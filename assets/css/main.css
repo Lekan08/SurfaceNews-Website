@@ -77,6 +77,10 @@ a {
     text-decoration: none;
 }
 
+.actions.dropdown-toggle:after {
+    content: none!important;
+}
+
 /*body{*/
 /*    background: #e8edf5;*/
 /*    width: 100%;*/
@@ -323,4 +327,20 @@ a {
     box-shadow: 0px 5px 23px rgba(0, 0, 0, 0.05);
     border-radius: 9px;
     padding: 35px 25px;
+}
+
+.options-ham-menu span {
+    color: #455A64 !important;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+ table,thead, tr,th, td{
+    padding: 20px 15px!important;
+}
+
+.action .dropdown-item{
+    font-size: 13px;
+    padding-bottom: 5px;
 }
