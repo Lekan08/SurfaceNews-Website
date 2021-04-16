@@ -139,51 +139,75 @@
             <div class="card">
                 <div class="card-body">
                    <span class="form-title"> User Boarding/User Invitation</span>
-                    <div class="row mt-4">
-                            <div class="col-lg-3">
-<!--                                <label class="form-label" style="">First Name</label>-->
-                                <input type="text" class="form-control"
-                                       placeholder="First Name" style="font-size: 14px">
-                            </div>
-                            <div class=" col-lg-3">
-<!--                                <label class="form-label">Last Name</label>-->
-                                <input type="text" class="form-control"
-                                       placeholder="Last Name" style="font-size: 14px">
-                            </div>
-                            <div class="col-lg-3">
-<!--                                <label class="form-label">Email</label>-->
-                                <input type="email" class="form-control"
-                                       placeholder="Email"  style="font-size: 14px">
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                    <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
-                                        <option>Candidate/Students</option>
-                                        <option>Admin</option>
+                                <select class="form-control" id="type" style="font-size: 14px" onchange="selectType();">
+                                    <option value="1">Candidate/Students</option>
+                                    <option value="2" selected>Admin</option>
 <!--                                        <option>Send Registration link</option>-->
 <!--                                        <option>Push reminder to potential students</option>-->
 <!--                                        <option>4</option>-->
 <!--                                        <option>5</option>-->
-                                    </select>
-                                </div>
-                            </div>
-                        <div class="col-lg-4 mt-3 d-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                <label class="form-check-label" for="exampleRadios1" style="font-size: 14px">
-                                    Online Payment
-                                </label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                <label class="form-check-label" for="exampleRadios2"  style="font-size: 14px">
-                                    Off-line Payment
-                                </label>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-lg-8 mt-3 float-end">
-                            <span type="button" class="btn-sm btn-pry float-end">Confirm</span>
+                        <div id="tAdmin" class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                                        <select class="form-control" id="wordpressID" style="font-size: 14px" onchange="getAdmin();">
+                                            <option value="">-Select Admin-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <!--                                <label class="form-label">Last Name</label>-->
+                                    <input type="text" class="form-control" id="ausername" style="font-size: 14px" disabled>
+                                </div>
+                                <div class="col-lg-3">
+                                    <!--                                <label class="form-label">Email</label>-->
+                                    <input type="email" class="form-control" id="aemail"  style="font-size: 14px" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 mt-3 float-end">
+                                <span type="button" class="btn-sm btn-pry float-end" onclick="inviteAdmin()">Confirm</span>
+                            </div>
+                        </div>
+                        <div id="tCandidate" class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <!--                                <label class="form-label" style="">First Name</label>-->
+                                    <input type="text" class="form-control" placeholder="First Name" style="font-size: 14px">
+                                </div>
+                                <div class=" col-lg-3">
+                                    <!--                                <label class="form-label">Last Name</label>-->
+                                    <input type="text" class="form-control" placeholder="Last Name" style="font-size: 14px">
+                                </div>
+                                <div class="col-lg-3">
+                                    <!--                                <label class="form-label">Email</label>-->
+                                    <input type="email" class="form-control" placeholder="Email"  style="font-size: 14px">
+                                </div>
+                                <div class="col-lg-4 mt-3 d-flex">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        <label class="form-check-label" for="exampleRadios1" style="font-size: 14px">
+                                            Online Payment
+                                        </label>
+                                    </div>
+                                    <div class="form-check ml-3">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                        <label class="form-check-label" for="exampleRadios2"  style="font-size: 14px">
+                                            Off-line Payment
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 mt-3 float-end">
+                                <span type="button" class="btn-sm btn-pry float-end">Confirm</span>
+                            </div>
                         </div>
                     </div>
 
@@ -251,6 +275,7 @@
                                 <th>Program</th>
                                 <th>Enrollment Status</th>
                                 <th>Actions</th>
+                                <th>Confirm</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -292,6 +317,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
                             </tr>
                             <tr>
                                 <td>Lindsey Stroud</td>
@@ -311,6 +337,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
                             </tr>
                             <tr>
                                 <td>Lindsey Stroud</td>
@@ -330,6 +357,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -357,9 +385,125 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    $(".hamburger").click(function(){
+    //var url = "http://localhost:8080";
+    //var wordpressUrl = "http://localhost:8099";
+    var url = "https://proinsight-reconservice.herokuapp.com";
+    var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+
+    //ON-READY FUNCTION
+    (function() {
+        document.getElementById("tCandidate").style.display = "none";
+        //Calling the Wordpress Admin List API
+        var key = "wp_capabilities";
+        var value = "subscriber";
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: wordpressUrl + "/wpusers/getNot/" + key + "/" + value,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+result.length);
+                //Preparing the Select List
+                var dropDown = document.getElementById("wordpressID");
+                for(var i = 0; i < result.length; i++) {
+                    var el = document.createElement("option");
+                    el.innerHTML = result[i].userLogin;
+                    el.value = result[i].id;
+                    dropDown.appendChild(el);
+                }
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
+        $(".hamburger").click(function(){
         $(".wrapper").toggleClass("active")
     })
+    })();
+
+    //On-Change Invite Type
+    function selectType(){
+        var e = document.getElementById("type");
+        var type = e.value;
+        if(type == "1"){
+            document.getElementById("tCandidate").style.display = "block";
+            document.getElementById("tAdmin").style.display = "none";
+        }else{
+            document.getElementById("tCandidate").style.display = "none";
+            document.getElementById("tAdmin").style.display = "block";
+        }
+    }
+
+    //On-Change Admin User
+    function getAdmin(){
+        var e = document.getElementById("wordpressID");
+        var wordpressID = e.value;
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: wordpressUrl + "/wpusers/get/" + wordpressID,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+result.length);
+                document.getElementById("ausername").value = result.userLogin;
+                document.getElementById("aemail").value = result.userEmail;
+                document.getElementById("ausername").text = result.userLogin;
+                document.getElementById("aemail").text = result.userEmail;
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+    }
+
+    //Invite Admin
+    function inviteAdmin(){
+        var e = document.getElementById("wordpressID");
+        var wordpressID = e.value;
+        //Calling the API -
+        $.ajax({
+    	    type: "POST",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: url + "/users/invite",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                wordpressID : wordpressID,
+                username : document.getElementById("ausername").value,
+                email : document.getElementById("aemail").value
+            }),
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    location.reload();
+                });
+            },
+            error: function(result){
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
+
+    }
 </script>
 
 </body>
