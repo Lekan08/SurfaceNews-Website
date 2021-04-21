@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-    <title>User Management</title>
+    <title>Lead Management</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -31,24 +31,23 @@
         </div>
         <div class="top_menu">
             <div class="home_link page-header">
-<!--                <a href="#">-->
-<!--                    <span class="icon"><i class="fas fa-home"></i></span>-->
-<!--                    <span>Home</span>-->
-<!--                </a>-->
-                User Management
+                <!--                <a href="#">-->
+                <!--                    <span class="icon"><i class="fas fa-home"></i></span>-->
+                <!--                    <span>Home</span>-->
+                <!--                </a>-->
+                Lead Management
             </div>
             <div class="right_info">
-<!--                <div class="icon_wrap">-->
-<!--                    <div class="icon">-->
-<!--                        <i class="fas fa-bell"></i>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="icon_wrap">-->
-<!--                    <div class="icon">-->
-<!--                        <i class="fas fa-cog"></i>-->
-<!--                    </div>-->
-<!--                </div>-->
-
+                <!--                <div class="icon_wrap">-->
+                <!--                    <div class="icon">-->
+                <!--                        <i class="fas fa-bell"></i>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="icon_wrap">-->
+                <!--                    <div class="icon">-->
+                <!--                        <i class="fas fa-cog"></i>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <div class="dropdown  pic">
                     <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
@@ -77,13 +76,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="user-management.html" class="active">
+                        <a href="user-management.html" class="">
                             <span class="icon"><i class="fas fa-address-book"></i></span>
                             <span class="list">User Management</span>
                         </a>
                     </li>
                     <li>
-                        <a href="lead-management.html" class="">
+                        <a href="lead-management.html" class="active">
                             <span class="icon"><i class="fas fa-filter"></i></span>
                             <span class="list">Lead Management</span>
                         </a>
@@ -138,14 +137,14 @@
 <!--                    </li>-->
                 </ul>
 
-<!--                <div class="hamburger">-->
-<!--                    <div class="inner_hamburger">-->
-<!--			            <span class="arrow">-->
-<!--			                <i class="fas fa-long-arrow-alt-left"></i>-->
-<!--			                <i class="fas fa-long-arrow-alt-right"></i>-->
-<!--			            </span>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="hamburger">-->
+                <!--                    <div class="inner_hamburger">-->
+                <!--			            <span class="arrow">-->
+                <!--			                <i class="fas fa-long-arrow-alt-left"></i>-->
+                <!--			                <i class="fas fa-long-arrow-alt-right"></i>-->
+                <!--			            </span>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
             </div>
         </div>
@@ -153,45 +152,9 @@
         <div class="sub-container" >
             <div class="card">
                 <div class="card-body">
-                   <span class="form-title"> User Boarding/User Invitation</span>
+                    <span class="form-title"> User Boarding/User Invitation</span>
                     <div class="row mt-3">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-<!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                <select class="form-control" id="type" style="font-size: 14px" onchange="selectType();">
-                                    <option value="1">Candidate/Students</option>
-                                    <option value="2" selected>Admin</option>
-<!--                                        <option>Send Registration link</option>-->
-<!--                                        <option>Push reminder to potential students</option>-->
-<!--                                        <option>4</option>-->
-<!--                                        <option>5</option>-->
-                                </select>
-                            </div>
-                        </div>
-                        <div id="tAdmin" class="col-lg-12">
-                            <div class="row mt-2">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                        <select class="form-control" id="wordpressID" style="font-size: 14px" onchange="getAdmin();">
-                                            <option value="">-Select Admin-</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <!--                                <label class="form-label">Last Name</label>-->
-                                    <input type="text" class="form-control" id="ausername" style="font-size: 14px" disabled>
-                                </div>
-                                <div class="col-lg-3">
-                                    <!--                                <label class="form-label">Email</label>-->
-                                    <input type="email" class="form-control" id="aemail"  style="font-size: 14px" disabled>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 mt-3 float-end">
-                                <span type="button" class="btn-sm btn-pry float-end" onclick="inviteAdmin()">Confirm</span>
-                            </div>
-                        </div>
-                        <div id="tCandidate" class="col-lg-12">
+                        <div  class="col-lg-12">
                             <div class="row mt-2">
                                 <div class="col-lg-3">
                                     <!--                                <label class="form-label" style="">First Name</label>-->
@@ -205,20 +168,20 @@
                                     <!--                                <label class="form-label">Email</label>-->
                                     <input type="email" class="form-control" placeholder="Email"  style="font-size: 14px">
                                 </div>
-                                <div class="col-lg-4 mt-3 d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="exampleRadios1" style="font-size: 14px">
-                                            Online Payment
-                                        </label>
-                                    </div>
-                                    <div class="form-check ml-3">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                        <label class="form-check-label" for="exampleRadios2"  style="font-size: 14px">
-                                            Off-line Payment
-                                        </label>
-                                    </div>
-                                </div>
+<!--                                <div class="col-lg-4 mt-3 d-flex">-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>-->
+<!--                                        <label class="form-check-label" for="exampleRadios1" style="font-size: 14px">-->
+<!--                                            Online Payment-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-check ml-3">-->
+<!--                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--                                        <label class="form-check-label" for="exampleRadios2"  style="font-size: 14px">-->
+<!--                                            Off-line Payment-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             <div class="col-lg-8 mt-3 float-end">
                                 <span type="button" class="btn-sm btn-pry float-end">Confirm</span>
@@ -230,35 +193,6 @@
             </div>
             <div class="card mt-3">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
-                                    <option>Program</option>
-                                    <option>Project Management</option>
-                                    <option>Business Analysis</option>
-<!--                                    <option>Push reminder to potential students</option>-->
-                                    <!--                                        <option>4</option>-->
-                                    <!--                                        <option>5</option>-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-                                    <option>Enrolled</option>
-                                    <option>Not Registered</option>
-                                    <option>Expired</option>
-                                    <option>Completed</option>
-                                    <!--                                        <option>4</option>-->
-                                    <!--                                        <option>5</option>-->
-                                </select>
-                            </div>
-                        </div>
-
-                    </div>
                     <div class="row">
                         <div class="col-sm-3 col-lg-3">
 
@@ -287,8 +221,6 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Program</th>
-                                <th>Enrollment Status</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -296,8 +228,6 @@
                             <tr>
                                 <td>Lindsey Stroud</td>
                                 <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-success">Completed</span></td>
                                 <td class="options-ham-menu">
                                     <div class="actions dropdown">
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -305,9 +235,9 @@
                                 </span>
 
                                         <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send payment due reminder</a>
-                                            <a class="dropdown-item" href="#"> Share</a>
-                                            <a class="dropdown-item" href="#"> Delete</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
+                                            <a class="dropdown-item" href="#">Send Reminder</a>
                                         </div>
                                     </div>
                                 </td>
@@ -316,18 +246,16 @@
                             <tr>
                                 <td>Lindsey Stroud</td>
                                 <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-warning">Not Registered</span></td>
                                 <td class="options-ham-menu">
                                     <div class="actions dropdown">
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer"><i class="fas fa-edit text-primary mr-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>
+                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information  </a>
+                                            <a class="dropdown-item" href="#">Send Reminder</a>
                                         </div>
                                     </div>
                                 </td>
@@ -335,18 +263,16 @@
                             <tr>
                                 <td>Lindsey Stroud</td>
                                 <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-primary">Enrolled</span></td>
                                 <td class="options-ham-menu">
                                     <div class="actions dropdown">
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer"><i class="fas fa-edit text-primary mr-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>
+                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
+                                            <a class="dropdown-item" href="#">Send Reminder</a>
                                         </div>
                                     </div>
                                 </td>
@@ -355,18 +281,16 @@
                             <tr>
                                 <td>Lindsey Stroud</td>
                                 <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-danger">Expired</span></td>
                                 <td class="options-ham-menu">
                                     <div class="actions dropdown">
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer"><i class="fas fa-edit text-primary mr-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>
+                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
+                                            <a class="dropdown-item" href="#">Send Reminder</a>
                                         </div>
                                     </div>
                                 </td>
@@ -374,18 +298,15 @@
                             <tr>
                                 <td>Lindsey Stroud</td>
                                 <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-secondary">Registered</span></td>
                                 <td class="options-ham-menu">
                                     <div class="actions dropdown">
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
-
-                                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer"><i class="fas fa-edit text-primary mr-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>
+                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information  </a>
+                                            <a class="dropdown-item" href="#">Send Reminder</a>
                                         </div>
                                     </div>
                                 </td>
@@ -393,18 +314,16 @@
                             <tr>
                                 <td>Lindsey Stroud</td>
                                 <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-amber">About To Expire</span></td>
                                 <td class="options-ham-menu">
                                     <div class="actions dropdown">
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer"><i class="fas fa-edit text-primary mr-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>
+                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
+                                            <a class="dropdown-item" href="#">Send Reminder</a>
                                         </div>
                                     </div>
                                 </td>
@@ -472,8 +391,8 @@
         })
 
         $(".hamburger").click(function(){
-        $(".wrapper").toggleClass("active")
-    })
+            $(".wrapper").toggleClass("active")
+        })
     })();
 
     //On-Change Invite Type
@@ -521,10 +440,10 @@
         var wordpressID = e.value;
         //Calling the API -
         $.ajax({
-    	    type: "POST",
-       	    beforeSend: function(request) {
-       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-       	    },
+            type: "POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            },
             url: url + "/users/invite",
             contentType: "application/json",
             dataType: 'json',
@@ -539,9 +458,9 @@
                     text: result['message'],
                     icon: "success",
                 })
-                .then(() => {
-                    location.reload();
-                });
+                    .then(() => {
+                        location.reload();
+                    });
             },
             error: function(result){
                 var json = $.parseJSON(result.responseText);
