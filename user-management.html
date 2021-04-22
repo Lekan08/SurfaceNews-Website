@@ -173,32 +173,32 @@
                                 </div>
                             </div>
                             <div class="col-lg-8 mt-3 float-end">
-                                <span type="button" class="btn-sm btn-pry float-end" onclick="inviteAdmin()">Confirm</span>
+                                <span type="button" class="btn-sm btn-pry float-end" onclick="inviteAdmin();">Confirm</span>
                             </div>
                         </div>
                         <div id="tCandidate" class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-3">
                                     <!--                                <label class="form-label" style="">First Name</label>-->
-                                    <input type="text" class="form-control" placeholder="First Name" style="font-size: 14px">
+                                    <input type="text" id="fname" class="form-control" placeholder="First Name" style="font-size: 14px">
                                 </div>
                                 <div class=" col-lg-3">
                                     <!--                                <label class="form-label">Last Name</label>-->
-                                    <input type="text" class="form-control" placeholder="Last Name" style="font-size: 14px">
+                                    <input type="text" id="lname" class="form-control" placeholder="Last Name" style="font-size: 14px">
                                 </div>
                                 <div class="col-lg-3">
                                     <!--                                <label class="form-label">Email</label>-->
-                                    <input type="email" class="form-control" placeholder="Email"  style="font-size: 14px">
+                                    <input type="email" id="email" class="form-control" placeholder="Email"  style="font-size: 14px">
                                 </div>
                                 <div class="col-lg-4 mt-3 d-flex">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        <input class="form-check-input" type="radio" name="payment" id="exampleRadios1" value="option1" checked>
                                         <label class="form-check-label" for="exampleRadios1" style="font-size: 14px">
                                             Online Payment
                                         </label>
                                     </div>
                                     <div class="form-check ml-3">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                        <input class="form-check-input" type="radio" name="payment" id="exampleRadios2" value="option2">
                                         <label class="form-check-label" for="exampleRadios2"  style="font-size: 14px">
                                             Off-line Payment
                                         </label>
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-8 mt-3 float-end">
-                                <span type="button" class="btn-sm btn-pry float-end">Confirm</span>
+                                <span type="button" class="btn-sm btn-pry float-end" onclick="inviteCandidate();">Confirm</span>
                             </div>
                         </div>
                     </div>
@@ -220,9 +220,10 @@
                             <div class="form-group">
                                 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                                 <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
-                                    <option>Program</option>
-                                    <option>Project Management</option>
-                                    <option>Business Analysis</option>
+                                    <option value="">Program</option>
+                                    <option value="Project Management Comprehensive">Project Management</option>
+                                    <option value="Business Analysis Comprehensive">Business Analysis</option>
+                                    <option value="Managing Project Financials">Managing Project Financials</option>
 <!--                                    <option>Push reminder to potential students</option>-->
                                     <!--                                        <option>4</option>-->
                                     <!--                                        <option>5</option>-->
@@ -233,13 +234,20 @@
                             <div class="form-group">
                                 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                                 <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-                                    <option>Enrolled</option>
-                                    <option>Not Registered</option>
-                                    <option>Expired</option>
-                                    <option>Completed</option>
+                                    <option value="">Enrollment Status</option>
+                                    <option value="Enrolled">Enrolled</option>
+                                    <option value="Awaiting Enrollment">Awaiting Enrollment</option>
+                                    <option value="Expired">Expired</option>
+                                    <option value="About To Expire">About To Expire</option>
+                                    <option value="Completed">Completed</option>
                                     <!--                                        <option>4</option>-->
                                     <!--                                        <option>5</option>-->
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <button class="btn btn-default" type="button" onclick="filter();">Filter</button>
                             </div>
                         </div>
 
@@ -257,9 +265,9 @@
                         <div class="col-sm-3 col-lg-3 mb-3">
                             <form class="navbar-form" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search" name="q"  style="font-size: 14px">
+                                    <input type="text" class="form-control" placeholder="Search" id="q"  style="font-size: 14px">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i
+                                        <button class="btn btn-default" type="button" onclick="search();"><i
                                                 class="glyphicon glyphicon-search"></i></button>
                                     </div>
                                 </div>
@@ -267,100 +275,8 @@
                         </div>
                     </div>
                     <div class="user">
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Program</th>
-                                <th>Enrollment Status</th>
-                                <th>Actions</th>
-                                <th>Confirm</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-success">Completed</span></td>
-                                <td class="">
-                                    <div class="form-group">
-                                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                    <select class="form-control" id="exampleFormControlSelect5" style="font-size: 14px;width: 75%" >
-                                        <option>Actions</option>
-                                        <option>Send payment due reminder</option>
-<!--                                        <option>Remove Access</option>-->
-                                        <option>Reminder to continue course</option>
-
-                                        <!--                                        <option>4</option>-->
-                                        <!--                                        <option>5</option>-->
-                                    </select>
-                                </div>
-                                </td>
-                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-warning">Pending</span></td>
-                                <td class="">
-                                    <div class="form-group">
-                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                        <select class="form-control" id="exampleFormControlSelect6" style="font-size: 14px;width: 75%" >
-                                            <option>Actions</option>
-                                            <option>Send payment due reminder</option>
-<!--                                            <option>Remove Access</option>-->
-                                            <option>Reminder to continue course</option>
-                                            <!--                                        <option>4</option>-->
-                                            <!--                                        <option>5</option>-->
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-primary">Enrolled</span></td>
-                                <td class="">
-                                    <div class="form-group">
-                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                        <select class="form-control" id="exampleFormControlSelect9" style="font-size: 14px;width: 75%" >
-                                            <option>Actions</option>
-                                            <option>Send payment due reminder</option>
-                                            <option>Remove Access</option>
-                                            <option>Reminder to continue course</option>
-                                            <!--                                        <option>4</option>-->
-                                            <!--                                        <option>5</option>-->
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td>Business Analyst</td>
-                                <td><span class="badge badge-pill badge-danger">Expired</span></td>
-                                <td class="">
-                                    <div class="form-group">
-                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                        <select class="form-control" id="exampleFormControlSelect10" style="font-size: 14px;width: 75%" >
-                                            <option>Actions</option>
-                                            <option>Send payment due reminder</option>
-<!--                                            <option>Remove Access</option>-->
-                                            <option>Reminder to continue course</option>
-                                            <!--                                        <option>4</option>-->
-                                            <!--                                        <option>5</option>-->
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>  <span type="button" class="btn-sm btn-pry">Confirm</span></td>
-                            </tr>
-                            </tbody>
+                        <table class="table " id="fi">
+                            
                         </table>
 
                     </div>
@@ -384,6 +300,7 @@
     //var wordpressUrl = "http://localhost:8099";
     var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    var candidates = [];
 
     //ON-READY FUNCTION
     (function() {
@@ -413,6 +330,60 @@
             },
             error: function(result){
                 console.log("Error"+result.statusText);
+            }
+        })
+
+        //Calling the Candidates List API
+        var e = document.getElementById("exampleFormControlSelect2");
+        var enrol = e.value;
+        var ex = document.getElementById("exampleFormControlSelect3");
+        var program = ex.value;
+        $.ajax({
+            type: "POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/users/getCandidate",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                enrollmentStatus : enrol,
+                program : program
+            }),
+            success: function(result){
+                candidates = result;
+                
+                //Preparing the List
+                var listing_table = document.getElementById("fi");
+                listing_table.innerHTML = "";
+                listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';
+                if(candidates.length > 0){
+                    for (var i = 0; i < candidates.length; i++) {
+                        var enrollmentStatus = candidates[i].enrollmentStatus;
+                        var enrolLook = "";
+                        if(enrollmentStatus == "Completed"){
+                            enrolLook = '<span class="badge badge-pill badge-success">Completed</span>';
+                        }else if(enrollmentStatus == "About To Expire"){
+                            enrolLook = '<span class="badge badge-pill badge-warning">About To Expire</span>';
+                        }else if(enrollmentStatus == "Expired"){
+                            enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
+                        }else if(enrollmentStatus == "Awaiting Enrollment"){
+                            enrolLook = '<span class="badge badge-pill badge-secondary">Awaiting Enrollment</span>';
+                        }else {
+                            enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
+                        }
+                        //console.log("mexid "+exams[i].id);
+                        var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + candidates[i].program + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
+                        listing_table.innerHTML += oneRecord;
+                    }
+
+                    listing_table.innerHTML += '</tbody>';
+                    //console.log("Ans "+sum);
+                }
+            },
+            error: function(result){
+                console.log("Err"+result.status);
             }
         })
 
@@ -498,6 +469,136 @@
             }
         })
 
+    }
+
+    function inviteCandidate(){
+        var payMethod = "";
+        var online = document.getElementById("exampleRadios1").checked;
+        var offline = document.getElementById("exampleRadios2").checked;
+        if(online){
+            payMethod = 2;
+        }else{
+            payMethod = 1;
+        }
+        //Calling the API - 
+        $.ajax({
+    	    type: "POST",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: url + "/users/inviteCandidate",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                fname : document.getElementById("fname").value,
+                lname : document.getElementById("lname").value,
+                email : document.getElementById("email").value,
+                paymentType : payMethod
+            }),
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    location.reload();
+                });
+            },
+            error: function(result){
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
+    }
+
+    //Function To Handle Filter of table
+    function filter(){
+        //Calling the Candidates List API
+        var e = document.getElementById("exampleFormControlSelect2");
+        var enrol = e.value;
+        var ex = document.getElementById("exampleFormControlSelect3");
+        var program = ex.value;
+        $.ajax({
+            type: "POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/users/getCandidate",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                enrollmentStatus : enrol,
+                program : program
+            }),
+            success: function(result){
+                candidates = result;
+                
+                //Preparing the List
+                var listing_table = document.getElementById("fi");
+                listing_table.innerHTML = "";
+                listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';
+                if(candidates.length > 0){
+                    for (var i = 0; i < candidates.length; i++) {
+                        var enrollmentStatus = candidates[i].enrollmentStatus;
+                        var enrolLook = "";
+                        if(enrollmentStatus == "Completed"){
+                            enrolLook = '<span class="badge badge-pill badge-success">Completed</span>';
+                        }else if(enrollmentStatus == "About To Expire"){
+                            enrolLook = '<span class="badge badge-pill badge-warning">About To Expire</span>';
+                        }else if(enrollmentStatus == "Expired"){
+                            enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
+                        }else if(enrollmentStatus == "Awaiting Enrollment"){
+                            enrolLook = '<span class="badge badge-pill badge-secondary">Awaiting Enrollment</span>';
+                        }else {
+                            enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
+                        }
+                        //console.log("mexid "+exams[i].id);
+                        var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + candidates[i].program + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
+                        listing_table.innerHTML += oneRecord;
+                    }
+
+                    listing_table.innerHTML += '</tbody>';
+                    //console.log("Ans "+sum);
+                }
+            },
+            error: function(result){
+                console.log("Err"+result.status);
+            }
+        })
+    }
+
+    //Function to search table
+    function search(){
+        var input, filter, table, tr, td, i, j, txtValue;
+        input = document.getElementById("q");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("fi");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            var check = 0;
+            for(j = 0; j < 4; j++){
+                td = tr[i].getElementsByTagName("td")[j];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        check = 1;
+                    }else{
+                        check = 0;
+                    }     
+                }
+            }
+            if(check == 0){
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
     }
 </script>
 
