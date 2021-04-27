@@ -247,7 +247,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <button class="btn btn-default" type="button" onclick="filter();">Filter</button>
+                                <button class="btn btn-pry" type="button" onclick="filter();">Filter</button>
                             </div>
                         </div>
 
@@ -265,11 +265,11 @@
                         <div class="col-sm-3 col-lg-3 mb-3">
                             <form class="navbar-form" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search" id="q"  style="font-size: 14px">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="button" onclick="search();"><i
+                                    <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
+                                    <!--div class="input-group-btn">
+                                        <button class="btn btn-pry" type="button"><i
                                                 class="glyphicon glyphicon-search"></i></button>
-                                    </div>
+                                    </div-->
                                 </div>
                             </form>
                         </div>
@@ -278,6 +278,11 @@
                         <table class="table " id="fi">
                             
                         </table>
+                        <div class="pagination">
+                            <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
+                            <a class="active" href="#"><span id="page"></span></a>
+                            <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+                        </div>
 
                     </div>
                 </div>
@@ -301,6 +306,9 @@
     var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     var candidates = [];
+    var jsonData = [];
+    var current_page = 1;
+    var records_per_page = 20;
 
     //ON-READY FUNCTION
     (function() {
@@ -334,9 +342,9 @@
         })
 
         //Calling the Candidates List API
-        var e = document.getElementById("exampleFormControlSelect2");
+        var e = document.getElementById("exampleFormControlSelect3");
         var enrol = e.value;
-        var ex = document.getElementById("exampleFormControlSelect3");
+        var ex = document.getElementById("exampleFormControlSelect2");
         var program = ex.value;
         $.ajax({
             type: "POST",
@@ -353,8 +361,8 @@
             }),
             success: function(result){
                 candidates = result;
-                
-                //Preparing the List
+                jsonData = result;
+                /*//Preparing the List
                 var listing_table = document.getElementById("fi");
                 listing_table.innerHTML = "";
                 listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';
@@ -373,14 +381,19 @@
                         }else {
                             enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
                         }
+                        var prog = candidates[i].program;
+                        if(prog == null){
+                            prog = "";
+                        }
                         //console.log("mexid "+exams[i].id);
-                        var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + candidates[i].program + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
+                        var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
                         listing_table.innerHTML += oneRecord;
                     }
 
                     listing_table.innerHTML += '</tbody>';
                     //console.log("Ans "+sum);
-                }
+                }**/
+                changePage(1);
             },
             error: function(result){
                 console.log("Err"+result.status);
@@ -519,9 +532,9 @@
     //Function To Handle Filter of table
     function filter(){
         //Calling the Candidates List API
-        var e = document.getElementById("exampleFormControlSelect2");
+        var e = document.getElementById("exampleFormControlSelect3");
         var enrol = e.value;
-        var ex = document.getElementById("exampleFormControlSelect3");
+        var ex = document.getElementById("exampleFormControlSelect2");
         var program = ex.value;
         $.ajax({
             type: "POST",
@@ -538,9 +551,10 @@
             }),
             success: function(result){
                 candidates = result;
-                
+                console.log("Vc "+candidates.length);
+                jsonData = result;
                 //Preparing the List
-                var listing_table = document.getElementById("fi");
+                /**var listing_table = document.getElementById("fi");
                 listing_table.innerHTML = "";
                 listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';
                 if(candidates.length > 0){
@@ -558,14 +572,19 @@
                         }else {
                             enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
                         }
+                        var prog = candidates[i].program;
+                        if(prog == null){
+                            prog = "";
+                        }
                         //console.log("mexid "+exams[i].id);
-                        var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + candidates[i].program + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
+                        var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
                         listing_table.innerHTML += oneRecord;
                     }
 
                     listing_table.innerHTML += '</tbody>';
-                    //console.log("Ans "+sum);
-                }
+                    console.log("Done");
+                }**/
+                changePage(1);
             },
             error: function(result){
                 console.log("Err"+result.status);
@@ -575,30 +594,111 @@
 
     //Function to search table
     function search(){
-        var input, filter, table, tr, td, i, j, txtValue;
-        input = document.getElementById("q");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("fi");
-        tr = table.getElementsByTagName("tr");
-        for (i = 1; i < tr.length; i++) {
-            var check = 0;
-            for(j = 0; j < 4; j++){
-                td = tr[i].getElementsByTagName("td")[j];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        check = 1;
-                    }else{
-                        check = 0;
-                    }     
-                }
+        var input = document.getElementById("q");
+        var filter = input.value.toUpperCase();
+        //Preparing the List
+        /*var listing_table = document.getElementById("fi");
+        listing_table.innerHTML = "";
+        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';*/
+        jsonData = [];
+        for(var i = 0; i < candidates.length; i++){
+            var prog = candidates[i].program;
+            if(prog == null){
+                prog = "";
             }
-            if(check == 0){
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+            if(candidates[i].displayName.toUpperCase().indexOf(filter) > -1 || candidates[i].email.toUpperCase().indexOf(filter) > -1 || prog.toUpperCase().indexOf(filter) > -1 || candidates[i].enrollmentStatus.toUpperCase().indexOf(filter) > -1){
+                /*var enrollmentStatus = candidates[i].enrollmentStatus;
+                var enrolLook = "";
+                if(enrollmentStatus == "Completed"){
+                    enrolLook = '<span class="badge badge-pill badge-success">Completed</span>';
+                }else if(enrollmentStatus == "About To Expire"){
+                    enrolLook = '<span class="badge badge-pill badge-warning">About To Expire</span>';
+                }else if(enrollmentStatus == "Expired"){
+                    enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
+                }else if(enrollmentStatus == "Awaiting Enrollment"){
+                    enrolLook = '<span class="badge badge-pill badge-secondary">Awaiting Enrollment</span>';
+                }else {
+                    enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
+                }
+                //console.log("mexid "+exams[i].id);
+                var oneRecord = '<tr><td>' + candidates[i].displayName + '</td><td>' + candidates[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
+                listing_table.innerHTML += oneRecord;*/
+                jsonData.push(candidates[i]);
             }
         }
+        //listing_table.innerHTML += '</tbody>';
+        changePage(1);
+    }
+
+    function prevPage(){
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
+    }
+    function nextPage(){
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
+    } 
+    function changePage(page){
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("fi");
+        var page_span = document.getElementById("page");
+  
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+  
+        listing_table.innerHTML = "";
+  
+        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';
+        var total = page * records_per_page;
+        if(jsonData.length < (page * records_per_page)){
+            total = jsonData.length;
+        }
+        for (var i = (page-1) * records_per_page; i < total; i++) {
+            var prog = jsonData[i].program;
+            if(prog == null){
+                prog = "";
+            }
+            var enrollmentStatus = jsonData[i].enrollmentStatus;
+            var enrolLook = "";
+            if(enrollmentStatus == "Completed"){
+                enrolLook = '<span class="badge badge-pill badge-success">Completed</span>';
+            }else if(enrollmentStatus == "About To Expire"){
+                enrolLook = '<span class="badge badge-pill badge-warning">About To Expire</span>';
+            }else if(enrollmentStatus == "Expired"){
+                enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
+            }else if(enrollmentStatus == "Awaiting Enrollment"){
+                enrolLook = '<span class="badge badge-pill badge-secondary">Awaiting Enrollment</span>';
+            }else {
+                enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
+            }
+            //console.log("mexid "+exams[i].id);
+            var oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>...</td></tr>';
+            listing_table.innerHTML += oneRecord;
+        }
+        listing_table.innerHTML += '</tbody>';
+        page_span.innerHTML = page;
+  
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+  
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+  
+    function numPages(){
+        return Math.ceil(jsonData.length / records_per_page);
     }
 </script>
 
