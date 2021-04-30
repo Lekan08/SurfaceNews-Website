@@ -54,11 +54,11 @@
                     <input type="text" class="form-control" id="username" onkeyup="pressKey(event);" style="width: 70%" disabled>
                 </div>
                 <div class="mb-5">
-                    <label for="password" class="form-label" style="font-size: 16px;font-weight: 500">Password</label>
+                    <label for="password" class="form-label" style="font-size: 16px;font-weight: 500">Create A New Password</label>
                     <input type="password" class="form-control" id="password" onkeyup="pressKey(event);"  style="width: 70%">
                 </div>
                 <div class="mb-5">
-                    <label for="cpassword" class="form-label" style="font-size: 16px;font-weight: 500">Password</label>
+                    <label for="cpassword" class="form-label" style="font-size: 16px;font-weight: 500">Confirm Password</label>
                     <input type="password" class="form-control" id="cpassword" onkeyup="pressKey(event);"  style="width: 70%">
                 </div>
                 <div class="mb-5">
@@ -87,6 +87,7 @@
     const id = urlParams.get('id');
     var email = "";
     var username = "";
+    console.log("Now");
     
     (function (){
         $.ajax({
@@ -99,15 +100,19 @@
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
-                console.log("Hi"+result.length);
+                console.log("Hi");
                 username = result.userLogin;
                 email = result.userEmail;
+                document.getElementById("username").value = username;
+                document.getElementById("email").value = email;
+                document.getElementById("username").text = username;
+                document.getElementById("email").text = email;
             },
             error: function(result){
                 console.log("Error"+result.statusText);
             }
         })
-    })
+    })();
 
     function pressKey(e){
         if (e.keyCode == 13) {

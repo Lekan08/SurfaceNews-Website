@@ -152,21 +152,21 @@
         <div class="sub-container" >
             <div class="card">
                 <div class="card-body">
-                    <span class="form-title"> User Boarding/User Invitation</span>
+                    <span class="form-title"> Lead Creation</span>
                     <div class="row mt-3">
                         <div  class="col-lg-12">
                             <div class="row mt-2">
                                 <div class="col-lg-3">
                                     <!--                                <label class="form-label" style="">First Name</label>-->
-                                    <input type="text" class="form-control" placeholder="First Name" style="font-size: 14px">
+                                    <input type="text" class="form-control" placeholder="First Name" id="fname" style="font-size: 14px" pattern="[A-Za-z-]+">
                                 </div>
                                 <div class=" col-lg-3">
                                     <!--                                <label class="form-label">Last Name</label>-->
-                                    <input type="text" class="form-control" placeholder="Last Name" style="font-size: 14px">
+                                    <input type="text" class="form-control" placeholder="Last Name" id="lname" style="font-size: 14px" pattern="[A-Za-z-]+">
                                 </div>
                                 <div class="col-lg-3">
                                     <!--                                <label class="form-label">Email</label>-->
-                                    <input type="email" class="form-control" placeholder="Email"  style="font-size: 14px">
+                                    <input type="email" class="form-control" placeholder="Email" id="email"  style="font-size: 14px">
                                 </div>
 <!--                                <div class="col-lg-4 mt-3 d-flex">-->
 <!--                                    <div class="form-check">-->
@@ -184,7 +184,7 @@
 <!--                                </div>-->
                             </div>
                             <div class="col-lg-8 mt-3 float-end">
-                                <span type="button" class="btn-sm btn-pry float-end">Confirm</span>
+                                <span type="button" class="btn-sm btn-pry float-end" onclick="addLead();">Confirm</span>
                             </div>
                         </div>
                     </div>
@@ -206,133 +206,61 @@
                         <div class="col-sm-3 col-lg-3 mb-3">
                             <form class="navbar-form" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search" name="q"  style="font-size: 14px">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i
-                                                class="glyphicon glyphicon-search"></i></button>
-                                    </div>
+                                    <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="user">
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td class="options-ham-menu">
-                                    <div class="actions dropdown">
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
-                                            <a class="dropdown-item" href="#">Send Reminder</a>
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td class="options-ham-menu">
-                                    <div class="actions dropdown">
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information  </a>
-                                            <a class="dropdown-item" href="#">Send Reminder</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td class="options-ham-menu">
-                                    <div class="actions dropdown">
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
-                                            <a class="dropdown-item" href="#">Send Reminder</a>
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td class="options-ham-menu">
-                                    <div class="actions dropdown">
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
-                                            <a class="dropdown-item" href="#">Send Reminder</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td class="options-ham-menu">
-                                    <div class="actions dropdown">
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information  </a>
-                                            <a class="dropdown-item" href="#">Send Reminder</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lindsey Stroud</td>
-                                <td>lindsey.stroud@gmail.com</td>
-                                <td class="options-ham-menu">
-                                    <div class="actions dropdown">
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Program Information </a>
-                                            <a class="dropdown-item" href="#">Send Reminder</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
+                        <table id="fi" class="table ">
+                            
                         </table>
+                        <div class="pagination">
+                            <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
+                            <a class="active" href="#"><span id="page"></span></a>
+                            <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+                        </div>
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>First Name<font color="red">*</font></label>
+                        <input class="form-control" placeholder="First Name" id="efname" type="text" pattern="[A-Za-z-]+" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>Last Name<font color="red">*</font></label>
+                        <input class="form-control" placeholder="Last Name" id="elname" type="text" pattern="[A-Za-z-]+" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-12">
+                        <label>Email <font color="red">*</font></label>
+                        <input class="form-control" placeholder="Email" id="eemail" type="email" >
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editLead();">Save</button>
             </div>
         </div>
     </div>
@@ -351,36 +279,34 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    //var url = "http://localhost:8080";
+    var url = "http://localhost:8080";
     //var wordpressUrl = "http://localhost:8099";
-    var url = "https://proinsight-reconservice.herokuapp.com";
+    //var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    var leads = [];
+    var jsonData = [];
+    var current_page = 1;
+    var records_per_page = 20;
+    var selectedLead = {};
 
     //ON-READY FUNCTION
     (function() {
-        document.getElementById("tCandidate").style.display = "none";
-        //Calling the Wordpress Admin List API
-        var key = "wp_capabilities";
-        var value = "subscriber";
+        //Calling the Leads List API
+        var status = 0;
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: wordpressUrl + "/wpusers/getNot/" + key + "/" + value,
+            url: url + "/leads/gets/" + status,
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
                 console.log("Hi"+result.length);
-                //Preparing the Select List
-                var dropDown = document.getElementById("wordpressID");
-                for(var i = 0; i < result.length; i++) {
-                    var el = document.createElement("option");
-                    el.innerHTML = result[i].userLogin;
-                    el.value = result[i].id;
-                    dropDown.appendChild(el);
-                }
+                leads = result;
+                jsonData = result;
+                changePage(1);
             },
             error: function(result){
                 console.log("Error"+result.statusText);
@@ -392,62 +318,21 @@
         })
     })();
 
-    //On-Change Invite Type
-    function selectType(){
-        var e = document.getElementById("type");
-        var type = e.value;
-        if(type == "1"){
-            document.getElementById("tCandidate").style.display = "block";
-            document.getElementById("tAdmin").style.display = "none";
-        }else{
-            document.getElementById("tCandidate").style.display = "none";
-            document.getElementById("tAdmin").style.display = "block";
-        }
-    }
-
-    //On-Change Admin User
-    function getAdmin(){
-        var e = document.getElementById("wordpressID");
-        var wordpressID = e.value;
-        $.ajax({
-            type: "GET",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-                request.setRequestHeader("Access-Control-Allow-Origin", "*");
-            },
-            url: wordpressUrl + "/wpusers/get/" + wordpressID,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function(result){
-                console.log("Hi"+result.length);
-                document.getElementById("ausername").value = result.userLogin;
-                document.getElementById("aemail").value = result.userEmail;
-                document.getElementById("ausername").text = result.userLogin;
-                document.getElementById("aemail").text = result.userEmail;
-            },
-            error: function(result){
-                console.log("Error"+result.statusText);
-            }
-        })
-    }
-
-    //Invite Admin
-    function inviteAdmin(){
-        var e = document.getElementById("wordpressID");
-        var wordpressID = e.value;
+    //Lead Creation
+    function addLead(){
         //Calling the API -
         $.ajax({
             type: "POST",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
             },
-            url: url + "/users/invite",
+            url: url + "/leads/add",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
-                wordpressID : wordpressID,
-                username : document.getElementById("ausername").value,
-                email : document.getElementById("aemail").value
+                fname : document.getElementById("fname").value,
+                lname : document.getElementById("lname").value,
+                email : document.getElementById("email").value
             }),
             success: function(result){
                 swal({
@@ -455,9 +340,9 @@
                     text: result['message'],
                     icon: "success",
                 })
-                    .then(() => {
-                        location.reload();
-                    });
+                .then(() => {
+                    location.reload();
+                });
             },
             error: function(result){
                 var json = $.parseJSON(result.responseText);
@@ -469,6 +354,136 @@
             }
         })
 
+    }
+
+    //Lead Update
+    function editLead(){
+        //Calling the API -
+        $.ajax({
+            type: "POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            },
+            url: url + "/leads/update",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                fname : document.getElementById("efname").value,
+                lname : document.getElementById("elname").value,
+                email : document.getElementById("eemail").value,
+                id : selectedLead.id,
+                createdTime : selectedLead.createdTime,
+                noOfReminders : selectedLead.noOfReminders,
+                lastReminderTime : selectedLead.lastReminderTime,
+                noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
+                lastProgramInformationTime : selectedLead.lastProgramInformationTime,
+                status : selectedLead.status
+            }),
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    location.reload();
+                });
+            },
+            error: function(result){
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
+
+    }
+
+    //Function to search table
+    function search(){
+        var input = document.getElementById("q");
+        var filter = input.value.toUpperCase();
+        jsonData = [];
+        for(var i = 0; i < leads.length; i++){
+            var name = leads[i].fname + " " + leads[i].lname;
+            if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
+                jsonData.push(leads[i]);
+            }
+        }
+        changePage(1);
+    }
+
+    function prevPage(){
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
+    }
+    function nextPage(){
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
+    } 
+    function changePage(page){
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("fi");
+        var page_span = document.getElementById("page");
+  
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+  
+        listing_table.innerHTML = "";
+  
+        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
+        var total = page * records_per_page;
+        if(jsonData.length < (page * records_per_page)){
+            total = jsonData.length;
+        }
+        for (let i = (page-1) * records_per_page; i < total; i++) {
+            let j = i;
+            //console.log("mexid "+exams[i].id);
+            var name = jsonData[i].fname + " " + jsonData[i].lname;
+            var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
+                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
+            listing_table.innerHTML += oneRecord;
+        }
+        listing_table.innerHTML += '</tbody>';
+        page_span.innerHTML = page;
+  
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+  
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+  
+    function numPages(){
+        return Math.ceil(jsonData.length / records_per_page);
+    }
+
+    //Function to handle the transition of selected lead
+    function kclick(x){
+        //console.log("My "+jsonData[x]);
+        var alead = jsonData[x];
+        selectedLead = jsonData[x];
+        //console.log("Ch "+jsonData[x].email);
+        document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
+        document.getElementById("efname").value = alead.fname;
+        document.getElementById("elname").value = alead.lname;
+        document.getElementById("eemail").value = alead.email;
     }
 </script>
 
