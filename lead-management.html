@@ -451,7 +451,7 @@
             var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
+                                <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
             listing_table.innerHTML += oneRecord;
         }
         listing_table.innerHTML += '</tbody>';
@@ -484,6 +484,38 @@
         document.getElementById("efname").value = alead.fname;
         document.getElementById("elname").value = alead.lname;
         document.getElementById("eemail").value = alead.email;
+    }
+
+    //Sending Emails To Lead
+    function sendMails(leadID, type){
+        //Calling the API -
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            },
+            url: url + "/leads/messaging/" + leadID + "/" + type,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    location.reload();
+                });
+            },
+            error: function(result){
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
     }
 </script>
 
