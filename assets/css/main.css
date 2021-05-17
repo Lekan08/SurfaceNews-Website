@@ -380,3 +380,39 @@ a {
     border-radius: 0.25rem;
      background-color: #F46D0B;
  }
+
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    border-color: #e9ecef #e9ecef #dee2e6;
+    border-bottom: 2px solid #28A3EF;
+}
+
+.nav-tabs .nav-link.disabled {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    border-bottom: 2px solid #2383BD!important;
+}
+
+.nav-item .active {
+    border-bottom-color:  #2383BD;
+}
+.nav-item a {
+    color: #A6ACBE;
+    /*text-decoration: underline;*/
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #555;
+    font-weight: 500!important;
+    cursor: default;
+    background-color: transparent;
+    border: transparent!important;
+    border-bottom: 2px solid #2383BD!important;
+}
