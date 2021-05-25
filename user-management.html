@@ -319,9 +319,9 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    //var url = "http://localhost:8080";
+    var url = "http://localhost:8080";
     //var wordpressUrl = "http://localhost:8099";
-    var url = "https://proinsight-reconservice.herokuapp.com";
+    //var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     var candidates = [];
     var jsonData = [];
@@ -609,13 +609,23 @@
                 enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
             }else if(enrollmentStatus == "Awaiting Enrollment"){
                 enrolLook = '<span class="badge badge-pill badge-secondary">Awaiting Enrollment</span>';
+            }else if(enrollmentStatus == "Lead"){
+                enrolLook = '<span class="badge badge-pill badge-info">Lead</span>';
             }else {
                 enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
             }
             //console.log("mexid "+exams[i].id);
-            var oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+            var oneRecord = "";
+            if(enrollmentStatus == "Lead"){
+                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
+                                <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
+            }else{
+                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item" href="#">Send Payment Link</a></div></div></td></tr>';
+            } 
             listing_table.innerHTML += oneRecord;
         }
         listing_table.innerHTML += '</tbody>';
@@ -636,6 +646,38 @@
   
     function numPages(){
         return Math.ceil(jsonData.length / records_per_page);
+    }
+
+    //Sending Emails To Lead
+    function sendMails(leadID, type){
+        //Calling the API -
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            },
+            url: url + "/users/messaging/" + leadID + "/" + type,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    location.reload();
+                });
+            },
+            error: function(result){
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
     }
 </script>
 
