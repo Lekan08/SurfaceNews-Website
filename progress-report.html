@@ -19,7 +19,7 @@
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-  <title>Manage Financials</title>
+  <title>Progress report</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -31,23 +31,10 @@
     </div>
     <div class="top_menu">
       <div class="home_link page-header">
-        <!--                <a href="#">-->
-        <!--                    <span class="icon"><i class="fas fa-home"></i></span>-->
-        <!--                    <span>Home</span>-->
-        <!--                </a>-->
-        Manage Financials
+      Progress Report
       </div>
       <div class="right_info">
-        <!--                <div class="icon_wrap">-->
-        <!--                    <div class="icon">-->
-        <!--                        <i class="fas fa-bell"></i>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="icon_wrap">-->
-        <!--                    <div class="icon">-->
-        <!--                        <i class="fas fa-cog"></i>-->
-        <!--                    </div>-->
-        <!--                </div>-->
+
         <div class="dropdown  pic">
           <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
@@ -88,19 +75,19 @@
             </a>
           </li>
           <li>
-            <a href="progress-report.html">
+            <a href="progress-report.html" class="active">
               <span class="icon"><i class="fas fa-spinner"></i></span>
               <span class="list">Progress Reports</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="course-report.html">
               <span class="icon"><i class="fas fa-chart-pie"></i></span>
               <span class="list">Course Report</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="assignment.html">
               <span class="icon"><i class="fas fa-tasks"></i></span>
               <span class="list">Assignment</span>
             </a>
@@ -118,7 +105,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="active">
+            <a href="manage-financials.html">
               <span class="icon"><i class="fas fa-credit-card"></i></span>
               <span class="list">Manage Financial</span>
             </a>
@@ -150,160 +137,216 @@
     </div>
 
     <div class="sub-container" >
-      <div class="card">
-        <div class="pt-3 pl-3 pr-3">
 
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="p-3">
+              <div class="d-flex">
+                <div class="mr-3">
+                <i class="far fa-user card-icon-purple"></i>
+                  </div>
+                <div class="card-text">
+                  <h3>100</h3>
+                  <p>Students Currently Enrolled</p>
+                </div>
+              </div>
+              <i class="fas fa-users float-end icon-purple"></i>
+            </div>
+          </div>
+        </div>
 
-          <ul class="nav nav-tabs " role="tablist">
-            <li class="nav-item active">
-              <a class="nav-link " href="manage-financials.html">ADD PAYMENT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="reciept.html">RECEIPTS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="outstanding-balance.html">OUTSTANDING BALANCES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="create-coupon.html">CREATE COUPON</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="financial-report.html">FINANCIAL REPORT</a>
-            </li>
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link" data-toggle="tab" href="#on-boarding">OTHERS</a>-->
-<!--            </li>-->
-          </ul>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="p-3">
+              <div class="d-flex">
+                <div class="mr-3">
+                  <i class="far fa-user card-icon-green"></i>
+                </div>
+                <div class="card-text">
+                  <h3>95</h3>
+                  <p>Active Students</p>
+                </div>
+              </div>
+              <i class="fas fa-users float-end icon-green"></i>
+            </div>
+          </div>
+        </div>
 
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="p-3">
+              <div class="d-flex">
+                <div class="mr-3">
+                  <i class="far fa-user card-icon-red"></i>
+                </div>
+                <div class="card-text">
+                  <h3>5</h3>
+                  <p>Inactive Students</p>
+                </div>
+              </div>
+              <i class="fas fa-users float-end icon-red"></i>
+            </div>
+          </div>
         </div>
       </div>
 
 
-          <div class="card mt-3 ">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3 col-lg-3">
-                  <div class="form-group">
-                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                    <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
-                      <option value="">Student</option>
-                      <option value="">John Doe</option>
-                      <option value="">Jude Law</option>
-                      <option value="">Mary Doe</option>
-                      <!--                                    <option>Push reminder to potential students</option>-->
-                      <!--                                        <option>4</option>-->
-                      <!--                                        <option>5</option>-->
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-3 col-lg-3">
-                  <div class="form-group">
-                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                    <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
-                      <option value="">Status</option>
-                      <option value="Project Management Comprehensive">Registered</option>
-                      <option value="Business Analysis Comprehensive">Enrolled</option>
-<!--                      <option value="Managing Project Financials">Managing Project Financials</option>-->
-                      <!--                                    <option>Push reminder to potential students</option>-->
-                      <!--                                        <option>4</option>-->
-                      <!--                                        <option>5</option>-->
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-3 col-lg-3">
+      <div class="py-1 mt-3">
+        <div class="card">
+          <div class="card-body">
+            <canvas id="densityChart" width="600" height="200"></canvas>
+          </div>
+        </div>
+      </div>
 
-                </div>
-                <div class="col-sm-3 col-lg-3 mb-3">
-                  <form class="navbar-form" role="search">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search"
-                             style="font-size: 14px">
-                    </div>
-                  </form>
-                </div>
+      <div class="card mt-3 ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3 col-lg-3">
+              <div class="form-group">
+                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
+                  <option value="">course</option>
+                  <option value="">project management</option>
+                  <option value="">Business analysis</option>
+                  <option value="">ICT</option>
+                  <!--                                    <option>Push reminder to potential students</option>-->
+                  <!--                                        <option>4</option>-->
+                  <!--                                        <option>5</option>-->
+                </select>
               </div>
-              <div class="user">
-                <table class="table profile-table">
-                  <thead>
-                  <tr>
-                    <th>Student name</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Obiajulu Aghemen</td>
-                    <td>obian@sample.com</td>
-                    <td><span class="badge bg-primary">Registered</span></td>
-                    <td>23-03-2021</td>
-                    <td class="options-ham-menu">
-                      <div class="dropdown">
+            </div>
+            <div class="col-sm-3 col-lg-3">
+              <div class="form-group">
+                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
+                  <option value="">Last Activity</option>
+                  <option value="">last 7days</option>
+                  <option value="">30 days</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3 col-lg-3">
+
+            </div>
+            <div class="col-sm-3 col-lg-3 mb-3">
+              <form class="navbar-form" role="search">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search"
+                         style="font-size: 14px">
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="user">
+            <table class="table profile-table">
+              <thead>
+              <tr>
+                <th>Student name</th>
+                <th>Course Name</th>
+                <th>Last Completed Session</th>
+                <th>Progress Status</th>
+                <th>Total Time Spent</th>
+                <th>Last Activity</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Obiajulu Aghemen</td>
+                <td>Project management</td>
+                <td>Session 1</td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100">25%
+                    </div>
+                  </div>
+                </td>
+                <td>10 hours</td>
+                <td>23-03-2021</td>
+                <td class="options-ham-menu">
+                  <div class="dropdown">
                                 <span class="actions  dropdown-toggle" href="#" id="action-dropDown2"
                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                             style="cursor: pointer">Add Payment</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Obiajulu Aghemen</td>
-                    <td>obian@sample.com</td>
-                    <td><span class="badge bg-success">Enrolled</span></td>
-                    <td>23-03-2021</td>
-                    <td class="options-ham-menu">
-                      <div class="dropdown">
+                    <div class="dropdown-menu" aria-labelledby="action-dropDown2">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
+                         style="cursor: pointer;font-size: 14px">Comment</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Obiajulu Aghemen</td>
+                <td>Project management</td>
+                <td>Session 1</td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
+                         aria-valuemin="0" aria-valuemax="100">75%
+                    </div>
+                  </div>
+                </td>
+                <td>10 hours</td>
+                <td>23-03-2021</td>
+                <td class="options-ham-menu">
+                  <div class="dropdown">
                                 <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink2"
                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                             style="cursor: pointer">Add Payment</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Obiajulu Aghemen</td>
-                    <td>obian@sample.com</td>
-                    <td><span class="badge bg-success">Enrolled</span></td>
-                    <td>23-03-2021</td>
-                    <td class="options-ham-menu">
-                      <div class="dropdown">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
+                         style="cursor: pointer;font-size: 14px">comment</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Obiajulu Aghemen</td>
+                <td>Project management</td>
+                <td>Session 1</td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                         aria-valuemin="0" aria-valuemax="100">50%
+                    </div>
+                  </div>
+                </td>
+                <td>10 hours</td>
+                <td>23-03-2021</td>
+                <td class="options-ham-menu">
+                  <div class="dropdown">
                                 <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3"
                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ...
                                 </span>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                             style="cursor: pointer; font-size: 14px">Add Payment</a>
-                          <!--                      <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>-->
-                          <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-                <div class="pagination">
-                  <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
-                  <a class="active" href="#"><span id="page"></span></a>
-                  <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
-                </div>
-
-              </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
+                         style="cursor: pointer; font-size: 14px">comment</a>
+                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>-->
+                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
+              <a class="active" href="#"><span id="page"></span></a>
+              <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
             </div>
+
           </div>
+        </div>
+      </div>
 
 
 
@@ -340,7 +383,7 @@
               <option value="">-Select payment type-</option>
               <option value="">Part Payment</option>
               <option value="">Full Payment</option>
-<!--              <option value="">Managing Project Financials</option>-->
+              <!--              <option value="">Managing Project Financials</option>-->
             </select>
           </div>
         </div>
@@ -368,7 +411,7 @@
 
       </div>
       <div class="modal-footer">
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+        <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
         <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
       </div>
     </div>
@@ -384,6 +427,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--<script src="https://www.jsdelivr.com/package/npm/chart.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
@@ -595,6 +640,93 @@
     document.getElementById("eemail").value = alead.email;
   }
 </script>
+
+<!--<script>-->
+
+<!--  /* bar chart */-->
+<!--  var chBar = document.getElementById("chBar");-->
+<!--  if (chBar) {-->
+<!--    new Chart(chBar, {-->
+<!--      type: 'bar',-->
+<!--      data: {-->
+<!--        labels: ["S", "M", "T", "W", "T", "F", "S"],-->
+<!--        datasets: [{-->
+<!--          data: [589, 445, 483, 503, 689, 692, 634],-->
+<!--          backgroundColor: colors[0]-->
+<!--        },-->
+<!--          {-->
+<!--            data: [639, 465, 493, 478, 589, 632, 674],-->
+<!--            backgroundColor: colors[1]-->
+<!--          }]-->
+<!--      },-->
+<!--      options: {-->
+<!--        legend: {-->
+<!--          display: false-->
+<!--        },-->
+<!--        scales: {-->
+<!--          xAxes: [{-->
+<!--            barPercentage: 0.4,-->
+<!--            categoryPercentage: 0.5-->
+<!--          }]-->
+<!--        }-->
+<!--      }-->
+<!--    });-->
+<!--  }-->
+<!--</script>-->
+
+<script>
+  var densityCanvas = document.getElementById("densityChart");
+
+  Chart.defaults.global.defaultFontFamily = "Rubik";
+  Chart.defaults.global.defaultFontSize = 14;
+
+
+  var densityData = {
+    label: 'Active Students',
+    data: [5427, 5243, 5514, 3933, 1326, 687, 1271, 1638,1326, 687, 1271, 1638],
+    backgroundColor:  'rgb(75, 192, 192)',
+    borderColor:  'rgb(75, 192, 192)',
+    borderWidth: 0,
+    yAxisID: "y-axis-density"
+  };
+
+
+  var gravityData = {
+    label: 'Inactive Students',
+    data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0,23.1, 9.0, 8.7, 11.0],
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    borderWidth: 0,
+    yAxisID: "y-axis-gravity"
+  };
+
+
+  var planetData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [densityData, gravityData]
+  };
+
+  var chartOptions = {
+    scales: {
+      xAxes: [{
+        barPercentage: 1,
+        categoryPercentage: 0.6
+      }],
+      yAxes: [{
+        id: "y-axis-density"
+      }, {
+        id: "y-axis-gravity"
+      }]
+    }
+  };
+
+  var barChart = new Chart(densityCanvas, {
+    type: 'bar',
+    data: planetData,
+    options: chartOptions
+  });
+</script>
+
 
 </body>
 </html>
