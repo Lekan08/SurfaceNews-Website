@@ -252,6 +252,8 @@
                                     <option value="">Enrollment Status</option>
                                     <option value="Enrolled">Enrolled</option>
                                     <option value="Awaiting Enrollment">Awaiting Enrollment</option>
+                                    <option value="Awaiting Registration">Awaiting Registration</option>
+                                    <option value="Lead">Lead</option>
                                     <option value="Expired">Expired</option>
                                     <option value="About To Expire">About To Expire</option>
                                     <option value="Completed">Completed</option>
@@ -604,13 +606,15 @@
             if(enrollmentStatus == "Completed"){
                 enrolLook = '<span class="badge badge-pill badge-success">Completed</span>';
             }else if(enrollmentStatus == "About To Expire"){
-                enrolLook = '<span class="badge badge-pill badge-warning">About To Expire</span>';
+                enrolLook = '<span class="badge badge-pill badge-dark">About To Expire</span>';
             }else if(enrollmentStatus == "Expired"){
                 enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
             }else if(enrollmentStatus == "Awaiting Enrollment"){
-                enrolLook = '<span class="badge badge-pill badge-secondary">Awaiting Enrollment</span>';
+                enrolLook = '<span class="badge badge-pill badge-info">Awaiting Enrollment</span>';
             }else if(enrollmentStatus == "Lead"){
-                enrolLook = '<span class="badge badge-pill badge-info">Lead</span>';
+                enrolLook = '<span class="badge badge-pill badge-secondary">Lead</span>';
+            }else if(enrollmentStatus == "Awaiting Registration"){
+                enrolLook = '<span class="badge badge-pill badge-warning">Awaiting Registration</span>';
             }else {
                 enrolLook = '<span class="badge badge-pill badge-primary">Enrolled</span>';
             }
