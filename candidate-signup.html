@@ -201,7 +201,7 @@
                             </div>
                         </div>
                         <div class="mb-4 pr-5 row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <label class="form-label">Password<font color="red">*</font></label>
                                 <input type="password" class="form-control" id="password"
                                        placeholder="">
@@ -234,13 +234,13 @@
     //var wordpressUrl = "http://localhost:8099";
     var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-    var oladeUrl = "https://oladeconsulting.com";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get('id');
 
     //ON-READY FUNCTION
     (function() {
+        console.log("id "+id);
         //Calling the User Details API
         $.ajax({
             type: "GET",
@@ -252,16 +252,16 @@
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
-                console.log("Here "+result.length);
-                if(result[0].paymentType == 1){
+                console.log("Here "+result.paymentType);
+                if(result.paymentType == 1){
                     document.getElementById("withoutPay").style.display = "block";
                     document.getElementById("withPay").style.display = "none";
-                    document.getElementById("fname").value = result[0].fname;
-                    document.getElementById("lname").value = result[0].lname;
-                    document.getElementById("email").value = result[0].email;
-                    document.getElementById("fname").text = result[0].fname;
-                    document.getElementById("lname").text = result[0].lname;
-                    document.getElementById("email").text = result[0].email;
+                    document.getElementById("fname").value = result.fname;
+                    document.getElementById("lname").value = result.lname;
+                    document.getElementById("email").value = result.email;
+                    document.getElementById("fname").text = result.fname;
+                    document.getElementById("lname").text = result.lname;
+                    document.getElementById("email").text = result.email;
                 }else{
                     document.getElementById("withoutPay").style.display = "none";
                     document.getElementById("withPay").style.display = "block";
@@ -289,28 +289,28 @@
        	        beforeSend: function(request) {
        	            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	        },
-                url: oladeUrl + "/wp/v2/users",
+                url: wordpressUrl + "/wpusers/add",
                 contentType: "application/json",
                 dataType: 'json',
                 data: JSON.stringify({
-                    name : document.getElementById("dname").value,
-                    username : document.getElementById("username").value,
-                    email : document.getElementById("email").value,
-                    first_name : document.getElementById("fname").value,
-                    last_name : document.getElementById("lname").value,
-                    nickname : document.getElementById("nname").value,
-                    password : pass,
+                    displayName : document.getElementById("dname").value,
+                    userLogin : document.getElementById("username").value,
+                    userEmail : document.getElementById("email").value,
+                    //first_name : document.getElementById("fname").value,
+                    //last_name : document.getElementById("lname").value,
+                    userNicename : document.getElementById("nname").value,
+                    userPass : pass/*,
                     meta: JSON.stringify({
                         nickname: document.getElementById("nname").value,
                         first_name : document.getElementById("fname").value,
                         last_name : document.getElementById("lname").value,
                         full_name: document.getElementById("fname").value + " " + document.getElementById("lname").value
-                    })
+                    })*/
                 }),
                 success: function(result){
                     swal({
-                        title: "SUCCESS",
-                        text: "Registration Completed Successfully",
+                        title: result['status'],
+                        text: result['message'],
                         icon: "success",
                     })
                     .then(() => {
@@ -319,10 +319,10 @@
                 },
                 error: function(result){
                     console.log(result.responseText);
-                    //var json = $.parseJSON(result.responseText);
+                    var json = $.parseJSON(result.responseText);
                     swal({
-                        title: "ERROR",
-                        text: "An Error Occured",
+                        title: json.status,
+                        text: json.message,
                         icon: "error",
                     });
                 }
