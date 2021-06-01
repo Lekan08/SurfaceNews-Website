@@ -205,6 +205,14 @@
                                     <!--                                <label class="form-label">Email</label>-->
                                     <input type="email" id="email" class="form-control" placeholder="Email"  style="font-size: 14px">
                                 </div>
+                                <div class="col-lg-3">
+                                    <select class="form-control" id="programSelect" style="font-size: 14px">
+                                        <option value="">Program</option>
+                                        <option value="Project Management Comprehensive">Project Management</option>
+                                        <option value="Business Analysis Comprehensive">Business Analysis</option>
+                                        <option value="Managing Project Financials">Managing Project Financials</option>
+                                    </select>
+                                </div>
                                 <div class="col-lg-4 mt-3 d-flex">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="payment" id="exampleRadios1" value="option1" checked>
@@ -219,6 +227,7 @@
                                         </label>
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="col-lg-8 mt-3 float-end">
                                 <span type="button" class="btn-sm btn-pry float-end" onclick="inviteCandidate();">Confirm</span>
@@ -303,6 +312,44 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>First Name<font color="red">*</font></label>
+                        <input class="form-control" placeholder="First Name" id="efname" type="text" pattern="[A-Za-z-]+" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>Last Name<font color="red">*</font></label>
+                        <input class="form-control" placeholder="Last Name" id="elname" type="text" pattern="[A-Za-z-]+" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-12">
+                        <label>Email <font color="red">*</font></label>
+                        <input class="form-control" placeholder="Email" id="eemail" type="email" >
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editLead();">Save</button>
             </div>
         </div>
     </div>
@@ -477,6 +524,8 @@
         var payMethod = "";
         var online = document.getElementById("exampleRadios1").checked;
         var offline = document.getElementById("exampleRadios2").checked;
+        var e = document.getElementById("programSelect");
+        var programSelect = e.value;
         if(online){
             payMethod = 2;
         }else{
@@ -495,7 +544,8 @@
                 fname : document.getElementById("fname").value,
                 lname : document.getElementById("lname").value,
                 email : document.getElementById("email").value,
-                paymentType : payMethod
+                paymentType : payMethod,
+                program : programSelect
             }),
             success: function(result){
                 swal({
@@ -606,7 +656,7 @@
             if(enrollmentStatus == "Completed"){
                 enrolLook = '<span class="badge badge-pill badge-success">Completed</span>';
             }else if(enrollmentStatus == "About To Expire"){
-                enrolLook = '<span class="badge badge-pill badge-dark">About To Expire</span>';
+                enrolLook = '<span class="badge badge-pill badge-amber">About To Expire</span>';
             }else if(enrollmentStatus == "Expired"){
                 enrolLook = '<span class="badge badge-pill badge-danger">Expired</span>';
             }else if(enrollmentStatus == "Awaiting Enrollment"){
@@ -622,13 +672,16 @@
             var oneRecord = "";
             if(enrollmentStatus == "Lead"){
                 oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
+                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+i+'\');">...</span> \
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
                                 <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
-            }else{
+            }else if(enrollmentStatus == "Awaiting Registration"){
                 oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item" href="#">Send Payment Link</a></div></div></td></tr>';
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
+                                <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'3\');">Resend Invite</a></div></div></td></tr>';
+            }else{
+                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> </td></tr>';
             } 
             listing_table.innerHTML += oneRecord;
         }
@@ -652,15 +705,75 @@
         return Math.ceil(jsonData.length / records_per_page);
     }
 
+    //Function to handle the transition of selected lead
+    function kclick(x){
+        //console.log("My "+jsonData[x]);
+        var alead = jsonData[x];
+        selectedLead = jsonData[x];
+
+        document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
+        document.getElementById("efname").value = alead.fname;
+        document.getElementById("elname").value = alead.lname;
+        document.getElementById("eemail").value = alead.email;
+    }
+
+    //Lead Update
+    function editLead(){
+        //Calling the API -
+        $.ajax({
+            type: "POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            },
+            url: url + "/users/updateLead",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                fname : document.getElementById("efname").value,
+                lname : document.getElementById("elname").value,
+                email : document.getElementById("eemail").value,
+                id : selectedLead.id,
+                paymentType : selectedLead.paymentType,
+                leadStatus : selectedLead.leadStatus,
+                program : selectedLead.program
+            }),
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    location.reload();
+                });
+            },
+            error: function(result){
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
+
+    }
+
     //Sending Emails To Lead
     function sendMails(leadID, type){
+        var xUrl = "";
+        if(type == 3){
+            xUrl = url + "/users/resendInvite/" + leadID;
+        }else{
+            xUrl = url + "/users/messaging/" + leadID + "/" + type;
+        }
         //Calling the API -
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
             },
-            url: url + "/users/messaging/" + leadID + "/" + type,
+            url: xUrl,
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
