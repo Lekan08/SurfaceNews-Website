@@ -69,7 +69,7 @@
             </a>
           </li>
           <li>
-            <a href="lead-management.html">
+            <a href="lead-report.html">
               <span class="icon"><i class="fas fa-filter"></i></span>
               <span class="list">Lead Management</span>
             </a>
@@ -195,7 +195,7 @@
       <div class="py-1 mt-3">
         <div class="card">
           <div class="card-body">
-            <canvas id="densityChart" width="600" height="200"></canvas>
+            <canvas id="canvas" width="650" height="250"></canvas>
           </div>
         </div>
       </div>
@@ -675,56 +675,68 @@
 <!--</script>-->
 
 <script>
-  var densityCanvas = document.getElementById("densityChart");
 
   Chart.defaults.global.defaultFontFamily = "Rubik";
-  Chart.defaults.global.defaultFontSize = 14;
+  Chart.defaults.global.defaultFontSize = 12;
 
+  var barChartData = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "July",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    datasets: [
 
-  var densityData = {
-    label: 'Active Students',
-    data: [5427, 5243, 5514, 3933, 1326, 687, 1271, 1638,1326, 687, 1271, 1638],
-    backgroundColor:  'rgb(75, 192, 192)',
-    borderColor:  'rgb(75, 192, 192)',
-    borderWidth: 0,
-    yAxisID: "y-axis-density"
-  };
-
-
-  var gravityData = {
-    label: 'Inactive Students',
-    data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0,23.1, 9.0, 8.7, 11.0],
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
-    borderWidth: 0,
-    yAxisID: "y-axis-gravity"
-  };
-
-
-  var planetData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [densityData, gravityData]
+      {
+        label: "Active Students",
+        backgroundColor: "#45DAB6",
+        borderWidth: 1,
+        data: [8,7,4,6,6,8,3,7,7,7,7,8]
+      },
+      {
+        label: "Inactive Students",
+        backgroundColor: "#FF5B79",
+        borderWidth: 1,
+        data: [6,9,7,3,3,4,4,6,4,6,4,6,]
+      }
+    ]
   };
 
   var chartOptions = {
+    responsive: true,
+    legend: {
+      position: "top"
+    },
+    title: {
+      display: true,
+      text: "Chart.js Bar Chart"
+    },
     scales: {
-      xAxes: [{
-        barPercentage: 1,
-        categoryPercentage: 0.6
-      }],
       yAxes: [{
-        id: "y-axis-density"
-      }, {
-        id: "y-axis-gravity"
+        ticks: {
+          beginAtZero: true
+        }
       }]
     }
-  };
+  }
 
-  var barChart = new Chart(densityCanvas, {
-    type: 'bar',
-    data: planetData,
-    options: chartOptions
-  });
+  window.onload = function() {
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myBar = new Chart(ctx, {
+      type: "bar",
+      data: barChartData,
+      options: chartOptions
+    });
+  };
 </script>
 
 
