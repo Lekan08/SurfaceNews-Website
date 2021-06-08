@@ -87,7 +87,7 @@
        	    beforeSend: function(request) {
        	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	    },
-            url: url + "/users/doLogin",
+            url: wordpressUrl + "/wpusers/doLogin",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
@@ -96,7 +96,7 @@
             }),
             success: function(result){
                 //console.log("Here "+result);
-                sessionStorage.setItem("user", JSON.stringify(result["user"]));
+                sessionStorage.setItem("user", JSON.stringify(result["data"]));
                 sessionStorage.setItem("lg", 1);
                 sessionStorage.setItem("url", url);
                 location.href = "user-management.html";
