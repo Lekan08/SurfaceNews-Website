@@ -19,7 +19,7 @@
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-  <title>Receipt</title>
+  <title>Course Report</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -35,7 +35,7 @@
         <!--                    <span class="icon"><i class="fas fa-home"></i></span>-->
         <!--                    <span>Home</span>-->
         <!--                </a>-->
-        Manage Financials
+        Course Report
       </div>
       <div class="right_info">
         <!--                <div class="icon_wrap">-->
@@ -94,7 +94,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="course-report.html" class="active">
               <span class="icon"><i class="fas fa-chart-pie"></i></span>
               <span class="list">Course Report</span>
             </a>
@@ -118,7 +118,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="active">
+            <a href="#">
               <span class="icon"><i class="fas fa-credit-card"></i></span>
               <span class="list">Manage Financial</span>
             </a>
@@ -150,31 +150,39 @@
     </div>
 
     <div class="sub-container" >
-      <div class="card">
-        <div class="pt-3 pl-3 pr-3">
 
 
-          <ul class="nav nav-tabs " role="tablist">
-            <li class="nav-item ">
-              <a class="nav-link " href="manage-financials.html">ADD PAYMENT</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link"  href="reciept.html">RECEIPTS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="outstanding-balance.html">OUTSTANDING BALANCES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="create-coupon.html">CREATE COUPON</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="financial-report.html">FINANCIAL REPORT</a>
-            </li>
-            <!--            <li class="nav-item">-->
-            <!--              <a class="nav-link" data-toggle="tab" href="#on-boarding">OTHERS</a>-->
-            <!--            </li>-->
-          </ul>
+      <div class="py-1 mt-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="row p-4">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                  <select class="form-control" id="exampleFormControlSelect1" style="font-size: 16px;width: 75%">
+                    <option value="">Select All Courses</option>
+                    <option value="">Project Management</option>
+                    <option value="">Business Analysis</option>
+                    <option value="">Business Comprehensive</option>
+                    <!--                                    <option>Push reminder to potential students</option>-->
+                    <!--                                        <option>4</option>-->
+                    <!--                                        <option>5</option>-->
+                  </select>
+                </div>
+                <div>
+                  <img src="assets/images/course-report-img.svg" class="img-fluid mt-5" width="75%">
+                </div>
+                
+              </div>
+              <div class="col-lg-6">
+                <canvas id="myChart" width="600" height="400"></canvas>
+                <div class="text-center mt-3">
+                  <p class="text-primary" style="font-size: 20px;font-weight: 500">Total Students : <span class="text-primary">75</span></p>
+                </div>
+              </div>
+            </div>
 
+          </div>
         </div>
       </div>
 
@@ -183,32 +191,10 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-3 col-lg-3">
-              <div class="form-group">
-                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
-                  <option value="">Student</option>
-                  <option value="">John Doe</option>
-                  <option value="">Jude Law</option>
-                  <option value="">Mary Doe</option>
-                  <!--                                    <option>Push reminder to potential students</option>-->
-                  <!--                                        <option>4</option>-->
-                  <!--                                        <option>5</option>-->
-                </select>
-              </div>
+
             </div>
             <div class="col-sm-3 col-lg-3">
-              <div class="form-group">
-                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
-                  <option value="">Program</option>
-                  <option value="Project Management Comprehensive">Project Management</option>
-                  <option value="Business Analysis Comprehensive">Business Analysis</option>
-                  <!--                      <option value="Managing Project Financials">Managing Project Financials</option>-->
-                  <!--                                    <option>Push reminder to potential students</option>-->
-                  <!--                                        <option>4</option>-->
-                  <!--                                        <option>5</option>-->
-                </select>
-              </div>
+
             </div>
             <div class="col-sm-3 col-lg-3">
 
@@ -226,77 +212,77 @@
             <table class="table profile-table">
               <thead>
               <tr>
-                <th>Student name</th>
-                <th>Program</th>
-                <th>File</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>Course name</th>
+                <th>Course creator</th>
+                <th>Course creation date</th>
+                <th>No Of Sessions</th>
+                <th>Name of Sessions</th>
+                <th>Course Duration</th>
               </tr>
               </thead>
               <tbody>
               <tr>
-                <td>Obiajulu Aghemen</td>
                 <td>Project Management</td>
-                <td><span class="text-info">receipt file.docs</span></td>
+                <td>Moses James</td>
                 <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions  dropdown-toggle" href="#" id="action-dropDown2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                      <a class="dropdown-item"
-                         style="cursor: pointer;font-size: 14px">Send Receipt</a>
-                      <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">
-                        Download Receipt</a>
-                    </div>
-                  </div>
+                <td>3</td>
+                <td>
+                  <div class="form-group">
+                  <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                  <select class="form-control" id="exampleFormControlSelect11" style="font-size: 14px;">
+                    <option value="">Session Names</option>
+                    <option value="">Project Mgt 101</option>
+                    <option value="">Project Mgt 102</option>
+                    <option value="">Project Mgt 103</option>
+                    <!--                                    <option>Push reminder to potential students</option>-->
+                    <!--                                        <option>4</option>-->
+                    <!--                                        <option>5</option>-->
+                  </select>
+                </div>
                 </td>
+                <td>5hrs</td>
               </tr>
               <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Business Analysis</td>
-                <td><span class="text-info">receipt file.docs</span></td>
+                <td>Project Management</td>
+                <td>Moses James</td>
                 <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                      <a class="dropdown-item"
-                         style="cursor: pointer;font-size: 14px">Send Receipt</a>
-                      <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">
-                        Download Receipt</a>
-                    </div>
+                <td>3</td>
+                <td>
+                  <div class="form-group">
+                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                    <select class="form-control" id="exampleFormControlSelect12" style="font-size: 14px;">
+                      <option value="">Session Names</option>
+                      <option value="">Project Mgt 101</option>
+                      <option value="">Project Mgt 102</option>
+                      <option value="">Project Mgt 103</option>
+                      <!--                                    <option>Push reminder to potential students</option>-->
+                      <!--                                        <option>4</option>-->
+                      <!--                                        <option>5</option>-->
+                    </select>
                   </div>
                 </td>
+                <td>5hrs</td>
               </tr>
               <tr>
-                <td>Obiajulu Aghemen</td>
                 <td>Project Management</td>
-                <td><span class="text-info">receipt file.docs</span></td>
+                <td>Moses James</td>
                 <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                      <a class="dropdown-item"
-                         style="cursor: pointer;font-size: 14px">Send Receipt</a>
-                      <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">
-                        Download Receipt</a>
-                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
-                    </div>
+                <td>3</td>
+                <td>
+                  <div class="form-group">
+                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                    <select class="form-control" id="exampleFormControlSelect13" style="font-size: 14px;">
+                      <option value="">Session Names</option>
+                      <option value="">Project Mgt 101</option>
+                      <option value="">Project Mgt 102</option>
+                      <option value="">Project Mgt 103</option>
+                      <!--                                    <option>Push reminder to potential students</option>-->
+                      <!--                                        <option>4</option>-->
+                      <!--                                        <option>5</option>-->
+                    </select>
                   </div>
                 </td>
+                <td>5hrs</td>
               </tr>
               </tbody>
             </table>
@@ -389,6 +375,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
@@ -599,6 +586,29 @@
     document.getElementById("elname").value = alead.lname;
     document.getElementById("eemail").value = alead.email;
   }
+</script>
+
+<script>
+  // And for a doughnut chart
+  var ctx = document.getElementById("myChart").getContext('2d');
+
+  Chart.defaults.global.defaultFontFamily = "Rubik";
+  Chart.defaults.global.defaultFontSize = 14;
+
+  var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["Completed", "In progress", "Not Started",],
+      datasets: [{
+        backgroundColor: [
+          "#45DAB6",
+          "#28A3EF",
+          "#FF5B79",
+        ],
+        data: [12, 28, 7]
+      }]
+    }
+  });
 </script>
 
 </body>
