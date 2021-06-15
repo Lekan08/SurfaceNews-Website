@@ -52,7 +52,7 @@
                 <div class="dropdown  pic">
                     <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-                        <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
+                        <span class="pl-2" style="font-size: 14px" id="profilename"></span>
                     </div>
 
                     <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -379,6 +379,16 @@
 
     //ON-READY FUNCTION
     (function() {
+        if(sessionStorage.getItem("lg") != 1){
+            location.href = "login.html";
+        }
+        if(sessionStorage.getItem("user") != null){
+            var user = JSON.parse(sessionStorage.getItem("user"));
+            console.log("Check "+user);
+            //console.log("yes"+fname);
+            document.getElementById("profilename").innerHTML = user.email;
+            //document.getElementById("oladeEmail").innerHTML = user.email;
+        }
         document.getElementById("tCandidate").style.display = "none";
         //Calling the Wordpress Admin List API
         var key = "wp_capabilities";
