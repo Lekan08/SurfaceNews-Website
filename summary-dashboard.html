@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-    <title>Progress report</title>
+    <title>Summary Dashboard</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -56,7 +56,7 @@
 
                 <ul >
                     <li>
-                        <a href="#">
+                        <a href="summary-dashboard.html" class="active">
 		              <span class="icon">
 		              	<i class="fas fa-border-all"></i></span>
                             <span class="list">Summary Dashboard</span>
@@ -69,7 +69,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="lead-report.html" class="active">
+                        <a href="lead-report.html">
                             <span class="icon"><i class="fas fa-filter"></i></span>
                             <span class="list">Lead Report</span>
                         </a>
@@ -138,34 +138,17 @@
 
         <div class="sub-container" >
 
-            <div class="row">
-                <div class="col-lg-4">
+            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                <div class="col">
                     <div class="card">
                         <div class="p-3">
                             <div class="d-flex">
                                 <div class="mr-3">
-                                    <i class="fas fa-filter card-icon-purple"></i>
+                                    <i class="fas fa-thumbs-up card-icon-green"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h3>100</h3>
-                                    <p>Total No Of Lead Generated</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-users float-end icon-purple"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="p-3">
-                            <div class="d-flex">
-                                <div class="mr-3">
-                                    <i class="fas fa-filter card-icon-green"></i>
-                                </div>
-                                <div class="card-text">
-                                    <h3>75</h3>
-                                    <p>Total No Of Lead Converted</p>
+                                    <h5>100</h5>
+                                    <p>Enrolled</p>
                                 </div>
                             </div>
                             <i class="fas fa-users float-end icon-green"></i>
@@ -173,16 +156,67 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col">
                     <div class="card">
                         <div class="p-3">
                             <div class="d-flex">
                                 <div class="mr-3">
-                                    <i class="fas fa-filter card-icon-red"></i>
+                                    <i class="fas fa-sync fa-spin card-icon-purple"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h3>15</h3>
-                                    <p>Total No Of Lead Disqualified</p>
+                                    <h5>75</h5>
+                                    <p>Await Enrollment</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-users float-end icon-purple"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <div class="p-3">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <i class="fas fa-filter card-icon-blue"></i>
+                                </div>
+                                <div class="card-text">
+                                    <h5>15</h5>
+                                    <p>Leads</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-users float-end icon-blue"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <div class="p-3">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <i class="fas fa-exclamation-triangle card-icon-orange"></i>
+                                </div>
+                                <div class="card-text">
+                                    <h5>15</h5>
+                                    <p>about to expire</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-users float-end icon-orange"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <div class="p-3">
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <i class="fas fa-exclamation-triangle card-icon-red"></i>
+                                </div>
+                                <div class="card-text">
+                                    <h5>15</h5>
+                                    <p>Expired</p>
                                 </div>
                             </div>
                             <i class="fas fa-users float-end icon-red"></i>
@@ -193,74 +227,126 @@
 
 
             <div class="py-1 mt-3">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="canvas" width="800" height="250"></canvas>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="canvas" width="900" height="350"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="myChart" width="600" height="400"></canvas>
+                                <div class="text-center mt-3">
+                                    <p class="text-primary" style="font-size: 20px;font-weight: 500">Total Students : <span class="text-primary">75</span></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card mt-3 ">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3 col-lg-3">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="card mt-3 ">
+                        <div class="card-body">
+                            <h6 class="pb-2" style="font-size: 14px">
+                                Progress Report
+                            </h6>
+                            <div class="user">
+                                <table class="table profile-table">
+                                    <thead>
+                                    <tr>
+                                        <th style="font-size: 12px">Candidate Name</th>
+                                        <th  style="font-size: 12px">Course Name</th>
+                                        <th style="font-size: 12px">Progress Status</th>
 
-                        </div>
-                        <div class="col-sm-3 col-lg-3">
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Anita James</td>
+                                        <td>Project management</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
+                                                     aria-valuemin="0" aria-valuemax="100">75%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mary Doe</td>
+                                        <td>Business Analysis</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                                     aria-valuemin="0" aria-valuemax="100">50%
+                                                </div>
+                                            </div>
+                                        </td>
 
-                        </div>
-                        <div class="col-sm-3 col-lg-3">
+                                    </tr>
+                                    <tr>
+                                        <td>Johnson Johnson</td>
+                                        <td>Project Management</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                                     aria-valuemin="0" aria-valuemax="100">25%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
 
-                        </div>
-                        <div class="col-sm-3 col-lg-3 mb-3">
-                            <form class="navbar-form" role="search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search"
-                                           style="font-size: 14px">
-                                </div>
-                            </form>
+                            </div>
+                            <div class="">
+                                <a href="progress-report.html" style="font-size: 12px;text-decoration: none">View All</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="user">
-                        <table class="table profile-table">
-                            <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>No of Lead generated</th>
-                                <th>No of lead Converted</th>
-                                <th>No of lead disqualified</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>January</td>
-                                <td>20</td>
-                                <td>18</td>
-                                <td>2</td>
+                </div>
 
-                            </tr>
-                            <tr>
-                                <td>February</td>
-                                <td>15</td>
-                                <td>10</td>
-                                <td>5</td>
+                <div class="col-lg-5">
+                    <div class="card mt-3 ">
+                        <div class="card-body">
+                            <h6 class="pb-2" style="font-size: 14px">
+                                Pending payment
+                            </h6>
+                            <div class="user">
+                                <table class="table profile-table">
+                                    <thead>
+                                    <tr>
+                                        <th style="font-size: 12px">Candidate Name</th>
+                                        <th style="font-size: 12px">Outstanding balances</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Joseph Burn</td>
+                                        <td>$300</td>
 
-                            </tr>
-                            <tr>
-                                <td>March</td>
-                                <td>12</td>
-                                <td>8</td>
-                                <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>David Rooney</td>
+                                        <td>$600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Michael James</td>
+                                        <td>$500</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="">
+                                    <a href="outstanding-balance.html" style="font-size: 12px;text-decoration: none">View All</a>
+                                </div>
 
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination">
-                            <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
-                            <a class="active" href="#"><span id="page"></span></a>
-                            <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -594,7 +680,7 @@
 <script>
 
     Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 12;
+    Chart.defaults.global.defaultFontSize = 11;
 
     var barChartData = {
         labels: [
@@ -613,30 +699,23 @@
         ],
         datasets: [
             {
-                label: "Lead Generated",
+                label: "Newly Enrolled Students",
                 backgroundColor: "#28A3EF",
                 borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
+                barThickness: 1,
+                maxBarThickness: 1,
                 data: [10, 8, 10, 8,10, 8, 9, 9, 9, 9, 9, 9,]
             },
 
             {
-                label: "Lead Converted",
+                label: "Student that completed the course",
                 backgroundColor: "#45DAB6",
                 borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
+                barThickness: 1,
+                maxBarThickness: 1,
                 data: [8,7,4,6,6,5,3,7,7,7,7,8]
             },
-            {
-                label: "Lead Disqualified",
-                backgroundColor: "#FF5B79",
-                borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [6,4,7,3,3,3,4,6,4,6,4,6,]
-            }
+
         ]
     };
 
@@ -666,6 +745,29 @@
             options: chartOptions
         });
     };
+</script>
+
+<script>
+    // And for a doughnut chart
+    var ctx = document.getElementById("myChart").getContext('2d');
+
+    Chart.defaults.global.defaultFontFamily = "Rubik";
+    Chart.defaults.global.defaultFontSize = 11;
+
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Completed", "In progress", "Not Started",],
+            datasets: [{
+                backgroundColor: [
+                    "#45DAB6",
+                    "#28A3EF",
+                    "#FF5B79",
+                ],
+                data: [12, 28, 7]
+            }]
+        }
+    });
 </script>
 
 
