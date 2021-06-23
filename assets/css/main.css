@@ -486,3 +486,27 @@ a {
    font-size: 14px;
     color: #B1B1B1;
 }
+.card-red {
+    background: #F57483;
+    border: none!important;
+}
+.card-red p {
+    font-size: 13px;
+}
+.card-green {
+    background: #45DAB6;
+    border: none!important;
+}
+
+.card-green p {
+    font-size: 13px;
+}
+
+.card-blue {
+    background: #3E9DE0;
+    border: none!important;
+}
+
+.card-blue p {
+    font-size: 13px;
+}
