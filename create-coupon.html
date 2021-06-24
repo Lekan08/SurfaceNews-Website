@@ -268,7 +268,7 @@
         <div class="form-group row">
           <div class="col-xs-6">
             <label>Type<font color="red">*</font></label>
-            <select class="form-control" id="createType" style="font-size: 14px">
+            <select class="form-control" id="createType" style="font-size: 14px" onchange="displayProduct();">
               <option value="">-Select Type</option>
               <option value="1">Coupon</option>
               <option value="2">Discount</option>
@@ -282,6 +282,17 @@
               <option value="">-Select Amount Type</option>
               <option value="2">Percentage</option>
               <option value="1">Flat</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row" id="prod">
+          <div class="col-xs-10">
+            <label>Product Type<font color="red">*</font></label>
+            <select class="form-control" id="productType" style="font-size: 14px">
+              <option value="">-Select Product Type</option>
+              <option value="PM">Project Management</option>
+              <option value="BA">Business Analysis</option>
+              <option value="MP">Managing Project Financials</option>
             </select>
           </div>
         </div>
@@ -372,6 +383,7 @@
   var selectedCoupon = {};
   var id = "";
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var productChecker = 0;
 
   //ON-READY FUNCTION
   (function() {
@@ -469,6 +481,7 @@
       }
     })
 
+    document.getElementById("prod").style.display = "none";
     $(".hamburger").click(function(){
       $(".wrapper").toggleClass("active")
     })
@@ -489,6 +502,11 @@
     var ex = document.getElementById("exampleFormControlSelect");
     var amountType = ex.value;
     var amount = document.getElementById("amount").value;
+    var valueText = "";
+    if(productChecker == 1){
+      var pType = document.getElementById("productType");
+      var valueText = pType.value;
+    }
     if(isNaN(amount)){
       swal({
         title: "INVALID_AMOUNT",
@@ -511,7 +529,8 @@
           amountType : amountType,
           amount : amount,
           duration : document.getElementById("duration").value,
-          useType : useType
+          useType : useType,
+          program : valueText
         }),
         success: function(result){
           swal({
@@ -712,7 +731,7 @@
       }
       var date = new Date(jsonData[i].generatedTime);
       var generatedDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-      var oneRecord = '<tr><td>' + jsonData[i].generatorName + '</td><td>' + type + '</td><td>' + amountType + '</td><td>' + status + '</td><td>' + generatedDate + '</td><td>' + jsonData[i].duration + '</td><td class="options-ham-menu"> <div class="dropdown"> \
+      var oneRecord = '<tr><td>' + jsonData[i].generatorName + '</td><td>' + type + '</td><td>' + amountType + '</td><td>' + status + '</td><td>' + generatedDate + '</td><td>' + jsonData[i].duration + ' hour(s)</td><td class="options-ham-menu"> <div class="dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+i+'\');">...</span> \
                                 <div class="dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#shareCoupon" style="cursor: pointer">Share </a> \
                                   <a class="dropdown-item" style="cursor: pointer;font-size: 14px;white-space: inherit" onclick="terminate(\''+jsonData[i].id+'\');">Cancel </a></div></div></td></tr>';
@@ -769,6 +788,19 @@
         });
       }
     })
+  }
+
+  //Show Products for Discount choice
+  function displayProduct(){
+    var e = document.getElementById("createType");
+    var createType = e.value;
+    if(createType == 2){
+      document.getElementById("prod").style.display = "block";
+      productChecker = 1;
+    }else{
+      document.getElementById("prod").style.display = "none";
+      productChecker = 0;
+    }
   }
 </script>
 
