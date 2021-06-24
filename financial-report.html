@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-    <title>Progress report</title>
+    <title>Financial Report</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -31,14 +31,27 @@
         </div>
         <div class="top_menu">
             <div class="home_link page-header">
-                Lead Report
+                <!--                <a href="#">-->
+                <!--                    <span class="icon"><i class="fas fa-home"></i></span>-->
+                <!--                    <span>Home</span>-->
+                <!--                </a>-->
+                Manage Financials
             </div>
             <div class="right_info">
-
+                <!--                <div class="icon_wrap">-->
+                <!--                    <div class="icon">-->
+                <!--                        <i class="fas fa-bell"></i>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="icon_wrap">-->
+                <!--                    <div class="icon">-->
+                <!--                        <i class="fas fa-cog"></i>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <div class="dropdown  pic">
                     <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-                        <span class="pl-2" style="font-size: 14px" id="profilename"></span>
+                        <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
                     </div>
 
                     <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -69,9 +82,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="lead-report.html" class="active">
+                        <a href="lead-report.html">
                             <span class="icon"><i class="fas fa-filter"></i></span>
-                            <span class="list">Lead Report</span>
+                            <span class="list">Lead Management</span>
                         </a>
                     </li>
                     <li>
@@ -105,7 +118,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="manage-financials.html">
+                        <a href="#" class="active">
                             <span class="icon"><i class="fas fa-credit-card"></i></span>
                             <span class="list">Manage Financial</span>
                         </a>
@@ -137,130 +150,163 @@
         </div>
 
         <div class="sub-container" >
+            <div class="card">
+                <div class="pt-3 pl-3 pr-3">
+
+
+                    <ul class="nav nav-tabs " role="tablist">
+                        <li class="nav-item ">
+                            <a class="nav-link " href="manage-financials.html">ADD PAYMENT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="reciept.html">RECEIPTS</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link"  href="outstanding-balance.html">OUTSTANDING BALANCES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="create-coupon.html">CREATE COUPON</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link"  href="financial-report.html">FINANCIAL REPORT</a>
+                        </li>
+                        <!--            <li class="nav-item">-->
+                        <!--              <a class="nav-link" data-toggle="tab" href="#on-boarding">OTHERS</a>-->
+                        <!--            </li>-->
+                    </ul>
+
+                </div>
+            </div>
 
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="p-3">
-                            <div class="d-flex">
-                                <div class="mr-3">
-                                    <i class="fas fa-filter card-icon-purple"></i>
+                <div class="col-lg-6">
+                    <div class="card mt-3 ">
+                        <div class="card-body">
+                            <h6 class="pb-2" style="font-size: 14px">
+                                2021 Year to date financial breakdown
+                            </h6>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 13px">
+                                            <option value="">Select Program</option>
+                                            <option value="">Project Management</option>
+                                            <option value="">Business analysis</option>
+                                            <option value="">Business information</option>
+                                            <option value="">ICT</option>
+                                            <!--                                    <option>Push reminder to potential students</option>-->
+                                            <!--                                        <option>4</option>-->
+                                            <!--                                        <option>5</option>-->
+                                        </select>
+                                    </div>
+                                    <div class="card card-green">
+                                        <div class="p-3">
+                                            <div class=" text-white">
+                                                <h5>$50,000</h5>
+                                                <p>Total Payments received</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card card-red mt-3">
+                                        <div class="p-3">
+                                            <div class=" text-white">
+                                                <h5>$10,000</h5>
+                                                <p>Total Unpaid balances</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card card-blue mt-3">
+                                        <div class="p-3">
+                                            <div class=" text-white">
+                                                <h5>$5,000</h5>
+                                                <p>Total discount offered</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="card-text">
-                                    <h3>100</h3>
-                                    <p>Total No Of Lead Generated</p>
+                                <div class="col-md-6">
+                                    <canvas id="myChart2" width="900" height="900"></canvas>
                                 </div>
+
                             </div>
-                            <i class="fas fa-users float-end icon-purple"></i>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="card mt-3 ">
+                        <div class="card-body">
+                            <h6 class="pb-2" style="font-size: 14px">
+                             Summary Of Financial breakdown per month
+                            </h6>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 13px">
+                                            <option value="">Select Month</option>
+                                            <option value="">January</option>
+                                            <option value="">February</option>
+                                            <option value="">March </option>
+                                            <option value="">April</option>
+                                            <!--                                    <option>Push reminder to potential students</option>-->
+                                            <!--                                        <option>4</option>-->
+                                            <!--                                        <option>5</option>-->
+                                        </select>
+                                    </div>
+                                    <div class="card card-green">
+                                        <div class="p-3">
+                                                <div class=" text-white">
+                                                    <h5>$50,000</h5>
+                                                    <p>Total Payments received</p>
+                                                </div>
+                                        </div>
+                                    </div>
 
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="p-3">
-                            <div class="d-flex">
-                                <div class="mr-3">
-                                    <i class="fas fa-filter card-icon-green"></i>
+                                    <div class="card card-red mt-3">
+                                        <div class="p-3">
+                                                <div class=" text-white">
+                                                    <h5>$10,000</h5>
+                                                    <p>Total Unpaid balances</p>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card card-blue mt-3">
+                                        <div class="p-3">
+                                                <div class=" text-white">
+                                                    <h5>$5,000</h5>
+                                                    <p>Total discount offered</p>
+                                                </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="card-text">
-                                    <h3>75</h3>
-                                    <p>Total No Of Lead Converted</p>
+                                <div class="col-md-6">
+                                    <canvas id="myChart" width="900" height="900"></canvas>
+                                    <div class="text-primary m-3" style="font-size: 13px;">
+                                        <p>No of full payment received: 40</p>
+                                        <p>No of part payment received: 10</p>
+                                    </div>
                                 </div>
+
                             </div>
-                            <i class="fas fa-users float-end icon-green"></i>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="py-1 mt-3">
                     <div class="card">
-                        <div class="p-3">
-                            <div class="d-flex">
-                                <div class="mr-3">
-                                    <i class="fas fa-filter card-icon-red"></i>
-                                </div>
-                                <div class="card-text">
-                                    <h3>15</h3>
-                                    <p>Total No Of Lead Disqualified</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-users float-end icon-red"></i>
+                        <div class="card-body">
+                            <h6 class="pb-2" >
+                                Payment Received For The Year
+                            </h6>
+                            <canvas id="canvas" width="650" height="250"></canvas>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="py-1 mt-3">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="canvas" width="800" height="250"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mt-3 ">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3 col-lg-3">
-
-                        </div>
-                        <div class="col-sm-3 col-lg-3">
-
-                        </div>
-                        <div class="col-sm-3 col-lg-3">
-
-                        </div>
-                        <div class="col-sm-3 col-lg-3 mb-3">
-                            <form class="navbar-form" role="search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search"
-                                           style="font-size: 14px">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="user">
-                        <table class="table profile-table">
-                            <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>No of Lead generated</th>
-                                <th>No of lead Converted</th>
-                                <th>No of lead disqualified</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>January</td>
-                                <td>20</td>
-                                <td>18</td>
-                                <td>2</td>
-
-                            </tr>
-                            <tr>
-                                <td>February</td>
-                                <td>15</td>
-                                <td>10</td>
-                                <td>5</td>
-
-                            </tr>
-                            <tr>
-                                <td>March</td>
-                                <td>12</td>
-                                <td>8</td>
-                                <td>4</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination">
-                            <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
-                            <a class="active" href="#"><span id="page"></span></a>
-                            <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -271,69 +317,6 @@
     </div>
 </div>
 
-<!--Edit Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Payment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label>Course<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-                            <option value="">-Select Course-</option>
-                            <option value="">Business Analysis</option>
-                            <option value="">Project management</option>
-                            <option value="">Managing Project Financials</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label>Payment Type<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-                            <option value="">-Select payment type-</option>
-                            <option value="">Part Payment</option>
-                            <option value="">Full Payment</option>
-                            <!--              <option value="">Managing Project Financials</option>-->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Coupon Code<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Coupon Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Tax<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -344,15 +327,14 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!--<script src="https://www.jsdelivr.com/package/npm/chart.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    //var url = "http://localhost:8080";
+    var url = "http://localhost:8080";
     //var wordpressUrl = "http://localhost:8099";
-    var url = "https://proinsight-reconservice.herokuapp.com";
+    //var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     var leads = [];
     var jsonData = [];
@@ -362,15 +344,6 @@
 
     //ON-READY FUNCTION
     (function() {
-        if(sessionStorage.getItem("lg") != 1){
-            location.href = "login.html";
-        }
-        if(sessionStorage.getItem("user") != null){
-            var user = JSON.parse(sessionStorage.getItem("user"));
-            
-            document.getElementById("profilename").innerHTML = user.email;
-            //document.getElementById("oladeEmail").innerHTML = user.email;
-        }
         //Calling the Leads List API
         var status = 0;
         $.ajax({
@@ -531,7 +504,7 @@
             var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
+                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
             listing_table.innerHTML += oneRecord;
         }
         listing_table.innerHTML += '</tbody>';
@@ -565,72 +538,53 @@
         document.getElementById("elname").value = alead.lname;
         document.getElementById("eemail").value = alead.email;
     }
-
-    //Sending Emails To Lead
-    function sendMails(leadID, type){
-        //Calling the API -
-        $.ajax({
-            type: "GET",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            },
-            url: url + "/leads/messaging/" + leadID + "/" + type,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                .then(() => {
-                    location.reload();
-                });
-            },
-            error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
-            }
-        })
-    }
 </script>
 
-<!--<script>-->
+<script>
+    // And for a doughnut chart
+    var ctx = document.getElementById("myChart").getContext('2d');
 
-<!--  /* bar chart */-->
-<!--  var chBar = document.getElementById("chBar");-->
-<!--  if (chBar) {-->
-<!--    new Chart(chBar, {-->
-<!--      type: 'bar',-->
-<!--      data: {-->
-<!--        labels: ["S", "M", "T", "W", "T", "F", "S"],-->
-<!--        datasets: [{-->
-<!--          data: [589, 445, 483, 503, 689, 692, 634],-->
-<!--          backgroundColor: colors[0]-->
-<!--        },-->
-<!--          {-->
-<!--            data: [639, 465, 493, 478, 589, 632, 674],-->
-<!--            backgroundColor: colors[1]-->
-<!--          }]-->
-<!--      },-->
-<!--      options: {-->
-<!--        legend: {-->
-<!--          display: false-->
-<!--        },-->
-<!--        scales: {-->
-<!--          xAxes: [{-->
-<!--            barPercentage: 0.4,-->
-<!--            categoryPercentage: 0.5-->
-<!--          }]-->
-<!--        }-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
+    Chart.defaults.global.defaultFontFamily = "Rubik";
+    Chart.defaults.global.defaultFontSize = 11;
+
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Payments", "Discount", "Unpaid Balances",],
+            datasets: [{
+                backgroundColor: [
+                    "#45DAB6",
+                    "#28A3EF",
+                    "#FF5B79",
+                ],
+                data: [12, 28, 7]
+            }]
+        }
+    });
+</script>
+
+<script>
+    // And for a doughnut chart
+    var ctx = document.getElementById("myChart2").getContext('2d');
+
+    Chart.defaults.global.defaultFontFamily = "Rubik";
+    Chart.defaults.global.defaultFontSize = 11;
+
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Payments", "Discount", "Unpaid Balances",],
+            datasets: [{
+                backgroundColor: [
+                    "#45DAB6",
+                    "#28A3EF",
+                    "#FF5B79",
+                ],
+                data: [12, 28, 7]
+            }]
+        }
+    });
+</script>
 
 <script>
 
@@ -653,30 +607,18 @@
             "Dec"
         ],
         datasets: [
-            {
-                label: "Lead Generated",
-                backgroundColor: "#28A3EF",
-                borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [10, 8, 10, 8,10, 8, 9, 9, 9, 9, 9, 9,]
-            },
 
             {
-                label: "Lead Converted",
+                label: "Project Management : $30,000",
                 backgroundColor: "#45DAB6",
                 borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [8,7,4,6,6,5,3,7,7,7,7,8]
+                data: [8,7,4,6,6,8,3,7,7,7,7,8]
             },
             {
-                label: "Lead Disqualified",
-                backgroundColor: "#FF5B79",
+                label: "Business Analysis : $20,000",
+                backgroundColor: "#28A3EF",
                 borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [6,4,7,3,3,3,4,6,4,6,4,6,]
+                data: [6,9,7,3,3,4,4,6,4,6,4,6,]
             }
         ]
     };
@@ -708,7 +650,6 @@
         });
     };
 </script>
-
 
 </body>
 </html>
