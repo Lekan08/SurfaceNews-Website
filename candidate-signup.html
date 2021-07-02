@@ -62,7 +62,7 @@
                             <div class="col-lg-12">
                                 <label class="form-label">Email Address<font color="red">*</font></label>
                                 <input type="text" class="form-control" id="wemail"
-                                       placeholder="">
+                                       placeholder="" disabled>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Phone Number<font color="red">*</font></label>
@@ -199,20 +199,25 @@
                             <div class="col-lg-4">
                                 <label class="form-label">Card Number</label>
                                 <input type="text" class="form-control"
-                                       placeholder="">
+                                       placeholder="" id="cardNumber">
                             </div>
-                            <div class="col-lg-4">
-                                <label class="form-label">Expiry Date</label>
-                                <input type="text" class="form-control"
-                                       placeholder="">
+                            <div class="col-lg-2">
+                                <label class="form-label">Expiry Month</label>
+                                <input type="number" class="form-control"
+                                       placeholder="" id="expMonth">
+                            </div>
+                            <div class="col-lg-2">
+                                <label class="form-label">Expiry Year</label>
+                                <input type="number" class="form-control"
+                                       placeholder="" id="expYear">
                             </div>
                             <div class="col-lg-4">
                                 <label class="form-label">CVV</label>
                                 <input type="text" class="form-control"
-                                       placeholder="">
+                                       placeholder="" id="cvv">
                             </div>
                         </div>
-                        <button type="button" class="btn mt-4 float-end pry-btn mr-5" onclick="pay();">PLACE ORDER</button>
+                        <button type="button" class="btn mt-4 float-end pry-btn mr-5" onclick="completeOnline();">PLACE ORDER</button>
                     </form>
 
                     <form id="withoutPay" class=" mt-5 pt-5">
@@ -235,7 +240,7 @@
                             <div class="col-lg-12">
                                 <label class="form-label">Email Address<font color="red">*</font></label>
                                 <input type="text" class="form-control" id="email"
-                                       placeholder="">
+                                       placeholder="" disabled>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Phone Number<font color="red">*</font></label>
@@ -327,10 +332,10 @@
 <script src="provinces.js"></script>
 
 <script>
-    //var url = "http://localhost:8080";
-    //var wordpressUrl = "http://localhost:8099";
-    var url = "https://proinsight-reconservice.herokuapp.com";
-    var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    var url = "http://localhost:8080";
+    var wordpressUrl = "http://localhost:8099";
+    //var url = "https://proinsight-reconservice.herokuapp.com";
+    //var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get('id');
@@ -555,7 +560,7 @@
                         icon: "success",
                     })
                     .then(() => {
-                        completeOfflineHelper();
+                        completeRegistrationHelper(1);
                     });
                 },
                 error: function(result){
@@ -571,22 +576,34 @@
         }
     }
 
-    //Method to help complete offline registation reconciliation
-    function completeOfflineHelper(){
+    //Method to help complete registation reconciliation
+    function completeRegistrationHelper(myPayType){
+        var fname = "";
+        var lname = "";
+        var email = "";
+        if(myPayType == 1){
+            fname = document.getElementById("fname").value;
+            lname = document.getElementById("lname").value;
+            email = document.getElementById("email").value;
+        }else{
+            fname = document.getElementById("wfname").value;
+            lname = document.getElementById("wlname").value;
+            email = document.getElementById("wemail").value;
+        }
         $.ajax({
     	    type: "POST",
        	    beforeSend: function(request) {
        	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	    },
-            url: url + "/users/completeOfflineCandidate",
+            url: url + "/users/completeCandidate",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
                 id : id,
-                fname : document.getElementById("fname").value,
-                lname : document.getElementById("lname").value,
-                email : document.getElementById("email").value,
-                paymentType : 1
+                fname : fname,
+                lname : lname,
+                email : email,
+                paymentType : myPayType
             }),
             success: function(result){
                 console.log(result.statusText);
@@ -716,6 +733,140 @@
         var chosenProvince = e.value;
         document.getElementById("wprovince").value = chosenProvince;
         document.getElementById("wprovince").text = chosenProvince;
+    }
+
+    //Method to complete online registration
+    function completeOnline(){
+        var pass = document.getElementById("wpassword").value;
+        var cpass = document.getElementById("wcpassword").value;
+        var pAmount = document.getElementById("payingAmount").value;
+        if(pass != cpass){
+            swal({
+                title: "Password Mismatch",
+                text: "Password Is Not Consistent!",
+                icon: "error",
+            });
+        }else if(pAmount < minCourseAmount){
+            swal({
+                title: "Amount Declined",
+                text: "Amount To Pay Is Below Minimum Amount!",
+                icon: "error",
+            });
+        }else {
+            var ouser = {
+                displayName : document.getElementById("wdname").value,
+                userLogin : document.getElementById("wusername").value,
+                userEmail : document.getElementById("wemail").value,
+                userNicename : document.getElementById("wusername").value,
+                userPass : pass
+            }
+            var ousermetas = [
+                {
+                    metaKey : "country",
+                    metaValue : document.getElementById("wcountry").value
+                },
+                {
+                    metaKey : "address",
+                    metaValue : document.getElementById("waddr").value
+                },
+                {
+                    metaKey : "apartment",
+                    metaValue : document.getElementById("wapartment").value
+                },
+                {
+                    metaKey : "town",
+                    metaValue : document.getElementById("wtown").value
+                },
+                {
+                    metaKey : "province",
+                    metaValue : document.getElementById("wprovince").value
+                },
+                {
+                    metaKey : "phoneno",
+                    metaValue : document.getElementById("wpno").value
+                }
+            ]
+            var currency = "cad";
+            var description = "Online Course Payment To Olade";
+            var chargeDTO = {
+                amount : document.getElementById("payingAmount").value,
+                currency : currency,
+                description : description
+            }
+            var paymentTokenDTO = {
+                cardNumber : document.getElementById("cardNumber").value,
+                cvc : document.getElementById("cvv").value,
+                expMonth : document.getElementById("expMonth").value,
+                expYear : document.getElementById("expYear").value
+            }
+            var regUser = JSON.stringify({
+                    'user' : ouser,
+                    'usermetas' : ousermetas,
+                    'paymentDTO' : paymentTokenDTO,
+                    'chargeDTO' : chargeDTO
+                });
+            $.ajax({
+    	        type: "POST",
+       	        beforeSend: function(request) {
+       	            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	        },
+                url: wordpressUrl + "/wpusers/payandreg",
+                contentType: "application/json",
+                dataType: 'json',
+                data: regUser,
+                success: function(result){
+                    swal({
+                        title: result['status'],
+                        text: result['message'],
+                        icon: "success",
+                    })
+                    .then(() => {
+                        completeRegistrationHelper(2);
+                        addPayment();
+                    });
+                },
+                error: function(result){
+                    console.log(result.responseText);
+                    var json = $.parseJSON(result.responseText);
+                    swal({
+                        title: json.status,
+                        text: json.message,
+                        icon: "error",
+                    });
+                }
+            })
+        }
+    }
+
+    //Method to add payment record 
+    function addPayment(){
+        var taxAmount = ((tax * courseAmount) / 100);
+        var totalAmount = courseAmount + taxAmount; 
+        console.log("amount "+courseAmount);
+        $.ajax({
+    	    type: "POST",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: url + "/payments/add",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                courseName : course,
+                amount : courseAmount,
+                taxAmount : taxAmount,
+                totalAmount : totalAmount,
+                paidAmount : document.getElementById("payingAmount").value,
+                candidateEmail : document.getElementById("wemail").value
+            }),
+            success: function(result){
+                console.log(result.statusText);
+                location.reload();
+            },
+            error: function(result){
+                console.log(result.responseText);
+            }
+        })
     }
 </script>
 
