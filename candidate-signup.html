@@ -153,7 +153,9 @@
                                 <p id="purchase"> </p>
                             </div>
                             <div class="col-lg-6" style="font-size: 14px">
-                                <p id="dCourseAmount"></p>
+                                <input type="text" class="form-control" id="dCourseAmount"
+                                       style="font-size: 14px" disabled>
+                                <!--p id="dCourseAmount"></p-->
                             </div>
 
 
@@ -161,16 +163,23 @@
                                 <p>Tax</p>
                             </div>
                             <div class="col-lg-6" style="font-size: 14px">
-                                <p id="dTaxAmount"></p>
+                                <input type="text" class="form-control" id="dTaxAmount"
+                                       style="font-size: 14px" disabled>
+                                <!--p id="dTaxAmount"></p-->
                             </div>
 
                             <hr>
 
                             <div class="col-lg-6" style="font-weight: 600">
-                                <p>Total</p>
+                                <p>Paying<font color="red">* <spam id="minInfo"></spam></font></p>
                             </div>
                             <div class="col-lg-6" style="font-weight: 600">
-                                <p id="dTotalAmount"></p>
+                                <!--input type="text" class="form-control" id="payingAmount"
+                                       style="font-size: 14px" onkeyup="calcTaxAmount();"-->
+                                <select class="form-control" id="payingAmount" style="font-size: 14px" onchange="calcTaxAmount();">
+                                    <option value="">-Select Payment-</option>
+                                </select>
+                                <!--p id="dTotalAmount"></p-->
                             </div>
 
                             <hr>
@@ -185,9 +194,9 @@
                             </div>
 
                             <div class="col-lg-8">
-                                <label class="form-label">Paying Amount<font color="red">* <spam id="minInfo"></spam></font></label>
-                                <input type="text" class="form-control" id="payingAmount"
-                                       style="font-size: 14px">
+                                <label class="form-label">Total Amount</label>
+                                <input type="text" class="form-control" id="dTotalAmount"
+                                       style="font-size: 14px" disabled>
                             </div>
 
                             <hr class="mt-3">
@@ -364,6 +373,8 @@
             dateDropdown.appendChild(dateOption);      
             i++;    
         }
+        document.getElementById("country").text = "Canada";
+        document.getElementById("country").value = "Canada";
         let cprovinces = document.getElementById("province1"); 
         var j = 0;
         while (j < provinces.length) { 
@@ -383,6 +394,8 @@
             wdateDropdown.appendChild(dateOption);      
             x++;    
         }
+        document.getElementById("wcountry").text = "Canada";
+        document.getElementById("wcountry").value = "Canada";
         let wcprovinces = document.getElementById("wprovince1"); 
         var y = 0;
         while (y < provinces.length) { 
@@ -421,13 +434,16 @@
                                     minCourseAmount = result.minimumPayment;
                                     var taxAmount = ((tax * courseAmount) / 100);
                                     var totalAmount = courseAmount + taxAmount; 
-                                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + totalAmount + "CAD";
-                                    document.getElementById("dCourseAmount").innerHTML = "$" + courseAmount + "CAD";
-                                    document.getElementById("dTaxAmount").innerHTML = "$" + taxAmount + "CAD";
-                                    document.getElementById("dTotalAmount").innerHTML = "$" + totalAmount + "CAD";
+                                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + courseAmount + "CAD";
+                                    document.getElementById("dCourseAmount").value = courseAmount;
+                                    document.getElementById("dCourseAmount").text = courseAmount;
+                                    document.getElementById("dTaxAmount").value = taxAmount;
+                                    document.getElementById("dTaxAmount").text = taxAmount;
+                                    document.getElementById("dTotalAmount").value = totalAmount;
+                                    document.getElementById("dTotalAmount").text = totalAmount;
                                     document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
-                                    document.getElementById("payingAmount").text = totalAmount;
-                                    document.getElementById("payingAmount").value = totalAmount;
+                                    //document.getElementById("payingAmount").text = totalAmount;
+                                    //document.getElementById("payingAmount").value = totalAmount;
                                 }
                             },
                             error: function(result){
@@ -477,6 +493,32 @@
             },
             error: function(result){
                 console.log("Here "+result.statusText);
+            }
+        })
+
+        //Calling the course prices
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/courseinstallment/getForCourse/" + course,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+result.length);
+                //Preparing the Select List
+                var dropDown = document.getElementById("payingAmount");
+                for(var i = 0; i < result.length; i++) {
+                    var el = document.createElement("option");
+                    el.innerHTML = result[i].amount;
+                    el.value = result[i].amount;
+                    dropDown.appendChild(el);
+                }
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
             }
         })
     })();
@@ -538,21 +580,6 @@
                 contentType: "application/json",
                 dataType: 'json',
                 data: regUser,
-                /*data: JSON.stringify({
-                    displayName : document.getElementById("dname").value,
-                    userLogin : document.getElementById("username").value,
-                    userEmail : document.getElementById("email").value,
-                    //first_name : document.getElementById("fname").value,
-                    //last_name : document.getElementById("lname").value,
-                    userNicename : document.getElementById("nname").value,
-                    userPass : pass/*,
-                    meta: JSON.stringify({
-                        nickname: document.getElementById("nname").value,
-                        first_name : document.getElementById("fname").value,
-                        last_name : document.getElementById("lname").value,
-                        full_name: document.getElementById("fname").value + " " + document.getElementById("lname").value
-                    })
-                }),*/
                 success: function(result){
                     swal({
                         title: result['status'],
@@ -581,6 +608,7 @@
         var fname = "";
         var lname = "";
         var email = "";
+        var prog = "";
         if(myPayType == 1){
             fname = document.getElementById("fname").value;
             lname = document.getElementById("lname").value;
@@ -589,6 +617,13 @@
             fname = document.getElementById("wfname").value;
             lname = document.getElementById("wlname").value;
             email = document.getElementById("wemail").value;
+            if(course == "PM"){
+                prog = "Project Management Comprehensive";
+            }else if(course == "BA"){
+                prog = "Business Analysis Comprehensive";
+            }else{
+                prog = "Managing Project Financials";
+            }
         }
         $.ajax({
     	    type: "POST",
@@ -603,7 +638,8 @@
                 fname : fname,
                 lname : lname,
                 email : email,
-                paymentType : myPayType
+                paymentType : myPayType,
+                program : prog
             }),
             success: function(result){
                 console.log(result.statusText);
@@ -664,6 +700,7 @@
     //Method to validate coupon
     function validateCoupon(){
         var vcoupon = document.getElementById("vcoupon").value;
+        //var payAmount = document.getElementById("payingAmount").value;
         console.log("amount "+courseAmount);
         $.ajax({
     	    type: "GET",
@@ -683,12 +720,15 @@
                     courseAmount = result['data'];
                     var taxAmount = ((tax * courseAmount) / 100);
                     var totalAmount = courseAmount + taxAmount; 
-                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + totalAmount + "CAD";
-                    document.getElementById("dCourseAmount").innerHTML = "$" + courseAmount + "CAD";
-                    document.getElementById("dTaxAmount").innerHTML = "$" + taxAmount + "CAD";
-                    document.getElementById("dTotalAmount").innerHTML = "$" + totalAmount + "CAD";
-                    document.getElementById("payingAmount").text = totalAmount;
-                    document.getElementById("payingAmount").value = totalAmount;
+                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + courseAmount + "CAD";
+                    document.getElementById("dCourseAmount").value = courseAmount;
+                    document.getElementById("dCourseAmount").text = courseAmount;
+                    document.getElementById("dTaxAmount").value = taxAmount;
+                    document.getElementById("dTaxAmount").text = taxAmount;
+                    document.getElementById("dTotalAmount").value = totalAmount;
+                    document.getElementById("dTotalAmount").text = totalAmount;
+                    //document.getElementById("payingAmount").text = totalAmount;
+                    //document.getElementById("payingAmount").value = totalAmount;
                 });
             },
             error: function(result){
@@ -739,7 +779,8 @@
     function completeOnline(){
         var pass = document.getElementById("wpassword").value;
         var cpass = document.getElementById("wcpassword").value;
-        var pAmount = document.getElementById("payingAmount").value;
+        var e = document.getElementById("payingAmount");
+        var pAmount = e.value;
         if(pass != cpass){
             swal({
                 title: "Password Mismatch",
@@ -789,7 +830,7 @@
             var currency = "cad";
             var description = "Online Course Payment To Olade";
             var chargeDTO = {
-                amount : document.getElementById("payingAmount").value,
+                amount : pAmount,
                 currency : currency,
                 description : description
             }
@@ -840,9 +881,11 @@
 
     //Method to add payment record 
     function addPayment(){
-        var taxAmount = ((tax * courseAmount) / 100);
-        var totalAmount = courseAmount + taxAmount; 
-        console.log("amount "+courseAmount);
+        //var taxAmount = ((tax * courseAmount) / 100);
+        //var totalAmount = courseAmount + taxAmount; 
+        //console.log("amount "+courseAmount);
+        var e = document.getElementById("payingAmount");
+        var pAmount = e.value;
         $.ajax({
     	    type: "POST",
        	    beforeSend: function(request) {
@@ -854,9 +897,9 @@
             data: JSON.stringify({
                 courseName : course,
                 amount : courseAmount,
-                taxAmount : taxAmount,
-                totalAmount : totalAmount,
-                paidAmount : document.getElementById("payingAmount").value,
+                taxAmount : document.getElementById("dTaxAmount").value,
+                totalAmount : document.getElementById("dTotalAmount").value,
+                paidAmount : pAmount,
                 candidateEmail : document.getElementById("wemail").value
             }),
             success: function(result){
@@ -867,6 +910,19 @@
                 console.log(result.responseText);
             }
         })
+    }
+
+    //Method to calculate tax amount from paying amount
+    function calcTaxAmount(){
+        var e = document.getElementById("payingAmount");
+        var pAmount = e.value;
+        var payAmount = pAmount * 1;
+        var taxAmount = ((tax * payAmount) / 100);
+        var totalAmount = payAmount + taxAmount; 
+        document.getElementById("dTaxAmount").value = taxAmount;
+        document.getElementById("dTaxAmount").text = taxAmount;
+        document.getElementById("dTotalAmount").value = totalAmount;
+        document.getElementById("dTotalAmount").text = totalAmount;
     }
 </script>
 

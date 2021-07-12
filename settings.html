@@ -38,7 +38,7 @@
                 <div class="dropdown  pic">
                     <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-                        <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
+                        <span class="pl-2" style="font-size: 14px" id="profilename"></span>
                     </div>
 
                     <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -173,9 +173,9 @@
                     </h6>
                     <div class="row">
                         <div class="col-lg-4">
-                            <label class="form-label">Tax Value</label>
-                            <input type="text" class="form-control" id="" style="font-size: 14px" disabled>
-                            <div type="button" class="btn-sm btn-pry float-end mt-3">Save</div>
+                            <label class="form-label">Tax Value (in Percentage)</label>
+                            <input type="text" class="form-control" id="tax" style="font-size: 14px" >
+                            <div type="button" class="btn-sm btn-pry float-end mt-3" onclick="saveTax();">Save</div>
                         </div>
                     </div>
                     <hr>
@@ -187,60 +187,34 @@
                         <div class="col-lg-5">
                             <div class="row">
                                 <div>
-                                    <input type="text" class="form-control" placeholder="Course Name"
-                                           style="font-size: 14px"
-                                           disabled>
+                                    <select class="form-control" id="courseName" style="font-size: 14px">
+                                        <option value="">-Select Course-</option>
+                                        <option value="BA">Business Analysis</option>
+                                        <option value="PM">Project Management</option>
+                                        <option value="MP">Managing Project Financials</option>
+                                    </select>
                                 </div>
 
                                 <div class="mt-3">
-                                    <input type="text" class="form-control" placeholder="Price (e.g $1000)"
-                                           style="font-size: 14px" disabled>
+                                    <input type="number" class="form-control"
+                                           style="font-size: 14px" id="coursePrice">
                                 </div>
 
 
                                 <div class="">
-                                    <div type="button" class="btn-sm btn-pry float-end mt-3">Save</div>
+                                    <div type="button" class="btn-sm btn-pry float-end mt-3" onclick="addCourse('1');">Save</div>
                                 </div>
                             </div>
                             <hr>
                             <div class="mt-4">
-                                <table class="table profile-table table-bordered ">
-                                    <thead>
-                                    <tr>
-                                        <th style="font-size: 12px">Course Name</th>
-                                        <th style="font-size: 12px">Price</th>
-                                        <th style="font-size: 12px"></th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Project management</td>
-                                        <td>$1000</td>
-                                        <td>
-                                            <i class="fas fa-pen"></i>
-                                            <i class="fas fa-trash ml-2 text-danger"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Business Analysis</td>
-                                        <td>$1000</td>
-                                        <td>
-                                            <i class="fas fa-pen"></i>
-                                            <i class="fas fa-trash ml-2 text-danger"></i>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Business Comprehensive</td>
-                                        <td>$1000</td>
-                                        <td>
-                                            <i class="fas fa-pen"></i>
-                                            <i class="fas fa-trash ml-2 text-danger"></i>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                <table class="table profile-table table-bordered " id="fi">
+                                    
                                 </table>
+                                <!--div class="pagination">
+                                    <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
+                                    <a class="active" href="#"><span id="page"></span></a>
+                                    <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+                                </div-->
                             </div>
                         </div>
                          <div class="col-lg-6 text-center">
@@ -260,7 +234,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Payment</h5>
+                <h5 class="modal-title">Edit Course Price</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -268,52 +242,23 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <div class="col-xs-6">
-                        <label>Course<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-                            <option value="">-Select Course-</option>
-                            <option value="">Business Analysis</option>
-                            <option value="">Project management</option>
-                            <option value="">Managing Project Financials</option>
-                        </select>
+                        <label>Name<font color="red">*</font></label>
+                        <input type="text" class="form-control"
+                                           style="font-size: 14px" id="cname">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-xs-6">
-                        <label>Payment Type<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-                            <option value="">-Select payment type-</option>
-                            <option value="">Part Payment</option>
-                            <option value="">Full Payment</option>
-                            <!--              <option value="">Managing Project Financials</option>-->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Coupon Code<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Coupon Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Tax<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
+                        <label>Price<font color="red">*</font></label>
+                        <input type="number" class="form-control"
+                                           style="font-size: 14px" id="cprice">
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
+                <button type="button" class="btn btn-primary" onclick="addCourse('2');">Confirm</button>
             </div>
         </div>
     </div>
@@ -334,60 +279,117 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    var url = "http://localhost:8080";
+    //var url = "http://localhost:8080";
     //var wordpressUrl = "http://localhost:8099";
-    //var url = "https://proinsight-reconservice.herokuapp.com";
+    var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-    var leads = [];
-    var jsonData = [];
-    var current_page = 1;
-    var records_per_page = 20;
-    var selectedLead = {};
 
     //ON-READY FUNCTION
     (function() {
-        //Calling the Leads List API
-        var status = 0;
+        if(sessionStorage.getItem("lg") != 1){
+            location.href = "login.html";
+        }
+        if(sessionStorage.getItem("user") != null){
+            var user = JSON.parse(sessionStorage.getItem("user"));
+            console.log("Check "+user);
+            document.getElementById("profilename").innerHTML = user.email;
+        }
+        //Calling the Course Price List API
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "/leads/gets/" + status,
+            url: url + "/courseprice/gets",
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
                 console.log("Hi"+result.length);
-                leads = result;
                 jsonData = result;
-                changePage(1);
+                var listing_table = document.getElementById("fi");
+                listing_table.innerHTML = "";
+
+                listing_table.innerHTML += '<thead><tr><th style="font-size: 12px">Course Name</th><th style="font-size: 12px">Price</th><th style="font-size: 12px"></th></tr></thead>';
+                listing_table.innerHTML += '<tbody>';
+                if(result.length > 0){
+                    for(var i = 0; i < result.length; i++){
+                        console.log("Course "+result[i].name);
+                        var courseName = "";
+                        if(result[i].name == "PM"){
+                            courseName = "Project Management";
+                        }else if(result[i].name == "BA"){
+                            courseName = "Business Analysis";
+                        }else{
+                            courseName = "Managing Financials";
+                        }
+                        var oneRecord = '<tr><td>' + courseName + '</td><td>$' + result[i].price + '</td><td><a onclick="kclick(\''+i+'\');"><i class="fas fa-pen"></i></a>\
+                            <i class="fas fa-trash ml-2 text-danger"></i></td></tr>';
+                        listing_table.innerHTML += oneRecord;
+                    }
+                }
+                listing_table.innerHTML += '</tbody>';
             },
             error: function(result){
                 console.log("Error"+result.statusText);
             }
         })
 
+        //Calling the Tax API
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/tax/get",
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+result.value);
+                var value = 0;
+                if(result.value != null){
+                    value = result.value;
+                }
+                document.getElementById("tax").text = value;
+                document.getElementById("tax").value = value;
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
+        $('#exampleModal').modal({ show: false})
         $(".hamburger").click(function(){
             $(".wrapper").toggleClass("active")
         })
     })();
 
-    //Lead Creation
-    function addLead(){
+    //Course Creation
+    function addCourse(aType){
+        var coName = "";
+        var coPrice = "";
+        if(aType == 1){
+            var e = document.getElementById("courseName");
+            coName = e.value;
+            coPrice = document.getElementById("coursePrice").value;
+        }else{
+            coName = document.getElementById("cname").value;
+            coPrice = document.getElementById("cprice").value;
+        }
         //Calling the API -
         $.ajax({
             type: "POST",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
             },
-            url: url + "/leads/add",
+            url: url + "/courseprice/add",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
-                fname : document.getElementById("fname").value,
-                lname : document.getElementById("lname").value,
-                email : document.getElementById("email").value
+                name : coName,
+                price : coPrice,
+                minimumPayment : 0
             }),
             success: function(result){
                 swal({
@@ -395,9 +397,9 @@
                     text: result['message'],
                     icon: "success",
                 })
-                    .then(() => {
-                        location.reload();
-                    });
+                .then(() => {
+                    location.reload();
+                });
             },
             error: function(result){
                 var json = $.parseJSON(result.responseText);
@@ -411,28 +413,19 @@
 
     }
 
-    //Lead Update
-    function editLead(){
+    //Tax Save
+    function saveTax(){
         //Calling the API -
         $.ajax({
             type: "POST",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
             },
-            url: url + "/leads/update",
+            url: url + "/tax/add",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
-                fname : document.getElementById("efname").value,
-                lname : document.getElementById("elname").value,
-                email : document.getElementById("eemail").value,
-                id : selectedLead.id,
-                createdTime : selectedLead.createdTime,
-                noOfReminders : selectedLead.noOfReminders,
-                lastReminderTime : selectedLead.lastReminderTime,
-                noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-                lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-                status : selectedLead.status
+                value : document.getElementById("tax").value
             }),
             success: function(result){
                 swal({
@@ -440,9 +433,9 @@
                     text: result['message'],
                     icon: "success",
                 })
-                    .then(() => {
-                        location.reload();
-                    });
+                .then(() => {
+                    location.reload();
+                });
             },
             error: function(result){
                 var json = $.parseJSON(result.responseText);
@@ -456,218 +449,18 @@
 
     }
 
-    //Function to search table
-    function search(){
-        var input = document.getElementById("q");
-        var filter = input.value.toUpperCase();
-        jsonData = [];
-        for(var i = 0; i < leads.length; i++){
-            var name = leads[i].fname + " " + leads[i].lname;
-            if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
-                jsonData.push(leads[i]);
-            }
-        }
-        changePage(1);
-    }
-
-    function prevPage(){
-        if (current_page > 1) {
-            current_page--;
-            changePage(current_page);
-        }
-    }
-    function nextPage(){
-        if (current_page < numPages()) {
-            current_page++;
-            changePage(current_page);
-        }
-    }
-    function changePage(page){
-        var btn_next = document.getElementById("btn_next");
-        var btn_prev = document.getElementById("btn_prev");
-        var listing_table = document.getElementById("fi");
-        var page_span = document.getElementById("page");
-
-        // Validate page
-        if (page < 1) page = 1;
-        if (page > numPages()) page = numPages();
-
-        listing_table.innerHTML = "";
-
-        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
-        var total = page * records_per_page;
-        if(jsonData.length < (page * records_per_page)){
-            total = jsonData.length;
-        }
-        for (let i = (page-1) * records_per_page; i < total; i++) {
-            let j = i;
-            //console.log("mexid "+exams[i].id);
-            var name = jsonData[i].fname + " " + jsonData[i].lname;
-            var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
-            listing_table.innerHTML += oneRecord;
-        }
-        listing_table.innerHTML += '</tbody>';
-        page_span.innerHTML = page;
-
-        if (page == 1) {
-            btn_prev.style.visibility = "hidden";
-        } else {
-            btn_prev.style.visibility = "visible";
-        }
-
-        if (page == numPages()) {
-            btn_next.style.visibility = "hidden";
-        } else {
-            btn_next.style.visibility = "visible";
-        }
-    }
-
-    function numPages(){
-        return Math.ceil(jsonData.length / records_per_page);
-    }
-
-    //Function to handle the transition of selected lead
+    //Function to handle the transition of selected course
     function kclick(x){
         //console.log("My "+jsonData[x]);
-        var alead = jsonData[x];
-        selectedLead = jsonData[x];
-        //console.log("Ch "+jsonData[x].email);
-        document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-        document.getElementById("efname").value = alead.fname;
-        document.getElementById("elname").value = alead.lname;
-        document.getElementById("eemail").value = alead.email;
+        var aCourse = jsonData[x];
+    
+        document.getElementById("cname").value = aCourse.name;
+        document.getElementById("cname").text = aCourse.name;
+        document.getElementById("cprice").value = aCourse.price;
+        document.getElementById("cprice").text = aCourse.price;
+        $('#exampleModal').modal('show');
     }
 </script>
-
-<!--<script>-->
-
-<!--  /* bar chart */-->
-<!--  var chBar = document.getElementById("chBar");-->
-<!--  if (chBar) {-->
-<!--    new Chart(chBar, {-->
-<!--      type: 'bar',-->
-<!--      data: {-->
-<!--        labels: ["S", "M", "T", "W", "T", "F", "S"],-->
-<!--        datasets: [{-->
-<!--          data: [589, 445, 483, 503, 689, 692, 634],-->
-<!--          backgroundColor: colors[0]-->
-<!--        },-->
-<!--          {-->
-<!--            data: [639, 465, 493, 478, 589, 632, 674],-->
-<!--            backgroundColor: colors[1]-->
-<!--          }]-->
-<!--      },-->
-<!--      options: {-->
-<!--        legend: {-->
-<!--          display: false-->
-<!--        },-->
-<!--        scales: {-->
-<!--          xAxes: [{-->
-<!--            barPercentage: 0.4,-->
-<!--            categoryPercentage: 0.5-->
-<!--          }]-->
-<!--        }-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
-
-<script>
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 11;
-
-    var barChartData = {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "July",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-        ],
-        datasets: [
-            {
-                label: "Newly Enrolled Students",
-                backgroundColor: "#28A3EF",
-                borderWidth: 1,
-                barThickness: 1,
-                maxBarThickness: 1,
-                data: [10, 8, 10, 8,10, 8, 9, 9, 9, 9, 9, 9,]
-            },
-
-            {
-                label: "Student that completed the course",
-                backgroundColor: "#45DAB6",
-                borderWidth: 1,
-                barThickness: 1,
-                maxBarThickness: 1,
-                data: [8,7,4,6,6,5,3,7,7,7,7,8]
-            },
-
-        ]
-    };
-
-    var chartOptions = {
-        responsive: true,
-        legend: {
-            position: "top"
-        },
-        title: {
-            display: true,
-            text: "Chart.js Bar Chart"
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-
-    window.onload = function() {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myBar = new Chart(ctx, {
-            type: "bar",
-            data: barChartData,
-            options: chartOptions
-        });
-    };
-</script>
-
-<script>
-    // And for a doughnut chart
-    var ctx = document.getElementById("myChart").getContext('2d');
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 11;
-
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Completed", "In progress", "Not Started",],
-            datasets: [{
-                backgroundColor: [
-                    "#45DAB6",
-                    "#28A3EF",
-                    "#FF5B79",
-                ],
-                data: [12, 28, 7]
-            }]
-        }
-    });
-</script>
-
 
 </body>
 </html>

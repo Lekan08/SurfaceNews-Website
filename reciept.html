@@ -51,7 +51,7 @@
         <div class="dropdown  pic">
           <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-            <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
+            <span class="pl-2" style="font-size: 14px" id="profilename"></span>
           </div>
 
           <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -118,7 +118,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="active">
+            <a href="manage-financials.html" class="active">
               <span class="icon"><i class="fas fa-credit-card"></i></span>
               <span class="list">Manage Financial</span>
             </a>
@@ -183,32 +183,23 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-3 col-lg-3">
-              <div class="form-group">
-                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+              <!--div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
                   <option value="">Student</option>
                   <option value="">John Doe</option>
                   <option value="">Jude Law</option>
                   <option value="">Mary Doe</option>
-                  <!--                                    <option>Push reminder to potential students</option>-->
-                  <!--                                        <option>4</option>-->
-                  <!--                                        <option>5</option>-->
                 </select>
-              </div>
+              </div-->
             </div>
             <div class="col-sm-3 col-lg-3">
-              <div class="form-group">
-                <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+              <!--div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                   <option value="">Program</option>
                   <option value="Project Management Comprehensive">Project Management</option>
                   <option value="Business Analysis Comprehensive">Business Analysis</option>
-                  <!--                      <option value="Managing Project Financials">Managing Project Financials</option>-->
-                  <!--                                    <option>Push reminder to potential students</option>-->
-                  <!--                                        <option>4</option>-->
-                  <!--                                        <option>5</option>-->
                 </select>
-              </div>
+              </div-->
             </div>
             <div class="col-sm-3 col-lg-3">
 
@@ -216,89 +207,14 @@
             <div class="col-sm-3 col-lg-3 mb-3">
               <form class="navbar-form" role="search">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search"
-                         style="font-size: 14px">
+                  <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
                 </div>
               </form>
             </div>
           </div>
           <div class="user">
-            <table class="table profile-table">
-              <thead>
-              <tr>
-                <th>Student name</th>
-                <th>Program</th>
-                <th>File</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Project Management</td>
-                <td><span class="text-info">receipt file.docs</span></td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions  dropdown-toggle" href="#" id="action-dropDown2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                      <a class="dropdown-item"
-                         style="cursor: pointer;font-size: 14px">Send Receipt</a>
-                      <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">
-                        Download Receipt</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Business Analysis</td>
-                <td><span class="text-info">receipt file.docs</span></td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                      <a class="dropdown-item"
-                         style="cursor: pointer;font-size: 14px">Send Receipt</a>
-                      <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">
-                        Download Receipt</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Project Management</td>
-                <td><span class="text-info">receipt file.docs</span></td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                      <a class="dropdown-item"
-                         style="cursor: pointer;font-size: 14px">Send Receipt</a>
-                      <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">
-                        Download Receipt</a>
-                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
+            <table class="table profile-table" id="fi">
+              
             </table>
             <div class="pagination">
               <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
@@ -321,62 +237,37 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add Payment</h5>
+        <h5 class="modal-title">Share Receipt</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group row">
-          <div class="col-xs-6">
-            <label>Course<font color="red">*</font></label>
-            <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-              <option value="">-Select Course-</option>
-              <option value="">Business Analysis</option>
-              <option value="">Project management</option>
-              <option value="">Managing Project Financials</option>
-            </select>
-          </div>
+            <div class="col-xs-12">
+                <label>To<font color="red">*</font></label>
+                <input class="form-control" id="to" placeholder="To" type="email" >
+            </div>
         </div>
         <div class="form-group row">
-          <div class="col-xs-6">
-            <label>Payment Type<font color="red">*</font></label>
-            <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-              <option value="">-Select payment type-</option>
-              <option value="">Part Payment</option>
-              <option value="">Full Payment</option>
-              <!--              <option value="">Managing Project Financials</option>-->
-            </select>
-          </div>
+            <div class="col-xs-12">
+                <label>Subject<font color="red">*</font></label>
+                <input class="form-control" placeholder="Subject" id="subject" type="text" >
+            </div>
         </div>
         <div class="form-group row">
-          <div class="col-md-6">
-            <label>Coupon Code<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-          <div class="col-md-6">
-            <label>Coupon Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
+            <div class="col-xs-12">
+                <label>Message <font color="red">*</font></label>
+                <textarea rows="4" id="message" class="form-control"></textarea>
+            </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-md-6">
-            <label>Tax<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-          <div class="col-md-6">
-            <label>Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
-      </div>
     </div>
+    <div class="modal-footer">
+      <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="share();">Save</button>
+    </div>
+  </div>
   </div>
 </div>
 
@@ -393,32 +284,44 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-  var url = "http://localhost:8080";
+  //var url = "http://localhost:8080";
   //var wordpressUrl = "http://localhost:8099";
-  //var url = "https://proinsight-reconservice.herokuapp.com";
+  var url = "https://proinsight-reconservice.herokuapp.com";
   var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-  var leads = [];
+  var receipts = [];
   var jsonData = [];
   var current_page = 1;
   var records_per_page = 20;
-  var selectedLead = {};
+  var rid = "";
+  var sender = "";
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   //ON-READY FUNCTION
   (function() {
-    //Calling the Leads List API
-    var status = 0;
+    if(sessionStorage.getItem("lg") != 1){
+      location.href = "login.html";
+    }
+    if(sessionStorage.getItem("user") != null){
+      var user = JSON.parse(sessionStorage.getItem("user"));
+      console.log("Check "+user);
+      //console.log("yes"+fname);
+      document.getElementById("profilename").innerHTML = user.email;
+      sender = user.email;
+      //document.getElementById("oladeEmail").innerHTML = user.email;
+    }
+    //Calling the Receipts List API
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/leads/gets/" + status,
+      url: url + "/receipts/gets",
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
         console.log("Hi"+result.length);
-        leads = result;
+        receipts = result;
         jsonData = result;
         changePage(1);
       },
@@ -432,21 +335,23 @@
     })
   })();
 
-  //Lead Creation
-  function addLead(){
+  //Share Receipt
+  function share(){
     //Calling the API -
     $.ajax({
       type: "POST",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/leads/add",
+      url: url + "/receipts/share",
       contentType: "application/json",
       dataType: 'json',
       data: JSON.stringify({
-        fname : document.getElementById("fname").value,
-        lname : document.getElementById("lname").value,
-        email : document.getElementById("email").value
+        documentID : rid,
+        to : document.getElementById("to").value,
+        subject : document.getElementById("subject").value,
+        message : document.getElementById("message").value,
+        senderID : sender
       }),
       success: function(result){
         swal({
@@ -454,9 +359,9 @@
           text: result['message'],
           icon: "success",
         })
-                .then(() => {
-                  location.reload();
-                });
+        .then(() => {
+          location.reload();
+        });
       },
       error: function(result){
         var json = $.parseJSON(result.responseText);
@@ -470,46 +375,22 @@
 
   }
 
-  //Lead Update
-  function editLead(){
+  //Download Reciept
+  function download1(){
     //Calling the API -
     $.ajax({
-      type: "POST",
+      type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/leads/update",
+      url: url + "/receipts/download/" + rid,
       contentType: "application/json",
       dataType: 'json',
-      data: JSON.stringify({
-        fname : document.getElementById("efname").value,
-        lname : document.getElementById("elname").value,
-        email : document.getElementById("eemail").value,
-        id : selectedLead.id,
-        createdTime : selectedLead.createdTime,
-        noOfReminders : selectedLead.noOfReminders,
-        lastReminderTime : selectedLead.lastReminderTime,
-        noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-        lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-        status : selectedLead.status
-      }),
       success: function(result){
-        swal({
-          title: result['status'],
-          text: result['message'],
-          icon: "success",
-        })
-                .then(() => {
-                  location.reload();
-                });
+        console.log("Downloader");
       },
       error: function(result){
-        var json = $.parseJSON(result.responseText);
-        swal({
-          title: json.status,
-          text: json.message,
-          icon: "error",
-        });
+        console.log("Error"+result.statusText);
       }
     })
 
@@ -520,10 +401,12 @@
     var input = document.getElementById("q");
     var filter = input.value.toUpperCase();
     jsonData = [];
-    for(var i = 0; i < leads.length; i++){
-      var name = leads[i].fname + " " + leads[i].lname;
-      if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
-        jsonData.push(leads[i]);
+    for(var i = 0; i < receipts.length; i++){
+      var date = new Date(receipts[i].createdTime);
+      var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+      if(receipts[i].candidateName.toUpperCase().indexOf(filter) > -1 || receipts[i].program.toUpperCase().indexOf(filter) > -1 || receipts[i].name.toUpperCase().indexOf(filter) > -1
+          || createdDate.toUpperCase().indexOf(filter) > -1){
+        jsonData.push(receipts[i]);
       }
     }
     changePage(1);
@@ -553,7 +436,8 @@
 
     listing_table.innerHTML = "";
 
-    listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
+    listing_table.innerHTML += '<thead><tr><th>Student Name</th><th>Program</th><th>File</th><th>Date</th><th>Actions</th></tr></thead>';
+    listing_table.innerHTML += '<tbody>';
     var total = page * records_per_page;
     if(jsonData.length < (page * records_per_page)){
       total = jsonData.length;
@@ -561,11 +445,12 @@
     for (let i = (page-1) * records_per_page; i < total; i++) {
       let j = i;
       //console.log("mexid "+exams[i].id);
-      var name = jsonData[i].fname + " " + jsonData[i].lname;
-      var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+      var date = new Date(jsonData[i].createdTime);
+      var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+      var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + jsonData[i].program + '</td><td>' + jsonData[i].name + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Receipt</a> \
+                                <a class="dropdown-item" href="'+ jsonData[i].displayURI +'">Download Receipt</a></div></div></td></tr>';
       listing_table.innerHTML += oneRecord;
     }
     listing_table.innerHTML += '</tbody>';
@@ -591,13 +476,13 @@
   //Function to handle the transition of selected lead
   function kclick(x){
     //console.log("My "+jsonData[x]);
-    var alead = jsonData[x];
-    selectedLead = jsonData[x];
-    //console.log("Ch "+jsonData[x].email);
-    document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-    document.getElementById("efname").value = alead.fname;
-    document.getElementById("elname").value = alead.lname;
-    document.getElementById("eemail").value = alead.email;
+    var aReceipt = jsonData[x];
+    
+    document.getElementById("to").value = aReceipt.candidateEmail;
+    document.getElementById("to").text = aReceipt.candidateEmail;
+    document.getElementById("subject").value = "Olade Consulting - Payment Receipt";
+    document.getElementById("subject").text = "Olade Consulting - Payment Receipt";
+    rid = aReceipt.id;
   }
 </script>
 
