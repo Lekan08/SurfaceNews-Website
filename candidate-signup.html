@@ -363,7 +363,7 @@
             document.getElementById("purchase").innerHTML = "Manage Financials";
         }
         //Calling the countries list
-        document.getElementById("hidprovince").style.display = "none";
+        document.getElementById("hidstate").style.display = "none";
         let dateDropdown = document.getElementById("country"); 
         var i = 0;
         while (i < countries.length) {      
@@ -384,7 +384,7 @@
             cprovinces.appendChild(dateOption1);      
             j++;    
         }
-        document.getElementById("whidprovince").style.display = "none";
+        document.getElementById("whidstate").style.display = "none";
         let wdateDropdown = document.getElementById("wcountry"); 
         var x = 0;
         while (x < countries.length) {      
@@ -750,6 +750,9 @@
         if(chosenCountry == "Canada"){
             document.getElementById("hidprovince").style.display = "block";
             document.getElementById("hidstate").style.display = "none";
+        }else {
+            document.getElementById("hidprovince").style.display = "none";
+            document.getElementById("hidstate").style.display = "block";
         }
     }
     function changeCountry1(){
@@ -758,6 +761,9 @@
         if(chosenCountry == "Canada"){
             document.getElementById("whidprovince").style.display = "block";
             document.getElementById("whidstate").style.display = "none";
+        }else{
+            document.getElementById("whidprovince").style.display = "none";
+            document.getElementById("whidstate").style.display = "block";
         }
     }
 
