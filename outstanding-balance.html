@@ -464,7 +464,7 @@
       }else {
         course = "Manage Financials";
       }
-      var balance = "$" + balances[i].balance + "CAD";
+      var balance = "$" + balances[i].balance + " CAD";
       if(balances[i].candidateName.toUpperCase().indexOf(filter) > -1 || course.toUpperCase().indexOf(filter) > -1 || balance.toUpperCase().indexOf(filter) > -1 
         || status.toUpperCase().indexOf(filter) > -1 || myDate.toUpperCase().indexOf(filter) > -1){
         jsonData.push(balances[i]);
