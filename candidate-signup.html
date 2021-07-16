@@ -609,14 +609,33 @@
         var lname = "";
         var email = "";
         var prog = "";
+        var addr = "";
+        var town = "";
+        var state = "";
+        var country = "";
+        var pno = ""
         if(myPayType == 1){
             fname = document.getElementById("fname").value;
             lname = document.getElementById("lname").value;
             email = document.getElementById("email").value;
+            var ad1 = document.getElementById("addr").value;
+            var ad2 = document.getElementById("apartment").value;
+            addr = ad1 + " " + ad2;
+            town = document.getElementById("town").value;
+            state = document.getElementById("province").value;
+            country = document.getElementById("country").value;
+            pno = document.getElementById("pno").value;
         }else{
             fname = document.getElementById("wfname").value;
             lname = document.getElementById("wlname").value;
             email = document.getElementById("wemail").value;
+            var ad1 = document.getElementById("waddr").value;
+            var ad2 = document.getElementById("wapartment").value;
+            addr = ad1 + " " + ad2;
+            town = document.getElementById("wtown").value;
+            state = document.getElementById("wprovince").value;
+            country = document.getElementById("wcountry").value;
+            pno = document.getElementById("wpno").value;
             if(course == "PM"){
                 prog = "Project Management Comprehensive";
             }else if(course == "BA"){
@@ -639,7 +658,12 @@
                 lname : lname,
                 email : email,
                 paymentType : myPayType,
-                program : prog
+                program : prog,
+                address : addr,
+                town : town,
+                state : state,
+                country : country,
+                pno : pno
             }),
             success: function(result){
                 console.log(result.statusText);

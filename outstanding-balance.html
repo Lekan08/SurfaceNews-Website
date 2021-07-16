@@ -315,6 +315,7 @@
   var courseAmount = 0;
   var aCourse = "";
   var payer = {};
+  var currBal = 0;
 
   //ON-READY FUNCTION
   (function() {
@@ -364,10 +365,11 @@
         beforeSend: function(request) {
           request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         },
-        url: url + "/bonus/validate/" + vcoupon + "/" + courseAmount,
+        url: url + "/bonus/validate/" + vcoupon + "/" + currBal,
         contentType: "application/json",
         dataType: 'json',
         success: function(result){
+          currBal = result['data'];
           addPayment();
         },
         error: function(result){
@@ -390,6 +392,7 @@
   function addPayment(){
     var e = document.getElementById("payingAmount");
     var pAmount = e.value;
+    console.log("Email "+payer.candidateEmail);
     $.ajax({
       type: "POST",
       beforeSend: function(request) {
@@ -400,11 +403,11 @@
       dataType: 'json',
       data: JSON.stringify({
         courseName : aCourse,
-        amount : document.getElementById("amount").value,
+        amount : currBal,
         taxAmount : document.getElementById("taxAmount").value,
         totalAmount : document.getElementById("totalAmount").value,
         paidAmount : pAmount,
-        candidateEmail : payer.email
+        candidateEmail : payer.candidateEmail
       }),
       success: function(result){
         console.log(result.statusText);
@@ -524,7 +527,7 @@
       }else {
         course = "Manage Financials";
       }
-      var balance = "$" + balances[i].balance + "CAD";
+      var balance = "$" + balances[i].balance + " CAD";
       var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + course + '</td><td>' + balance + '</td><td>' + look + '</td><td>' + myDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
                                 <div class="dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item" style="cursor: pointer;font-size: 14px;white-space: inherit">Send Payment Due to reminder</a>\
@@ -559,14 +562,15 @@
     var aPayment = jsonData[x];
     payer = jsonData[x];
 
-    var course = "";
-    if(aPayment.program == "Business Analysis Comprehensive"){
+    var course = aPayment.course;
+    console.log("An "+jsonData[x].course);
+    /*if(aPayment.course == "Business Analysis Comprehensive"){
       course = "BA";
     }else if(aPayment.program == "Project Management Comprehensive"){
       course = "PM";
     }else{
       course = "MP";
-    }
+    }*/
     
     aCourse = course;
     $.ajax({
@@ -598,14 +602,15 @@
                 var totalAmount = courseAmount + taxAmount; 
                 //document.getElementById("payingAmount").text = totalAmount;
                 //document.getElementById("payingAmount").value = totalAmount;
-                document.getElementById("course").text = aPayment.program;
-                document.getElementById("course").value = aPayment.program;
+                document.getElementById("course").text = aPayment.course;
+                document.getElementById("course").value = aPayment.course;
                 document.getElementById("taxAmount").text = taxAmount;
                 document.getElementById("taxAmount").value = taxAmount;
-                document.getElementById("amount").text = courseAmount;
-                document.getElementById("amount").value = courseAmount;
+                document.getElementById("amount").text = aPayment.balance;
+                document.getElementById("amount").value = aPayment.balance;
                 document.getElementById("totalAmount").text = totalAmount;
                 document.getElementById("totalAmount").value = totalAmount;
+                currBal = aPayment.balance;
 
                 //Calling the course prices
                 $.ajax({

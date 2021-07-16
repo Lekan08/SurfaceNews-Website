@@ -313,6 +313,7 @@
   var courseAmount = 0;
   var aCourse = "";
   var payer = {};
+  var currBal = 0;
   //var minCourseAmount = 0;
 
   //ON-READY FUNCTION
@@ -492,6 +493,7 @@
                 document.getElementById("amount").value = courseAmount;
                 document.getElementById("totalAmount").text = totalAmount;
                 document.getElementById("totalAmount").value = totalAmount;
+                currBal = courseAmount;
 
                 //Calling the course prices
                 $.ajax({
@@ -542,10 +544,11 @@
         beforeSend: function(request) {
           request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         },
-        url: url + "/bonus/validate/" + vcoupon + "/" + courseAmount,
+        url: url + "/bonus/validate/" + vcoupon + "/" + currBal,
         contentType: "application/json",
         dataType: 'json',
         success: function(result){
+          currBal = result['data'];
           addPayment();
         },
         error: function(result){
@@ -578,7 +581,7 @@
       dataType: 'json',
       data: JSON.stringify({
         courseName : aCourse,
-        amount : document.getElementById("amount").value,
+        amount : currBal,
         taxAmount : document.getElementById("taxAmount").value,
         totalAmount : document.getElementById("totalAmount").value,
         paidAmount : pAmount,
