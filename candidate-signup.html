@@ -352,6 +352,7 @@
     var tax = 0;
     var courseAmount = 0;
     var minCourseAmount = 0;
+    var discount = 0;
 
     //ON-READY FUNCTION
     (function() {
@@ -741,6 +742,7 @@
                     icon: "success",
                 })
                 .then(() => {
+                    discount = courseAmount - result['data'];
                     courseAmount = result['data'];
                     var taxAmount = ((tax * courseAmount) / 100);
                     var totalAmount = courseAmount + taxAmount; 
@@ -930,6 +932,7 @@
                 taxAmount : document.getElementById("dTaxAmount").value,
                 totalAmount : document.getElementById("dTotalAmount").value,
                 paidAmount : pAmount,
+                discount : discount,
                 candidateEmail : document.getElementById("wemail").value
             }),
             success: function(result){

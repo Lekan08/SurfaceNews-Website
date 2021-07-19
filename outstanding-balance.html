@@ -316,6 +316,7 @@
   var aCourse = "";
   var payer = {};
   var currBal = 0;
+  var discount = 0;
 
   //ON-READY FUNCTION
   (function() {
@@ -369,6 +370,7 @@
         contentType: "application/json",
         dataType: 'json',
         success: function(result){
+          discount = currBal - result['data'];
           currBal = result['data'];
           addPayment();
         },
@@ -407,6 +409,7 @@
         taxAmount : document.getElementById("taxAmount").value,
         totalAmount : document.getElementById("totalAmount").value,
         paidAmount : pAmount,
+        discount : discount,
         candidateEmail : payer.candidateEmail
       }),
       success: function(result){
