@@ -184,7 +184,7 @@
                       Course Price ($)
                     </h6>
                     <div class="row">
-                        <div class="col-lg-5">
+                        <div class="col-lg-7">
                             <div class="row">
                                 <div>
                                     <select class="form-control" id="courseName" style="font-size: 14px">
@@ -196,17 +196,33 @@
                                 </div>
 
                                 <div class="mt-3">
+                                    <label>Price<font color="red">*</font></label>
                                     <input type="number" class="form-control"
                                            style="font-size: 14px" id="coursePrice">
                                 </div>
 
+                                <div class="mt-3">
+                                    <label>1st Installment</label>
+                                    <input type="number" class="form-control"
+                                           style="font-size: 14px" id="finstall">
+                                </div>
+                                <div class="mt-3">
+                                    <label>2nd Installment</label>
+                                    <input type="number" class="form-control"
+                                           style="font-size: 14px" id="sinstall">
+                                </div>
+                                <div class="mt-3">
+                                    <label>3rd Installment</label>
+                                    <input type="number" class="form-control"
+                                           style="font-size: 14px" id="tinstall">
+                                </div>
 
                                 <div class="">
                                     <div type="button" class="btn-sm btn-pry float-end mt-3" onclick="addCourse('1');">Save</div>
                                 </div>
                             </div>
                             <hr>
-                            <div class="mt-4">
+                            <div class="mt-7">
                                 <table class="table profile-table table-bordered " id="fi">
                                     
                                 </table>
@@ -217,7 +233,7 @@
                                 </div-->
                             </div>
                         </div>
-                         <div class="col-lg-6 text-center">
+                         <div class="col-lg-4 text-center">
                              <img src="assets/images/course-price-illustration.svg" class="img-fluid ">
                          </div>
                     </div>
@@ -252,6 +268,27 @@
                         <label>Price<font color="red">*</font></label>
                         <input type="number" class="form-control"
                                            style="font-size: 14px" id="cprice">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>1st Installment</label>
+                        <input type="number" class="form-control"
+                                           style="font-size: 14px" id="cfinstall">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>2nd Installment</label>
+                        <input type="number" class="form-control"
+                                           style="font-size: 14px" id="csinstall">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label>3rd Installment</label>
+                        <input type="number" class="form-control"
+                                           style="font-size: 14px" id="ctinstall">
                     </div>
                 </div>
 
@@ -301,7 +338,7 @@
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "/courseprice/gets",
+            url: url + "/courseprice/getsall",
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
@@ -310,7 +347,8 @@
                 var listing_table = document.getElementById("fi");
                 listing_table.innerHTML = "";
 
-                listing_table.innerHTML += '<thead><tr><th style="font-size: 12px">Course Name</th><th style="font-size: 12px">Price</th><th style="font-size: 12px"></th></tr></thead>';
+                listing_table.innerHTML += '<thead><tr><th style="font-size: 12px">Course Name</th><th style="font-size: 12px">Price</th><th style="font-size: 12px">1st Installment</th><th style="font-size: 12px">2nd Installment</th>\
+                    <th style="font-size: 12px">3rd Installment</th><th style="font-size: 12px"></th></tr></thead>';
                 listing_table.innerHTML += '<tbody>';
                 if(result.length > 0){
                     for(var i = 0; i < result.length; i++){
@@ -323,8 +361,8 @@
                         }else{
                             courseName = "Managing Financials";
                         }
-                        var oneRecord = '<tr><td>' + courseName + '</td><td>$' + result[i].price + '</td><td><a onclick="kclick(\''+i+'\');"><i class="fas fa-pen"></i></a>\
-                            <i class="fas fa-trash ml-2 text-danger"></i></td></tr>';
+                        var oneRecord = '<tr><td>' + courseName + '</td><td>$' + result[i].amount + '</td><td>$' + result[i].firstInstallment + '</td><td>$' + result[i].secondInstallment + '</td>\
+                            <td>$' + result[i].thirdInstallment + '</td><td><a onclick="kclick(\''+i+'\');"><i class="fas fa-pen"></i></a></td></tr>';
                         listing_table.innerHTML += oneRecord;
                     }
                 }
@@ -369,13 +407,22 @@
     function addCourse(aType){
         var coName = "";
         var coPrice = "";
+        var cofinstall = 0;
+        var cosinstall = 0;
+        var cotinstall = 0;
         if(aType == 1){
             var e = document.getElementById("courseName");
             coName = e.value;
             coPrice = document.getElementById("coursePrice").value;
+            cofinstall = document.getElementById("finstall").value;
+            cosinstall = document.getElementById("sinstall").value;
+            cotinstall = document.getElementById("tinstall").value;
         }else{
             coName = document.getElementById("cname").value;
             coPrice = document.getElementById("cprice").value;
+            cofinstall = document.getElementById("cfinstall").value;
+            cosinstall = document.getElementById("csinstall").value;
+            cotinstall = document.getElementById("ctinstall").value;
         }
         //Calling the API -
         $.ajax({
@@ -383,13 +430,15 @@
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
             },
-            url: url + "/courseprice/add",
+            url: url + "/courseprice/addall",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
                 name : coName,
-                price : coPrice,
-                minimumPayment : 0
+                amount : coPrice,
+                firstInstallment : cofinstall,
+                secondInstallment : cosinstall,
+                thirdInstallment : cotinstall
             }),
             success: function(result){
                 swal({
@@ -456,8 +505,14 @@
     
         document.getElementById("cname").value = aCourse.name;
         document.getElementById("cname").text = aCourse.name;
-        document.getElementById("cprice").value = aCourse.price;
-        document.getElementById("cprice").text = aCourse.price;
+        document.getElementById("cprice").value = aCourse.amount;
+        document.getElementById("cprice").text = aCourse.amount;
+        document.getElementById("cfinstall").value = aCourse.firstInstallment;
+        document.getElementById("cfinstall").text = aCourse.firstInstallment;
+        document.getElementById("csinstall").value = aCourse.secondInstallment;
+        document.getElementById("csinstall").text = aCourse.secondInstallment;
+        document.getElementById("ctinstall").value = aCourse.thirdInstallment;
+        document.getElementById("ctinstall").text = aCourse.thirdInstallment;
         $('#exampleModal').modal('show');
     }
 </script>

@@ -272,10 +272,18 @@
             <input class="form-control"  style="font-size: 14px" id="totalAmount" disabled>
           </div>
           <div class="col-md-6">
-            <label>Paying Amount<font color="red">*</font></label>
-            <select class="form-control" id="payingAmount" style="font-size: 14px" onchange="calcTaxAmount();">
-              <option value="">-Select Payment-</option>
+            <label>Payment Type<font color="red">*</font></label>
+            <select class="form-control" id="paymentType" style="font-size: 14px" onchange="showAmount();">
+              <option value="1" selected="selected">Full Payment</option>
+              <option value="2">Installmental Payment</option>
             </select>
+          </div>
+        </div>
+
+        <div id="hone" class="form-group row">
+          <div class="col-xs-6">
+            <label>Paying Amount<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="payingAmount" onkeyup="calcTaxAmount();">
           </div>
         </div>
 
@@ -315,6 +323,7 @@
   var payer = {};
   var currBal = 0;
   var discount = 0;
+  var installmentAmount = 0;
   //var minCourseAmount = 0;
 
   //ON-READY FUNCTION
@@ -330,6 +339,7 @@
       //document.getElementById("oladeEmail").innerHTML = user.email;
     }
 
+    document.getElementById("hone").style.display = "none";
     //Calling the Candidates With Outstanding Balance List API
     $.ajax({
       type: "GET",
@@ -404,22 +414,24 @@
     if(jsonData.length < (page * records_per_page)){
       total = jsonData.length;
     }
-    for (let i = (page-1) * records_per_page; i < total; i++) {
-      let j = i;
-      //console.log("mexid "+exams[i].id);
-      var name = jsonData[i].fname + " " + jsonData[i].lname;
-      var status = payments[i].leadStatus;
-      var look = "";
-      if(status == 2){
-        look = '<span class="badge badge-pill badge-success">Registered</span>';
-      }else{
-        look = '<span class="badge badge-pill badge-danger">Not Registered</span>';
-      }
-      var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td>' + look + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+    if(jsonData.length > 0){ 
+      for(let i = (page-1) * records_per_page; i < total; i++) {
+        let j = i;
+        //console.log("mexid "+exams[i].id);
+        var name = jsonData[i].fname + " " + jsonData[i].lname;
+        var status = payments[i].leadStatus;
+        var look = "";
+        if(status == 2){
+          look = '<span class="badge badge-pill badge-success">Registered</span>';
+        }else{
+          look = '<span class="badge badge-pill badge-danger">Not Registered</span>';
+        }
+        var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td>' + look + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
           <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
           <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Add Payment</a> \
           </div></div></td></tr>';
-      listing_table.innerHTML += oneRecord;
+        listing_table.innerHTML += oneRecord;
+      }
     }
     listing_table.innerHTML += '</tbody>';
     page_span.innerHTML = page;
@@ -494,6 +506,8 @@
                 document.getElementById("amount").value = courseAmount;
                 document.getElementById("totalAmount").text = totalAmount;
                 document.getElementById("totalAmount").value = totalAmount;
+                document.getElementById("payingAmount").value = courseAmount;
+                document.getElementById("payingAmount").text = courseAmount;
                 currBal = courseAmount;
 
                 //Calling the course prices
@@ -508,14 +522,7 @@
                   dataType: 'json',
                   success: function(result){
                     console.log("Hi"+result.length);
-                    //Preparing the Select List
-                    var dropDown = document.getElementById("payingAmount");
-                    for(var i = 0; i < result.length; i++) {
-                      var el = document.createElement("option");
-                      el.innerHTML = result[i].amount;
-                      el.value = result[i].amount;
-                      dropDown.appendChild(el);
-                    }
+                    installmentAmount = result[0].amount;
                   },
                   error: function(result){
                     console.log("Error"+result.statusText);
@@ -571,8 +578,7 @@
 
   //Method to add payment record 
   function addPayment(){
-    var e = document.getElementById("payingAmount");
-    var pAmount = e.value;
+    var pAmount = document.getElementById("payingAmount").value;
     $.ajax({
       type: "POST",
       beforeSend: function(request) {
@@ -615,8 +621,7 @@
 
   //Method to calculate tax amount from paying amount
   function calcTaxAmount(){
-    var e = document.getElementById("payingAmount");
-    var pAmount = e.value;
+    var pAmount = document.getElementById("payingAmount").value;
     var payAmount = pAmount * 1;
     var taxAmount = ((tax * payAmount) / 100);
     var totalAmount = payAmount + taxAmount; 
@@ -624,6 +629,21 @@
     document.getElementById("taxAmount").text = taxAmount;
     document.getElementById("totalAmount").value = totalAmount;
     document.getElementById("totalAmount").text = totalAmount;
+  }
+
+  function showAmount(){
+    var e = document.getElementById("paymentType");
+    var pType = e.value;
+    if(pType == 1){
+      document.getElementById("payingAmount").value = courseAmount;
+      document.getElementById("payingAmount").text = courseAmount;
+    }else{
+      document.getElementById("payingAmount").value = installmentAmount;
+      document.getElementById("payingAmount").text = installmentAmount;
+      //document.getElementById("minInfo").innerHTML = "Choosing Installmental Payments option can attract extra charges";
+    }
+
+    calcTaxAmount();
   }
 </script>
 

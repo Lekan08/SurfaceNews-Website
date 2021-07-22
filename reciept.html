@@ -265,7 +265,7 @@
     <div class="modal-footer">
       <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="share();">Save</button>
+        <button type="button" class="btn btn-primary" onclick="share();">Send</button>
     </div>
   </div>
   </div>
@@ -387,10 +387,22 @@
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
-        console.log("Downloader");
+        swal({
+          title: result['status'],
+          text: result['message'],
+          icon: "success",
+        })
+        .then(() => {
+          location.reload();
+        });
       },
       error: function(result){
-        console.log("Error"+result.statusText);
+        var json = $.parseJSON(result.responseText);
+        swal({
+          title: json.status,
+          text: json.message,
+          icon: "error",
+        });
       }
     })
 
@@ -450,7 +462,7 @@
       var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + jsonData[i].program + '</td><td>' + jsonData[i].name + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Receipt</a> \
-                                <a class="dropdown-item" href="'+ jsonData[i].displayURI +'">Download Receipt</a></div></div></td></tr>';
+                                <a class="dropdown-item" onclick="download1(\''+jsonData[i].id+'\', \'3\');">Download Receipt</a></div></div></td></tr>';
       listing_table.innerHTML += oneRecord;
     }
     listing_table.innerHTML += '</tbody>';
@@ -477,6 +489,7 @@
   function kclick(x){
     //console.log("My "+jsonData[x]);
     var aReceipt = jsonData[x];
+    console.log("Cand "+aReceipt.candidateEmail);
     
     document.getElementById("to").value = aReceipt.candidateEmail;
     document.getElementById("to").text = aReceipt.candidateEmail;

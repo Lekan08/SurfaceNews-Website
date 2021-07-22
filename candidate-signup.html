@@ -135,17 +135,29 @@
                             </div>
                         </div>
                         <div class="mb-2 pt-4">
-                            <h5>Card Details</h5><br>
+                            <h5>Payment Details</h5><br>
                             <h6 id="totalFee"></h6>
                         </div>
 
+
                         <div class="row" style="width: 75%">
                             <div class="col-lg-6" style="font-weight: 600">
+                                <p>Payment Type<font color="red">* <span id="minInfo"></span></font></p>
+                            </div>
+                            <div class="col-lg-6" style="font-weight: 600">
+                                <select class="form-control" id="paymentType" style="font-size: 14px" onchange="showAmount();">
+                                    <option value="1" selected="selected">Full Payment</option>
+                                    <option value="2">Installmental Payment</option>
+                                </select>
+                                <!--p id="dTotalAmount"></p-->
+                            </div>
+
+                            <!--div class="col-lg-6" style="font-weight: 600">
                                <p> Product</p>
                             </div>
                             <div class="col-lg-6" style="font-weight: 600">
                                 <p>Subtotal</p>
-                            </div>
+                            </div-->
 
                             <hr>
 
@@ -170,15 +182,16 @@
 
                             <hr>
 
-                            <div class="col-lg-6" style="font-weight: 600">
-                                <p>Paying<font color="red">* <spam id="minInfo"></spam></font></p>
+                            
+                            <div id="hone" class="col-lg-6" style="font-weight: 600">
+                                <p>Paying<font color="red">* </font></p>
                             </div>
-                            <div class="col-lg-6" style="font-weight: 600">
-                                <!--input type="text" class="form-control" id="payingAmount"
-                                       style="font-size: 14px" onkeyup="calcTaxAmount();"-->
-                                <select class="form-control" id="payingAmount" style="font-size: 14px" onchange="calcTaxAmount();">
+                            <div id="htwo" class="col-lg-6" style="font-weight: 600">
+                                <input type="text" class="form-control" id="payingAmount"
+                                       style="font-size: 14px" onkeyup="calcTaxAmount();">
+                                <!--select class="form-control" id="payingAmount" style="font-size: 14px" onchange="calcTaxAmount();">
                                     <option value="">-Select Payment-</option>
-                                </select>
+                                </select-->
                                 <!--p id="dTotalAmount"></p-->
                             </div>
 
@@ -194,7 +207,7 @@
                             </div>
 
                             <div class="col-lg-8">
-                                <label class="form-label">Total Amount</label>
+                                <label class="form-label">Total Amount (CAD)</label>
                                 <input type="text" class="form-control" id="dTotalAmount"
                                        style="font-size: 14px" disabled>
                             </div>
@@ -203,6 +216,10 @@
                         </div>
 
 
+
+                        <div class="mb-2 pt-4">
+                            <h5>Card Details</h5>
+                        </div>
 
                         <div class="mb-4 pr-5 pt-3 row">
                             <div class="col-lg-4">
@@ -353,6 +370,7 @@
     var courseAmount = 0;
     var minCourseAmount = 0;
     var discount = 0;
+    var installmentAmount = 0;
 
     //ON-READY FUNCTION
     (function() {
@@ -365,6 +383,8 @@
         }
         //Calling the countries list
         document.getElementById("hidstate").style.display = "none";
+        document.getElementById("hone").style.display = "none";
+        document.getElementById("htwo").style.display = "none";
         let dateDropdown = document.getElementById("country"); 
         var i = 0;
         while (i < countries.length) {      
@@ -442,7 +462,9 @@
                                     document.getElementById("dTaxAmount").text = taxAmount;
                                     document.getElementById("dTotalAmount").value = totalAmount;
                                     document.getElementById("dTotalAmount").text = totalAmount;
-                                    document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
+                                    document.getElementById("payingAmount").value = courseAmount;
+                                    document.getElementById("payingAmount").text = courseAmount;
+                                    //document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
                                     //document.getElementById("payingAmount").text = totalAmount;
                                     //document.getElementById("payingAmount").value = totalAmount;
                                 }
@@ -509,14 +531,15 @@
             dataType: 'json',
             success: function(result){
                 console.log("Hi"+result.length);
+                installmentAmount = result[0].amount;
                 //Preparing the Select List
-                var dropDown = document.getElementById("payingAmount");
+                /*var dropDown = document.getElementById("payingAmount");
                 for(var i = 0; i < result.length; i++) {
                     var el = document.createElement("option");
                     el.innerHTML = result[i].amount;
                     el.value = result[i].amount;
                     dropDown.appendChild(el);
-                }
+                }*/
             },
             error: function(result){
                 console.log("Error"+result.statusText);
@@ -713,7 +736,7 @@
                     console.log("Get Course Price"+result.price);
                     courseAmount = result.price;
                     minCourseAmount = result.minimumPayment;
-                    document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
+                    //document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
                 }
             },
             error: function(result){
@@ -811,15 +834,14 @@
     function completeOnline(){
         var pass = document.getElementById("wpassword").value;
         var cpass = document.getElementById("wcpassword").value;
-        var e = document.getElementById("payingAmount");
-        var pAmount = e.value;
+        var pAmount = document.getElementById("payingAmount").value;
         if(pass != cpass){
             swal({
                 title: "Password Mismatch",
                 text: "Password Is Not Consistent!",
                 icon: "error",
             });
-        }else if(pAmount < minCourseAmount){
+        }else if((installmentAmount <= courseAmount) && (pAmount < minCourseAmount || pAmount < installmentAmount)){
             swal({
                 title: "Amount Declined",
                 text: "Amount To Pay Is Below Minimum Amount!",
@@ -916,8 +938,7 @@
         //var taxAmount = ((tax * courseAmount) / 100);
         //var totalAmount = courseAmount + taxAmount; 
         //console.log("amount "+courseAmount);
-        var e = document.getElementById("payingAmount");
-        var pAmount = e.value;
+        var pAmount = document.getElementById("payingAmount").value;
         $.ajax({
     	    type: "POST",
        	    beforeSend: function(request) {
@@ -947,8 +968,7 @@
 
     //Method to calculate tax amount from paying amount
     function calcTaxAmount(){
-        var e = document.getElementById("payingAmount");
-        var pAmount = e.value;
+        var pAmount = document.getElementById("payingAmount").value;
         var payAmount = pAmount * 1;
         var taxAmount = ((tax * payAmount) / 100);
         var totalAmount = payAmount + taxAmount; 
@@ -956,6 +976,21 @@
         document.getElementById("dTaxAmount").text = taxAmount;
         document.getElementById("dTotalAmount").value = totalAmount;
         document.getElementById("dTotalAmount").text = totalAmount;
+    }
+
+    function showAmount(){
+        var e = document.getElementById("paymentType");
+        var pType = e.value;
+        if(pType == 1){
+            document.getElementById("payingAmount").value = courseAmount;
+            document.getElementById("payingAmount").text = courseAmount;
+        }else{
+            document.getElementById("payingAmount").value = installmentAmount;
+            document.getElementById("payingAmount").text = installmentAmount;
+            //document.getElementById("minInfo").innerHTML = "Choosing Installmental Payments option can attract extra charges";
+        }
+
+        calcTaxAmount();
     }
 </script>
 
