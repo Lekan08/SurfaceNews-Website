@@ -222,28 +222,43 @@
                         </div>
 
                         <div class="mb-4 pr-5 pt-3 row">
-                            <div class="col-lg-4">
-                                <label class="form-label">Card Number</label>
-                                <input type="text" class="form-control"
-                                       placeholder="" id="cardNumber">
+                                    <div class="col-lg-7">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+                                                    <label class="form-label">Card Number</label>
+                                                    <input type="text" class="form-control"
+                                                           placeholder="" id="cardNumber">
+                                                </div>
+
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-6">
+                                                        <label class="form-label">Expiry Date (MM/YYYY)</label>
+                                                        <input type="number" class="form-control"
+                                                               placeholder="MM/YYYY" id="expMonth">
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label class="form-label">CVV</label>
+                                                        <input type="text" class="form-control"
+                                                               placeholder="" id="cvv">
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn mt-5 float-end pry-btn "
+                                                        onclick="completeOnline();">PLACE ORDER
+                                                </button>
+
+                                            </div>
+                                        </div>
                             </div>
-                            <div class="col-lg-2">
-                                <label class="form-label">Expiry Month</label>
-                                <input type="number" class="form-control"
-                                       placeholder="" id="expMonth">
-                            </div>
-                            <div class="col-lg-2">
-                                <label class="form-label">Expiry Year</label>
-                                <input type="number" class="form-control"
-                                       placeholder="" id="expYear">
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-label">CVV</label>
-                                <input type="text" class="form-control"
-                                       placeholder="" id="cvv">
-                            </div>
+
+<!--                            <div class="col-lg-2">-->
+<!--                                <label class="form-label">Expiry Year</label>-->
+<!--                                <input type="number" class="form-control"-->
+<!--                                       placeholder="" id="expYear">-->
+<!--                            </div>-->
+
                         </div>
-                        <button type="button" class="btn mt-4 float-end pry-btn mr-5" onclick="completeOnline();">PLACE ORDER</button>
                     </form>
 
                     <form id="withoutPay" class=" mt-5 pt-5">
