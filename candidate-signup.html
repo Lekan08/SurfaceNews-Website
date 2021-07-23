@@ -62,7 +62,7 @@
                             <div class="col-lg-12">
                                 <label class="form-label">Email Address<font color="red">*</font></label>
                                 <input type="text" class="form-control" id="wemail"
-                                       placeholder="">
+                                       placeholder="" disabled>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Phone Number<font color="red">*</font></label>
@@ -135,17 +135,29 @@
                             </div>
                         </div>
                         <div class="mb-2 pt-4">
-                            <h5>Card Details</h5><br>
+                            <h5>Payment Details</h5><br>
                             <h6 id="totalFee"></h6>
                         </div>
 
+
                         <div class="row" style="width: 75%">
                             <div class="col-lg-6" style="font-weight: 600">
+                                <p>Payment Type<font color="red">* <span id="minInfo"></span></font></p>
+                            </div>
+                            <div class="col-lg-6" style="font-weight: 600">
+                                <select class="form-control" id="paymentType" style="font-size: 14px" onchange="showAmount();">
+                                    <option value="1" selected="selected">Full Payment</option>
+                                    <option value="2">Installmental Payment</option>
+                                </select>
+                                <!--p id="dTotalAmount"></p-->
+                            </div>
+
+                            <!--div class="col-lg-6" style="font-weight: 600">
                                <p> Product</p>
                             </div>
                             <div class="col-lg-6" style="font-weight: 600">
                                 <p>Subtotal</p>
-                            </div>
+                            </div-->
 
                             <hr>
 
@@ -153,7 +165,9 @@
                                 <p id="purchase"> </p>
                             </div>
                             <div class="col-lg-6" style="font-size: 14px">
-                                <p id="dCourseAmount"></p>
+                                <input type="text" class="form-control" id="dCourseAmount"
+                                       style="font-size: 14px" disabled>
+                                <!--p id="dCourseAmount"></p-->
                             </div>
 
 
@@ -161,16 +175,24 @@
                                 <p>Tax</p>
                             </div>
                             <div class="col-lg-6" style="font-size: 14px">
-                                <p id="dTaxAmount"></p>
+                                <input type="text" class="form-control" id="dTaxAmount"
+                                       style="font-size: 14px" disabled>
+                                <!--p id="dTaxAmount"></p-->
                             </div>
 
                             <hr>
 
-                            <div class="col-lg-6" style="font-weight: 600">
-                                <p>Total</p>
+                            
+                            <div id="hone" class="col-lg-6" style="font-weight: 600">
+                                <p>Paying<font color="red">* </font></p>
                             </div>
-                            <div class="col-lg-6" style="font-weight: 600">
-                                <p id="dTotalAmount"></p>
+                            <div id="htwo" class="col-lg-6" style="font-weight: 600">
+                                <input type="text" class="form-control" id="payingAmount"
+                                       style="font-size: 14px" onkeyup="calcTaxAmount();">
+                                <!--select class="form-control" id="payingAmount" style="font-size: 14px" onchange="calcTaxAmount();">
+                                    <option value="">-Select Payment-</option>
+                                </select-->
+                                <!--p id="dTotalAmount"></p-->
                             </div>
 
                             <hr>
@@ -185,9 +207,9 @@
                             </div>
 
                             <div class="col-lg-8">
-                                <label class="form-label">Paying Amount<font color="red">* <spam id="minInfo"></spam></font></label>
-                                <input type="text" class="form-control" id="payingAmount"
-                                       style="font-size: 14px">
+                                <label class="form-label">Total Amount (CAD)</label>
+                                <input type="text" class="form-control" id="dTotalAmount"
+                                       style="font-size: 14px" disabled>
                             </div>
 
                             <hr class="mt-3">
@@ -195,24 +217,33 @@
 
 
 
+                        <div class="mb-2 pt-4">
+                            <h5>Card Details</h5>
+                        </div>
+
                         <div class="mb-4 pr-5 pt-3 row">
                             <div class="col-lg-4">
                                 <label class="form-label">Card Number</label>
                                 <input type="text" class="form-control"
-                                       placeholder="">
+                                       placeholder="" id="cardNumber">
                             </div>
-                            <div class="col-lg-4">
-                                <label class="form-label">Expiry Date</label>
-                                <input type="text" class="form-control"
-                                       placeholder="">
+                            <div class="col-lg-2">
+                                <label class="form-label">Expiry Month</label>
+                                <input type="number" class="form-control"
+                                       placeholder="" id="expMonth">
+                            </div>
+                            <div class="col-lg-2">
+                                <label class="form-label">Expiry Year</label>
+                                <input type="number" class="form-control"
+                                       placeholder="" id="expYear">
                             </div>
                             <div class="col-lg-4">
                                 <label class="form-label">CVV</label>
                                 <input type="text" class="form-control"
-                                       placeholder="">
+                                       placeholder="" id="cvv">
                             </div>
                         </div>
-                        <button type="button" class="btn mt-4 float-end pry-btn mr-5" onclick="pay();">PLACE ORDER</button>
+                        <button type="button" class="btn mt-4 float-end pry-btn mr-5" onclick="completeOnline();">PLACE ORDER</button>
                     </form>
 
                     <form id="withoutPay" class=" mt-5 pt-5">
@@ -235,7 +266,7 @@
                             <div class="col-lg-12">
                                 <label class="form-label">Email Address<font color="red">*</font></label>
                                 <input type="text" class="form-control" id="email"
-                                       placeholder="">
+                                       placeholder="" disabled>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Phone Number<font color="red">*</font></label>
@@ -338,6 +369,8 @@
     var tax = 0;
     var courseAmount = 0;
     var minCourseAmount = 0;
+    var discount = 0;
+    var installmentAmount = 0;
 
     //ON-READY FUNCTION
     (function() {
@@ -349,7 +382,9 @@
             document.getElementById("purchase").innerHTML = "Manage Financials";
         }
         //Calling the countries list
-        document.getElementById("hidprovince").style.display = "none";
+        document.getElementById("hidstate").style.display = "none";
+        document.getElementById("hone").style.display = "none";
+        document.getElementById("htwo").style.display = "none";
         let dateDropdown = document.getElementById("country"); 
         var i = 0;
         while (i < countries.length) {      
@@ -359,6 +394,8 @@
             dateDropdown.appendChild(dateOption);      
             i++;    
         }
+        document.getElementById("country").text = "Canada";
+        document.getElementById("country").value = "Canada";
         let cprovinces = document.getElementById("province1"); 
         var j = 0;
         while (j < provinces.length) { 
@@ -368,7 +405,7 @@
             cprovinces.appendChild(dateOption1);      
             j++;    
         }
-        document.getElementById("whidprovince").style.display = "none";
+        document.getElementById("whidstate").style.display = "none";
         let wdateDropdown = document.getElementById("wcountry"); 
         var x = 0;
         while (x < countries.length) {      
@@ -378,6 +415,8 @@
             wdateDropdown.appendChild(dateOption);      
             x++;    
         }
+        document.getElementById("wcountry").text = "Canada";
+        document.getElementById("wcountry").value = "Canada";
         let wcprovinces = document.getElementById("wprovince1"); 
         var y = 0;
         while (y < provinces.length) { 
@@ -416,13 +455,18 @@
                                     minCourseAmount = result.minimumPayment;
                                     var taxAmount = ((tax * courseAmount) / 100);
                                     var totalAmount = courseAmount + taxAmount; 
-                                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + totalAmount + "CAD";
-                                    document.getElementById("dCourseAmount").innerHTML = "$" + courseAmount + "CAD";
-                                    document.getElementById("dTaxAmount").innerHTML = "$" + taxAmount + "CAD";
-                                    document.getElementById("dTotalAmount").innerHTML = "$" + totalAmount + "CAD";
-                                    document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
-                                    document.getElementById("payingAmount").text = totalAmount;
-                                    document.getElementById("payingAmount").value = totalAmount;
+                                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + courseAmount + "CAD";
+                                    document.getElementById("dCourseAmount").value = courseAmount;
+                                    document.getElementById("dCourseAmount").text = courseAmount;
+                                    document.getElementById("dTaxAmount").value = taxAmount;
+                                    document.getElementById("dTaxAmount").text = taxAmount;
+                                    document.getElementById("dTotalAmount").value = totalAmount;
+                                    document.getElementById("dTotalAmount").text = totalAmount;
+                                    document.getElementById("payingAmount").value = courseAmount;
+                                    document.getElementById("payingAmount").text = courseAmount;
+                                    //document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
+                                    //document.getElementById("payingAmount").text = totalAmount;
+                                    //document.getElementById("payingAmount").value = totalAmount;
                                 }
                             },
                             error: function(result){
@@ -472,6 +516,33 @@
             },
             error: function(result){
                 console.log("Here "+result.statusText);
+            }
+        })
+
+        //Calling the course prices
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/courseinstallment/getForCourse/" + course,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+result.length);
+                installmentAmount = result[0].amount;
+                //Preparing the Select List
+                /*var dropDown = document.getElementById("payingAmount");
+                for(var i = 0; i < result.length; i++) {
+                    var el = document.createElement("option");
+                    el.innerHTML = result[i].amount;
+                    el.value = result[i].amount;
+                    dropDown.appendChild(el);
+                }*/
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
             }
         })
     })();
@@ -533,21 +604,6 @@
                 contentType: "application/json",
                 dataType: 'json',
                 data: regUser,
-                /*data: JSON.stringify({
-                    displayName : document.getElementById("dname").value,
-                    userLogin : document.getElementById("username").value,
-                    userEmail : document.getElementById("email").value,
-                    //first_name : document.getElementById("fname").value,
-                    //last_name : document.getElementById("lname").value,
-                    userNicename : document.getElementById("nname").value,
-                    userPass : pass/*,
-                    meta: JSON.stringify({
-                        nickname: document.getElementById("nname").value,
-                        first_name : document.getElementById("fname").value,
-                        last_name : document.getElementById("lname").value,
-                        full_name: document.getElementById("fname").value + " " + document.getElementById("lname").value
-                    })
-                }),*/
                 success: function(result){
                     swal({
                         title: result['status'],
@@ -555,7 +611,7 @@
                         icon: "success",
                     })
                     .then(() => {
-                        completeOfflineHelper();
+                        completeRegistrationHelper(1);
                     });
                 },
                 error: function(result){
@@ -571,22 +627,67 @@
         }
     }
 
-    //Method to help complete offline registation reconciliation
-    function completeOfflineHelper(){
+    //Method to help complete registation reconciliation
+    function completeRegistrationHelper(myPayType){
+        var fname = "";
+        var lname = "";
+        var email = "";
+        var prog = "";
+        var addr = "";
+        var town = "";
+        var state = "";
+        var country = "";
+        var pno = ""
+        if(myPayType == 1){
+            fname = document.getElementById("fname").value;
+            lname = document.getElementById("lname").value;
+            email = document.getElementById("email").value;
+            var ad1 = document.getElementById("addr").value;
+            var ad2 = document.getElementById("apartment").value;
+            addr = ad1 + " " + ad2;
+            town = document.getElementById("town").value;
+            state = document.getElementById("province").value;
+            country = document.getElementById("country").value;
+            pno = document.getElementById("pno").value;
+        }else{
+            fname = document.getElementById("wfname").value;
+            lname = document.getElementById("wlname").value;
+            email = document.getElementById("wemail").value;
+            var ad1 = document.getElementById("waddr").value;
+            var ad2 = document.getElementById("wapartment").value;
+            addr = ad1 + " " + ad2;
+            town = document.getElementById("wtown").value;
+            state = document.getElementById("wprovince").value;
+            country = document.getElementById("wcountry").value;
+            pno = document.getElementById("wpno").value;
+            if(course == "PM"){
+                prog = "Project Management Comprehensive";
+            }else if(course == "BA"){
+                prog = "Business Analysis Comprehensive";
+            }else{
+                prog = "Managing Project Financials";
+            }
+        }
         $.ajax({
     	    type: "POST",
        	    beforeSend: function(request) {
        	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	    },
-            url: url + "/users/completeOfflineCandidate",
+            url: url + "/users/completeCandidate",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
                 id : id,
-                fname : document.getElementById("fname").value,
-                lname : document.getElementById("lname").value,
-                email : document.getElementById("email").value,
-                paymentType : 1
+                fname : fname,
+                lname : lname,
+                email : email,
+                paymentType : myPayType,
+                program : prog,
+                address : addr,
+                town : town,
+                state : state,
+                country : country,
+                pno : pno
             }),
             success: function(result){
                 console.log(result.statusText);
@@ -635,7 +736,7 @@
                     console.log("Get Course Price"+result.price);
                     courseAmount = result.price;
                     minCourseAmount = result.minimumPayment;
-                    document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
+                    //document.getElementById("minInfo").innerHTML = "Minimum Initial Deposit is $" + minCourseAmount + "CAD (tax excl.)";
                 }
             },
             error: function(result){
@@ -647,6 +748,7 @@
     //Method to validate coupon
     function validateCoupon(){
         var vcoupon = document.getElementById("vcoupon").value;
+        //var payAmount = document.getElementById("payingAmount").value;
         console.log("amount "+courseAmount);
         $.ajax({
     	    type: "GET",
@@ -663,15 +765,19 @@
                     icon: "success",
                 })
                 .then(() => {
+                    discount = courseAmount - result['data'];
                     courseAmount = result['data'];
                     var taxAmount = ((tax * courseAmount) / 100);
                     var totalAmount = courseAmount + taxAmount; 
-                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + totalAmount + "CAD";
-                    document.getElementById("dCourseAmount").innerHTML = "$" + courseAmount + "CAD";
-                    document.getElementById("dTaxAmount").innerHTML = "$" + taxAmount + "CAD";
-                    document.getElementById("dTotalAmount").innerHTML = "$" + totalAmount + "CAD";
-                    document.getElementById("payingAmount").text = totalAmount;
-                    document.getElementById("payingAmount").value = totalAmount;
+                    document.getElementById("totalFee").innerHTML = "Training Fee is $" + courseAmount + "CAD";
+                    document.getElementById("dCourseAmount").value = courseAmount;
+                    document.getElementById("dCourseAmount").text = courseAmount;
+                    document.getElementById("dTaxAmount").value = taxAmount;
+                    document.getElementById("dTaxAmount").text = taxAmount;
+                    document.getElementById("dTotalAmount").value = totalAmount;
+                    document.getElementById("dTotalAmount").text = totalAmount;
+                    //document.getElementById("payingAmount").text = totalAmount;
+                    //document.getElementById("payingAmount").value = totalAmount;
                 });
             },
             error: function(result){
@@ -693,6 +799,9 @@
         if(chosenCountry == "Canada"){
             document.getElementById("hidprovince").style.display = "block";
             document.getElementById("hidstate").style.display = "none";
+        }else {
+            document.getElementById("hidprovince").style.display = "none";
+            document.getElementById("hidstate").style.display = "block";
         }
     }
     function changeCountry1(){
@@ -701,6 +810,9 @@
         if(chosenCountry == "Canada"){
             document.getElementById("whidprovince").style.display = "block";
             document.getElementById("whidstate").style.display = "none";
+        }else{
+            document.getElementById("whidprovince").style.display = "none";
+            document.getElementById("whidstate").style.display = "block";
         }
     }
 
@@ -716,6 +828,169 @@
         var chosenProvince = e.value;
         document.getElementById("wprovince").value = chosenProvince;
         document.getElementById("wprovince").text = chosenProvince;
+    }
+
+    //Method to complete online registration
+    function completeOnline(){
+        var pass = document.getElementById("wpassword").value;
+        var cpass = document.getElementById("wcpassword").value;
+        var pAmount = document.getElementById("payingAmount").value;
+        if(pass != cpass){
+            swal({
+                title: "Password Mismatch",
+                text: "Password Is Not Consistent!",
+                icon: "error",
+            });
+        }else if((installmentAmount <= courseAmount) && (pAmount < minCourseAmount || pAmount < installmentAmount)){
+            swal({
+                title: "Amount Declined",
+                text: "Amount To Pay Is Below Minimum Amount!",
+                icon: "error",
+            });
+        }else {
+            var ouser = {
+                displayName : document.getElementById("wdname").value,
+                userLogin : document.getElementById("wusername").value,
+                userEmail : document.getElementById("wemail").value,
+                userNicename : document.getElementById("wusername").value,
+                userPass : pass
+            }
+            var ousermetas = [
+                {
+                    metaKey : "country",
+                    metaValue : document.getElementById("wcountry").value
+                },
+                {
+                    metaKey : "address",
+                    metaValue : document.getElementById("waddr").value
+                },
+                {
+                    metaKey : "apartment",
+                    metaValue : document.getElementById("wapartment").value
+                },
+                {
+                    metaKey : "town",
+                    metaValue : document.getElementById("wtown").value
+                },
+                {
+                    metaKey : "province",
+                    metaValue : document.getElementById("wprovince").value
+                },
+                {
+                    metaKey : "phoneno",
+                    metaValue : document.getElementById("wpno").value
+                }
+            ]
+            var currency = "cad";
+            var description = "Online Course Payment To Olade";
+            var chargeDTO = {
+                amount : pAmount,
+                currency : currency,
+                description : description
+            }
+            var paymentTokenDTO = {
+                cardNumber : document.getElementById("cardNumber").value,
+                cvc : document.getElementById("cvv").value,
+                expMonth : document.getElementById("expMonth").value,
+                expYear : document.getElementById("expYear").value
+            }
+            var regUser = JSON.stringify({
+                    'user' : ouser,
+                    'usermetas' : ousermetas,
+                    'paymentDTO' : paymentTokenDTO,
+                    'chargeDTO' : chargeDTO
+                });
+            $.ajax({
+    	        type: "POST",
+       	        beforeSend: function(request) {
+       	            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	        },
+                url: wordpressUrl + "/wpusers/payandreg",
+                contentType: "application/json",
+                dataType: 'json',
+                data: regUser,
+                success: function(result){
+                    swal({
+                        title: result['status'],
+                        text: result['message'],
+                        icon: "success",
+                    })
+                    .then(() => {
+                        completeRegistrationHelper(2);
+                        addPayment();
+                    });
+                },
+                error: function(result){
+                    console.log(result.responseText);
+                    var json = $.parseJSON(result.responseText);
+                    swal({
+                        title: json.status,
+                        text: json.message,
+                        icon: "error",
+                    });
+                }
+            })
+        }
+    }
+
+    //Method to add payment record 
+    function addPayment(){
+        //var taxAmount = ((tax * courseAmount) / 100);
+        //var totalAmount = courseAmount + taxAmount; 
+        //console.log("amount "+courseAmount);
+        var pAmount = document.getElementById("payingAmount").value;
+        $.ajax({
+    	    type: "POST",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: url + "/payments/add",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                courseName : course,
+                amount : courseAmount,
+                taxAmount : document.getElementById("dTaxAmount").value,
+                totalAmount : document.getElementById("dTotalAmount").value,
+                paidAmount : pAmount,
+                discount : discount,
+                candidateEmail : document.getElementById("wemail").value
+            }),
+            success: function(result){
+                console.log(result.statusText);
+                location.reload();
+            },
+            error: function(result){
+                console.log(result.responseText);
+            }
+        })
+    }
+
+    //Method to calculate tax amount from paying amount
+    function calcTaxAmount(){
+        var pAmount = document.getElementById("payingAmount").value;
+        var payAmount = pAmount * 1;
+        var taxAmount = ((tax * payAmount) / 100);
+        var totalAmount = payAmount + taxAmount; 
+        document.getElementById("dTaxAmount").value = taxAmount;
+        document.getElementById("dTaxAmount").text = taxAmount;
+        document.getElementById("dTotalAmount").value = totalAmount;
+        document.getElementById("dTotalAmount").text = totalAmount;
+    }
+
+    function showAmount(){
+        var e = document.getElementById("paymentType");
+        var pType = e.value;
+        if(pType == 1){
+            document.getElementById("payingAmount").value = courseAmount;
+            document.getElementById("payingAmount").text = courseAmount;
+        }else{
+            document.getElementById("payingAmount").value = installmentAmount;
+            document.getElementById("payingAmount").text = installmentAmount;
+            //document.getElementById("minInfo").innerHTML = "Choosing Installmental Payments option can attract extra charges";
+        }
+
+        calcTaxAmount();
     }
 </script>
 

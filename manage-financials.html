@@ -51,7 +51,7 @@
         <div class="dropdown  pic">
           <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-            <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
+            <span class="pl-2" style="font-size: 14px" id="profilename"></span>
           </div>
 
           <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -183,32 +183,23 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3 col-lg-3">
-                  <div class="form-group">
-                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                  <!--div class="form-group">
                     <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
                       <option value="">Student</option>
                       <option value="">John Doe</option>
                       <option value="">Jude Law</option>
                       <option value="">Mary Doe</option>
-                      <!--                                    <option>Push reminder to potential students</option>-->
-                      <!--                                        <option>4</option>-->
-                      <!--                                        <option>5</option>-->
                     </select>
-                  </div>
+                  </div-->
                 </div>
                 <div class="col-sm-3 col-lg-3">
-                  <div class="form-group">
-                    <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
+                  <!--div class="form-group">
                     <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                       <option value="">Status</option>
                       <option value="Project Management Comprehensive">Registered</option>
                       <option value="Business Analysis Comprehensive">Enrolled</option>
-<!--                      <option value="Managing Project Financials">Managing Project Financials</option>-->
-                      <!--                                    <option>Push reminder to potential students</option>-->
-                      <!--                                        <option>4</option>-->
-                      <!--                                        <option>5</option>-->
                     </select>
-                  </div>
+                  </div-->
                 </div>
                 <div class="col-sm-3 col-lg-3">
 
@@ -216,84 +207,14 @@
                 <div class="col-sm-3 col-lg-3 mb-3">
                   <form class="navbar-form" role="search">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search"
-                             style="font-size: 14px">
+                      <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
                     </div>
                   </form>
                 </div>
               </div>
               <div class="user">
-                <table class="table profile-table">
-                  <thead>
-                  <tr>
-                    <th>Student name</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Obiajulu Aghemen</td>
-                    <td>obian@sample.com</td>
-                    <td><span class="badge bg-primary">Registered</span></td>
-                    <td>23-03-2021</td>
-                    <td class="options-ham-menu">
-                      <div class="dropdown">
-                                <span class="actions  dropdown-toggle" href="#" id="action-dropDown2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                        <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                             style="cursor: pointer">Add Payment</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Obiajulu Aghemen</td>
-                    <td>obian@sample.com</td>
-                    <td><span class="badge bg-success">Enrolled</span></td>
-                    <td>23-03-2021</td>
-                    <td class="options-ham-menu">
-                      <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                             style="cursor: pointer">Add Payment</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Obiajulu Aghemen</td>
-                    <td>obian@sample.com</td>
-                    <td><span class="badge bg-success">Enrolled</span></td>
-                    <td>23-03-2021</td>
-                    <td class="options-ham-menu">
-                      <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                             style="cursor: pointer; font-size: 14px">Add Payment</a>
-                          <!--                      <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>-->
-                          <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
+                <table class="table profile-table" id="fi">
+                  
                 </table>
                 <div class="pagination">
                   <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
@@ -311,7 +232,7 @@
   </div>
 </div>
 
-<!--Edit Modal-->
+<!--Modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -325,51 +246,51 @@
         <div class="form-group row">
           <div class="col-xs-6">
             <label>Course<font color="red">*</font></label>
-            <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-              <option value="">-Select Course-</option>
-              <option value="">Business Analysis</option>
-              <option value="">Project management</option>
-              <option value="">Managing Project Financials</option>
-            </select>
+            <input class="form-control"  style="font-size: 14px"  id="course" disabled>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-xs-6">
-            <label>Payment Type<font color="red">*</font></label>
-            <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-              <option value="">-Select payment type-</option>
-              <option value="">Part Payment</option>
-              <option value="">Full Payment</option>
-<!--              <option value="">Managing Project Financials</option>-->
-            </select>
+            <label>Coupon Code (if any)</label>
+            <input class="form-control"  style="font-size: 14px" id="couponCode">
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <label>Coupon Code<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
+            <label>Tax<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="taxAmount" disabled>
           </div>
           <div class="col-md-6">
-            <label>Coupon Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
+            <label>Amount<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="amount" disabled>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-md-6">
-            <label>Tax<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
+            <label>Total Amount<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="totalAmount" disabled>
           </div>
           <div class="col-md-6">
-            <label>Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
+            <label>Payment Type<font color="red">*</font></label>
+            <select class="form-control" id="paymentType" style="font-size: 14px" onchange="showAmount();">
+              <option value="1" selected="selected">Full Payment</option>
+              <option value="2">Installmental Payment</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="hone" class="form-group row">
+          <div class="col-xs-6">
+            <label>Paying Amount<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="payingAmount" onkeyup="calcTaxAmount();">
           </div>
         </div>
 
       </div>
       <div class="modal-footer">
 <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
+        <button type="button" class="btn btn-primary" onclick="makePayment();">Confirm</button>
       </div>
     </div>
   </div>
@@ -388,32 +309,50 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-  var url = "http://localhost:8080";
+  //var url = "http://localhost:8080";
   //var wordpressUrl = "http://localhost:8099";
-  //var url = "https://proinsight-reconservice.herokuapp.com";
+  var url = "https://proinsight-reconservice.herokuapp.com";
   var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-  var leads = [];
+  var payments = [];
   var jsonData = [];
   var current_page = 1;
   var records_per_page = 20;
-  var selectedLead = {};
+  var tax = 0;
+  var courseAmount = 0;
+  var aCourse = "";
+  var payer = {};
+  var currBal = 0;
+  var discount = 0;
+  var installmentAmount = 0;
+  //var minCourseAmount = 0;
 
   //ON-READY FUNCTION
   (function() {
-    //Calling the Leads List API
-    var status = 0;
+    if(sessionStorage.getItem("lg") != 1){
+      location.href = "login.html";
+    }
+    if(sessionStorage.getItem("user") != null){
+      var user = JSON.parse(sessionStorage.getItem("user"));
+      console.log("Check "+user);
+      //console.log("yes"+fname);
+      document.getElementById("profilename").innerHTML = user.email;
+      //document.getElementById("oladeEmail").innerHTML = user.email;
+    }
+
+    document.getElementById("hone").style.display = "none";
+    //Calling the Candidates With Outstanding Balance List API
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/leads/gets/" + status,
+      url: url + "/payments/offlinepayers",
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
         console.log("Hi"+result.length);
-        leads = result;
+        payments = result;
         jsonData = result;
         changePage(1);
       },
@@ -427,98 +366,19 @@
     })
   })();
 
-  //Lead Creation
-  function addLead(){
-    //Calling the API -
-    $.ajax({
-      type: "POST",
-      beforeSend: function(request) {
-        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-      },
-      url: url + "/leads/add",
-      contentType: "application/json",
-      dataType: 'json',
-      data: JSON.stringify({
-        fname : document.getElementById("fname").value,
-        lname : document.getElementById("lname").value,
-        email : document.getElementById("email").value
-      }),
-      success: function(result){
-        swal({
-          title: result['status'],
-          text: result['message'],
-          icon: "success",
-        })
-                .then(() => {
-                  location.reload();
-                });
-      },
-      error: function(result){
-        var json = $.parseJSON(result.responseText);
-        swal({
-          title: json.status,
-          text: json.message,
-          icon: "error",
-        });
-      }
-    })
-
-  }
-
-  //Lead Update
-  function editLead(){
-    //Calling the API -
-    $.ajax({
-      type: "POST",
-      beforeSend: function(request) {
-        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-      },
-      url: url + "/leads/update",
-      contentType: "application/json",
-      dataType: 'json',
-      data: JSON.stringify({
-        fname : document.getElementById("efname").value,
-        lname : document.getElementById("elname").value,
-        email : document.getElementById("eemail").value,
-        id : selectedLead.id,
-        createdTime : selectedLead.createdTime,
-        noOfReminders : selectedLead.noOfReminders,
-        lastReminderTime : selectedLead.lastReminderTime,
-        noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-        lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-        status : selectedLead.status
-      }),
-      success: function(result){
-        swal({
-          title: result['status'],
-          text: result['message'],
-          icon: "success",
-        })
-                .then(() => {
-                  location.reload();
-                });
-      },
-      error: function(result){
-        var json = $.parseJSON(result.responseText);
-        swal({
-          title: json.status,
-          text: json.message,
-          icon: "error",
-        });
-      }
-    })
-
-  }
-
   //Function to search table
   function search(){
     var input = document.getElementById("q");
     var filter = input.value.toUpperCase();
     jsonData = [];
-    for(var i = 0; i < leads.length; i++){
-      var name = leads[i].fname + " " + leads[i].lname;
-      if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
-        jsonData.push(leads[i]);
+    for(var i = 0; i < payments.length; i++){
+      var name = payments[i].fname + " " + payments[i].lname;
+      var status = "Not Registered";
+      if(payments[i].leadStatus == 2){
+        status = "Registered";
+      }
+      if(name.toUpperCase().indexOf(filter) > -1 || payments[i].email.toUpperCase().indexOf(filter) > -1 || status.toUpperCase().indexOf(filter) > -1){
+        jsonData.push(payments[i]);
       }
     }
     changePage(1);
@@ -548,20 +408,30 @@
 
     listing_table.innerHTML = "";
 
-    listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
+    listing_table.innerHTML += '<thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead>';
+    listing_table.innerHTML += '<tbody>';
     var total = page * records_per_page;
     if(jsonData.length < (page * records_per_page)){
       total = jsonData.length;
     }
-    for (let i = (page-1) * records_per_page; i < total; i++) {
-      let j = i;
-      //console.log("mexid "+exams[i].id);
-      var name = jsonData[i].fname + " " + jsonData[i].lname;
-      var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
-      listing_table.innerHTML += oneRecord;
+    if(jsonData.length > 0){ 
+      for(let i = (page-1) * records_per_page; i < total; i++) {
+        let j = i;
+        //console.log("mexid "+exams[i].id);
+        var name = jsonData[i].fname + " " + jsonData[i].lname;
+        var status = payments[i].leadStatus;
+        var look = "";
+        if(status == 2){
+          look = '<span class="badge badge-pill badge-success">Registered</span>';
+        }else{
+          look = '<span class="badge badge-pill badge-danger">Not Registered</span>';
+        }
+        var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td>' + look + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+          <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
+          <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Add Payment</a> \
+          </div></div></td></tr>';
+        listing_table.innerHTML += oneRecord;
+      }
     }
     listing_table.innerHTML += '</tbody>';
     page_span.innerHTML = page;
@@ -583,16 +453,197 @@
     return Math.ceil(jsonData.length / records_per_page);
   }
 
-  //Function to handle the transition of selected lead
+  //Function to handle the transition of selected student
   function kclick(x){
     //console.log("My "+jsonData[x]);
-    var alead = jsonData[x];
-    selectedLead = jsonData[x];
-    //console.log("Ch "+jsonData[x].email);
-    document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-    document.getElementById("efname").value = alead.fname;
-    document.getElementById("elname").value = alead.lname;
-    document.getElementById("eemail").value = alead.email;
+    var aPayment = jsonData[x];
+    payer = jsonData[x];
+
+    var course = "";
+    if(aPayment.program == "Business Analysis Comprehensive"){
+      course = "BA";
+    }else if(aPayment.program == "Project Management Comprehensive"){
+      course = "PM";
+    }else{
+      course = "MP";
+    }
+    
+    aCourse = course;
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+      },
+      url: url + "/tax/get",
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        if(result.value != null){
+          console.log("Get Tax1"+result.value);
+          tax = result.value;
+          $.ajax({
+    	      type: "GET",
+            beforeSend: function(request) {
+              request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            },
+            url: url + "/courseprice/get/" + course,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+              if(result.price != null){
+                console.log("Get Course Price1"+result.price);
+                courseAmount = result.price;
+                //minCourseAmount = result.minimumPayment;
+                var taxAmount = ((tax * courseAmount) / 100);
+                var totalAmount = courseAmount + taxAmount; 
+                //document.getElementById("payingAmount").text = totalAmount;
+                //document.getElementById("payingAmount").value = totalAmount;
+                document.getElementById("course").text = aPayment.program;
+                document.getElementById("course").value = aPayment.program;
+                document.getElementById("taxAmount").text = taxAmount;
+                document.getElementById("taxAmount").value = taxAmount;
+                document.getElementById("amount").text = courseAmount;
+                document.getElementById("amount").value = courseAmount;
+                document.getElementById("totalAmount").text = totalAmount;
+                document.getElementById("totalAmount").value = totalAmount;
+                document.getElementById("payingAmount").value = courseAmount;
+                document.getElementById("payingAmount").text = courseAmount;
+                currBal = courseAmount;
+
+                //Calling the course prices
+                $.ajax({
+                  type: "GET",
+                  beforeSend: function(request) {
+                    request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                    request.setRequestHeader("Access-Control-Allow-Origin", "*");
+                  },
+                  url: url + "/courseinstallment/getForCourse/" + course,
+                  contentType: "application/json",
+                  dataType: 'json',
+                  success: function(result){
+                    console.log("Hi"+result.length);
+                    installmentAmount = result[0].amount;
+                  },
+                  error: function(result){
+                    console.log("Error"+result.statusText);
+                  }
+                })
+              }
+            },
+            error: function(result){
+              console.log(result.responseText);
+            }
+          })
+        }
+      },
+      error: function(result){
+        console.log(result.responseText);
+      }
+    })
+  }
+
+  //Method to validate coupon
+  function makePayment(){
+    var vcoupon = document.getElementById("couponCode").value;
+    console.log("amount "+courseAmount);
+    if(vcoupon != null && vcoupon != ""){
+      $.ajax({
+        type: "GET",
+        beforeSend: function(request) {
+          request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+        },
+        url: url + "/bonus/validate/" + vcoupon + "/" + currBal,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(result){
+          discount = currBal - result['data'];
+          currBal = result['data'];
+          addPayment();
+        },
+        error: function(result){
+          console.log(result.responseText);
+          var json = $.parseJSON(result.responseText);
+          swal({
+            title: json.status,
+            text: json.message,
+            icon: "error",
+          });
+        }
+      })
+    }else{
+      addPayment();
+    }
+    
+  }
+
+  //Method to add payment record 
+  function addPayment(){
+    var pAmount = document.getElementById("payingAmount").value;
+    $.ajax({
+      type: "POST",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+      },
+      url: url + "/payments/add",
+      contentType: "application/json",
+      dataType: 'json',
+      data: JSON.stringify({
+        courseName : aCourse,
+        amount : currBal,
+        taxAmount : document.getElementById("taxAmount").value,
+        totalAmount : document.getElementById("totalAmount").value,
+        paidAmount : pAmount,
+        discount : discount,
+        candidateEmail : payer.email
+      }),
+      success: function(result){
+        console.log(result.statusText);
+        swal({
+          title: result['status'],
+          text: result['message'],
+          icon: "success",
+        })
+        .then(() => {
+          location.reload();
+        });
+      },
+      error: function(result){
+        console.log(result.responseText);
+        var json = $.parseJSON(result.responseText);
+        swal({
+          title: json.status,
+          text: json.message,
+          icon: "error",
+        });
+      }
+    })
+  }
+
+  //Method to calculate tax amount from paying amount
+  function calcTaxAmount(){
+    var pAmount = document.getElementById("payingAmount").value;
+    var payAmount = pAmount * 1;
+    var taxAmount = ((tax * payAmount) / 100);
+    var totalAmount = payAmount + taxAmount; 
+    document.getElementById("taxAmount").value = taxAmount;
+    document.getElementById("taxAmount").text = taxAmount;
+    document.getElementById("totalAmount").value = totalAmount;
+    document.getElementById("totalAmount").text = totalAmount;
+  }
+
+  function showAmount(){
+    var e = document.getElementById("paymentType");
+    var pType = e.value;
+    if(pType == 1){
+      document.getElementById("payingAmount").value = courseAmount;
+      document.getElementById("payingAmount").text = courseAmount;
+    }else{
+      document.getElementById("payingAmount").value = installmentAmount;
+      document.getElementById("payingAmount").text = installmentAmount;
+      //document.getElementById("minInfo").innerHTML = "Choosing Installmental Payments option can attract extra charges";
+    }
+
+    calcTaxAmount();
   }
 </script>
 

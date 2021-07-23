@@ -189,21 +189,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 13px">
-                                            <option value="">Select Program</option>
-                                            <option value="">Project Management</option>
-                                            <option value="">Business analysis</option>
-                                            <option value="">Business information</option>
-                                            <option value="">ICT</option>
-                                            <!--                                    <option>Push reminder to potential students</option>-->
-                                            <!--                                        <option>4</option>-->
-                                            <!--                                        <option>5</option>-->
+                                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 13px" onchange="courseChart();">
+                                            <option value="PM" selected="selected">Project Management</option>
+                                            <option value="BA">Business analysis</option>
+                                            <option value="MP">Manage Financials</option>
                                         </select>
                                     </div>
                                     <div class="card card-green">
                                         <div class="p-3">
                                             <div class=" text-white">
-                                                <h5>$50,000</h5>
+                                                <h5 id="courseTP"></h5>
                                                 <p>Total Payments received</p>
                                             </div>
                                         </div>
@@ -212,7 +207,7 @@
                                     <div class="card card-red mt-3">
                                         <div class="p-3">
                                             <div class=" text-white">
-                                                <h5>$10,000</h5>
+                                                <h5 id="courseTU"></h5>
                                                 <p>Total Unpaid balances</p>
                                             </div>
                                         </div>
@@ -221,7 +216,7 @@
                                     <div class="card card-blue mt-3">
                                         <div class="p-3">
                                             <div class=" text-white">
-                                                <h5>$5,000</h5>
+                                                <h5 id="courseTD"></h5>
                                                 <p>Total discount offered</p>
                                             </div>
                                         </div>
@@ -245,22 +240,25 @@
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
-                                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 13px">
-                                            <option value="">Select Month</option>
-                                            <option value="">January</option>
-                                            <option value="">February</option>
-                                            <option value="">March </option>
-                                            <option value="">April</option>
-                                            <!--                                    <option>Push reminder to potential students</option>-->
-                                            <!--                                        <option>4</option>-->
-                                            <!--                                        <option>5</option>-->
+                                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 13px" onchange="monthChart();">
+                                            <option value="1" selected="selected">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March </option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July </option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November </option>
+                                            <option value="12">December</option>
                                         </select>
                                     </div>
                                     <div class="card card-green">
                                         <div class="p-3">
                                                 <div class=" text-white">
-                                                    <h5>$50,000</h5>
+                                                    <h5 id="monthTP"></h5>
                                                     <p>Total Payments received</p>
                                                 </div>
                                         </div>
@@ -269,7 +267,7 @@
                                     <div class="card card-red mt-3">
                                         <div class="p-3">
                                                 <div class=" text-white">
-                                                    <h5>$10,000</h5>
+                                                    <h5 id="monthTU"></h5>
                                                     <p>Total Unpaid balances</p>
                                                 </div>
                                         </div>
@@ -278,7 +276,7 @@
                                     <div class="card card-blue mt-3">
                                         <div class="p-3">
                                                 <div class=" text-white">
-                                                    <h5>$5,000</h5>
+                                                    <h5 id="monthTD"></h5>
                                                     <p>Total discount offered</p>
                                                 </div>
                                         </div>
@@ -288,8 +286,8 @@
                                 <div class="col-md-6">
                                     <canvas id="myChart" width="900" height="900"></canvas>
                                     <div class="text-primary m-3" style="font-size: 13px;">
-                                        <p>No of full payment received: 40</p>
-                                        <p>No of part payment received: 10</p>
+                                        <p id="fullRatio"></p>
+                                        <p id="partRatio"></p>
                                     </div>
                                 </div>
 
@@ -332,34 +330,241 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    var url = "http://localhost:8080";
+    //var url = "http://localhost:8080";
     //var wordpressUrl = "http://localhost:8099";
-    //var url = "https://proinsight-reconservice.herokuapp.com";
+    var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-    var leads = [];
-    var jsonData = [];
-    var current_page = 1;
-    var records_per_page = 20;
-    var selectedLead = {};
+    var currCourse = "";
+    var currMonth = 0;
+    var courseReport = {};
+    var monthReport = {};
 
     //ON-READY FUNCTION
     (function() {
-        //Calling the Leads List API
-        var status = 0;
+        //Calling the Course Payment Report API
+        var e = document.getElementById("exampleFormControlSelect1");
+        currCourse = e.value;
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "/leads/gets/" + status,
+            url: url + "/payments/coursereports/" + currCourse,
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
-                console.log("Hi"+result.length);
-                leads = result;
-                jsonData = result;
-                changePage(1);
+                //console.log("Hi"+result.length);
+                courseReport = result;
+                document.getElementById("courseTP").innerHTML = "$" + result.received;
+                document.getElementById("courseTU").innerHTML = "$" + result.unpaid;
+                var disc = 0;
+                if(result.discount != null) disc = result.discount;
+                document.getElementById("courseTD").innerHTML = "$" + disc;
+
+                // And for a doughnut chart
+                var ctx = document.getElementById("myChart2").getContext('2d');
+
+                Chart.defaults.global.defaultFontFamily = "Rubik";
+                Chart.defaults.global.defaultFontSize = 11;
+            
+                //console.log("Find "+courseReport.received);
+                if(courseReport.discount != null) tt = courseReport.discount;
+                var myDoughnutChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ["Payments", "Discount", "Unpaid Balances",],
+                        datasets: [{
+                            backgroundColor: [
+                                "#45DAB6",
+                                "#28A3EF",
+                                "#FF5B79",
+                            ],
+                            data: [result.received, result.unpaid, disc]
+                        }]
+                    }
+                });
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
+        //Calling the Month Payment Report API
+        var e = document.getElementById("exampleFormControlSelect");
+        currMonth = e.value;
+        var date = new Date();
+        var date1 = new Date();
+        var fTime = new Date(date.getFullYear(), currMonth - 1, 1).getTime();
+        var sTime = new Date(date1.getFullYear(), currMonth, 0).getTime();
+        console.log("Timestamp "+fTime);
+        console.log("Timestamps "+sTime);
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/payments/monthreports/" + fTime + "/" + sTime,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                //console.log("Hi"+result.length);
+                monthReport = result;
+                document.getElementById("monthTP").innerHTML = "$" + result.received;
+                document.getElementById("monthTU").innerHTML = "$" + result.unpaid;
+                var disc = 0;
+                if(result.discount != null) disc = result.discount;
+                document.getElementById("monthTD").innerHTML = "$" + disc;
+
+                // And for a doughnut chart
+                var ctx1 = document.getElementById("myChart").getContext('2d');
+
+                Chart.defaults.global.defaultFontFamily = "Rubik";
+                Chart.defaults.global.defaultFontSize = 11;
+
+                var myDoughnutChart = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ["Payments", "Discount", "Unpaid Balances",],
+                        datasets: [{
+                            backgroundColor: [
+                                "#45DAB6",
+                                "#28A3EF",
+                                "#FF5B79",
+                            ],
+                            data: [result.received, result.unpaid, disc]
+                        }]
+                    }
+                });
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
+        //Calling the Course Payment Report API
+        var year = 2021;
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/payments/yearreports/" + year,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                //console.log("Hi"+JSON.stringify(result));
+                //courseReport = result;
+
+                Chart.defaults.global.defaultFontFamily = "Rubik";
+                Chart.defaults.global.defaultFontSize = 12;
+
+                var total = 0;
+                total = result[0].payments[0].received + result[0].payments[1].received + result[0].payments[2].received + result[0].payments[3].received + 
+                            result[0].payments[4].received + result[0].payments[5].received + result[0].payments[6].received + result[0].payments[7].received + result[0].payments[8].received +
+                            result[0].payments[9].received + result[0].payments[10].received + result[0].payments[11].received;
+
+                var total1 = 0;
+                total1 = result[1].payments[0].received + result[1].payments[1].received + result[1].payments[2].received + result[1].payments[3].received + 
+                            result[1].payments[4].received + result[1].payments[5].received + result[1].payments[6].received + result[1].payments[7].received + result[1].payments[8].received +
+                            result[1].payments[9].received + result[1].payments[10].received + result[1].payments[11].received;
+
+                var total2 = 0;
+                total2 = result[2].payments[0].received + result[2].payments[1].received + result[2].payments[2].received + result[2].payments[3].received + 
+                            result[2].payments[4].received + result[2].payments[5].received + result[2].payments[6].received + result[2].payments[7].received + result[2].payments[8].received +
+                            result[2].payments[9].received + result[2].payments[10].received + result[2].payments[11].received;                
+
+                var barChartData = {
+                    labels: [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "July",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                    ],
+                    datasets: [
+                        {
+                            label: "Project Management : $"+total,
+                            backgroundColor: "#45DAB6",
+                            borderWidth: 1,
+                            data: [result[0].payments[0].received,result[0].payments[1].received,result[0].payments[2].received,result[0].payments[3].received,
+                            result[0].payments[4].received,result[0].payments[5].received,result[0].payments[6].received,result[0].payments[7].received,result[0].payments[8].received,
+                            result[0].payments[9].received,result[0].payments[10].received,result[0].payments[11].received,]
+                        },
+                        {
+                            label: "Business Analysis : $"+total1,
+                            backgroundColor: "#28A3EF",
+                            borderWidth: 1,
+                            data: [result[1].payments[0].received,result[1].payments[1].received,result[1].payments[2].received,result[1].payments[3].received,
+                            result[1].payments[4].received,result[1].payments[5].received,result[1].payments[6].received,result[1].payments[7].received,result[1].payments[8].received,
+                            result[1].payments[9].received,result[1].payments[10].received,result[1].payments[11].received,]
+                        },
+                        {
+                            label: "Manage Financials : $"+total2,
+                            backgroundColor: "#FF5B79",
+                            borderWidth: 1,
+                            data: [result[2].payments[0].received,result[2].payments[1].received,result[2].payments[2].received,result[2].payments[3].received,
+                            result[2].payments[4].received,result[2].payments[5].received,result[2].payments[6].received,result[2].payments[7].received,result[2].payments[8].received,
+                            result[2].payments[9].received,result[2].payments[10].received,result[2].payments[11].received,]
+                        }
+                    ]
+                };
+
+                var chartOptions = {
+                    responsive: true,
+                    legend: {
+                        position: "top"
+                    },
+                    title: {
+                        display: true,
+                        text: "Chart.js Bar Chart"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+
+                //window.onload = function() {
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myBar = new Chart(ctx, {
+                        type: "bar",
+                        data: barChartData,
+                        options: chartOptions
+                    });
+                //};
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
+        //Getting The Payment Ratios
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/payments/ratioreports/" + fTime + "/" + sTime,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                //console.log("Hi"+result.length);
+                document.getElementById("fullRatio").innerHTML = "No of full payment received: " + result.fullPayments;
+                document.getElementById("partRatio").innerHTML = "No of part payment received: " + result.partPayments;
             },
             error: function(result){
                 console.log("Error"+result.statusText);
@@ -371,284 +576,132 @@
         })
     })();
 
-    //Lead Creation
-    function addLead(){
-        //Calling the API -
+    //Method to display chart from input
+    function courseChart(){
+        var e = document.getElementById("exampleFormControlSelect1");
+        currCourse = e.value;
         $.ajax({
-            type: "POST",
+            type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "/leads/add",
+            url: url + "/payments/coursereports/" + currCourse,
             contentType: "application/json",
             dataType: 'json',
-            data: JSON.stringify({
-                fname : document.getElementById("fname").value,
-                lname : document.getElementById("lname").value,
-                email : document.getElementById("email").value
-            }),
             success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                    .then(() => {
-                        location.reload();
-                    });
+                console.log("Hi"+result.length);
+                courseReport = result;
+                document.getElementById("courseTP").innerHTML = "$" + result.received;
+                document.getElementById("courseTU").innerHTML = "$" + result.unpaid;
+                var disc = 0;
+                if(result.discount != null) disc = result.discount;
+                document.getElementById("courseTD").innerHTML = "$" + disc;
+
+                // And for a doughnut chart
+                var ctx = document.getElementById("myChart2").getContext('2d');
+
+                Chart.defaults.global.defaultFontFamily = "Rubik";
+                Chart.defaults.global.defaultFontSize = 11;
+            
+                console.log("Find "+courseReport.received);
+                if(courseReport.discount != null) tt = courseReport.discount;
+                var myDoughnutChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ["Payments", "Discount", "Unpaid Balances",],
+                        datasets: [{
+                            backgroundColor: [
+                                "#45DAB6",
+                                "#28A3EF",
+                                "#FF5B79",
+                            ],
+                            data: [result.received, result.unpaid, disc]
+                        }]
+                    }
+                });
             },
             error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
+                console.log("Error"+result.statusText);
+            }
+        })
+    }
+
+    //Method to display month chart from input
+    function monthChart(){
+        var e = document.getElementById("exampleFormControlSelect");
+        currMonth = e.value;
+        var date = new Date();
+        var date1 = new Date();
+        var fTime = new Date(date.getFullYear(), currMonth - 1, 1).getTime();
+        var sTime = new Date(date1.getFullYear(), currMonth, 0).getTime();
+        console.log("Timestamp "+fTime);
+        console.log("Timestamps "+sTime);
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/payments/monthreports/" + fTime + "/" + sTime,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+JSON.stringify(result));
+                monthReport = result;
+                document.getElementById("monthTP").innerHTML = "$" + result.received;
+                document.getElementById("monthTU").innerHTML = "$" + result.unpaid;
+                var disc = 0;
+                if(result.discount != null) disc = result.discount;
+                document.getElementById("monthTD").innerHTML = "$" + disc;
+
+                // And for a doughnut chart
+                var ctx1 = document.getElementById("myChart").getContext('2d');
+
+                Chart.defaults.global.defaultFontFamily = "Rubik";
+                Chart.defaults.global.defaultFontSize = 11;
+
+                var myDoughnutChart = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ["Payments", "Discount", "Unpaid Balances",],
+                        datasets: [{
+                            backgroundColor: [
+                                "#45DAB6",
+                                "#28A3EF",
+                                "#FF5B79",
+                            ],
+                            data: [result.received, result.unpaid, disc]
+                        }]
+                    }
                 });
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
             }
         })
 
-    }
-
-    //Lead Update
-    function editLead(){
-        //Calling the API -
+        //Getting The Payment Ratios
         $.ajax({
-            type: "POST",
+            type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "/leads/update",
+            url: url + "/payments/ratioreports/" + fTime + "/" + sTime,
             contentType: "application/json",
             dataType: 'json',
-            data: JSON.stringify({
-                fname : document.getElementById("efname").value,
-                lname : document.getElementById("elname").value,
-                email : document.getElementById("eemail").value,
-                id : selectedLead.id,
-                createdTime : selectedLead.createdTime,
-                noOfReminders : selectedLead.noOfReminders,
-                lastReminderTime : selectedLead.lastReminderTime,
-                noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-                lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-                status : selectedLead.status
-            }),
             success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                    .then(() => {
-                        location.reload();
-                    });
+                //console.log("Hi"+result.length);
+                document.getElementById("fullRatio").innerHTML = "No of full payment received: " + result.fullPayments;
+                document.getElementById("partRatio").innerHTML = "No of part payment received: " + result.partPayments;
             },
             error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
+                console.log("Error"+result.statusText);
             }
         })
-
     }
-
-    //Function to search table
-    function search(){
-        var input = document.getElementById("q");
-        var filter = input.value.toUpperCase();
-        jsonData = [];
-        for(var i = 0; i < leads.length; i++){
-            var name = leads[i].fname + " " + leads[i].lname;
-            if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
-                jsonData.push(leads[i]);
-            }
-        }
-        changePage(1);
-    }
-
-    function prevPage(){
-        if (current_page > 1) {
-            current_page--;
-            changePage(current_page);
-        }
-    }
-    function nextPage(){
-        if (current_page < numPages()) {
-            current_page++;
-            changePage(current_page);
-        }
-    }
-    function changePage(page){
-        var btn_next = document.getElementById("btn_next");
-        var btn_prev = document.getElementById("btn_prev");
-        var listing_table = document.getElementById("fi");
-        var page_span = document.getElementById("page");
-
-        // Validate page
-        if (page < 1) page = 1;
-        if (page > numPages()) page = numPages();
-
-        listing_table.innerHTML = "";
-
-        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
-        var total = page * records_per_page;
-        if(jsonData.length < (page * records_per_page)){
-            total = jsonData.length;
-        }
-        for (let i = (page-1) * records_per_page; i < total; i++) {
-            let j = i;
-            //console.log("mexid "+exams[i].id);
-            var name = jsonData[i].fname + " " + jsonData[i].lname;
-            var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
-            listing_table.innerHTML += oneRecord;
-        }
-        listing_table.innerHTML += '</tbody>';
-        page_span.innerHTML = page;
-
-        if (page == 1) {
-            btn_prev.style.visibility = "hidden";
-        } else {
-            btn_prev.style.visibility = "visible";
-        }
-
-        if (page == numPages()) {
-            btn_next.style.visibility = "hidden";
-        } else {
-            btn_next.style.visibility = "visible";
-        }
-    }
-
-    function numPages(){
-        return Math.ceil(jsonData.length / records_per_page);
-    }
-
-    //Function to handle the transition of selected lead
-    function kclick(x){
-        //console.log("My "+jsonData[x]);
-        var alead = jsonData[x];
-        selectedLead = jsonData[x];
-        //console.log("Ch "+jsonData[x].email);
-        document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-        document.getElementById("efname").value = alead.fname;
-        document.getElementById("elname").value = alead.lname;
-        document.getElementById("eemail").value = alead.email;
-    }
-</script>
-
-<script>
-    // And for a doughnut chart
-    var ctx = document.getElementById("myChart").getContext('2d');
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 11;
-
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Payments", "Discount", "Unpaid Balances",],
-            datasets: [{
-                backgroundColor: [
-                    "#45DAB6",
-                    "#28A3EF",
-                    "#FF5B79",
-                ],
-                data: [12, 28, 7]
-            }]
-        }
-    });
-</script>
-
-<script>
-    // And for a doughnut chart
-    var ctx = document.getElementById("myChart2").getContext('2d');
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 11;
-
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Payments", "Discount", "Unpaid Balances",],
-            datasets: [{
-                backgroundColor: [
-                    "#45DAB6",
-                    "#28A3EF",
-                    "#FF5B79",
-                ],
-                data: [12, 28, 7]
-            }]
-        }
-    });
-</script>
-
-<script>
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 12;
-
-    var barChartData = {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "July",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-        ],
-        datasets: [
-
-            {
-                label: "Project Management : $30,000",
-                backgroundColor: "#45DAB6",
-                borderWidth: 1,
-                data: [8,7,4,6,6,8,3,7,7,7,7,8]
-            },
-            {
-                label: "Business Analysis : $20,000",
-                backgroundColor: "#28A3EF",
-                borderWidth: 1,
-                data: [6,9,7,3,3,4,4,6,4,6,4,6,]
-            }
-        ]
-    };
-
-    var chartOptions = {
-        responsive: true,
-        legend: {
-            position: "top"
-        },
-        title: {
-            display: true,
-            text: "Chart.js Bar Chart"
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-
-    window.onload = function() {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myBar = new Chart(ctx, {
-            type: "bar",
-            data: barChartData,
-            options: chartOptions
-        });
-    };
+    
 </script>
 
 </body>

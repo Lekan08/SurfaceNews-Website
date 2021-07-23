@@ -147,7 +147,7 @@
                                     <i class="fas fa-filter card-icon-purple"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h3>100</h3>
+                                    <h3 id="totalGenerated"></h3>
                                     <p>Total No Of Lead Generated</p>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
                                     <i class="fas fa-filter card-icon-green"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h3>75</h3>
+                                    <h3 id="totalConverted"></h3>
                                     <p>Total No Of Lead Converted</p>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                     <i class="fas fa-filter card-icon-red"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h3>15</h3>
+                                    <h3 id="totalDisqualified"></h3>
                                     <p>Total No Of Lead Disqualified</p>
                                 </div>
                             </div>
@@ -213,47 +213,16 @@
 
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-3">
-                            <form class="navbar-form" role="search">
+                            <!--form class="navbar-form" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search"
-                                           style="font-size: 14px">
+                                    <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
                                 </div>
-                            </form>
+                            </form-->
                         </div>
                     </div>
                     <div class="user">
-                        <table class="table profile-table">
-                            <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>No of Lead generated</th>
-                                <th>No of lead Converted</th>
-                                <th>No of lead disqualified</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>January</td>
-                                <td>20</td>
-                                <td>18</td>
-                                <td>2</td>
-
-                            </tr>
-                            <tr>
-                                <td>February</td>
-                                <td>15</td>
-                                <td>10</td>
-                                <td>5</td>
-
-                            </tr>
-                            <tr>
-                                <td>March</td>
-                                <td>12</td>
-                                <td>8</td>
-                                <td>4</td>
-
-                            </tr>
-                            </tbody>
+                        <table class="table profile-table" id="fi">
+                            
                         </table>
                         <div class="pagination">
                             <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
@@ -267,70 +236,6 @@
 
 
 
-        </div>
-    </div>
-</div>
-
-<!--Edit Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Payment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label>Course<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-                            <option value="">-Select Course-</option>
-                            <option value="">Business Analysis</option>
-                            <option value="">Project management</option>
-                            <option value="">Managing Project Financials</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label>Payment Type<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-                            <option value="">-Select payment type-</option>
-                            <option value="">Part Payment</option>
-                            <option value="">Full Payment</option>
-                            <!--              <option value="">Managing Project Financials</option>-->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Coupon Code<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Coupon Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Tax<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
-            </div>
         </div>
     </div>
 </div>
@@ -357,12 +262,12 @@
     var leads = [];
     var jsonData = [];
     var current_page = 1;
-    var records_per_page = 20;
-    var selectedLead = {};
+    var records_per_page = 6;
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     //ON-READY FUNCTION
     (function() {
-        if(sessionStorage.getItem("lg") != 1){
+        /*if(sessionStorage.getItem("lg") != 1){
             location.href = "login.html";
         }
         if(sessionStorage.getItem("user") != null){
@@ -370,20 +275,113 @@
             
             document.getElementById("profilename").innerHTML = user.email;
             //document.getElementById("oladeEmail").innerHTML = user.email;
-        }
-        //Calling the Leads List API
-        var status = 0;
+        }*/
+        //Calling the Leads Report API
+        var year = 2021;
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "/leads/gets/" + status,
+            url: url + "/users/leadreports/" + year,
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
                 console.log("Hi"+result.length);
+                //Setting the cards
+
+                //Setting the graph
+                Chart.defaults.global.defaultFontFamily = "Rubik";
+                Chart.defaults.global.defaultFontSize = 12;
+
+                var barChartData = {
+                    labels: [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "July",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                    ],
+                    datasets: [
+                        {
+                            label: "Lead Generated",
+                            backgroundColor: "#28A3EF",
+                            borderWidth: 1,
+                            barThickness: 18,
+                            maxBarThickness: 18,
+                            data: [result[0].generated, result[1].generated, result[2].generated, result[3].generated,result[4].generated, result[5].generated, result[6].generated, 
+                            result[7].generated, result[8].generated, result[9].generated, result[10].generated, result[11].generated,]
+                        },
+
+                        {
+                            label: "Lead Converted",
+                            backgroundColor: "#45DAB6",
+                            borderWidth: 1,
+                            barThickness: 18,
+                            maxBarThickness: 18,
+                            data: [result[0].converted, result[1].converted, result[2].converted, result[3].converted,result[4].converted, result[5].converted, result[6].converted, 
+                            result[7].converted, result[8].converted, result[9].converted, result[10].converted, result[11].converted,]
+                        },
+                        {
+                            label: "Lead Disqualified",
+                            backgroundColor: "#FF5B79",
+                            borderWidth: 1,
+                            barThickness: 18,
+                            maxBarThickness: 18,
+                            data: [result[0].disqualified, result[1].disqualified, result[2].disqualified, result[3].disqualified,result[4].disqualified, result[5].disqualified, result[6].disqualified, 
+                            result[7].disqualified, result[8].disqualified, result[9].disqualified, result[10].disqualified, result[11].disqualified,]
+                        }
+                    ]
+                };
+
+                var chartOptions = {
+                    responsive: true,
+                    legend: {
+                        position: "top"
+                    },
+                    title: {
+                        display: true,
+                        text: "Chart.js Bar Chart"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myBar = new Chart(ctx, {
+                    type: "bar",
+                    data: barChartData,
+                    options: chartOptions
+                });
+
+                var total = 0;
+                total = result[0].generated + result[1].generated + result[2].generated + result[3].generated + result[4].generated + result[5].generated + result[6].generated + 
+                            result[7].generated + result[8].generated + result[9].generated + result[10].generated + result[11].generated;
+                document.getElementById("totalGenerated").innerHTML = total;
+
+                var total1 = 0;
+                total1 = result[0].converted + result[1].converted + result[2].converted + result[3].converted + result[4].converted + result[5].converted + result[6].converted + 
+                            result[7].converted + result[8].converted + result[9].converted + result[10].converted + result[11].converted;
+                document.getElementById("totalConverted").innerHTML = total1;
+
+                var total2 = 0;
+                total2 = result[0].disqualified + result[1].disqualified + result[2].disqualified + result[3].disqualified + result[4].disqualified + result[5].disqualified + result[6].disqualified + 
+                            result[7].disqualified + result[8].disqualified + result[9].disqualified + result[10].disqualified + result[11].disqualified;
+                document.getElementById("totalDisqualified").innerHTML = total2;
+
                 leads = result;
                 jsonData = result;
                 changePage(1);
@@ -398,102 +396,23 @@
         })
     })();
 
-    //Lead Creation
-    function addLead(){
-        //Calling the API -
-        $.ajax({
-            type: "POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            },
-            url: url + "/leads/add",
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify({
-                fname : document.getElementById("fname").value,
-                lname : document.getElementById("lname").value,
-                email : document.getElementById("email").value
-            }),
-            success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                    .then(() => {
-                        location.reload();
-                    });
-            },
-            error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
-            }
-        })
-
-    }
-
-    //Lead Update
-    function editLead(){
-        //Calling the API -
-        $.ajax({
-            type: "POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            },
-            url: url + "/leads/update",
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify({
-                fname : document.getElementById("efname").value,
-                lname : document.getElementById("elname").value,
-                email : document.getElementById("eemail").value,
-                id : selectedLead.id,
-                createdTime : selectedLead.createdTime,
-                noOfReminders : selectedLead.noOfReminders,
-                lastReminderTime : selectedLead.lastReminderTime,
-                noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-                lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-                status : selectedLead.status
-            }),
-            success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                    .then(() => {
-                        location.reload();
-                    });
-            },
-            error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
-            }
-        })
-
-    }
-
     //Function to search table
-    function search(){
+    /*function search(){
         var input = document.getElementById("q");
         var filter = input.value.toUpperCase();
         jsonData = [];
         for(var i = 0; i < leads.length; i++){
-            var name = leads[i].fname + " " + leads[i].lname;
-            if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
+            var month = months[i];
+            var generated = "" + leads[i].generated;
+            var converted = "" + leads[i].converted;
+            var disqualified = "" + leads[i].disqualified;
+            if(month.toUpperCase().indexOf(filter) > -1 || generated.toUpperCase().indexOf(filter) > -1 || converted.toUpperCase().indexOf(filter) > -1 
+                    || disqualified.toUpperCase().indexOf(filter) > -1){
                 jsonData.push(leads[i]);
             }
         }
         changePage(1);
-    }
+    }*/
 
     function prevPage(){
         if (current_page > 1) {
@@ -519,7 +438,7 @@
 
         listing_table.innerHTML = "";
 
-        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
+        listing_table.innerHTML += '<thead><tr><th>Month</th><th>No of Lead generated</th><th>No of lead Converted</th><th>No of lead disqualified</th></tr></thead><tbody>';
         var total = page * records_per_page;
         if(jsonData.length < (page * records_per_page)){
             total = jsonData.length;
@@ -527,11 +446,8 @@
         for (let i = (page-1) * records_per_page; i < total; i++) {
             let j = i;
             //console.log("mexid "+exams[i].id);
-            var name = jsonData[i].fname + " " + jsonData[i].lname;
-            var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
+            var month = months[i];
+            var oneRecord = '<tr><td>' + month + '</td><td>' + jsonData[i].generated + '</td><td>' + jsonData[i].converted + '</td><td>' + jsonData[i].disqualified + '</td></tr>';
             listing_table.innerHTML += oneRecord;
         }
         listing_table.innerHTML += '</tbody>';
@@ -553,160 +469,6 @@
     function numPages(){
         return Math.ceil(jsonData.length / records_per_page);
     }
-
-    //Function to handle the transition of selected lead
-    function kclick(x){
-        //console.log("My "+jsonData[x]);
-        var alead = jsonData[x];
-        selectedLead = jsonData[x];
-        //console.log("Ch "+jsonData[x].email);
-        document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-        document.getElementById("efname").value = alead.fname;
-        document.getElementById("elname").value = alead.lname;
-        document.getElementById("eemail").value = alead.email;
-    }
-
-    //Sending Emails To Lead
-    function sendMails(leadID, type){
-        //Calling the API -
-        $.ajax({
-            type: "GET",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            },
-            url: url + "/leads/messaging/" + leadID + "/" + type,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                .then(() => {
-                    location.reload();
-                });
-            },
-            error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
-            }
-        })
-    }
-</script>
-
-<!--<script>-->
-
-<!--  /* bar chart */-->
-<!--  var chBar = document.getElementById("chBar");-->
-<!--  if (chBar) {-->
-<!--    new Chart(chBar, {-->
-<!--      type: 'bar',-->
-<!--      data: {-->
-<!--        labels: ["S", "M", "T", "W", "T", "F", "S"],-->
-<!--        datasets: [{-->
-<!--          data: [589, 445, 483, 503, 689, 692, 634],-->
-<!--          backgroundColor: colors[0]-->
-<!--        },-->
-<!--          {-->
-<!--            data: [639, 465, 493, 478, 589, 632, 674],-->
-<!--            backgroundColor: colors[1]-->
-<!--          }]-->
-<!--      },-->
-<!--      options: {-->
-<!--        legend: {-->
-<!--          display: false-->
-<!--        },-->
-<!--        scales: {-->
-<!--          xAxes: [{-->
-<!--            barPercentage: 0.4,-->
-<!--            categoryPercentage: 0.5-->
-<!--          }]-->
-<!--        }-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
-
-<script>
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 12;
-
-    var barChartData = {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "July",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-        ],
-        datasets: [
-            {
-                label: "Lead Generated",
-                backgroundColor: "#28A3EF",
-                borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [10, 8, 10, 8,10, 8, 9, 9, 9, 9, 9, 9,]
-            },
-
-            {
-                label: "Lead Converted",
-                backgroundColor: "#45DAB6",
-                borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [8,7,4,6,6,5,3,7,7,7,7,8]
-            },
-            {
-                label: "Lead Disqualified",
-                backgroundColor: "#FF5B79",
-                borderWidth: 1,
-                barThickness: 18,
-                maxBarThickness: 18,
-                data: [6,4,7,3,3,3,4,6,4,6,4,6,]
-            }
-        ]
-    };
-
-    var chartOptions = {
-        responsive: true,
-        legend: {
-            position: "top"
-        },
-        title: {
-            display: true,
-            text: "Chart.js Bar Chart"
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-
-    window.onload = function() {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myBar = new Chart(ctx, {
-            type: "bar",
-            data: barChartData,
-            options: chartOptions
-        });
-    };
 </script>
 
 
