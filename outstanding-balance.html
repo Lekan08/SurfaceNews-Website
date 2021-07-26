@@ -245,25 +245,20 @@
       </div>
       <div class="modal-body">
         <div class="form-group row">
-          <div class="col-xs-6">
+          <div class="col-xs-12">
             <label>Course<font color="red">*</font></label>
             <input class="form-control"  style="font-size: 14px"  id="course" disabled>
           </div>
         </div>
+        
         <div class="form-group row">
-          <div class="col-xs-6">
-            <label>Coupon Code (if any)</label>
-            <input class="form-control"  style="font-size: 14px" id="couponCode">
+          <div class="col-md-6">
+            <label>Amount<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="payingAmount" onkeyup="calcTaxAmount();">
           </div>
-        </div>
-        <div class="form-group row">
           <div class="col-md-6">
             <label>Tax<font color="red">*</font></label>
             <input class="form-control"  style="font-size: 14px" id="taxAmount" disabled>
-          </div>
-          <div class="col-md-6">
-            <label>Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" id="amount" disabled>
           </div>
         </div>
 
@@ -272,9 +267,16 @@
             <label>Total Amount<font color="red">*</font></label>
             <input class="form-control"  style="font-size: 14px" id="totalAmount" disabled>
           </div>
+          <div class="col-xs-6">
+            <label>Coupon Code (if any)</label>
+            <input class="form-control"  style="font-size: 14px" id="couponCode">
+          </div>
+        </div>
+
+        <div class="form-group row">
           <div id="hone" class="col-md-6">
             <label>Paying Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" id="payingAmount" onkeyup="calcTaxAmount();">
+            <input class="form-control"  style="font-size: 14px" id="amount" disabled>
           </div>
         </div>
 
@@ -364,7 +366,7 @@
         beforeSend: function(request) {
           request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         },
-        url: url + "/bonus/validate/" + vcoupon + "/" + currBal,
+        url: url + "/bonus/validate/" + vcoupon + "/" + currBal + "/" + aCourse,
         contentType: "application/json",
         dataType: 'json',
         success: function(result){

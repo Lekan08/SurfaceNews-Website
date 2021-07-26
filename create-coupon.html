@@ -19,6 +19,8 @@
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
+  <!-- Select2 CSS --> 
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
   <title>Create Coupon</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
@@ -268,7 +270,7 @@
         <div class="form-group row">
           <div class="col-xs-6">
             <label>Type<font color="red">*</font></label>
-            <select class="form-control" id="createType" style="font-size: 14px" onchange="displayProduct();">
+            <select class="form-control" id="createType" style="font-size: 14px">
               <option value="">-Select Type</option>
               <option value="1">Coupon</option>
               <option value="2">Discount</option>
@@ -285,7 +287,7 @@
             </select>
           </div>
         </div>
-        <div class="form-group row" id="prod">
+        <div class="form-group row">
           <div class="col-xs-10">
             <label>Product Type<font color="red">*</font></label>
             <select class="form-control" id="productType" style="font-size: 14px">
@@ -370,6 +372,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<!-- Select2 JS --> 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 <script>
   //var url = "http://localhost:8080";
@@ -443,7 +447,7 @@
         var dropDown = document.getElementById("wordpressID");
         for(var i = 0; i < result.length; i++) {
           var el = document.createElement("option");
-          el.innerHTML = result[i].userLogin;
+          el.innerHTML = result[i].displayName + " " + result[i].userLogin;
           el.value = result[i].id;
           dropDown.appendChild(el);
         }
@@ -481,7 +485,9 @@
       }
     })
 
-    document.getElementById("prod").style.display = "none";
+    // Initialize select2
+    $("#candID").select2();
+    //document.getElementById("prod").style.display = "none";
     $(".hamburger").click(function(){
       $(".wrapper").toggleClass("active")
     })
@@ -502,11 +508,8 @@
     var ex = document.getElementById("exampleFormControlSelect");
     var amountType = ex.value;
     var amount = document.getElementById("amount").value;
-    var valueText = "";
-    if(productChecker == 1){
-      var pType = document.getElementById("productType");
-      var valueText = pType.value;
-    }
+    var pType = document.getElementById("productType");
+    var valueText = pType.value;
     if(isNaN(amount)){
       swal({
         title: "INVALID_AMOUNT",
@@ -791,7 +794,7 @@
   }
 
   //Show Products for Discount choice
-  function displayProduct(){
+  /*function displayProduct(){
     var e = document.getElementById("createType");
     var createType = e.value;
     if(createType == 2){
@@ -801,7 +804,7 @@
       document.getElementById("prod").style.display = "none";
       productChecker = 0;
     }
-  }
+  }*/
 </script>
 
 </body>
