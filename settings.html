@@ -258,7 +258,7 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <div class="col-xs-6">
-                        <label>Name<font color="red">*</font></label>
+                        <label>Course Name<font color="red">*</font></label>
                         <input type="text" class="form-control"
                                            style="font-size: 14px" id="cname">
                     </div>
@@ -503,8 +503,17 @@
         //console.log("My "+jsonData[x]);
         var aCourse = jsonData[x];
     
-        document.getElementById("cname").value = aCourse.name;
-        document.getElementById("cname").text = aCourse.name;
+        var qname = "";
+        if(aCourse.name == "PM"){
+            qname = "Project Management";
+        }else if(aCourse.name == "BA"){
+            qname = "Business Analysis";
+        }else {
+            qname = "Manage Financials";
+        }
+
+        document.getElementById("cname").value = qname;
+        document.getElementById("cname").text = qname;
         document.getElementById("cprice").value = aCourse.amount;
         document.getElementById("cprice").text = aCourse.amount;
         document.getElementById("cfinstall").value = aCourse.firstInstallment;

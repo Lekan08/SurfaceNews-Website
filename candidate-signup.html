@@ -486,7 +486,7 @@
 
                                     var dropDown = document.getElementById("paymentType");
                                     var el = document.createElement("option");
-                                    el.innerHTML = "Full Payment - " + courseAmount;
+                                    el.innerHTML = "Full Payment - $" + courseAmount;
                                     el.value = "1";
                                     el.selected = "selected";
                                     dropDown.appendChild(el);
@@ -576,7 +576,7 @@
                 //Preparing the Select List
                 var dropDown = document.getElementById("paymentType");
                 var el = document.createElement("option");
-                el.innerHTML = "Part Payment - " + installmentAmount;
+                el.innerHTML = "Part Payment - $" + installmentAmount;
                 el.value = "2";
                 dropDown.appendChild(el);
             },

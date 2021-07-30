@@ -165,6 +165,9 @@
               <a class="nav-link"  href="outstanding-balance.html">OUTSTANDING BALANCES</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link"  href="invoices.html">INVOICES</a>
+              </li>
+            <li class="nav-item">
               <a class="nav-link"  href="create-coupon.html">CREATE COUPON</a>
             </li>
             <li class="nav-item">
@@ -496,7 +499,7 @@
 
                 var dropDown = document.getElementById("paymentType");
                 var el = document.createElement("option");
-                el.innerHTML = "Full Payment - " + courseAmount;
+                el.innerHTML = "Full Payment - $" + courseAmount;
                 el.value = "1";
                 el.selected = "selected";
                 dropDown.appendChild(el);
@@ -532,7 +535,7 @@
                     installmentAmount = result[0].amount;
                     var dropDown1 = document.getElementById("paymentType");
                     var el1 = document.createElement("option");
-                    el1.innerHTML = "Part Payment - " + installmentAmount;
+                    el1.innerHTML = "Part Payment - $" + installmentAmount;
                     el1.value = "2";
                     dropDown1.appendChild(el1);
                   },
