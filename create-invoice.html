@@ -19,7 +19,7 @@
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-  <title>Receipt</title>
+  <title>Create Invoice</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -155,19 +155,19 @@
 
 
           <ul class="nav nav-tabs " role="tablist">
-            <li class="nav-item">
+            <li class="nav-item ">
               <a class="nav-link " href="manage-financials.html">ADD PAYMENT</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link"  href="reciept.html">RECEIPTS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link"  href="outstanding-balance.html">OUTSTANDING BALANCES</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"  href="invoices.html">INVOICES</a>
-              </li>
-            <li class="nav-item">
+              <a class="nav-link"  href="invoices.html">INVOICES</a>
+            </li>
+            <li class="nav-item  active">
               <a class="nav-link"  href="corporate-invoices.html">CREATE INVOICE</a>
             </li>
             <li class="nav-item">
@@ -187,47 +187,128 @@
 
       <div class="card mt-3 ">
         <div class="card-body">
+          <div class="mt-1 mb-5">
+            <h5>
+              Create Invoice
+            </h5>
+          </div>
+          <div class="container">
           <div class="row">
             <div class="col-sm-3 col-lg-3">
-              <!--div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
-                  <option value="">Student</option>
-                  <option value="">John Doe</option>
-                  <option value="">Jude Law</option>
-                  <option value="">Mary Doe</option>
-                </select>
-              </div-->
+              <label class="form-label">Company Name<font color="red">*</font></label>
+              <input type="text" class="form-control" id="wfname"
+                     placeholder="Enter company name">
             </div>
             <div class="col-sm-3 col-lg-3">
-              <!--div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
-                  <option value="">Program</option>
-                  <option value="Project Management Comprehensive">Project Management</option>
-                  <option value="Business Analysis Comprehensive">Business Analysis</option>
-                </select>
-              </div-->
+              <label class="form-label">Company Address<font color="red">*</font></label>
+              <input type="text" class="form-control" id="wemail"
+                     placeholder="Enter Address">
             </div>
             <div class="col-sm-3 col-lg-3">
-
+                <label class="form-label">Company Email Address<font color="red">*</font></label>
+                <input type="text" class="form-control" id=""
+                       placeholder="Enter email">
             </div>
             <div class="col-sm-3 col-lg-3 mb-3">
-              <form class="navbar-form" role="search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
-                </div>
-              </form>
+              <label class="form-label">Company Phone<font color="red">*</font></label>
+              <input type="text" class="form-control" id=""
+                     placeholder="Enter phone number">
             </div>
           </div>
-          <div class="user">
-            <table class="table profile-table" id="fi">
-              
-            </table>
-            <div class="pagination">
-              <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
-              <a class="active" href="#"><span id="page"></span></a>
-              <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+          </div>
+          <div class="container">
+
+            <div class="row">
+              <div class="col-md-12">
+                <br>
+                <button class="btn btn-pry float-end add-row mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp; Add new line item</button>
+              </div>
             </div>
 
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered" id="editableTable">
+                  <thead>
+                  <tr>
+                    <th>Course (Item Description)</th>
+                    <th>Price (CAD$)</th>
+                    <th>Quantity</th>
+                    <th>Total (CAD$)</th>
+                    <th>Edit</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr data-id="1">
+                    <td data-field="name">Business Analysis</td>
+                    <td data-field="price">CAD$ 1000</td>
+                    <td data-field="quantity">1</td>
+                    <td data-field="sex">CAD$ 1000</td>
+                    <td>
+                      <a class="button button-small edit" title="Edit">
+                        <i class="fa fa-edit"></i>
+                      </a>
+
+                      <a class="button button-small edit" title="Delete">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr data-id="2">
+                    <td data-field="name">Project Management</td>
+                    <td data-field="price">CAD$ 1000</td>
+                    <td data-field="quantity">2</td>
+                    <td data-field="sex">CAD$ 2000</td>
+                    <td>
+                      <a class="button button-small edit" title="Edit">
+                        <i class="fa fa-edit"></i>
+                      </a> <a class="button button-small edit" title="Delete">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                    </td>
+                  </tr>
+<!--                  <tr data-id="3">-->
+<!--                    <td data-field="name">Halyna Nadia</td>-->
+<!--                    <td data-field="birthday">May 25, 2015</td>-->
+<!--                    <td data-field="age">22</td>-->
+<!--                    <td data-field="sex">Female</td>-->
+<!--                    <td>-->
+<!--                      <a class="button button-small edit" title="Edit">-->
+<!--                        <i class="fa fa-pencil"></i>-->
+<!--                      </a> <a class="button button-small" title="Delete">-->
+<!--                      <i class="fa fa-trash"></i>-->
+<!--                    </a>-->
+<!--                    </td>-->
+<!--                  </tr>-->
+
+                  </tbody>
+                </table>
+                <table class="table-bordered float-end mb-5">
+                  <tbody>
+                <tr>
+                  <td colspan="3"></td>
+                  <td><b>SUB TOTAL</b></td>
+                  <td><b>CAD$ 15200</b></td>
+                </tr>
+                <tr>
+                  <td colspan="3"></td>
+                  <td><b>TAX HST 13%</b></td>
+                  <td><b>CAD$ 16200</b></td>
+                </tr>
+                <!--                <tr>-->
+                <!--                    <td colspan="3"></td>-->
+                <!--                    <td><b>DISCOUNT 3%</b></td>-->
+                <!--                    <td><b>16000</b></td>-->
+                <!--                </tr>-->
+                <tr style="color: #0099D5;">
+                  <td colspan="3"></td>
+                  <td><b>GRAND TOTAL (CAD$)</b></td>
+                  <td><b>CAD$ 28000</b></td>
+                </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -243,37 +324,37 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Share Receipt</h5>
+        <h5 class="modal-title">Share Invoice</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group row">
-            <div class="col-xs-12">
-                <label>To<font color="red">*</font></label>
-                <input class="form-control" id="to" placeholder="To" type="email" >
-            </div>
+          <div class="col-xs-12">
+            <label>To<font color="red">*</font></label>
+            <input class="form-control" id="to" placeholder="To" type="email" >
+          </div>
         </div>
         <div class="form-group row">
-            <div class="col-xs-12">
-                <label>Subject<font color="red">*</font></label>
-                <input class="form-control" placeholder="Subject" id="subject" type="text" >
-            </div>
+          <div class="col-xs-12">
+            <label>Subject<font color="red">*</font></label>
+            <input class="form-control" placeholder="Subject" id="subject" type="text" >
+          </div>
         </div>
         <div class="form-group row">
-            <div class="col-xs-12">
-                <label>Message <font color="red">*</font></label>
-                <textarea rows="4" id="message" class="form-control"></textarea>
-            </div>
+          <div class="col-xs-12">
+            <label>Message <font color="red">*</font></label>
+            <textarea rows="4" id="message" class="form-control"></textarea>
+          </div>
         </div>
-    </div>
-    <div class="modal-footer">
-      <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
+      </div>
+      <div class="modal-footer">
+        <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="share();">Send</button>
+      </div>
     </div>
-  </div>
   </div>
 </div>
 
@@ -294,7 +375,7 @@
   //var wordpressUrl = "http://localhost:8099";
   var url = "https://proinsight-reconservice.herokuapp.com";
   var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-  var receipts = [];
+  var invoices = [];
   var jsonData = [];
   var current_page = 1;
   var records_per_page = 20;
@@ -315,19 +396,19 @@
       sender = user.email;
       //document.getElementById("oladeEmail").innerHTML = user.email;
     }
-    //Calling the Receipts List API
+    //Calling the Invoices List API
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/receipts/gets",
+      url: url + "/payments/getinvoices",
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
         console.log("Hi"+result.length);
-        receipts = result;
+        invoices = result;
         jsonData = result;
         changePage(1);
       },
@@ -341,7 +422,7 @@
     })
   })();
 
-  //Share Receipt
+  //Share Invoice
   function share(){
     //Calling the API -
     $.ajax({
@@ -349,7 +430,7 @@
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/receipts/share",
+      url: url + "/payments/shareinvoice",
       contentType: "application/json",
       dataType: 'json',
       data: JSON.stringify({
@@ -365,9 +446,9 @@
           text: result['message'],
           icon: "success",
         })
-        .then(() => {
-          location.reload();
-        });
+                .then(() => {
+                  location.reload();
+                });
       },
       error: function(result){
         var json = $.parseJSON(result.responseText);
@@ -381,7 +462,7 @@
 
   }
 
-  //Download Reciept
+  //Download Invoice
   function download1(){
     //Calling the API -
     $.ajax({
@@ -389,7 +470,7 @@
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/receipts/download/" + rid,
+      url: url + "/payments/downloadinvoice/" + rid,
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
@@ -398,9 +479,9 @@
           text: result['message'],
           icon: "success",
         })
-        .then(() => {
-          location.reload();
-        });
+                .then(() => {
+                  location.reload();
+                });
       },
       error: function(result){
         var json = $.parseJSON(result.responseText);
@@ -419,12 +500,12 @@
     var input = document.getElementById("q");
     var filter = input.value.toUpperCase();
     jsonData = [];
-    for(var i = 0; i < receipts.length; i++){
-      var date = new Date(receipts[i].createdTime);
+    for(var i = 0; i < invoices.length; i++){
+      var date = new Date(invoices[i].createdTime);
       var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-      if(receipts[i].candidateName.toUpperCase().indexOf(filter) > -1 || receipts[i].program.toUpperCase().indexOf(filter) > -1 || receipts[i].name.toUpperCase().indexOf(filter) > -1
-          || createdDate.toUpperCase().indexOf(filter) > -1){
-        jsonData.push(receipts[i]);
+      if(invoices[i].candidateName.toUpperCase().indexOf(filter) > -1 || invoices[i].program.toUpperCase().indexOf(filter) > -1 || invoices[i].name.toUpperCase().indexOf(filter) > -1
+              || createdDate.toUpperCase().indexOf(filter) > -1){
+        jsonData.push(invoices[i]);
       }
     }
     changePage(1);
@@ -467,8 +548,8 @@
       var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
       var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + jsonData[i].program + '</td><td>' + jsonData[i].name + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Receipt</a> \
-                                <a class="dropdown-item" onclick="download1(\''+jsonData[i].id+'\', \'3\');">Download Receipt</a></div></div></td></tr>';
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Invoice</a> \
+                                <a class="dropdown-item" onclick="download1(\''+jsonData[i].id+'\', \'3\');">Download Invoice</a></div></div></td></tr>';
       listing_table.innerHTML += oneRecord;
     }
     listing_table.innerHTML += '</tbody>';
@@ -491,18 +572,258 @@
     return Math.ceil(jsonData.length / records_per_page);
   }
 
-  //Function to handle the transition of selected lead
+  //Function to handle the transition of selected invoice
   function kclick(x){
     //console.log("My "+jsonData[x]);
-    var aReceipt = jsonData[x];
-    console.log("Cand "+aReceipt.candidateEmail);
-    
-    document.getElementById("to").value = aReceipt.candidateEmail;
-    document.getElementById("to").text = aReceipt.candidateEmail;
-    document.getElementById("subject").value = "Olade Consulting - Payment Receipt";
-    document.getElementById("subject").text = "Olade Consulting - Payment Receipt";
-    rid = aReceipt.id;
+    var aInvoice = jsonData[x];
+    console.log("Cand "+aInvoice.candidateEmail);
+
+    document.getElementById("to").value = aInvoice.candidateEmail;
+    document.getElementById("to").text = aInvoice.candidateEmail;
+    document.getElementById("subject").value = "Olade Consulting - Payment Invoice";
+    document.getElementById("subject").text = "Olade Consulting - Payment Invoice";
+    rid = aInvoice.id;
   }
+</script>
+
+<!--Create Invoice-->
+<script>
+  (function($, window, document, undefined) {
+    var pluginName = "editable",
+            defaults = {
+              keyboard: true,
+              dblclick: true,
+              button: true,
+              buttonSelector: ".edit",
+              maintainWidth: true,
+              dropdowns: {},
+              edit: function() {},
+              save: function() {},
+              cancel: function() {}
+            };
+
+    function editable(element, options) {
+      this.element = element;
+      this.options = $.extend({}, defaults, options);
+
+      this._defaults = defaults;
+      this._name = pluginName;
+
+      this.init();
+    }
+
+    editable.prototype = {
+      init: function() {
+        this.editing = false;
+
+        if (this.options.dblclick) {
+          $(this.element)
+                  .css('cursor', 'pointer')
+                  .bind('dblclick', this.toggle.bind(this));
+        }
+
+        if (this.options.button) {
+          $(this.options.buttonSelector, this.element)
+                  .bind('click', this.toggle.bind(this));
+        }
+      },
+
+      toggle: function(e) {
+        e.preventDefault();
+
+        this.editing = !this.editing;
+
+        if (this.editing) {
+          this.edit();
+        } else {
+          this.save();
+        }
+      },
+
+      edit: function() {
+        var instance = this,
+                values = {};
+
+        $('td[data-field]', this.element).each(function() {
+          var input,
+                  field = $(this).data('field'),
+                  value = $(this).text(),
+                  width = $(this).width();
+
+          values[field] = value;
+
+          $(this).empty();
+
+          if (instance.options.maintainWidth) {
+            $(this).width(width);
+          }
+
+          if (field in instance.options.dropdowns) {
+            input = $('<select></select>');
+
+            for (var i = 0; i < instance.options.dropdowns[field].length; i++) {
+              $('<option></option>')
+                      .text(instance.options.dropdowns[field][i])
+                      .appendTo(input);
+            };
+
+            input.val(value)
+                    .data('old-value', value)
+                    .dblclick(instance._captureEvent);
+          } else {
+            input = $('<input type="text" />')
+                    .val(value)
+                    .data('old-value', value)
+                    .dblclick(instance._captureEvent);
+          }
+
+          input.appendTo(this);
+
+          if (instance.options.keyboard) {
+            input.keydown(instance._captureKey.bind(instance));
+          }
+        });
+
+        this.options.edit.bind(this.element)(values);
+      },
+
+      save: function() {
+        var instance = this,
+                values = {};
+
+        $('td[data-field]', this.element).each(function() {
+          var value = $(':input', this).val();
+
+          values[$(this).data('field')] = value;
+
+          $(this).empty()
+                  .text(value);
+        });
+
+        this.options.save.bind(this.element)(values);
+      },
+
+      cancel: function() {
+        var instance = this,
+                values = {};
+
+        $('td[data-field]', this.element).each(function() {
+          var value = $(':input', this).data('old-value');
+
+          values[$(this).data('field')] = value;
+
+          $(this).empty()
+                  .text(value);
+        });
+
+        this.options.cancel.bind(this.element)(values);
+      },
+
+      _captureEvent: function(e) {
+        e.stopPropagation();
+      },
+
+      _captureKey: function(e) {
+        if (e.which === 13) {
+          this.editing = false;
+          this.save();
+        } else if (e.which === 27) {
+          this.editing = false;
+          this.cancel();
+        }
+      }
+    };
+
+    $.fn[pluginName] = function(options) {
+      return this.each(function() {
+        if (!$.data(this, "plugin_" + pluginName)) {
+          $.data(this, "plugin_" + pluginName,
+                  new editable(this, options));
+        }
+      });
+    };
+
+  })(jQuery, window, document);
+
+  editTable();
+
+  //custome editable starts
+  function editTable(){
+
+    $(function() {
+      var pickers = {};
+
+      $('table tr').editable({
+        dropdowns: {
+          sex: ['Male', 'Female']
+        },
+        edit: function(values) {
+          $(".edit i", this)
+                  .removeClass('fa-pencil')
+                  .addClass('fa-save')
+                  .attr('title', 'Save');
+
+          pickers[this] = new Pikaday({
+            field: $("td[data-field=birthday] input", this)[0],
+            format: 'MMM D, YYYY'
+          });
+        },
+        save: function(values) {
+          $(".edit i", this)
+                  .removeClass('fa-save')
+                  .addClass('fa-pencil')
+                  .attr('title', 'Edit');
+
+          if (this in pickers) {
+            pickers[this].destroy();
+            delete pickers[this];
+          }
+        },
+        cancel: function(values) {
+          $(".edit i", this)
+                  .removeClass('fa-save')
+                  .addClass('fa-pencil')
+                  .attr('title', 'Edit');
+
+          if (this in pickers) {
+            pickers[this].destroy();
+            delete pickers[this];
+          }
+        }
+      });
+    });
+
+  }
+
+  $(".add-row").click(function(){
+    $("#editableTable").find("tbody tr:first").before("<tr><td data-field='name'></td><td data-field='name'></td><td data-field='name'></td><td data-field='name'></td><td><a class='button button-small edit' title='Edit'><i class='fa fa-pencil'></i></a> <a class='button button-small' title='Delete'><i class='fa fa-trash'></i></a></td></tr>");
+    editTable();
+    setTimeout(function(){
+      $("#editableTable").find("tbody tr:first td:last a[title='Edit']").click();
+    }, 200);
+
+    setTimeout(function(){
+      $("#editableTable").find("tbody tr:first td:first input[type='text']").focus();
+    }, 300);
+
+    $("#editableTable").find("a[title='Delete']").unbind('click').click(function(e){
+      $(this).closest("tr").remove();
+    });
+
+  });
+
+  function myFunction() {
+
+  }
+
+  $("#editableTable").find("a[title='Delete']").click(function(e){
+    var x;
+    if (confirm("Are you sure you want to delete entire row?") == true) {
+      $(this).closest("tr").remove();
+    } else {
+
+    }
+  });
 </script>
 
 </body>
