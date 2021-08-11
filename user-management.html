@@ -620,7 +620,8 @@
             if(prog == null){
                 prog = "";
             }
-            if(candidates[i].displayName.toUpperCase().indexOf(filter) > -1 || candidates[i].email.toUpperCase().indexOf(filter) > -1 || prog.toUpperCase().indexOf(filter) > -1 || candidates[i].enrollmentStatus.toUpperCase().indexOf(filter) > -1){
+            if(candidates[i].displayName.toUpperCase().indexOf(filter) > -1 || candidates[i].email.toUpperCase().indexOf(filter) > -1 || prog.toUpperCase().indexOf(filter) > -1 || candidates[i].enrollmentStatus.toUpperCase().indexOf(filter) > -1 
+                    || candidates[i].theDate.toUpperCase().indexOf(filter) > -1){
                 jsonData.push(candidates[i]);
             }
         }
@@ -651,7 +652,7 @@
   
         listing_table.innerHTML = "";
   
-        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Actions</b></td></tr>';
+        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Program</b></td><td><b>Enrollment Status</b></td><td><b>Date</b></td><td><b>Actions</b></td></tr>';
         var total = page * records_per_page;
         if(jsonData.length < (page * records_per_page)){
             total = jsonData.length;
@@ -681,17 +682,20 @@
             //console.log("mexid "+exams[i].id);
             var oneRecord = "";
             if(enrollmentStatus == "Lead"){
-                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>' + jsonData[i].theDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+i+'\');">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
                                 <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
             }else if(enrollmentStatus == "Awaiting Registration"){
-                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>' + jsonData[i].theDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
                                 <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'3\');">Resend Invite</a></div></div></td></tr>';
             }else{
-                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td class="options-ham-menu"> </td></tr>';
+                oneRecord = '<tr><td>' + jsonData[i].displayName + '</td><td>' + jsonData[i].email + '</td><td>' + prog + '</td><td>' + enrolLook + '</td><td>' + jsonData[i].theDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
+                                <a class="dropdown-item" href="#">Placeholder</a></div></div></td></tr>';
             } 
             listing_table.innerHTML += oneRecord;
         }

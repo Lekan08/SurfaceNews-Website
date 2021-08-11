@@ -144,7 +144,7 @@
 
                     <ul class="nav nav-tabs " role="tablist">
                         <li class="nav-item active">
-                            <a class="nav-link " href="manage-financials.html">FINANCIALS</a>
+                            <a class="nav-link " href="manage-financials.html">COURSE PRICE</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="reciept.html">LEAD MANAGEMENT</a>
@@ -169,19 +169,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h6 class="pb-2">
-                        Tax settings
-                    </h6>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <label class="form-label">Tax Value (in Percentage)</label>
-                            <input type="text" class="form-control" id="tax" style="font-size: 14px" >
-                            <div type="button" class="btn-sm btn-pry float-end mt-3" onclick="saveTax();">Save</div>
-                        </div>
-                    </div>
-                    <hr>
-
-                    <h6 class="pb-2">
-                      Course Price ($)
+                        Course Price ($)
                     </h6>
                     <div class="row">
                         <div class="col-lg-7">
@@ -194,29 +182,29 @@
                                         <option value="MP">Managing Project Financials</option>
                                     </select>
                                 </div>
-
+  
                                 <div class="mt-3">
                                     <label>Price<font color="red">*</font></label>
                                     <input type="number" class="form-control"
-                                           style="font-size: 14px" id="coursePrice">
+                                             style="font-size: 14px" id="coursePrice">
                                 </div>
-
+  
                                 <div class="mt-3">
                                     <label>1st Installment</label>
                                     <input type="number" class="form-control"
-                                           style="font-size: 14px" id="finstall">
+                                             style="font-size: 14px" id="finstall">
                                 </div>
                                 <div class="mt-3">
                                     <label>2nd Installment</label>
                                     <input type="number" class="form-control"
-                                           style="font-size: 14px" id="sinstall">
+                                             style="font-size: 14px" id="sinstall">
                                 </div>
                                 <div class="mt-3">
                                     <label>3rd Installment</label>
                                     <input type="number" class="form-control"
-                                           style="font-size: 14px" id="tinstall">
+                                             style="font-size: 14px" id="tinstall">
                                 </div>
-
+  
                                 <div class="">
                                     <div type="button" class="btn-sm btn-pry float-end mt-3" onclick="addCourse('1');">Save</div>
                                 </div>
@@ -224,18 +212,30 @@
                             <hr>
                             <div class="mt-7">
                                 <table class="table profile-table table-bordered " id="fi">
-                                    
+                                      
                                 </table>
-                                <!--div class="pagination">
-                                    <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
-                                    <a class="active" href="#"><span id="page"></span></a>
-                                    <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
-                                </div-->
+                                  <!--div class="pagination">
+                                      <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
+                                      <a class="active" href="#"><span id="page"></span></a>
+                                      <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+                                  </div-->
                             </div>
                         </div>
-                         <div class="col-lg-4 text-center">
-                             <img src="assets/images/course-price-illustration.svg" class="img-fluid ">
-                         </div>
+                        <div class="col-lg-4 text-center">
+                            <img src="assets/images/course-price-illustration.svg" class="img-fluid ">
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h6 class="pb-2">
+                        Tax settings
+                    </h6>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label class="form-label">Tax Value (in Percentage)</label>
+                            <input type="text" class="form-control" id="tax" style="font-size: 14px" >
+                            <div type="button" class="btn-sm btn-pry float-end mt-3" onclick="saveTax();">Save</div>
+                        </div>
                     </div>
                     <hr>
                 </div>

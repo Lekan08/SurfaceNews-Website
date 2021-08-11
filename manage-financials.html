@@ -279,7 +279,7 @@
         <div class="form-group row">
           <div class="col-xs-6">
             <label>Coupon Code (if any)</label>
-            <input class="form-control"  style="font-size: 14px" id="couponCode">
+            <input class="form-control"  style="font-size: 14px" id="couponCode" onkeyup="makePayment();">
           </div>
         </div>
 
@@ -293,7 +293,7 @@
       </div>
       <div class="modal-footer">
 <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary" onclick="makePayment();">Confirm</button>
+        <button type="button" class="btn btn-primary" onclick="addPayment();">Confirm</button>
       </div>
     </div>
   </div>
@@ -561,7 +561,7 @@
   function makePayment(){
     var vcoupon = document.getElementById("couponCode").value;
     console.log("amount "+courseAmount);
-    if(vcoupon != null && vcoupon != ""){
+    if(vcoupon != null && vcoupon != "" && vcoupon.length == 6){
       $.ajax({
         type: "GET",
         beforeSend: function(request) {
@@ -573,7 +573,7 @@
         success: function(result){
           discount = currBal - result['data'];
           currBal = result['data'];
-          addPayment();
+          //addPayment();
         },
         error: function(result){
           console.log(result.responseText);
@@ -586,7 +586,7 @@
         }
       })
     }else{
-      addPayment();
+      //addPayment();
     }
     
   }
