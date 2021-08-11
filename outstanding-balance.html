@@ -155,7 +155,7 @@
 
 
           <ul class="nav nav-tabs " role="tablist">
-            <li class="nav-item ">
+            <li class="nav-item">
               <a class="nav-link " href="manage-financials.html">ADD PAYMENT</a>
             </li>
             <li class="nav-item">
@@ -164,6 +164,9 @@
             <li class="nav-item active">
               <a class="nav-link"  href="outstanding-balance.html">OUTSTANDING BALANCES</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="invoices.html">INVOICES</a>
+              </li>
             <li class="nav-item">
               <a class="nav-link"  href="create-coupon.html">CREATE COUPON</a>
             </li>
@@ -245,25 +248,20 @@
       </div>
       <div class="modal-body">
         <div class="form-group row">
-          <div class="col-xs-6">
+          <div class="col-xs-12">
             <label>Course<font color="red">*</font></label>
             <input class="form-control"  style="font-size: 14px"  id="course" disabled>
           </div>
         </div>
+        
         <div class="form-group row">
-          <div class="col-xs-6">
-            <label>Coupon Code (if any)</label>
-            <input class="form-control"  style="font-size: 14px" id="couponCode">
+          <div class="col-md-6">
+            <label>Amount<font color="red">*</font></label>
+            <input class="form-control"  style="font-size: 14px" id="payingAmount" onkeyup="calcTaxAmount();">
           </div>
-        </div>
-        <div class="form-group row">
           <div class="col-md-6">
             <label>Tax<font color="red">*</font></label>
             <input class="form-control"  style="font-size: 14px" id="taxAmount" disabled>
-          </div>
-          <div class="col-md-6">
-            <label>Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" id="amount" disabled>
           </div>
         </div>
 
@@ -272,9 +270,16 @@
             <label>Total Amount<font color="red">*</font></label>
             <input class="form-control"  style="font-size: 14px" id="totalAmount" disabled>
           </div>
+          <div class="col-xs-6">
+            <label>Coupon Code (if any)</label>
+            <input class="form-control"  style="font-size: 14px" id="couponCode">
+          </div>
+        </div>
+
+        <div class="form-group row">
           <div id="hone" class="col-md-6">
             <label>Paying Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" id="payingAmount" onkeyup="calcTaxAmount();">
+            <input class="form-control"  style="font-size: 14px" id="amount" disabled>
           </div>
         </div>
 
@@ -364,7 +369,7 @@
         beforeSend: function(request) {
           request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         },
-        url: url + "/bonus/validate/" + vcoupon + "/" + currBal,
+        url: url + "/bonus/validate/" + vcoupon + "/" + currBal + "/" + aCourse,
         contentType: "application/json",
         dataType: 'json',
         success: function(result){
@@ -409,6 +414,39 @@
         discount : discount,
         candidateEmail : payer.candidateEmail
       }),
+      success: function(result){
+        console.log(result.statusText);
+        swal({
+          title: result['status'],
+          text: result['message'],
+          icon: "success",
+        })
+        .then(() => {
+          location.reload();
+        });
+      },
+      error: function(result){
+        console.log(result.responseText);
+        var json = $.parseJSON(result.responseText);
+        swal({
+          title: json.status,
+          text: json.message,
+          icon: "error",
+        });
+      }
+    })
+  }
+
+  //Method To Create Invoice
+  function createInvoice(value){
+    $.ajax({
+      type: "POST",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+      },
+      url: url + "/payments/createinvoice/" + value,
+      contentType: "application/json",
+      dataType: 'json',
       success: function(result){
         console.log(result.statusText);
         swal({
@@ -530,7 +568,7 @@
       var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + course + '</td><td>' + balance + '</td><td>' + look + '</td><td>' + myDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
                                 <div class="dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item" style="cursor: pointer;font-size: 14px;white-space: inherit">Send Payment Due to reminder</a>\
-                                <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">Create Invoice</a>\
+                                <a class="dropdown-item" style="cursor: pointer;font-size: 14px" onclick="kclick(\''+jsonData[i].paymentID+'\');">Create Invoice</a>\
                                 <a class="dropdown-item" style="cursor: pointer;font-size: 14px" data-toggle="modal" data-target="#exampleModal">Add Payment</a>\
                                 <a class="dropdown-item" style="cursor: pointer;font-size: 14px" href="#">Download Invoice</a></div></div></td></tr>';
       listing_table.innerHTML += oneRecord;
