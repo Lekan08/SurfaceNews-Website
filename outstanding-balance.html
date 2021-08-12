@@ -375,7 +375,11 @@
         success: function(result){
           discount = currBal - result['data'];
           currBal = result['data'];
+          document.getElementById("payingAmount").value = currBal;
+          document.getElementById("payingAmount").text = currBal;
           //addPayment();
+          calcTaxAmount();
+          document.getElementById("couponCode").disabled = true;
         },
         error: function(result){
           console.log(result.responseText);
