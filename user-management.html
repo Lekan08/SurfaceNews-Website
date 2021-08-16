@@ -368,10 +368,10 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    //var url = "http://localhost:8080";
-    //var wordpressUrl = "http://localhost:8099";
-    var url = "https://proinsight-reconservice.herokuapp.com";
-    var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    var url = "http://localhost:8080";
+    var wordpressUrl = "http://localhost:8099";
+    //var url = "https://proinsight-reconservice.herokuapp.com";
+    //var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     var candidates = [];
     var jsonData = [];
     var current_page = 1;
@@ -620,8 +620,7 @@
             if(prog == null){
                 prog = "";
             }
-            if(candidates[i].displayName.toUpperCase().indexOf(filter) > -1 || candidates[i].email.toUpperCase().indexOf(filter) > -1 || prog.toUpperCase().indexOf(filter) > -1 || candidates[i].enrollmentStatus.toUpperCase().indexOf(filter) > -1 
-                    || candidates[i].theDate.toUpperCase().indexOf(filter) > -1){
+            if(candidates[i].displayName.toUpperCase().indexOf(filter) > -1 || candidates[i].email.toUpperCase().indexOf(filter) > -1 || prog.toUpperCase().indexOf(filter) > -1 || candidates[i].enrollmentStatus.toUpperCase().indexOf(filter) > -1){
                 jsonData.push(candidates[i]);
             }
         }
