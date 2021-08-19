@@ -130,6 +130,12 @@
                             <span class="list">Community</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="settings.html">
+                            <span class="icon"><i class="fas fa-cog"></i></span>
+                            <span class="list">Settings</span>
+                        </a>
+                    </li>
 <!--                    <li>-->
 <!--                        <a href="#">-->
 <!--                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>-->
@@ -159,8 +165,8 @@
                             <div class="form-group">
 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                                 <select class="form-control" id="type" style="font-size: 14px" onchange="selectType();">
-                                    <option value="1">Candidate/Students</option>
-                                    <option value="2" selected>Admin</option>
+                                    <option value="1" selected>Candidate/Students</option>
+                                    <option value="2">Admin</option>
 <!--                                        <option>Send Registration link</option>-->
 <!--                                        <option>Push reminder to potential students</option>-->
 <!--                                        <option>4</option>-->
@@ -368,10 +374,10 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    var url = "http://localhost:8080";
-    var wordpressUrl = "http://localhost:8099";
-    //var url = "https://proinsight-reconservice.herokuapp.com";
-    //var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    //var url = "http://localhost:8080";
+    //var wordpressUrl = "http://localhost:8099";
+    var url = "https://proinsight-reconservice.herokuapp.com";
+    var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     var candidates = [];
     var jsonData = [];
     var current_page = 1;
