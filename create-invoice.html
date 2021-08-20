@@ -129,6 +129,12 @@
               <span class="list">Community</span>
             </a>
           </li>
+          <li>
+            <a href="settings.html">
+              <span class="icon"><i class="fas fa-cog"></i></span>
+              <span class="list">Settings</span>
+            </a>
+          </li>
           <!--                    <li>-->
           <!--                        <a href="#">-->
           <!--                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>-->
@@ -196,22 +202,22 @@
           <div class="row">
             <div class="col-sm-3 col-lg-3">
               <label class="form-label">Company Name<font color="red">*</font></label>
-              <input type="text" class="form-control" id="wfname"
+              <input type="text" class="form-control" id="cname"
                      placeholder="Enter company name">
             </div>
             <div class="col-sm-3 col-lg-3">
               <label class="form-label">Company Address<font color="red">*</font></label>
-              <input type="text" class="form-control" id="wemail"
+              <input type="text" class="form-control" id="caddr"
                      placeholder="Enter Address">
             </div>
             <div class="col-sm-3 col-lg-3">
                 <label class="form-label">Company Email Address<font color="red">*</font></label>
-                <input type="text" class="form-control" id=""
+                <input type="text" class="form-control" id="cemail"
                        placeholder="Enter email">
             </div>
             <div class="col-sm-3 col-lg-3 mb-3">
               <label class="form-label">Company Phone<font color="red">*</font></label>
-              <input type="text" class="form-control" id=""
+              <input type="text" class="form-control" id="cpno"
                      placeholder="Enter phone number">
             </div>
           </div>
@@ -287,12 +293,12 @@
                 <tr>
                   <td colspan="3"></td>
                   <td><b>SUB TOTAL</b></td>
-                  <td><b>CAD$ 15200</b></td>
+                  <td><b>CAD$ <span id="subtotal"></span></b></td>
                 </tr>
                 <tr>
                   <td colspan="3"></td>
-                  <td><b>TAX HST 13%</b></td>
-                  <td><b>CAD$ 16200</b></td>
+                  <td><b>HST 13%</b></td>
+                  <td><b>CAD$ <span id="tax"></span></b></td>
                 </tr>
                 <!--                <tr>-->
                 <!--                    <td colspan="3"></td>-->
@@ -302,12 +308,14 @@
                 <tr style="color: #0099D5;">
                   <td colspan="3"></td>
                   <td><b>GRAND TOTAL (CAD$)</b></td>
-                  <td><b>CAD$ 28000</b></td>
+                  <td><b>CAD$ <span id="total"></span></b></td>
                 </tr>
                   </tbody>
                 </table>
 
               </div>
+              <div class="col-md-11"></div>
+              <div class="col-md-1"><button type="button" class="btn btn-pry" onclick="createInvoice();">SAVE</button></div>
             </div>
           </div>
         </div>
@@ -315,45 +323,6 @@
 
 
 
-    </div>
-  </div>
-</div>
-
-<!--Edit Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Share Invoice</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group row">
-          <div class="col-xs-12">
-            <label>To<font color="red">*</font></label>
-            <input class="form-control" id="to" placeholder="To" type="email" >
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-xs-12">
-            <label>Subject<font color="red">*</font></label>
-            <input class="form-control" placeholder="Subject" id="subject" type="text" >
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-xs-12">
-            <label>Message <font color="red">*</font></label>
-            <textarea rows="4" id="message" class="form-control"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="share();">Send</button>
-      </div>
     </div>
   </div>
 </div>
@@ -371,18 +340,11 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-  //var url = "http://localhost:8080";
+  var url = "http://localhost:8080";
   //var wordpressUrl = "http://localhost:8099";
-  var url = "https://proinsight-reconservice.herokuapp.com";
+  //var url = "https://proinsight-reconservice.herokuapp.com";
   var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-  var invoices = [];
-  var jsonData = [];
-  var current_page = 1;
-  var records_per_page = 20;
-  var rid = "";
-  var sender = "";
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
+  
   //ON-READY FUNCTION
   (function() {
     if(sessionStorage.getItem("lg") != 1){
@@ -396,34 +358,47 @@
       sender = user.email;
       //document.getElementById("oladeEmail").innerHTML = user.email;
     }
-    //Calling the Invoices List API
-    $.ajax({
-      type: "GET",
-      beforeSend: function(request) {
-        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-        request.setRequestHeader("Access-Control-Allow-Origin", "*");
-      },
-      url: url + "/payments/getinvoices",
-      contentType: "application/json",
-      dataType: 'json',
-      success: function(result){
-        console.log("Hi"+result.length);
-        invoices = result;
-        jsonData = result;
-        changePage(1);
-      },
-      error: function(result){
-        console.log("Error"+result.statusText);
-      }
-    })
+
+    //Set Values
+    document.getElementById("subtotal").innerHTML = "0.00";
+    document.getElementById("tax").innerHTML = "0.00";
+    document.getElementById("total").innerHTML = "0.00";
 
     $(".hamburger").click(function(){
       $(".wrapper").toggleClass("active")
     })
   })();
 
-  //Share Invoice
-  function share(){
+  //Create Invoice
+  function createInvoice(){
+    var items = [];
+    var count = $('#editableTable tr').length;
+    console.log("Table Length "+count);
+    for(var i = 1; i < count; i++){
+      var item = {
+        name : document.getElementById("editableTable").rows[i].cells[0].innerHTML,
+        quantity : document.getElementById("editableTable").rows[i].cells[1].text,
+        unitPrice : document.getElementById("editableTable").rows[i].cells[2].innerHTML
+      }
+
+      items.push(item);
+      
+    }
+
+    var invoice = {
+        name : document.getElementById("cname").value,
+        address : document.getElementById("caddr").value,
+        email : document.getElementById("cemail").value,
+        pno : document.getElementById("cpno").value
+      }
+
+    var payload = JSON.stringify({
+        'invoice' : invoice,
+        'items' : items
+      });
+
+    console.log("Data "+payload);
+
     //Calling the API -
     $.ajax({
       type: "POST",
