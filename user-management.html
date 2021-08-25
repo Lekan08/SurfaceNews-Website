@@ -395,35 +395,7 @@
             document.getElementById("profilename").innerHTML = user.email;
             //document.getElementById("oladeEmail").innerHTML = user.email;
         }
-        document.getElementById("tCandidate").style.display = "none";
-        //Calling the Wordpress Admin List API
-        var key = "wp_capabilities";
-        var value = "subscriber";
-        $.ajax({
-            type: "GET",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-                request.setRequestHeader("Access-Control-Allow-Origin", "*");
-            },
-            url: wordpressUrl + "/wpusers/getNot/" + key + "/" + value,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function(result){
-                console.log("Hi"+result.length);
-                //Preparing the Select List
-                var dropDown = document.getElementById("wordpressID");
-                for(var i = 0; i < result.length; i++) {
-                    var el = document.createElement("option");
-                    el.innerHTML = result[i].userLogin;
-                    el.value = result[i].id;
-                    dropDown.appendChild(el);
-                }
-            },
-            error: function(result){
-                console.log("Error"+result.statusText);
-            }
-        })
-
+        document.getElementById("tAdmin").style.display = "none";
         //Calling the Candidates List API
         var e = document.getElementById("exampleFormControlSelect3");
         var enrol = e.value;
@@ -452,9 +424,37 @@
             }
         })
 
+        //Calling the Wordpress Admin List API
+        var key = "wp_capabilities";
+        var value = "subscriber";
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: wordpressUrl + "/wpusers/getNot/" + key + "/" + value,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log("Hi"+result.length);
+                //Preparing the Select List
+                var dropDown = document.getElementById("wordpressID");
+                for(var i = 0; i < result.length; i++) {
+                    var el = document.createElement("option");
+                    el.innerHTML = result[i].userLogin;
+                    el.value = result[i].id;
+                    dropDown.appendChild(el);
+                }
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
         $(".hamburger").click(function(){
-        $(".wrapper").toggleClass("active")
-    })
+            $(".wrapper").toggleClass("active")
+        })
     })();
 
     //On-Change Invite Type
