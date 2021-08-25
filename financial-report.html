@@ -186,13 +186,13 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="card mt-3 ">
+                    <div class="card mt-3 " style="height: 424px">
                         <div class="card-body">
                             <h6 class="pb-2" style="font-size: 14px">
                                 2021 Year to date financial breakdown
                             </h6>
                             <div class="row mt-3">
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="border-right: 1px #c4c4c4 solid">
                                     <div class="form-group">
                                         <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                                         <select class="form-control" id="exampleFormControlSelect1" style="font-size: 13px" onchange="courseChart();">
@@ -201,29 +201,32 @@
                                             <option value="MP">Manage Financials</option>
                                         </select>
                                     </div>
-                                    <div class="card card-green">
-                                        <div class="p-3">
-                                            <div class=" text-white">
-                                                <h5 id="courseTP"></h5>
-                                                <p>Total Payments received</p>
+                                    <div class=" ">
+                                        <div class="p-2 d-flex">
+                                            <span class="card card-green" style="width: 13px;height: 13px"></span>
+                                            <div class="ml-1">
+                                                <h6 id="courseTP"></h6>
+                                                <p style="font-size: 13px">Total Payments received</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="card card-red mt-3">
-                                        <div class="p-3">
-                                            <div class=" text-white">
-                                                <h5 id="courseTU"></h5>
-                                                <p>Total Unpaid balances</p>
+                                    <div class=" ">
+                                        <div class="p-2 d-flex">
+                                            <span class="card card-red" style="width: 13px;height: 13px"></span>
+                                            <div class="ml-1">
+                                                <h6 id="courseTU"></h6>
+                                                <p style="font-size: 13px">Total Unpaid balances</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="card card-blue mt-3">
-                                        <div class="p-3">
-                                            <div class=" text-white">
-                                                <h5 id="courseTD"></h5>
-                                                <p>Total discount offered</p>
+                                    <div class="">
+                                        <div class="p-2 d-flex">
+                                            <span class="card card-blue" style="width: 13px;height: 13px"></span>
+                                            <div class="ml-1">
+                                                <h6 id="courseTD"></h6>
+                                                <p style="font-size: 13px">Total discount offered</p>
                                             </div>
                                         </div>
                                     </div>
@@ -244,7 +247,7 @@
                              Summary Of Financial breakdown per month
                             </h6>
                             <div class="row mt-3">
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="border-right: 1px #c4c4c4 solid">
                                     <div class="form-group">
                                         <select class="form-control" id="exampleFormControlSelect" style="font-size: 13px" onchange="monthChart();">
                                             <option value="1" selected="selected">January</option>
@@ -261,29 +264,32 @@
                                             <option value="12">December</option>
                                         </select>
                                     </div>
-                                    <div class="card card-green">
-                                        <div class="p-3">
-                                                <div class=" text-white">
-                                                    <h5 id="monthTP"></h5>
-                                                    <p>Total Payments received</p>
+                                    <div class=" ">
+                                        <div class="d-flex p-2">
+                                            <span class="card card-green" style="width: 13px;height: 13px"></span>
+                                                <div class="ml-1">
+                                                    <h6 id="monthTP"></h6>
+                                                    <p style="font-size: 13px">Total Payments received</p>
                                                 </div>
                                         </div>
                                     </div>
 
-                                    <div class="card card-red mt-3">
-                                        <div class="p-3">
-                                                <div class=" text-white">
-                                                    <h5 id="monthTU"></h5>
-                                                    <p>Total Unpaid balances</p>
+                                    <div class=" ">
+                                        <div class="d-flex p-2">
+                                            <span class="card card-red" style="width: 13px;height: 13px"></span>
+                                                <div class="ml-1">
+                                                    <h6 id="monthTU"></h6>
+                                                    <p style="font-size: 13px">Total Unpaid balances</p>
                                                 </div>
                                         </div>
                                     </div>
 
-                                    <div class="card card-blue mt-3">
-                                        <div class="p-3">
-                                                <div class=" text-white">
-                                                    <h5 id="monthTD"></h5>
-                                                    <p>Total discount offered</p>
+                                    <div class="">
+                                        <div class="d-flex p-2">
+                                            <span class="card card-blue" style="width: 13px;height: 13px"></span>
+                                                <div class="ml-1">
+                                                    <h6 id="monthTD"></h6>
+                                                    <p style="font-size: 13px">Total discount offered</p>
                                                 </div>
                                         </div>
                                     </div>
@@ -291,7 +297,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <canvas id="myChart" width="900" height="900"></canvas>
-                                    <div class="text-primary m-3" style="font-size: 13px;">
+                                    <div class=" m-3" style="font-size: 13px;">
                                         <p id="fullRatio"></p>
                                         <p id="partRatio"></p>
                                     </div>
