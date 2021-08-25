@@ -227,7 +227,7 @@
             <div class="row">
               <div class="col-md-12">
                 <br>
-                <button class="btn btn-pry float-end add-row mb-3"><i class="fa fa-plus"></i>&nbsp;&nbsp; Add new line item</button>
+                <button id="adder" class="btn btn-pry float-end add-row mb-3" onclick="addRow();"><i class="fa fa-plus"></i>&nbsp;&nbsp; Add new line item</button>
               </div>
             </div>
 
@@ -243,23 +243,30 @@
                     <th>Edit</th>
                   </tr>
                   </thead>
-                  <tbody>
-                  <tr data-id="1">
-                    <td data-field="name">Business Analysis</td>
-                    <td data-field="price">CAD$ 1000</td>
-                    <td data-field="quantity">1</td>
-                    <td data-field="sex">CAD$ 1000</td>
+                  <tbody id="fi">
+                  <tr>
                     <td>
-                      <a class="button button-small edit" title="Edit">
+                      <select class="form-control" id="course" style="font-size: 14px" onchange="fetchPrice(1)">
+                        <option value="">--Select Course--</option>
+                        <option value="PM">Project Management</option>
+                        <option value="BA">Business Analysis</option>
+                        <option value="MP">Manage Financials</option>
+                      </select>
+                    </td>
+                    <td id="price"></td>
+                    <td><input type="number" class="form-control" id="quantity"  style="font-size: 14px" onchange="calTotal(1);" ></td>
+                    <td id="total"></td>
+                    <td id="action">
+                      <!--a class="button button-small edit" title="Edit">
                         <i class="fa fa-edit"></i>
-                      </a>
+                      </a-->
 
-                      <a class="button button-small edit" title="Delete">
+                      <a class="button button-small edit" title="Delete" onclick="deleteRow(1);">
                         <i class="fa fa-trash"></i>
                       </a>
                     </td>
                   </tr>
-                  <tr data-id="2">
+                  <!--tr data-id="2">
                     <td data-field="name">Project Management</td>
                     <td data-field="price">CAD$ 1000</td>
                     <td data-field="quantity">2</td>
@@ -271,21 +278,7 @@
                       <i class="fa fa-trash"></i>
                     </a>
                     </td>
-                  </tr>
-<!--                  <tr data-id="3">-->
-<!--                    <td data-field="name">Halyna Nadia</td>-->
-<!--                    <td data-field="birthday">May 25, 2015</td>-->
-<!--                    <td data-field="age">22</td>-->
-<!--                    <td data-field="sex">Female</td>-->
-<!--                    <td>-->
-<!--                      <a class="button button-small edit" title="Edit">-->
-<!--                        <i class="fa fa-pencil"></i>-->
-<!--                      </a> <a class="button button-small" title="Delete">-->
-<!--                      <i class="fa fa-trash"></i>-->
-<!--                    </a>-->
-<!--                    </td>-->
-<!--                  </tr>-->
-
+                  </tr-->
                   </tbody>
                 </table>
                 <table class="table-bordered float-end mb-5">
@@ -308,7 +301,7 @@
                 <tr style="color: #0099D5;">
                   <td colspan="3"></td>
                   <td><b>GRAND TOTAL (CAD$)</b></td>
-                  <td><b>CAD$ <span id="total"></span></b></td>
+                  <td><b>CAD$ <span id="gtotal"></span></b></td>
                 </tr>
                   </tbody>
                 </table>
@@ -340,10 +333,12 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-  var url = "http://localhost:8080";
+  //var url = "http://localhost:8080";
   //var wordpressUrl = "http://localhost:8099";
-  //var url = "https://proinsight-reconservice.herokuapp.com";
+  var url = "https://proinsight-reconservice.herokuapp.com";
   var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+  var counter = 1;
+  var tax = 0;
   
   //ON-READY FUNCTION
   (function() {
@@ -362,7 +357,27 @@
     //Set Values
     document.getElementById("subtotal").innerHTML = "0.00";
     document.getElementById("tax").innerHTML = "0.00";
-    document.getElementById("total").innerHTML = "0.00";
+    document.getElementById("gtotal").innerHTML = "0.00";
+
+    //Get tax
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+      },
+      url: url + "/tax/get",
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        if(result.value != null){
+          console.log("Get Tax1"+result.value);
+          tax = result.value;
+        }
+      },
+      error: function(result){
+        console.log(result.responseText);
+      }
+    })
 
     $(".hamburger").click(function(){
       $(".wrapper").toggleClass("active")
@@ -372,17 +387,18 @@
   //Create Invoice
   function createInvoice(){
     var items = [];
-    var count = $('#editableTable tr').length;
-    console.log("Table Length "+count);
-    for(var i = 1; i < count; i++){
+    for(var i = 1; i <= counter; i++){
+      var index = "";
+      if(i > 1){
+        index = "" + i;
+      }
       var item = {
-        name : document.getElementById("editableTable").rows[i].cells[0].innerHTML,
-        quantity : document.getElementById("editableTable").rows[i].cells[1].text,
-        unitPrice : document.getElementById("editableTable").rows[i].cells[2].innerHTML
+        name : document.getElementById("course" + index).value,
+        quantity : document.getElementById("quantity" + index).value,
+        unitPrice : document.getElementById("price" + index).value
       }
 
       items.push(item);
-      
     }
 
     var invoice = {
@@ -405,25 +421,19 @@
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/payments/shareinvoice",
+      url: url + "/corporateinvoices/add",
       contentType: "application/json",
       dataType: 'json',
-      data: JSON.stringify({
-        documentID : rid,
-        to : document.getElementById("to").value,
-        subject : document.getElementById("subject").value,
-        message : document.getElementById("message").value,
-        senderID : sender
-      }),
+      data: payload,
       success: function(result){
         swal({
           title: result['status'],
           text: result['message'],
           icon: "success",
         })
-                .then(() => {
-                  location.reload();
-                });
+        .then(() => {
+          location.reload();
+        });
       },
       error: function(result){
         var json = $.parseJSON(result.responseText);
@@ -437,132 +447,95 @@
 
   }
 
-  //Download Invoice
-  function download1(){
-    //Calling the API -
+  //Adding Row to table
+  function addRow(){
+    console.log("Wawu");
+    //jQuery('button.btn btn-pry float-end add-row mb-3').click(function(event){
+      event.preventDefault();
+      counter++;
+      console.log("Wawaaaa");
+      var newRow = jQuery('<tr><td><select class="form-control" id="course' + 
+        counter + '" style="font-size: 14px" onchange="fetchPrice(' + 
+        counter + ');"><option value="">--Select Course--</option><option value="PM">Project Management</option><option value="BA">Business Analysis</option><option value="MP">Manage Financials</option></select></td><td id="price' + 
+        counter + '"></td><td><input type="number" class="form-control" id="quantity' + 
+        counter + '" onchange="calTotal(' + counter + ');" style="font-size: 14px" /></td><td id="total' +
+        counter + '"></td><td id="action' + 
+        counter + '"><a class="button button-small edit" title="Delete" onclick="deleteRow('+counter+');"><i class="fa fa-trash"></i></a></td></tr>');
+
+      jQuery('#fi').append(newRow);
+    //});
+  }
+
+  function fetchPrice(value){
+    var course = "";
+    if(value == 1){
+      var e = document.getElementById("course");
+      course = e.value;
+    }else{
+      var e = document.getElementById("course"+value);
+      course = e.value;
+    }
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/payments/downloadinvoice/" + rid,
+      url: url + "/courseprice/get/" + course,
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
-        swal({
-          title: result['status'],
-          text: result['message'],
-          icon: "success",
-        })
-                .then(() => {
-                  location.reload();
-                });
+        if(result.price != null){
+          console.log("Get Course Price1"+result.price);
+          if(value == 1) document.getElementById("price").innerHTML = result.price;
+          else document.getElementById("price"+value).innerHTML = result.price;
+        }
       },
       error: function(result){
-        var json = $.parseJSON(result.responseText);
-        swal({
-          title: json.status,
-          text: json.message,
-          icon: "error",
-        });
+        console.log(result.responseText);
       }
     })
-
   }
 
-  //Function to search table
-  function search(){
-    var input = document.getElementById("q");
-    var filter = input.value.toUpperCase();
-    jsonData = [];
-    for(var i = 0; i < invoices.length; i++){
-      var date = new Date(invoices[i].createdTime);
-      var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-      if(invoices[i].candidateName.toUpperCase().indexOf(filter) > -1 || invoices[i].program.toUpperCase().indexOf(filter) > -1 || invoices[i].name.toUpperCase().indexOf(filter) > -1
-              || createdDate.toUpperCase().indexOf(filter) > -1){
-        jsonData.push(invoices[i]);
+  function calTotal(value){
+    var price = 0;
+    var quantity = 0;
+    if(value == 1){
+      price = document.getElementById("price").innerHTML;
+      quantity = document.getElementById("quantity").value;
+      document.getElementById("total").innerHTML = price * quantity;
+    }else{
+      price = document.getElementById("price"+value).innerHTML;
+      quantity = document.getElementById("quantity"+value).value;
+      document.getElementById("total"+value).innerHTML = price * quantity;
+    }
+
+    calGrandTotal();
+  }
+
+  function calGrandTotal(){
+    var sum = 0;
+    for(var i = 1; i <= counter; i++){
+      var index = "";
+      if(i > 1){
+        index = "" + i;
       }
+      var amount = document.getElementById("total" + index).innerHTML * 1;
+      sum += amount;
     }
-    changePage(1);
+
+    document.getElementById("subtotal").innerHTML = sum;
+    var taxAmount = (tax * sum) / 100;
+    document.getElementById("tax").innerHTML = taxAmount;
+    document.getElementById("gtotal").innerHTML = sum + taxAmount;
   }
 
-  function prevPage(){
-    if (current_page > 1) {
-      current_page--;
-      changePage(current_page);
-    }
-  }
-  function nextPage(){
-    if (current_page < numPages()) {
-      current_page++;
-      changePage(current_page);
-    }
-  }
-  function changePage(page){
-    var btn_next = document.getElementById("btn_next");
-    var btn_prev = document.getElementById("btn_prev");
-    var listing_table = document.getElementById("fi");
-    var page_span = document.getElementById("page");
-
-    // Validate page
-    if (page < 1) page = 1;
-    if (page > numPages()) page = numPages();
-
-    listing_table.innerHTML = "";
-
-    listing_table.innerHTML += '<thead><tr><th>Student Name</th><th>Program</th><th>File</th><th>Date</th><th>Actions</th></tr></thead>';
-    listing_table.innerHTML += '<tbody>';
-    var total = page * records_per_page;
-    if(jsonData.length < (page * records_per_page)){
-      total = jsonData.length;
-    }
-    for (let i = (page-1) * records_per_page; i < total; i++) {
-      let j = i;
-      //console.log("mexid "+exams[i].id);
-      var date = new Date(jsonData[i].createdTime);
-      var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-      var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + jsonData[i].program + '</td><td>' + jsonData[i].name + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Invoice</a> \
-                                <a class="dropdown-item" onclick="download1(\''+jsonData[i].id+'\', \'3\');">Download Invoice</a></div></div></td></tr>';
-      listing_table.innerHTML += oneRecord;
-    }
-    listing_table.innerHTML += '</tbody>';
-    page_span.innerHTML = page;
-
-    if (page == 1) {
-      btn_prev.style.visibility = "hidden";
-    } else {
-      btn_prev.style.visibility = "visible";
-    }
-
-    if (page == numPages()) {
-      btn_next.style.visibility = "hidden";
-    } else {
-      btn_next.style.visibility = "visible";
-    }
-  }
-
-  function numPages(){
-    return Math.ceil(jsonData.length / records_per_page);
-  }
-
-  //Function to handle the transition of selected invoice
-  function kclick(x){
-    //console.log("My "+jsonData[x]);
-    var aInvoice = jsonData[x];
-    console.log("Cand "+aInvoice.candidateEmail);
-
-    document.getElementById("to").value = aInvoice.candidateEmail;
-    document.getElementById("to").text = aInvoice.candidateEmail;
-    document.getElementById("subject").value = "Olade Consulting - Payment Invoice";
-    document.getElementById("subject").text = "Olade Consulting - Payment Invoice";
-    rid = aInvoice.id;
+  function deleteRow(value){
+    document.getElementById("editableTable").deleteRow(value);
   }
 </script>
 
 <!--Create Invoice-->
-<script>
+<!--script>
   (function($, window, document, undefined) {
     var pluginName = "editable",
             defaults = {
@@ -799,7 +772,7 @@
 
     }
   });
-</script>
+</script-->
 
 </body>
 </html>

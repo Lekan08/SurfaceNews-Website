@@ -129,6 +129,12 @@
               <span class="list">Community</span>
             </a>
           </li>
+          <li>
+            <a href="settings.html">
+              <span class="icon"><i class="fas fa-cog"></i></span>
+              <span class="list">Settings</span>
+            </a>
+          </li>
           <!--                    <li>-->
           <!--                        <a href="#">-->
           <!--                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>-->
@@ -224,88 +230,8 @@
             </div>
           </div>
           <div class="user">
-            <table class="table profile-table">
-              <thead>
-              <tr>
-                <th>Company Name</th>
-                <th>Course</th>
-                <th>Quantity</th>
-                <th>Total Amount</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Olade Consulting</td>
-                <td>Project management</td>
-                <td>2</td>
-                <td>$2,000</td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions  dropdown-toggle" href="#" id="action-dropDown2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                      <a class="dropdown-item" href="#"
-                         style="cursor: pointer;font-size: 14px;">View</a>
-                      <a class="dropdown-item" href="#"
-                         style="cursor: pointer;font-size: 14px;">Send</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Olade Consulting</td>
-                <td>Project management</td>
-                <td>2</td>
-                <td>$2,000</td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                      <a class="dropdown-item" href="#"
-                         style="cursor: pointer;font-size: 14px;white-space: inherit">View</a>
-                      <a class="dropdown-item" href="#"
-                         style="cursor: pointer;font-size: 14px;">Send</a>
-
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Olade Consulting</td>
-                <td>Project management</td>
-                <td>2</td>
-                <td>$2,000</td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                      <a class="dropdown-item" href="#"
-                         style="cursor: pointer;font-size: 14px;white-space: inherit">View</a>
-                      <a class="dropdown-item" href="#"
-                         style="cursor: pointer;font-size: 14px;">Send</a>
-
-                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
+            <table class="table profile-table" id="fi">
+              
             </table>
             <div class="pagination">
               <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
@@ -323,7 +249,7 @@
   </div>
 </div>
 
-<!--Edit Modal-->
+<!-- Share Corporate Invoice-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -335,30 +261,30 @@
       </div>
       <div class="modal-body">
         <div class="form-group row">
-          <div class="col-xs-12">
-            <label>To<font color="red">*</font></label>
-            <input class="form-control" id="to" placeholder="To" type="email" >
-          </div>
+            <div class="col-xs-12">
+                <label>To<font color="red">*</font></label>
+                <input class="form-control" id="to" placeholder="To" type="email" >
+            </div>
         </div>
         <div class="form-group row">
-          <div class="col-xs-12">
-            <label>Subject<font color="red">*</font></label>
-            <input class="form-control" placeholder="Subject" id="subject" type="text" >
-          </div>
+            <div class="col-xs-12">
+                <label>Subject<font color="red">*</font></label>
+                <input class="form-control" placeholder="Subject" id="subject" type="text" >
+            </div>
         </div>
         <div class="form-group row">
-          <div class="col-xs-12">
-            <label>Message <font color="red">*</font></label>
-            <textarea rows="4" id="message" class="form-control"></textarea>
-          </div>
+            <div class="col-xs-12">
+                <label>Message <font color="red">*</font></label>
+                <textarea rows="4" id="message" class="form-control"></textarea>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
+    </div>
+    <div class="modal-footer">
+      <!--a href="C:/Users/OluwasegunAjayi/Downloads/resume.pdf">Download!</a-->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="share();">Send</button>
-      </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -383,9 +309,10 @@
   var jsonData = [];
   var current_page = 1;
   var records_per_page = 20;
-  var rid = "";
   var sender = "";
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var tax = 0;
+  var rid = "";
 
   //ON-READY FUNCTION
   (function() {
@@ -407,7 +334,7 @@
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/payments/getinvoices",
+      url: url + "/corporateinvoices/gets",
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
@@ -418,6 +345,26 @@
       },
       error: function(result){
         console.log("Error"+result.statusText);
+      }
+    })
+
+    //Get tax
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+      },
+      url: url + "/tax/get",
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        if(result.value != null){
+          console.log("Get Tax1"+result.value);
+          tax = result.value;
+        }
+      },
+      error: function(result){
+        console.log(result.responseText);
       }
     })
 
@@ -434,7 +381,7 @@
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/payments/shareinvoice",
+      url: url + "/corporateinvoices/share",
       contentType: "application/json",
       dataType: 'json',
       data: JSON.stringify({
@@ -450,42 +397,9 @@
           text: result['message'],
           icon: "success",
         })
-                .then(() => {
-                  location.reload();
-                });
-      },
-      error: function(result){
-        var json = $.parseJSON(result.responseText);
-        swal({
-          title: json.status,
-          text: json.message,
-          icon: "error",
+        .then(() => {
+          location.reload();
         });
-      }
-    })
-
-  }
-
-  //Download Invoice
-  function download1(){
-    //Calling the API -
-    $.ajax({
-      type: "GET",
-      beforeSend: function(request) {
-        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-      },
-      url: url + "/payments/downloadinvoice/" + rid,
-      contentType: "application/json",
-      dataType: 'json',
-      success: function(result){
-        swal({
-          title: result['status'],
-          text: result['message'],
-          icon: "success",
-        })
-                .then(() => {
-                  location.reload();
-                });
       },
       error: function(result){
         var json = $.parseJSON(result.responseText);
@@ -505,9 +419,9 @@
     var filter = input.value.toUpperCase();
     jsonData = [];
     for(var i = 0; i < invoices.length; i++){
-      var date = new Date(invoices[i].createdTime);
+      var date = new Date(invoices[i].invoice.createdTime);
       var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-      if(invoices[i].candidateName.toUpperCase().indexOf(filter) > -1 || invoices[i].program.toUpperCase().indexOf(filter) > -1 || invoices[i].name.toUpperCase().indexOf(filter) > -1
+      if(invoices[i].invoice.name.toUpperCase().indexOf(filter) > -1 || invoices[i].invoice.invoiceNo.toUpperCase().indexOf(filter) > -1 
               || createdDate.toUpperCase().indexOf(filter) > -1){
         jsonData.push(invoices[i]);
       }
@@ -539,7 +453,7 @@
 
     listing_table.innerHTML = "";
 
-    listing_table.innerHTML += '<thead><tr><th>Student Name</th><th>Program</th><th>File</th><th>Date</th><th>Actions</th></tr></thead>';
+    listing_table.innerHTML += '<thead><tr><th>Company Name</th><th>Invoice No</th><th>Total Quantity</th><th>Total Amount</th><th>Date</th><th>Actions</th></tr></thead>';
     listing_table.innerHTML += '<tbody>';
     var total = page * records_per_page;
     if(jsonData.length < (page * records_per_page)){
@@ -548,12 +462,21 @@
     for (let i = (page-1) * records_per_page; i < total; i++) {
       let j = i;
       //console.log("mexid "+exams[i].id);
-      var date = new Date(jsonData[i].createdTime);
+      var sum = 0;
+      var quantity = 0;
+      for(var x = 0; x < jsonData[i].items.length; x++){
+        quantity += jsonData[i].items[x].quantity;
+        var amount = jsonData[i].items[x].quantity * jsonData[i].items[x].unitPrice; 
+        sum += amount;
+      }
+      var taxAmount = (tax * sum) / 100;
+      var totalAmount = taxAmount + sum;
+      var date = new Date(jsonData[i].invoice.createdTime);
       var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-      var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + jsonData[i].program + '</td><td>' + jsonData[i].name + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
+      var oneRecord = '<tr><td>' + jsonData[i].invoice.name + '</td><td>' + jsonData[i].invoice.invoiceNo + '</td><td>' + quantity + '</td><td>' + totalAmount + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Send Invoice</a> \
-                                <a class="dropdown-item" onclick="download1(\''+jsonData[i].id+'\', \'3\');">Download Invoice</a></div></div></td></tr>';
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3"><a class="dropdown-item" href="create-invoice.html?id='+jsonData[i].invoice.invoiceNo+'" style="cursor: pointer;font-size: 14px;white-space: inherit">View</a><</div></div></td></tr>';
       listing_table.innerHTML += oneRecord;
     }
     listing_table.innerHTML += '</tbody>';
@@ -580,13 +503,13 @@
   function kclick(x){
     //console.log("My "+jsonData[x]);
     var aInvoice = jsonData[x];
-    console.log("Cand "+aInvoice.candidateEmail);
+    console.log("Cand "+aInvoice.invoice.email);
+    rid = aInvoice.invoice.invoiceNo;
 
-    document.getElementById("to").value = aInvoice.candidateEmail;
-    document.getElementById("to").text = aInvoice.candidateEmail;
+    document.getElementById("to").value = aInvoice.invoice.email;
+    document.getElementById("to").text = aInvoice.invoice.email;
     document.getElementById("subject").value = "Olade Consulting - Payment Invoice";
     document.getElementById("subject").text = "Olade Consulting - Payment Invoice";
-    rid = aInvoice.id;
   }
 </script>
 

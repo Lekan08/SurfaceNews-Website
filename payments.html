@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/olade-logo-blue.png">
+    <link rel="icon" type="image/png" href="assets/images/olade-logo-blue.png">
+    <!--    font-awesome-->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
+    <title>Online Payment</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="login-bg text-white">
+                <div class="pt-lg-5">
+                    <p class="">Find Bright, Diverse And
+                        <br>
+                        Innovative Tech Talent
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-8 m-auto">
+            <div class="container p-5">
+                <div class="float-end">
+                    <a href="" id="logo-container"><img src="assets/images/olade-logo-blue.png" width="70" alt=""></a>
+                </div>
+            </div>
+
+            <div class="login-form ">
+                    <h1>Student Payment</h1>
+                    <form id="withPay" class=" mt-4">
+                        <div class="mb-2 pt-4">
+                            <h5>Payment Details</h5><br>
+                            <h6 id="totalFee"></h6>
+                        </div>
+
+
+                        <div class="row" style="width: 75%">
+                            <hr style="width: 95%;">
+
+                            <div class="col-lg-6"  style="font-size: 14px">
+                                <p id="purchase"> </p>
+                            </div>
+                            <div class="col-lg-6" style="font-size: 14px">
+                                <!--input type="text" class="form-control" id="dCourseAmount"
+                                       style="font-size: 14px" disabled-->
+                                <p id="payingAmount"></p>
+                            </div>
+
+
+                            <div class="col-lg-6" style="font-size: 14px">
+                                <p>HST</p>
+                            </div>
+                            <div class="col-lg-6" style="font-size: 14px">
+                                <!--input type="text" class="form-control" id="dTaxAmount"
+                                       style="font-size: 14px" disabled-->
+                                <p id="dTaxAmount"></p>
+                            </div>
+
+                            <div class="col-lg-6" style="font-size: 14px">
+                                <p>Total Amount (CAD)</p>
+                            </div>
+                            <div class="col-lg-6" style="font-size: 14px">
+                                <p id="dTotalAmount"></p>
+                            </div>
+
+                            <hr style="width: 95%;">
+
+                            <div class="col-lg-6">
+
+                                <input type="text" class="form-control" id="vcoupon"
+                                       placeholder="Coupon Code" style="font-size: 14px">
+                            </div>
+                            <div class="col-lg-6">
+                                <button id="vco" type="button" class="btn pry-btn" onclick="validateCoupon();">APPLY</button>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="mb-2 pt-4">
+                            <h5>Card Details</h5>
+                        </div>
+
+                        <div class="mb-4 pr-5 pt-3 row">
+                            <div class="col-lg-7">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <label class="form-label">Card Number</label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="" id="cardNumber">
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Expiry Date (MM/YYYY)</label>
+                                                <input type="number" class="form-control"
+                                                       placeholder="MM/YYYY" id="expr">
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <label class="form-label">CVV</label>
+                                                <input type="text" class="form-control"
+                                                       placeholder="" id="cvv">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn mt-5 float-end pry-btn "
+                                                onclick="completeOnline();">PLACE ORDER
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    //var url = "http://localhost:8080";
+    //var wordpressUrl = "http://localhost:8099";
+    var url = "https://proinsight-reconservice.herokuapp.com";
+    var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const email = urlParams.get('email');
+    const course = urlParams.get('course');
+    var tax = 0;
+    var courseAmount = 0;
+    var minCourseAmount = 0;
+    var discount = 0;
+    var installmentAmount = 0;
+    var installDiscount = 0;
+
+    //ON-READY FUNCTION
+    (function() {
+        if(course == "PM"){
+            document.getElementById("purchase").innerHTML = "Project Management";
+        }else if(course == "BA"){
+            document.getElementById("purchase").innerHTML = "Business Analysis";
+        }else{
+            document.getElementById("purchase").innerHTML = "Manage Financials";
+        }
+        
+        if(course != null){
+            $.ajax({
+    	        type: "GET",
+       	        beforeSend: function(request) {
+       	            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	        },
+                url: url + "/tax/get",
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    if(result.value != null){
+                        console.log("Get Tax1"+result.value);
+                        tax = result.value;
+                        $.ajax({
+    	                    type: "GET",
+       	                    beforeSend: function(request) {
+       	                        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	                    },
+                            url: url + "/payments/getforcandidate/" + email + "/" + course,
+                            contentType: "application/json",
+                            dataType: 'json',
+                            success: function(result){
+                                if(result.price != null){
+                                    console.log("Get Course Price1"+result.balance);
+                                    courseAmount = result.balance;
+
+                                    var taxAmount = ((tax * courseAmount) / 100);
+                                    var totalAmount = courseAmount + taxAmount; 
+                                    document.getElementById("dTaxAmount").innerHTML = taxAmount;
+                                    document.getElementById("dTotalAmount").innerHTML = totalAmount;
+                                    document.getElementById("payingAmount").innerHTML = courseAmount;
+                                    var test = document.getElementById("dTaxAmount").innerHTML;
+                                    console.log("Test " + test);
+                                }
+                            },
+                            error: function(result){
+                                console.log(result.responseText);
+                            }
+                        })
+                    }
+                },
+                error: function(result){
+                    console.log(result.responseText);
+                }
+            })
+        
+        
+        }
+    })();
+
+    //Method to validate coupon
+    function validateCoupon(){
+        var vcoupon = document.getElementById("vcoupon").value;
+        //var payAmount = document.getElementById("payingAmount").value;
+        console.log("amount "+courseAmount);
+        $.ajax({
+    	    type: "GET",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: url + "/bonus/validate/" + vcoupon + "/" + courseAmount + "/" + course,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    discount = courseAmount - result['data'];
+
+                    courseAmount = result['data'];
+                    var taxAmount = ((tax * courseAmount) / 100);
+                    var totalAmount = courseAmount + taxAmount;
+                    document.getElementById("dTaxAmount").innerHTML = taxAmount;
+                    //document.getElementById("dTaxAmount").text = taxAmount;
+                    document.getElementById("dTotalAmount").innerHTML = totalAmount;
+                    document.getElementById("payingAmount").innerHTML = courseAmount;
+                    document.getElementById("vco").disabled = true;
+                });
+            },
+            error: function(result){
+                console.log(result.responseText);
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
+    }
+
+    //Method to complete online registration
+    function completeOnline(){
+        var pAmount = document.getElementById("payingAmount").innerHTML;
+        var expr = document.getElementById("expr").value;
+        var exprMonth = expr.substring(0, 2);
+        var exprYear = expr.substring(3, 7);
+        
+        var payment = JSON.stringify({
+            "cardNumber" : document.getElementById("cardNumber").value,
+            "cvc" : document.getElementById("cvv").value,
+            "expMonth" : exprMonth,
+            "expYear" : exprYear
+        });
+        $.ajax({
+    	    type: "POST",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: wordpressUrl + "/wpusers/pay",
+            contentType: "application/json",
+            dataType: 'json',
+            data: payment,
+            success: function(result){
+                swal({
+                    title: result['status'],
+                    text: result['message'],
+                    icon: "success",
+                })
+                .then(() => {
+                    addPayment();
+                });
+            },
+            error: function(result){
+                console.log(result.responseText);
+                var json = $.parseJSON(result.responseText);
+                swal({
+                    title: json.status,
+                    text: json.message,
+                    icon: "error",
+                });
+            }
+        })
+    }
+
+    //Method to add payment record 
+    function addPayment(){
+        var pAmount = document.getElementById("payingAmount").innerHTML;
+        $.ajax({
+    	    type: "POST",
+       	    beforeSend: function(request) {
+       	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+       	    },
+            url: url + "/payments/update",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                courseName : course,
+                taxAmount : document.getElementById("dTaxAmount").innerHTML,
+                totalAmount : document.getElementById("dTotalAmount").innerHTML,
+                paidAmount : pAmount,
+                discount : discount,
+                candidateEmail : email
+            }),
+            success: function(result){
+                console.log(result.statusText);
+                location.reload();
+            },
+            error: function(result){
+                console.log(result.responseText);
+            }
+        })
+    }
+
+</script>
+
+
+</body>
+</html>
