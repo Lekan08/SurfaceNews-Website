@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/table.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
     <title>Financial Report</title>
 </head>
@@ -249,21 +250,14 @@
                             <div class="row mt-3">
                                 <div class="col-md-6" style="border-right: 1px #c4c4c4 solid">
                                     <div class="form-group">
-                                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 13px" onchange="monthChart();">
-                                            <option value="1" selected="selected">January</option>
-                                            <option value="2">February</option>
-                                            <option value="3">March </option>
-                                            <option value="4">April</option>
-                                            <option value="5">May</option>
-                                            <option value="6">June</option>
-                                            <option value="7">July </option>
-                                            <option value="8">August</option>
-                                            <option value="9">September</option>
-                                            <option value="10">October</option>
-                                            <option value="11">November </option>
-                                            <option value="12">December</option>
-                                        </select>
+                                        <label class="control-label" for="sdate">Start Date</label>
+                                        <input class="form-control" id="sdate" name="sdate" placeholder="MM/DD/YYY" type="text"/>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="edate">End Date</label>
+                                        <input class="form-control" id="edate" name="edate" placeholder="MM/DD/YYY" type="text" onchange="monthChart();"/>
+                                    </div>
+                            
                                     <div class=" ">
                                         <div class="d-flex p-2">
                                             <span class="card card-green" style="width: 13px;height: 13px"></span>
@@ -332,10 +326,16 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
@@ -353,6 +353,17 @@
 
     //ON-READY FUNCTION
     (function() {
+        var sdate_input=$('input[name="sdate"]'); //our date input has the name "date"
+        var edate_input=$('input[name="edate"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        };
+        sdate_input.datepicker(options);
+        edate_input.datepicker(options);
         //Calling the Course Payment Report API
         var e = document.getElementById("exampleFormControlSelect1");
         currCourse = e.value;
@@ -403,14 +414,15 @@
         })
 
         //Calling the Month Payment Report API
-        var e = document.getElementById("exampleFormControlSelect");
-        currMonth = e.value;
-        var date = new Date();
-        var date1 = new Date();
-        var fTime = new Date(date.getFullYear(), currMonth - 1, 1).getTime();
-        var sTime = new Date(date1.getFullYear(), currMonth, 0).getTime();
-        console.log("Timestamp "+fTime);
-        console.log("Timestamps "+sTime);
+        var sDate = new Date("8/1/2021");
+        var eDate = new Date("8/30/2021");
+        document.getElementById("sdate").value = "8/1/2021";
+        document.getElementById("sdate").text = "8/1/2021";
+        document.getElementById("edate").value = "8/30/2021";
+        document.getElementById("edate").text = "8/30/2021";
+        console.log("Value "+sDate.getTime());
+        var fTime = sDate.getTime();
+        var sTime = eDate.getTime();
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
@@ -641,14 +653,19 @@
 
     //Method to display month chart from input
     function monthChart(){
-        var e = document.getElementById("exampleFormControlSelect");
+        var sDate = new Date(document.getElementById("sdate").value);
+        var eDate = new Date(document.getElementById("edate").value);
+        console.log("Value "+sDate.getTime());
+        var fTime = sDate.getTime();
+        var sTime = eDate.getTime();
+        /*var e = document.getElementById("exampleFormControlSelect");
         currMonth = e.value;
         var date = new Date();
         var date1 = new Date();
         var fTime = new Date(date.getFullYear(), currMonth - 1, 1).getTime();
         var sTime = new Date(date1.getFullYear(), currMonth, 0).getTime();
         console.log("Timestamp "+fTime);
-        console.log("Timestamps "+sTime);
+        console.log("Timestamps "+sTime);*/
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
