@@ -189,26 +189,26 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-3 col-lg-3">
-              <!--div class="form-group">
+              <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
                   <option value="">Student</option>
-                  <option value="">John Doe</option>
-                  <option value="">Jude Law</option>
-                  <option value="">Mary Doe</option>
                 </select>
-              </div-->
+              </div>
             </div>
             <div class="col-sm-3 col-lg-3">
-              <!--div class="form-group">
+              <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                   <option value="">Program</option>
-                  <option value="Project Management Comprehensive">Project Management</option>
-                  <option value="Business Analysis Comprehensive">Business Analysis</option>
+                  <option value="PM">Project Management</option>
+                  <option value="BA">Business Analysis</option>
+                  <option value="MP">Manage Financials</option>
                 </select>
-              </div-->
+              </div>
             </div>
             <div class="col-sm-3 col-lg-3">
-
+              <div class="form-group">
+                <button class="btn btn-pry" type="button" onclick="filter();">Filter</button>
+              </div>
             </div>
             <div class="col-sm-3 col-lg-3 mb-3">
               <form class="navbar-form" role="search">
@@ -316,13 +316,63 @@
       //document.getElementById("oladeEmail").innerHTML = user.email;
     }
     //Calling the Receipts List API
+    var e = document.getElementById("exampleFormControlSelect1");
+    var student = e.value;
+    var e1 = document.getElementById("exampleFormControlSelect2");
+    var course = e1.value;
+    if(student == "") student = "-1";
+    if(course == "") course = "-1";
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/receipts/gets",
+      url: url + "/receipts/gets/" + student + "/" + course,
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        console.log("Hi"+result.length);
+        receipts = result;
+        jsonData = result;
+
+        //Preparing the Select List
+        var dropDown = document.getElementById("exampleFormControlSelect1");
+        for(var i = 0; i < result.length; i++) {
+          var el = document.createElement("option");
+          el.innerHTML = result[i].candidateName;
+          el.value = result[i].candidateEmail;
+          dropDown.appendChild(el);
+        }
+
+        changePage(1);
+      },
+      error: function(result){
+        console.log("Error"+result.statusText);
+      }
+    })
+
+    $(".hamburger").click(function(){
+      $(".wrapper").toggleClass("active")
+    })
+  })();
+
+  //function to filter table
+  function filter(){
+    //Calling the Receipts List API
+    var e = document.getElementById("exampleFormControlSelect1");
+    var student = e.value;
+    var e1 = document.getElementById("exampleFormControlSelect2");
+    var course = e1.value;
+    if(student == "") student = "-1";
+    if(course == "") course = "-1";
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+      },
+      url: url + "/receipts/gets/" + student + "/" + course,
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
@@ -335,11 +385,7 @@
         console.log("Error"+result.statusText);
       }
     })
-
-    $(".hamburger").click(function(){
-      $(".wrapper").toggleClass("active")
-    })
-  })();
+  }
 
   //Share Receipt
   function share(){
@@ -463,6 +509,8 @@
     for (let i = (page-1) * records_per_page; i < total; i++) {
       let j = i;
       //console.log("mexid "+exams[i].id);
+      console.log("T " + jsonData[i].createdTime);
+      if(jsonData[i].createdTime == null) jsonData[i].createdTime = new Date().getTime();
       var date = new Date(jsonData[i].createdTime);
       var createdDate = "" + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
       var oneRecord = '<tr><td>' + jsonData[i].candidateName + '</td><td>' + jsonData[i].program + '</td><td>' + jsonData[i].name + '</td><td>' + createdDate + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \

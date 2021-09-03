@@ -19,7 +19,7 @@
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
-  <title>Progress report</title>
+  <title>Progress Report</title>
 </head>
 <body style="  background: #e8edf5;  width: 100%; height: 100%;">
 
@@ -38,7 +38,7 @@
         <div class="dropdown  pic">
           <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-            <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
+            <span class="pl-2" style="font-size: 14px" id="profilename"></span>
           </div>
 
           <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -116,6 +116,12 @@
               <span class="list">Community</span>
             </a>
           </li>
+          <li>
+            <a href="settings.html">
+                <span class="icon"><i class="fas fa-cog"></i></span>
+                <span class="list">Settings</span>
+            </a>
+        </li>
           <!--                    <li>-->
           <!--                        <a href="#">-->
           <!--                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>-->
@@ -147,7 +153,7 @@
                 <i class="far fa-user card-icon-purple"></i>
                   </div>
                 <div class="card-text">
-                  <h3>100</h3>
+                  <h3 id="total"></h3>
                   <p>Students Currently Enrolled</p>
                 </div>
               </div>
@@ -164,7 +170,7 @@
                   <i class="far fa-user card-icon-green"></i>
                 </div>
                 <div class="card-text">
-                  <h3>95</h3>
+                  <h3 id="actives"></h3>
                   <p>Active Students</p>
                 </div>
               </div>
@@ -181,7 +187,7 @@
                   <i class="far fa-user card-icon-red"></i>
                 </div>
                 <div class="card-text">
-                  <h3>5</h3>
+                  <h3 id="inactives"></h3>
                   <p>Inactive Students</p>
                 </div>
               </div>
@@ -207,10 +213,9 @@
               <div class="form-group">
                 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                 <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
-                  <option value="">course</option>
-                  <option value="">project management</option>
-                  <option value="">Business analysis</option>
-                  <option value="">ICT</option>
+                  <option value="">--Select Course--</option>
+                  <option value="Project Management Comprehensive">Project Management Comprehensive</option>
+                  <option value="Business Analysis Comprehensive">Business Analysis Comprehensive</option>
                   <!--                                    <option>Push reminder to potential students</option>-->
                   <!--                                        <option>4</option>-->
                   <!--                                        <option>5</option>-->
@@ -222,121 +227,27 @@
                 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                 <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                   <option value="">Last Activity</option>
-                  <option value="">last 7days</option>
-                  <option value="">30 days</option>
+                  <option value="1">last 7days</option>
+                  <option value="2">30 days</option>
                 </select>
               </div>
             </div>
             <div class="col-sm-3 col-lg-3">
-
+              <div class="form-group">
+                  <button class="btn btn-pry" type="button" onclick="filter();">Filter</button>
+              </div>
             </div>
             <div class="col-sm-3 col-lg-3 mb-3">
               <form class="navbar-form" role="search">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search"
-                         style="font-size: 14px">
+                  <input type="text" class="form-control" placeholder="Search" id="q" onkeyup="search();"  style="font-size: 14px">
                 </div>
               </form>
             </div>
           </div>
           <div class="user">
-            <table class="table profile-table">
-              <thead>
-              <tr>
-                <th>Student name</th>
-                <th>Course Name</th>
-                <th>Last Completed Session</th>
-                <th>Progress Status</th>
-                <th>Total Time Spent</th>
-                <th>Last Activity</th>
-                <th>Actions</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Project management</td>
-                <td>Session 1</td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                         aria-valuemin="0" aria-valuemax="100">25%
-                    </div>
-                  </div>
-                </td>
-                <td>10 hours</td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions  dropdown-toggle" href="#" id="action-dropDown2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="action-dropDown2">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                         style="cursor: pointer;font-size: 14px">Comment</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Project management</td>
-                <td>Session 1</td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
-                         aria-valuemin="0" aria-valuemax="100">75%
-                    </div>
-                  </div>
-                </td>
-                <td>10 hours</td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                         style="cursor: pointer;font-size: 14px">comment</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Obiajulu Aghemen</td>
-                <td>Project management</td>
-                <td>Session 1</td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
-                         aria-valuemin="0" aria-valuemax="100">50%
-                    </div>
-                  </div>
-                </td>
-                <td>10 hours</td>
-                <td>23-03-2021</td>
-                <td class="options-ham-menu">
-                  <div class="dropdown">
-                                <span class="actions dropdown-toggle" href="#" id="dropdownMenuLink3"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ...
-                                </span>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                         style="cursor: pointer; font-size: 14px">comment</a>
-                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-share-alt text-info mr-1"></i> Share</a>-->
-                      <!--                      <a class="dropdown-item" href="#"><i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>-->
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
+            <table class="table profile-table" id="fi">
+             
             </table>
             <div class="pagination">
               <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
@@ -359,60 +270,27 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add Payment</h5>
+        <h5 class="modal-title">Add Comment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group row">
-          <div class="col-xs-6">
-            <label>Course<font color="red">*</font></label>
-            <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-              <option value="">-Select Course-</option>
-              <option value="">Business Analysis</option>
-              <option value="">Project management</option>
-              <option value="">Managing Project Financials</option>
-            </select>
+          <div class="col-xs-12">
+            <label>Email<font color="red">*</font></label>
+            <input class="form-control" id="email" style="font-size: 14px" >
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-xs-6">
-            <label>Payment Type<font color="red">*</font></label>
-            <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-              <option value="">-Select payment type-</option>
-              <option value="">Part Payment</option>
-              <option value="">Full Payment</option>
-              <!--              <option value="">Managing Project Financials</option>-->
-            </select>
+          <div class="col-xs-12">
+            <label>Comment<font color="red">*</font></label>
+            <textarea rows="4" class="form-control" id="comment"></textarea>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-md-6">
-            <label>Coupon Code<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-          <div class="col-md-6">
-            <label>Coupon Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-md-6">
-            <label>Tax<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-          <div class="col-md-6">
-            <label>Amount<font color="red">*</font></label>
-            <input class="form-control"  style="font-size: 14px" >
-          </div>
-        </div>
-
       </div>
       <div class="modal-footer">
-        <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
+        <button type="button" class="btn btn-primary" onclick="addComment();">Confirm</button>
       </div>
     </div>
   </div>
@@ -433,32 +311,160 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-  var url = "http://localhost:8080";
+  //var url = "http://localhost:8080";
   //var wordpressUrl = "http://localhost:8099";
-  //var url = "https://proinsight-reconservice.herokuapp.com";
+  var url = "https://proinsight-reconservice.herokuapp.com";
   var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
-  var leads = [];
+  var reports = [];
   var jsonData = [];
   var current_page = 1;
-  var records_per_page = 20;
-  var selectedLead = {};
+  var records_per_page = 10;
+  var selectedReport = {};
 
   //ON-READY FUNCTION
   (function() {
-    //Calling the Leads List API
-    var status = 0;
+    if(sessionStorage.getItem("lg") != 1){
+      location.href = "login.html";
+    }
+    if(sessionStorage.getItem("user") != null){
+      var user = JSON.parse(sessionStorage.getItem("user"));
+      console.log("Check "+user);
+      //console.log("yes"+fname);
+      document.getElementById("profilename").innerHTML = user.email;
+      //document.getElementById("oladeEmail").innerHTML = user.email;
+    }
+
+    //Calling the Progress Stats API
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/leads/gets/" + status,
+      url: wordpressUrl + "/wpusers/getProgressStats",
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
         console.log("Hi"+result.length);
-        leads = result;
+        document.getElementById("actives").innerHTML = result.active;
+        document.getElementById("inactives").innerHTML = result.inactive;
+        var total = 0;
+        total = result.active + result.inactive;
+        document.getElementById("total").innerHTML = total;
+      },
+      error: function(result){
+        console.log("Error"+result.statusText);
+      }
+    })
+
+    //Chart
+    var year = 2021;
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+      },
+      url: url + "/progressreports/gets/" + year,
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        console.log("Hi"+result.length);
+        Chart.defaults.global.defaultFontFamily = "Rubik";
+        Chart.defaults.global.defaultFontSize = 12;
+
+        var barChartData = {
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "July",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+          ],
+          datasets: [
+          {
+            label: "Active Students",
+            backgroundColor: "#45DAB6",
+            borderWidth: 1,
+            data: [result[0].active,result[1].active,result[2].active,result[3].active,result[4].active,result[5].active,result[6].active,result[7].active,result[8].active,result[9].active,
+              result[10].active,result[11].active]
+          },
+          {
+            label: "Inactive Students",
+            backgroundColor: "#FF5B79",
+            borderWidth: 1,
+            data: [result[0].inactive,result[1].inactive,result[2].inactive,result[3].inactive,result[4].inactive,result[5].inactive,result[6].inactive,result[7].inactive,result[8].inactive,
+              result[9].inactive,result[10].inactive,result[11].inactive]
+          }
+          ]
+        };
+
+        var chartOptions = {
+          responsive: true,
+          legend: {
+            position: "top"
+          },
+          title: {
+            display: true,
+            text: "Chart.js Bar Chart"
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx, {
+          type: "bar",
+          data: barChartData,
+          options: chartOptions
+        });
+      },
+      error: function(result){
+        console.log("Error"+result.statusText);
+      }
+    })
+
+    var e = document.getElementById("exampleFormControlSelect1");
+    var course = e.value;
+    var e1 = document.getElementById("exampleFormControlSelect2");
+    var activity = e1.value;
+    var timestamp = new Date().getTime();
+    var deficit = 0;
+    if(activity == "1"){
+      deficit = 7 * 24 * 60 * 60 * 1000;
+    }else if(activity == "2"){
+      deficit = 30 * 24 * 60 * 60 * 1000;
+    }else{
+      deficit = timestamp;
+    }
+
+    timestamp = timestamp - deficit;
+    if(course == "") course = "x";
+    //Calling the Progress Report List API
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+      },
+      url: wordpressUrl + "/wpusers/getProgressReports/" + course + "/" + timestamp,
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        console.log("Hi"+result.length);
+        reports = result;
         jsonData = result;
         changePage(1);
       },
@@ -472,20 +478,20 @@
     })
   })();
 
-  //Lead Creation
-  function addLead(){
+  //Comment Creation
+  function addComment(){
     //Calling the API -
     $.ajax({
       type: "POST",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
       },
-      url: url + "/leads/add",
+      url: url + "/comments/add",
       contentType: "application/json",
       dataType: 'json',
       data: JSON.stringify({
-        fname : document.getElementById("fname").value,
-        lname : document.getElementById("lname").value,
+        wordpressID : selectedReport.wordpressID,
+        comment : document.getElementById("comment").value,
         email : document.getElementById("email").value
       }),
       success: function(result){
@@ -494,9 +500,9 @@
           text: result['message'],
           icon: "success",
         })
-                .then(() => {
-                  location.reload();
-                });
+        .then(() => {
+          location.reload();
+        });
       },
       error: function(result){
         var json = $.parseJSON(result.responseText);
@@ -510,49 +516,43 @@
 
   }
 
-  //Lead Update
-  function editLead(){
-    //Calling the API -
+  //Method to filter table
+  function filter(){
+    var e = document.getElementById("exampleFormControlSelect1");
+    var course = e.value;
+    var e1 = document.getElementById("exampleFormControlSelect2");
+    var activity = e1.value;
+    var timestamp = new Date().getTime();
+    var deficit = 0;
+    if(activity == "1"){
+      deficit = 7 * 24 * 60 * 60 * 1000;
+    }else if(activity == "2"){
+      deficit = 30 * 24 * 60 * 60 * 1000;
+    }else{
+      deficit = timestamp;
+    }
+
+    timestamp = timestamp - deficit;
+    //Calling the Progress Report List API
     $.ajax({
-      type: "POST",
+      type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/leads/update",
+      url: wordpressUrl + "/wpusers/getProgressReports/" + course + "/" + timestamp,
       contentType: "application/json",
       dataType: 'json',
-      data: JSON.stringify({
-        fname : document.getElementById("efname").value,
-        lname : document.getElementById("elname").value,
-        email : document.getElementById("eemail").value,
-        id : selectedLead.id,
-        createdTime : selectedLead.createdTime,
-        noOfReminders : selectedLead.noOfReminders,
-        lastReminderTime : selectedLead.lastReminderTime,
-        noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-        lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-        status : selectedLead.status
-      }),
       success: function(result){
-        swal({
-          title: result['status'],
-          text: result['message'],
-          icon: "success",
-        })
-                .then(() => {
-                  location.reload();
-                });
+        console.log("Hi"+result.length);
+        reports = result;
+        jsonData = result;
+        changePage(1);
       },
       error: function(result){
-        var json = $.parseJSON(result.responseText);
-        swal({
-          title: json.status,
-          text: json.message,
-          icon: "error",
-        });
+        console.log("Error"+result.statusText);
       }
     })
-
   }
 
   //Function to search table
@@ -560,10 +560,10 @@
     var input = document.getElementById("q");
     var filter = input.value.toUpperCase();
     jsonData = [];
-    for(var i = 0; i < leads.length; i++){
-      var name = leads[i].fname + " " + leads[i].lname;
-      if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
-        jsonData.push(leads[i]);
+    for(var i = 0; i < reports.length; i++){
+      if(reports[i].name.toUpperCase().indexOf(filter) > -1 || reports[i].courseName.toUpperCase().indexOf(filter) > -1 || reports[i].lastCompletedLesson.toUpperCase().indexOf(filter) > -1 
+          || reports[i].lastActivity.toUpperCase().indexOf(filter) > -1){
+        jsonData.push(reports[i]);
       }
     }
     changePage(1);
@@ -593,7 +593,7 @@
 
     listing_table.innerHTML = "";
 
-    listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
+    listing_table.innerHTML += '<thead><tr><th>Student name</th><th>Course Name</th><th>Last Completed Lesson</th><th>Progress Status</th><th>Last Activity</th><th>Actions</th></tr></thead><tbody>';
     var total = page * records_per_page;
     if(jsonData.length < (page * records_per_page)){
       total = jsonData.length;
@@ -601,11 +601,13 @@
     for (let i = (page-1) * records_per_page; i < total; i++) {
       let j = i;
       //console.log("mexid "+exams[i].id);
-      var name = jsonData[i].fname + " " + jsonData[i].lname;
-      var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
+      var oneRecord = '<tr><td>' + jsonData[i].name + '</td><td>' + jsonData[i].courseName + '</td><td>' + jsonData[i].lastCompletedLesson + '</td><td><div class="progress">\
+                    <div class="progress-bar" role="progressbar" id="' + j + '" aria-valuenow="' + jsonData[i].progress + '" aria-valuemin="0" aria-valuemax="100">' + jsonData[i].progress + '%\
+                    </div></div></td><td>' + jsonData[i].lastActivity + '</td><td class="options-ham-menu"> <div class="dropdown"> \
+                    <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
+                    <div class="dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;font-size: 14px">Comment </a> \
+                    </div></div></td></tr>';
+      
       listing_table.innerHTML += oneRecord;
     }
     listing_table.innerHTML += '</tbody>';
@@ -622,22 +624,41 @@
     } else {
       btn_next.style.visibility = "visible";
     }
+
+    setCSS(page);
   }
 
   function numPages(){
     return Math.ceil(jsonData.length / records_per_page);
   }
 
-  //Function to handle the transition of selected lead
+  //Function to handle the transition of selected report
   function kclick(x){
     //console.log("My "+jsonData[x]);
-    var alead = jsonData[x];
-    selectedLead = jsonData[x];
-    //console.log("Ch "+jsonData[x].email);
-    document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-    document.getElementById("efname").value = alead.fname;
-    document.getElementById("elname").value = alead.lname;
-    document.getElementById("eemail").value = alead.email;
+    var aReport = jsonData[x];
+    selectedReport = jsonData[x];
+    document.getElementById("email").value = selectedReport.email;
+    document.getElementById("email").text = selectedReport.email;
+  }
+
+  //function to set the css
+  function setCSS(page){
+    console.log("Hegre");
+    if (page < 1) page = 1;
+    if (page > numPages()) page = numPages();
+    var total = page * records_per_page;
+    if(jsonData.length < (page * records_per_page)){
+      total = jsonData.length;
+    }
+
+    for (let i = (page-1) * records_per_page; i < total; i++) {
+      let j = i;
+      console.log("Here"+jsonData[i].progress);
+      var el = document.getElementById(j);
+      var width = jsonData[i].progress + "%";
+      console.log("W " + width);
+      el.style.width = width;
+    }
   }
 </script>
 

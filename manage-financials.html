@@ -189,26 +189,25 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3 col-lg-3">
-                  <!--div class="form-group">
+                  <div class="form-group">
                     <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
                       <option value="">Student</option>
-                      <option value="">John Doe</option>
-                      <option value="">Jude Law</option>
-                      <option value="">Mary Doe</option>
                     </select>
-                  </div-->
+                  </div>
                 </div>
                 <div class="col-sm-3 col-lg-3">
-                  <!--div class="form-group">
+                  <div class="form-group">
                     <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                       <option value="">Status</option>
-                      <option value="Project Management Comprehensive">Registered</option>
-                      <option value="Business Analysis Comprehensive">Enrolled</option>
+                      <option value="2">Registered</option>
+                      <option value="1">Not Registered</option>
                     </select>
-                  </div-->
+                  </div>
                 </div>
                 <div class="col-sm-3 col-lg-3">
-
+                  <div class="form-group">
+                    <button class="btn btn-pry" type="button" onclick="filter();">Filter</button>
+                  </div>
                 </div>
                 <div class="col-sm-3 col-lg-3 mb-3">
                   <form class="navbar-form" role="search">
@@ -347,13 +346,62 @@
 
     document.getElementById("hone").style.display = "none";
     //Calling the Candidates With Outstanding Balance List API
+    var e = document.getElementById("exampleFormControlSelect1");
+    var student = e.value;
+    var e1 = document.getElementById("exampleFormControlSelect2");
+    var status = e1.value;
+    if(student == "") student = "-1";
+    if(status == "") status = "-1";
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: url + "/payments/offlinepayers",
+      url: url + "/payments/offlinepayers/" + student + "/" + status,
+      contentType: "application/json",
+      dataType: 'json',
+      success: function(result){
+        console.log("Hi"+result.length);
+        payments = result;
+        jsonData = result;
+
+        //Preparing the Select List
+        var dropDown = document.getElementById("exampleFormControlSelect1");
+        for(var i = 0; i < result.length; i++) {
+          var el = document.createElement("option");
+          el.innerHTML = result[i].fname + " " + result[i].lname;
+          el.value = result[i].id;
+          dropDown.appendChild(el);
+        }
+
+        changePage(1);
+      },
+      error: function(result){
+        console.log("Error"+result.statusText);
+      }
+    })
+
+    $(".hamburger").click(function(){
+      $(".wrapper").toggleClass("active")
+    })
+  })();
+
+  //function to filter table
+  function filter(){
+    var e = document.getElementById("exampleFormControlSelect1");
+    var student = e.value;
+    var e1 = document.getElementById("exampleFormControlSelect2");
+    var status = e1.value;
+    if(student == "") student = "-1";
+    if(status == "") status = "-1";
+    $.ajax({
+      type: "GET",
+      beforeSend: function(request) {
+        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+      },
+      url: url + "/payments/offlinepayers/" + student + "/" + status,
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
@@ -366,11 +414,7 @@
         console.log("Error"+result.statusText);
       }
     })
-
-    $(".hamburger").click(function(){
-      $(".wrapper").toggleClass("active")
-    })
-  })();
+  }
 
   //Function to search table
   function search(){
