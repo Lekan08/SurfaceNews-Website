@@ -214,9 +214,7 @@
                                 <div class="col-lg-3">
                                     <select class="form-control" id="programSelect" style="font-size: 14px">
                                         <option value="">Program</option>
-                                        <option value="Project Management Comprehensive">Project Management</option>
-                                        <option value="Business Analysis Comprehensive">Business Analysis</option>
-                                        <option value="Managing Project Financials">Managing Project Financials</option>
+                                        
                                     </select>
                                 </div>
                                 <div class="col-lg-4 mt-3 d-flex">
@@ -251,12 +249,6 @@
                                 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                                 <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                                     <option value="">Program</option>
-                                    <option value="Project Management Comprehensive">Project Management</option>
-                                    <option value="Business Analysis Comprehensive">Business Analysis</option>
-                                    <option value="Managing Project Financials">Managing Project Financials</option>
-<!--                                    <option>Push reminder to potential students</option>-->
-                                    <!--                                        <option>4</option>-->
-                                    <!--                                        <option>5</option>-->
                                 </select>
                             </div>
                         </div>
@@ -378,6 +370,10 @@
     //var wordpressUrl = "http://localhost:8099";
     var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const clickstatus = urlParams.get('status');
+    const leadscard = urlParams.get('leadscard');
     var candidates = [];
     var jsonData = [];
     var current_page = 1;
@@ -394,11 +390,30 @@
             //console.log("yes"+fname);
             document.getElementById("profilename").innerHTML = user.email;
             //document.getElementById("oladeEmail").innerHTML = user.email;
+
+            var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+            var dropDown = document.getElementById("programSelect");
+            var dropDown1 = document.getElementById("exampleFormControlSelect2");
+            for(var i = 0; i < courselist.length; i++) {
+                var el = document.createElement("option");
+                el.innerHTML = courselist[i].name;
+                el.value = courselist[i].name;
+                dropDown.appendChild(el);
+                dropDown1.appendChild(el);
+            }
         }
         document.getElementById("tAdmin").style.display = "none";
         //Calling the Candidates List API
         var e = document.getElementById("exampleFormControlSelect3");
         var enrol = e.value;
+        if(enrol == "" && clickstatus != null) {
+            if(clickstatus == "enrolled") enrol = "Enrolled";
+            else if(clickstatus == "awaitingenrollment") enrol = "Awaiting Enrollment";
+            else if(clickstatus == "leads") enrol = "Lead";
+            else if(clickstatus == "abouttoexpire") enrol = "About To Expire";
+            else if(clickstatus == "expired") enrol = "Expired";
+            else enrol = "";
+        }
         var ex = document.getElementById("exampleFormControlSelect2");
         var program = ex.value;
         $.ajax({
@@ -415,8 +430,22 @@
                 program : program
             }),
             success: function(result){
-                candidates = result;
-                jsonData = result;
+                if(leadscard != null){
+                    for(var i = 0; i < result.length; i++){
+                        if(leadscard == "total" && result[i].id != null) {
+                            jsonData.push(result[i]);
+                            candidates.push(result[i]);
+                        }else if(leadscard == "converted" && result[i].id != null && result[i].enrollmentStatus != "Lead") {
+                            jsonData.push(result[i]);
+                            candidates.push(result[i]);
+                        }else {
+                        }
+                    }
+                }else{
+                    candidates = result;
+                    jsonData = result;
+                }
+                
                 changePage(1);
             },
             error: function(result){

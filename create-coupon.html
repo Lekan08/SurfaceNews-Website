@@ -304,9 +304,9 @@
             <label>Product Type<font color="red">*</font></label>
             <select class="form-control" id="productType" style="font-size: 14px">
               <option value="">-Select Product Type</option>
-              <option value="PM">Project Management</option>
+              <!--option value="PM">Project Management</option>
               <option value="BA">Business Analysis</option>
-              <option value="MP">Managing Project Financials</option>
+              <option value="MP">Managing Project Financials</option-->
             </select>
           </div>
         </div>
@@ -412,7 +412,15 @@
       document.getElementById("profilename").innerHTML = user.email;
       id = user.wordpressID;
       console.log("id "+id);
-      //document.getElementById("oladeEmail").innerHTML = user.email;
+
+      var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+      var dropDown = document.getElementById("productType");
+      for(var i = 0; i < courselist.length; i++) {
+        var el = document.createElement("option");
+        el.innerHTML = courselist[i].name;
+        el.value = courselist[i].abbr;
+        dropDown.appendChild(el);
+      }
     }
 
     //Calling the Coupon List API

@@ -248,9 +248,6 @@
                     <td>
                       <select class="form-control" id="course" style="font-size: 14px" onchange="fetchPrice(1)">
                         <option value="">--Select Course--</option>
-                        <option value="PM">Project Management</option>
-                        <option value="BA">Business Analysis</option>
-                        <option value="MP">Manage Financials</option>
                       </select>
                     </td>
                     <td id="price"></td>
@@ -352,6 +349,15 @@
       document.getElementById("profilename").innerHTML = user.email;
       sender = user.email;
       //document.getElementById("oladeEmail").innerHTML = user.email;
+
+      var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+      var dropDown = document.getElementById("course");
+      for(var i = 0; i < courselist.length; i++) {
+        var el = document.createElement("option");
+        el.innerHTML = courselist[i].name;
+        el.value = courselist[i].abbr;
+        dropDown.appendChild(el);
+      }
     }
 
     //Set Values

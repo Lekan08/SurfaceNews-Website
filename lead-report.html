@@ -116,6 +116,12 @@
                             <span class="list">Community</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="settings.html">
+                            <span class="icon"><i class="fas fa-cog"></i></span>
+                            <span class="list">Settings</span>
+                        </a>
+                    </li>
                     <!--                    <li>-->
                     <!--                        <a href="#">-->
                     <!--                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>-->
@@ -151,7 +157,7 @@
                                     <p>Total No Of Lead Generated</p>
                                 </div>
                             </div>
-                            <i class="fas fa-users float-end icon-purple"></i>
+                            <a href="user-management.html?leadscard=total" class="btn btn-primary stretched-link"><i class="fas fa-users float-end icon-purple"></i></a>
                         </div>
                     </div>
                 </div>
@@ -168,7 +174,7 @@
                                     <p>Total No Of Lead Converted</p>
                                 </div>
                             </div>
-                            <i class="fas fa-users float-end icon-green"></i>
+                            <a href="user-management.html?leadscard=converted" class="btn btn-primary stretched-link"><i class="fas fa-users float-end icon-green"></i></a>
                         </div>
                     </div>
                 </div>
@@ -185,7 +191,7 @@
                                     <p>Total No Of Lead Disqualified</p>
                                 </div>
                             </div>
-                            <i class="fas fa-users float-end icon-red"></i>
+                            <a href="user-management.html?leadscard=disqualified" class="btn btn-primary stretched-link"><i class="fas fa-users float-end icon-red"></i></a>
                         </div>
                     </div>
                 </div>
@@ -267,7 +273,7 @@
 
     //ON-READY FUNCTION
     (function() {
-        /*if(sessionStorage.getItem("lg") != 1){
+        if(sessionStorage.getItem("lg") != 1){
             location.href = "login.html";
         }
         if(sessionStorage.getItem("user") != null){
@@ -275,7 +281,7 @@
             
             document.getElementById("profilename").innerHTML = user.email;
             //document.getElementById("oladeEmail").innerHTML = user.email;
-        }*/
+        }
         //Calling the Leads Report API
         var year = 2021;
         $.ajax({

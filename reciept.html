@@ -205,9 +205,7 @@
               <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect2" style="font-size: 14px">
                   <option value="">Program</option>
-                  <option value="PM">Project Management</option>
-                  <option value="BA">Business Analysis</option>
-                  <option value="MP">Manage Financials</option>
+                  
                 </select>
               </div>
             </div>
@@ -319,7 +317,15 @@
       //console.log("yes"+fname);
       document.getElementById("profilename").innerHTML = user.email;
       sender = user.email;
-      //document.getElementById("oladeEmail").innerHTML = user.email;
+      
+      var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+      var dropDown = document.getElementById("exampleFormControlSelect2");
+      for(var i = 0; i < courselist.length; i++) {
+        var el = document.createElement("option");
+        el.innerHTML = courselist[i].name;
+        el.value = courselist[i].abbr;
+        dropDown.appendChild(el);
+      }
     }
     //Calling the Receipts List API
     var e = document.getElementById("exampleFormControlSelect1");

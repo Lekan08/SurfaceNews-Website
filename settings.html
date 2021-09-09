@@ -183,9 +183,7 @@
                                 <div>
                                     <select class="form-control" id="courseName" style="font-size: 14px">
                                         <option value="">-Select Course-</option>
-                                        <option value="BA">Business Analysis</option>
-                                        <option value="PM">Project Management</option>
-                                        <option value="MP">Managing Project Financials</option>
+                                        
                                     </select>
                                 </div>
   
@@ -336,6 +334,15 @@
             var user = JSON.parse(sessionStorage.getItem("user"));
             console.log("Check "+user);
             document.getElementById("profilename").innerHTML = user.email;
+
+            var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+            var dropDown = document.getElementById("courseName");
+            for(var i = 0; i < courselist.length; i++) {
+                var el = document.createElement("option");
+                el.innerHTML = courselist[i].name;
+                el.value = courselist[i].abbr;
+                dropDown.appendChild(el);
+            }
         }
         //Calling the Course Price List API
         $.ajax({

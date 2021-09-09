@@ -74,6 +74,28 @@
     //var wordpressUrl = "http://localhost:8099";
     var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
+
+    //ON-READY FUNCTION
+    (function() {
+        //Calling the Course List API
+        $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: wordpressUrl + "/wpusers/getCourseReports",
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                sessionStorage.setItem("courselist", JSON.stringify(result));
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+    })();
+    
     function pressKey(e){
         if (e.keyCode == 13) {
             validate(event);

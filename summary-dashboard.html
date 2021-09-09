@@ -38,12 +38,11 @@
                 <div class="dropdown  pic">
                     <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
-                        <span class="pl-2" style="font-size: 14px">Aderonke Akinyemi</span>
+                        <span class="pl-2" style="font-size: 14px" id="profilename"></span>
                     </div>
 
                     <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item text-black-50" href="settings.html" style="font-size: 14px"><i class="fas fa-cog mr-2"></i>Settings</a>
-                        <a class="dropdown-item text-black-50" href="#" style="font-size: 14px"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </div>
                 </div>
             </div>
@@ -117,6 +116,12 @@
                             <span class="list">Community</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="settings.html">
+                            <span class="icon"><i class="fas fa-cog"></i></span>
+                            <span class="list">Settings</span>
+                        </a>
+                      </li>
                     <!--                    <li>-->
                     <!--                        <a href="#">-->
                     <!--                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>-->
@@ -148,7 +153,7 @@
                                     <i class="fas fa-thumbs-up card-icon-green"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h5>100</h5>
+                                    <h5><a href="user-management.html?status=enrolled" class="btn btn-primary stretched-link"><span id="enrolled"></span></a></h5>
                                     <p>Enrolled</p>
                                 </div>
                             </div>
@@ -165,8 +170,8 @@
                                     <i class="fas fa-sync fa-spin card-icon-purple"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h5>75</h5>
-                                    <p>Await Enrollment</p>
+                                    <h5><a href="user-management.html?status=awaitingenrollment" class="btn btn-primary stretched-link"><span id="awaitingEnrollment"></span></a></h5>
+                                    <p>Awaiting Enrollment</p>
                                 </div>
                             </div>
                             <i class="fas fa-users float-end icon-purple"></i>
@@ -182,7 +187,7 @@
                                     <i class="fas fa-filter card-icon-blue"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h5>15</h5>
+                                    <h5><a href="user-management.html?status=leads" class="btn btn-primary stretched-link"><span id="leads"></span></a></h5>
                                     <p>Leads</p>
                                 </div>
                             </div>
@@ -199,8 +204,8 @@
                                     <i class="fas fa-exclamation-triangle card-icon-orange"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h5>15</h5>
-                                    <p>about to expire</p>
+                                    <h5><a href="user-management.html?status=abouttoexpire" class="btn btn-primary stretched-link"><span id="aboutToExpire"></span></a></h5>
+                                    <p>About To Expire</p>
                                 </div>
                             </div>
                             <i class="fas fa-users float-end icon-orange"></i>
@@ -216,7 +221,7 @@
                                     <i class="fas fa-exclamation-triangle card-icon-red"></i>
                                 </div>
                                 <div class="card-text">
-                                    <h5>15</h5>
+                                    <h5><a href="user-management.html?status=expired" class="btn btn-primary stretched-link"><span id="expired"></span></h5>
                                     <p>Expired</p>
                                 </div>
                             </div>
@@ -241,7 +246,7 @@
                             <div class="card-body">
                                 <canvas id="myChart" width="600" height="400"></canvas>
                                 <div class="text-center mt-3">
-                                    <p class="text-primary" style="font-size: 20px;font-weight: 500">Total Students : <span class="text-primary">75</span></p>
+                                    <p class="text-primary" style="font-size: 20px;font-weight: 500">Total Students : <span class="text-primary" id="total"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -257,51 +262,8 @@
                                 Progress Report
                             </h6>
                             <div class="user">
-                                <table class="table profile-table">
-                                    <thead>
-                                    <tr>
-                                        <th style="font-size: 12px">Candidate Name</th>
-                                        <th  style="font-size: 12px">Course Name</th>
-                                        <th style="font-size: 12px">Progress Status</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Anita James</td>
-                                        <td>Project management</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
-                                                     aria-valuemin="0" aria-valuemax="100">75%
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mary Doe</td>
-                                        <td>Business Analysis</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
-                                                     aria-valuemin="0" aria-valuemax="100">50%
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Johnson Johnson</td>
-                                        <td>Project Management</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                                     aria-valuemin="0" aria-valuemax="100">25%
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                <table class="table profile-table" id="fi1">
+                                    
                                 </table>
 
                             </div>
@@ -319,28 +281,8 @@
                                 Pending payment
                             </h6>
                             <div class="user">
-                                <table class="table profile-table">
-                                    <thead>
-                                    <tr>
-                                        <th style="font-size: 12px">Candidate Name</th>
-                                        <th style="font-size: 12px">Outstanding balances</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Joseph Burn</td>
-                                        <td>$300</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>David Rooney</td>
-                                        <td>$600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Michael James</td>
-                                        <td>$500</td>
-                                    </tr>
-                                    </tbody>
+                                <table class="table profile-table" id="fi2">
+                                    
                                 </table>
                                 <div class="">
                                     <a href="outstanding-balance.html" style="font-size: 12px;text-decoration: none">View All</a>
@@ -354,70 +296,6 @@
 
 
 
-        </div>
-    </div>
-</div>
-
-<!--Edit Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Payment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label>Course<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect" style="font-size: 14px">
-                            <option value="">-Select Course-</option>
-                            <option value="">Business Analysis</option>
-                            <option value="">Project management</option>
-                            <option value="">Managing Project Financials</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label>Payment Type<font color="red">*</font></label>
-                        <select class="form-control" id="exampleFormControlSelect3" style="font-size: 14px">
-                            <option value="">-Select payment type-</option>
-                            <option value="">Part Payment</option>
-                            <option value="">Full Payment</option>
-                            <!--              <option value="">Managing Project Financials</option>-->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Coupon Code<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Coupon Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Tax<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                    <div class="col-md-6">
-                        <label>Amount<font color="red">*</font></label>
-                        <input class="form-control"  style="font-size: 14px" >
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                <button type="button" class="btn btn-primary" onclick="editLead();">Confirm</button>
-            </div>
         </div>
     </div>
 </div>
@@ -437,9 +315,9 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 <script>
-    var url = "http://localhost:8080";
+    //var url = "http://localhost:8080";
     //var wordpressUrl = "http://localhost:8099";
-    //var url = "https://proinsight-reconservice.herokuapp.com";
+    var url = "https://proinsight-reconservice.herokuapp.com";
     var wordpressUrl = "https://proinsight-lmsservice.herokuapp.com";
     var leads = [];
     var jsonData = [];
@@ -449,26 +327,216 @@
 
     //ON-READY FUNCTION
     (function() {
-        //Calling the Leads List API
-        var status = 0;
+        if(sessionStorage.getItem("lg") != 1){
+          location.href = "login.html";
+        }
+        if(sessionStorage.getItem("user") != null){
+          var user = JSON.parse(sessionStorage.getItem("user"));
+          document.getElementById("profilename").innerHTML = user.email;
+        }
+
+        //Calling the Course Chart API
         $.ajax({
-            type: "GET",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-                request.setRequestHeader("Access-Control-Allow-Origin", "*");
-            },
-            url: url + "/leads/gets/" + status,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function(result){
-                console.log("Hi"+result.length);
-                leads = result;
-                jsonData = result;
-                changePage(1);
-            },
-            error: function(result){
-                console.log("Error"+result.statusText);
+          type: "GET",
+          beforeSend: function(request) {
+            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            request.setRequestHeader("Access-Control-Allow-Origin", "*");
+          },
+          url: wordpressUrl + "/wpusers/getAllCourseStats",
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(result){
+            console.log("Hi"+result.length);
+            notStarted = result.notStarted;
+            inProgress = result.inProgress;
+            completed = result.completed;
+            var total = notStarted + inProgress + completed;
+            document.getElementById("total").innerHTML = total;
+
+            // And for a doughnut chart
+            var ctx = document.getElementById("myChart").getContext('2d');
+
+            Chart.defaults.global.defaultFontFamily = "Rubik";
+            Chart.defaults.global.defaultFontSize = 11;
+
+            var myDoughnutChart = new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                labels: ["Completed", "In progress", "Not Started",],
+                datasets: [{
+                  backgroundColor: [
+                    "#45DAB6",
+                    "#28A3EF",
+                    "#FF5B79",
+                  ],
+                  data: [completed, inProgress, notStarted]
+                }]
+              }
+            });
+          },
+          error: function(result){
+            console.log("Error"+result.statusText);
+          }
+        })
+
+        //Calling the Dashboard Cards
+        var year = 2021;
+        $.ajax({
+          type: "GET",
+          beforeSend: function(request) {
+            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            request.setRequestHeader("Access-Control-Allow-Origin", "*");
+          },
+          url: url + "/users/dashboardstats/" + year,
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(result){
+            console.log("Hi"+result.length);
+            document.getElementById("enrolled").innerHTML = result.enrolled;
+            document.getElementById("awaitingEnrollment").innerHTML = result.awaitingEnrollment;
+            document.getElementById("leads").innerHTML = result.leads;
+            document.getElementById("aboutToExpire").innerHTML = result.aboutToExpire;
+            document.getElementById("expired").innerHTML = result.expired;
+
+            Chart.defaults.global.defaultFontFamily = "Rubik";
+            Chart.defaults.global.defaultFontSize = 11;
+
+            var barChartData = {
+              labels: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "July",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+              ],
+              datasets: [
+                {
+                  label: "Newly Enrolled Students",
+                  backgroundColor: "#28A3EF",
+                  borderWidth: 1,
+                  barThickness: 1,
+                  maxBarThickness: 1,
+                  data: [result.statsDTO[0].enrolled, result.statsDTO[1].enrolled, result.statsDTO[2].enrolled, result.statsDTO[3].enrolled,result.statsDTO[4].enrolled, result.statsDTO[5].enrolled, 
+                    result.statsDTO[6].enrolled, result.statsDTO[7].enrolled, result.statsDTO[8].enrolled, result.statsDTO[9].enrolled, result.statsDTO[10].enrolled, result.statsDTO[11].enrolled]
+                },
+
+                {
+                  label: "Student that completed the course",
+                  backgroundColor: "#45DAB6",
+                  borderWidth: 1,
+                  barThickness: 1,
+                  maxBarThickness: 1,
+                  data: [result.statsDTO[0].completed, result.statsDTO[1].completed, result.statsDTO[2].completed, result.statsDTO[3].completed,result.statsDTO[4].completed, result.statsDTO[5].completed, 
+                    result.statsDTO[6].completed, result.statsDTO[7].completed, result.statsDTO[8].completed, result.statsDTO[9].completed, result.statsDTO[10].completed, result.statsDTO[11].completed]
+                },
+
+              ]
+            };
+
+            var chartOptions = {
+              responsive: true,
+              legend: {
+                position: "top"
+              },
+              title: {
+                display: true,
+                text: "Chart.js Bar Chart"
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
             }
+
+            var ctx = document.getElementById("canvas").getContext("2d");
+              window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: barChartData,
+                options: chartOptions
+            });
+          },
+          error: function(result){
+            console.log("Error"+result.statusText);
+          }
+        })
+
+        //Progress Report Summary
+        var course = "y";
+        var timestamp = 0;
+        //Calling the Progress Report List API
+        $.ajax({
+          type: "GET",
+          beforeSend: function(request) {
+            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            request.setRequestHeader("Access-Control-Allow-Origin", "*");
+          },
+          url: wordpressUrl + "/wpusers/getProgressReports/" + course + "/" + timestamp,
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(result){
+            console.log("Hi"+result.length);
+            jsonData = result;
+            var listing_table = document.getElementById("fi1");
+
+            listing_table.innerHTML = "";
+
+            listing_table.innerHTML += '<thead><tr><th style="font-size: 12px">Candidate Name</th><th  style="font-size: 12px">Course Name</th><th style="font-size: 12px">Progress Status</th></tr></thead><tbody>';
+            for (let i = 0; i < 3; i++) {
+              var oneRecord = '<tr><td>' + jsonData[i].name + '</td><td>' + jsonData[i].courseName + '</td><td><div class="progress">\
+                    <div class="progress-bar" role="progressbar" id="' + i + '" aria-valuenow="' + jsonData[i].progress + '" aria-valuemin="0" aria-valuemax="100">' + jsonData[i].progress + '%\
+                    </div></div></td></tr>';
+      
+              listing_table.innerHTML += oneRecord;
+            }
+            listing_table.innerHTML += '</tbody>';
+
+            setCSS();
+          },
+          error: function(result){
+            console.log("Error"+result.statusText);
+          }
+        })
+
+        //Outstanding Balance Summary
+        var student = "-1";
+        var course = "-1";
+        var status = "-1";
+        $.ajax({
+          type: "GET",
+          beforeSend: function(request) {
+            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+            request.setRequestHeader("Access-Control-Allow-Origin", "*");
+          },
+          url: url + "/payments/outstandings/" + student + "/" + course + "/" + status,
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(result){
+            console.log("Hi"+result.length);
+            var listing_table = document.getElementById("fi2");
+
+            listing_table.innerHTML = "";
+
+            listing_table.innerHTML += '<thead><tr><th style="font-size: 12px">Candidate Name</th><th style="font-size: 12px">Outstanding balances</th></tr></thead><tbody>';
+            for (let i = 0; i < 3; i++) {
+              var balance = "$" + result[i].balance + " CAD";
+              var oneRecord = '<tr><td>' + result[i].candidateName + '</td><td>' + balance + '</td></tr>';
+              listing_table.innerHTML += oneRecord;
+            }
+            listing_table.innerHTML += '</tbody>';
+          },
+          error: function(result){
+            console.log("Error"+result.statusText);
+          }
         })
 
         $(".hamburger").click(function(){
@@ -476,209 +544,20 @@
         })
     })();
 
-    //Lead Creation
-    function addLead(){
-        //Calling the API -
-        $.ajax({
-            type: "POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            },
-            url: url + "/leads/add",
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify({
-                fname : document.getElementById("fname").value,
-                lname : document.getElementById("lname").value,
-                email : document.getElementById("email").value
-            }),
-            success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                    .then(() => {
-                        location.reload();
-                    });
-            },
-            error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
-            }
-        })
-
-    }
-
-    //Lead Update
-    function editLead(){
-        //Calling the API -
-        $.ajax({
-            type: "POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            },
-            url: url + "/leads/update",
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify({
-                fname : document.getElementById("efname").value,
-                lname : document.getElementById("elname").value,
-                email : document.getElementById("eemail").value,
-                id : selectedLead.id,
-                createdTime : selectedLead.createdTime,
-                noOfReminders : selectedLead.noOfReminders,
-                lastReminderTime : selectedLead.lastReminderTime,
-                noOfSentProgramInformation : selectedLead.noOfSentProgramInformation,
-                lastProgramInformationTime : selectedLead.lastProgramInformationTime,
-                status : selectedLead.status
-            }),
-            success: function(result){
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                    .then(() => {
-                        location.reload();
-                    });
-            },
-            error: function(result){
-                var json = $.parseJSON(result.responseText);
-                swal({
-                    title: json.status,
-                    text: json.message,
-                    icon: "error",
-                });
-            }
-        })
-
-    }
-
-    //Function to search table
-    function search(){
-        var input = document.getElementById("q");
-        var filter = input.value.toUpperCase();
-        jsonData = [];
-        for(var i = 0; i < leads.length; i++){
-            var name = leads[i].fname + " " + leads[i].lname;
-            if(name.toUpperCase().indexOf(filter) > -1 || leads[i].email.toUpperCase().indexOf(filter) > -1){
-                jsonData.push(leads[i]);
-            }
-        }
-        changePage(1);
-    }
-
-    function prevPage(){
-        if (current_page > 1) {
-            current_page--;
-            changePage(current_page);
-        }
-    }
-    function nextPage(){
-        if (current_page < numPages()) {
-            current_page++;
-            changePage(current_page);
-        }
-    }
-    function changePage(page){
-        var btn_next = document.getElementById("btn_next");
-        var btn_prev = document.getElementById("btn_prev");
-        var listing_table = document.getElementById("fi");
-        var page_span = document.getElementById("page");
-
-        // Validate page
-        if (page < 1) page = 1;
-        if (page > numPages()) page = numPages();
-
-        listing_table.innerHTML = "";
-
-        listing_table.innerHTML += '<tbody><tr><td><b>Name</b></td><td><b>Email</b></td><td><b>Actions</b></td></tr>';
-        var total = page * records_per_page;
-        if(jsonData.length < (page * records_per_page)){
-            total = jsonData.length;
-        }
-        for (let i = (page-1) * records_per_page; i < total; i++) {
-            let j = i;
-            //console.log("mexid "+exams[i].id);
-            var name = jsonData[i].fname + " " + jsonData[i].lname;
-            var oneRecord = '<tr><td>' + name + '</td><td>' + jsonData[i].email + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+j+'\');">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
-                                <a class="dropdown-item" href="#">Send Program Information</a><a class="dropdown-item" href="#">Send Reminder</a></div></div></td></tr>';
-            listing_table.innerHTML += oneRecord;
-        }
-        listing_table.innerHTML += '</tbody>';
-        page_span.innerHTML = page;
-
-        if (page == 1) {
-            btn_prev.style.visibility = "hidden";
-        } else {
-            btn_prev.style.visibility = "visible";
-        }
-
-        if (page == numPages()) {
-            btn_next.style.visibility = "hidden";
-        } else {
-            btn_next.style.visibility = "visible";
-        }
-    }
-
-    function numPages(){
-        return Math.ceil(jsonData.length / records_per_page);
-    }
-
-    //Function to handle the transition of selected lead
-    function kclick(x){
-        //console.log("My "+jsonData[x]);
-        var alead = jsonData[x];
-        selectedLead = jsonData[x];
-        //console.log("Ch "+jsonData[x].email);
-        document.getElementById("exampleModalLabel").innerHTML = alead.fname + " " + alead.lname;
-        document.getElementById("efname").value = alead.fname;
-        document.getElementById("elname").value = alead.lname;
-        document.getElementById("eemail").value = alead.email;
+    //function to set the css
+    function setCSS(){
+      console.log("Hegre");
+      for (let i = 0; i < 3; i++) {
+        console.log("Here"+jsonData[i].progress);
+        var el = document.getElementById(i);
+        var width = jsonData[i].progress + "%";
+        console.log("W " + width);
+        el.style.width = width;
+      }
     }
 </script>
 
-<!--<script>-->
-
-<!--  /* bar chart */-->
-<!--  var chBar = document.getElementById("chBar");-->
-<!--  if (chBar) {-->
-<!--    new Chart(chBar, {-->
-<!--      type: 'bar',-->
-<!--      data: {-->
-<!--        labels: ["S", "M", "T", "W", "T", "F", "S"],-->
-<!--        datasets: [{-->
-<!--          data: [589, 445, 483, 503, 689, 692, 634],-->
-<!--          backgroundColor: colors[0]-->
-<!--        },-->
-<!--          {-->
-<!--            data: [639, 465, 493, 478, 589, 632, 674],-->
-<!--            backgroundColor: colors[1]-->
-<!--          }]-->
-<!--      },-->
-<!--      options: {-->
-<!--        legend: {-->
-<!--          display: false-->
-<!--        },-->
-<!--        scales: {-->
-<!--          xAxes: [{-->
-<!--            barPercentage: 0.4,-->
-<!--            categoryPercentage: 0.5-->
-<!--          }]-->
-<!--        }-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
-
-<script>
+<!--script>
 
     Chart.defaults.global.defaultFontFamily = "Rubik";
     Chart.defaults.global.defaultFontSize = 11;
@@ -746,30 +625,7 @@
             options: chartOptions
         });
     };
-</script>
-
-<script>
-    // And for a doughnut chart
-    var ctx = document.getElementById("myChart").getContext('2d');
-
-    Chart.defaults.global.defaultFontFamily = "Rubik";
-    Chart.defaults.global.defaultFontSize = 11;
-
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Completed", "In progress", "Not Started",],
-            datasets: [{
-                backgroundColor: [
-                    "#45DAB6",
-                    "#28A3EF",
-                    "#FF5B79",
-                ],
-                data: [12, 28, 7]
-            }]
-        }
-    });
-</script>
+</script-->
 
 
 </body>

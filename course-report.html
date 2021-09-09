@@ -69,7 +69,7 @@
 
         <ul >
           <li>
-            <a href="#">
+            <a href="summary-dashboard.html">
 		              <span class="icon">
 		              	<i class="fas fa-border-all"></i></span>
               <span class="list">Summary Dashboard</span>
@@ -254,6 +254,16 @@
 
   //ON-READY FUNCTION
   (function() {
+    if(sessionStorage.getItem("lg") != 1){
+      location.href = "login.html";
+    }
+    if(sessionStorage.getItem("user") != null){
+      var user = JSON.parse(sessionStorage.getItem("user"));
+      //console.log("Check "+user);
+      //console.log("yes"+fname);
+      document.getElementById("profilename").innerHTML = user.email;
+      //document.getElementById("oladeEmail").innerHTML = user.email;
+    }
     //Calling the Course List API
     $.ajax({
       type: "GET",

@@ -214,11 +214,7 @@
                 <!--                                    <label  class="form-label" for="exampleFormControlSelect1">Actions</label>-->
                 <select class="form-control" id="exampleFormControlSelect1" style="font-size: 14px">
                   <option value="">--Select Course--</option>
-                  <option value="Project Management Comprehensive">Project Management Comprehensive</option>
-                  <option value="Business Analysis Comprehensive">Business Analysis Comprehensive</option>
-                  <!--                                    <option>Push reminder to potential students</option>-->
-                  <!--                                        <option>4</option>-->
-                  <!--                                        <option>5</option>-->
+                  
                 </select>
               </div>
             </div>
@@ -331,7 +327,15 @@
       console.log("Check "+user);
       //console.log("yes"+fname);
       document.getElementById("profilename").innerHTML = user.email;
-      //document.getElementById("oladeEmail").innerHTML = user.email;
+      
+      var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+      var dropDown = document.getElementById("exampleFormControlSelect1");
+      for(var i = 0; i < courselist.length; i++) {
+        var el = document.createElement("option");
+        el.innerHTML = courselist[i].name;
+        el.value = courselist[i].name;
+        dropDown.appendChild(el);
+      }
     }
 
     //Calling the Progress Stats API
@@ -660,104 +664,6 @@
       el.style.width = width;
     }
   }
-</script>
-
-<!--<script>-->
-
-<!--  /* bar chart */-->
-<!--  var chBar = document.getElementById("chBar");-->
-<!--  if (chBar) {-->
-<!--    new Chart(chBar, {-->
-<!--      type: 'bar',-->
-<!--      data: {-->
-<!--        labels: ["S", "M", "T", "W", "T", "F", "S"],-->
-<!--        datasets: [{-->
-<!--          data: [589, 445, 483, 503, 689, 692, 634],-->
-<!--          backgroundColor: colors[0]-->
-<!--        },-->
-<!--          {-->
-<!--            data: [639, 465, 493, 478, 589, 632, 674],-->
-<!--            backgroundColor: colors[1]-->
-<!--          }]-->
-<!--      },-->
-<!--      options: {-->
-<!--        legend: {-->
-<!--          display: false-->
-<!--        },-->
-<!--        scales: {-->
-<!--          xAxes: [{-->
-<!--            barPercentage: 0.4,-->
-<!--            categoryPercentage: 0.5-->
-<!--          }]-->
-<!--        }-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
-
-<script>
-
-  Chart.defaults.global.defaultFontFamily = "Rubik";
-  Chart.defaults.global.defaultFontSize = 12;
-
-  var barChartData = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "July",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ],
-    datasets: [
-
-      {
-        label: "Active Students",
-        backgroundColor: "#45DAB6",
-        borderWidth: 1,
-        data: [8,7,4,6,6,8,3,7,7,7,7,8]
-      },
-      {
-        label: "Inactive Students",
-        backgroundColor: "#FF5B79",
-        borderWidth: 1,
-        data: [6,9,7,3,3,4,4,6,4,6,4,6,]
-      }
-    ]
-  };
-
-  var chartOptions = {
-    responsive: true,
-    legend: {
-      position: "top"
-    },
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart"
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-    }
-  }
-
-  window.onload = function() {
-    var ctx = document.getElementById("canvas").getContext("2d");
-    window.myBar = new Chart(ctx, {
-      type: "bar",
-      data: barChartData,
-      options: chartOptions
-    });
-  };
 </script>
 
 
