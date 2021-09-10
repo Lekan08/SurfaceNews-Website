@@ -153,7 +153,7 @@
                 <i class="far fa-user card-icon-purple"></i>
                   </div>
                 <div class="card-text">
-                  <h3 id="total"></h3>
+                  <a href="user-management.html?progress=total" class="btn btn-primary stretched-link"><h3 id="total"></h3></a>
                   <p>Students Currently Enrolled</p>
                 </div>
               </div>
@@ -170,7 +170,7 @@
                   <i class="far fa-user card-icon-green"></i>
                 </div>
                 <div class="card-text">
-                  <h3 id="actives"></h3>
+                  <a href="user-management.html?progress=active" class="btn btn-primary stretched-link"><h3 id="actives"></h3></a>
                   <p>Active Students</p>
                 </div>
               </div>
@@ -187,7 +187,7 @@
                   <i class="far fa-user card-icon-red"></i>
                 </div>
                 <div class="card-text">
-                  <h3 id="inactives"></h3>
+                  <a href="user-management.html?progress=inactive" class="btn btn-primary stretched-link"><h3 id="inactives"></h3></a>
                   <p>Inactive Students</p>
                 </div>
               </div>
@@ -349,12 +349,14 @@
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
-        console.log("Hi"+result.length);
-        document.getElementById("actives").innerHTML = result.active;
-        document.getElementById("inactives").innerHTML = result.inactive;
+        console.log("Hi"+result.active[0]);
+        document.getElementById("actives").innerHTML = result.active.length;
+        document.getElementById("inactives").innerHTML = result.inactive.length;
         var total = 0;
-        total = result.active + result.inactive;
+        total = result.active.length + result.inactive.length;
         document.getElementById("total").innerHTML = total;
+        sessionStorage.setItem("actives", JSON.stringify(result.active));
+        sessionStorage.setItem("inactives", JSON.stringify(result.inactive));
       },
       error: function(result){
         console.log("Error"+result.statusText);
@@ -537,6 +539,7 @@
     }
 
     timestamp = timestamp - deficit;
+    if(course == "") course = "x";
     //Calling the Progress Report List API
     $.ajax({
       type: "GET",
