@@ -85,7 +85,7 @@
                     <li>
                         <a href="lead-report.html" class="">
                             <span class="icon"><i class="fas fa-filter"></i></span>
-                            <span class="list">Lead Management</span>
+                            <span class="list">Lead Reports</span>
                         </a>
                     </li>
                     <li>
@@ -414,6 +414,7 @@
             else if(clickstatus == "expired") enrol = "Expired";
             else enrol = "";
         }
+        console.log("yes "+enrol);
         var ex = document.getElementById("exampleFormControlSelect2");
         var program = ex.value;
         $.ajax({
@@ -691,6 +692,7 @@
         if(jsonData.length < (page * records_per_page)){
             total = jsonData.length;
         }
+        if(total <= 0) return;
         for (var i = (page-1) * records_per_page; i < total; i++) {
             var prog = jsonData[i].program;
             if(prog == null){

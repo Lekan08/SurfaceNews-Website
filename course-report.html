@@ -263,77 +263,59 @@
       //console.log("yes"+fname);
       document.getElementById("profilename").innerHTML = user.email;
       //document.getElementById("oladeEmail").innerHTML = user.email;
+
+      var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+      var dropDown = document.getElementById("exampleFormControlSelect1");
+      for(var i = 0; i < courselist.length; i++) {
+        var el = document.createElement("option");
+        el.innerHTML = courselist[i].name;
+        el.value = courselist[i].id;
+        dropDown.appendChild(el);
+      }
     }
-    //Calling the Course List API
+
+    courses = courselist;
+    jsonData = courselist;
+    changePage(1);
+
+    var e = document.getElementById("exampleFormControlSelect1");
+    var course = e.value;
     $.ajax({
       type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
         request.setRequestHeader("Access-Control-Allow-Origin", "*");
       },
-      url: wordpressUrl + "/wpusers/getCourseReports",
+      url: wordpressUrl + "/wpusers/getCourseStats/" + course,
       contentType: "application/json",
       dataType: 'json',
       success: function(result){
         console.log("Hi"+result.length);
-        courses = result;
-        jsonData = result;
+        notStarted = result.notStarted;
+        inProgress = result.inProgress;
+        completed = result.completed;
+        var total = notStarted + inProgress + completed;
+        document.getElementById("total").innerHTML = total;
 
-        //Preparing the Select List
-        var dropDown = document.getElementById("exampleFormControlSelect1");
-        for(var i = 0; i < result.length; i++) {
-          var el = document.createElement("option");
-          el.innerHTML = result[i].name;
-          el.value = result[i].id;
-          dropDown.appendChild(el);
-        }
+        // And for a doughnut chart
+        var ctx = document.getElementById("myChart").getContext('2d');
+        Chart.defaults.global.defaultFontFamily = "Rubik";
+        Chart.defaults.global.defaultFontSize = 14;
 
-        var e = document.getElementById("exampleFormControlSelect1");
-        var course = e.value;
-        $.ajax({
-          type: "GET",
-          beforeSend: function(request) {
-            request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-            request.setRequestHeader("Access-Control-Allow-Origin", "*");
-          },
-          url: wordpressUrl + "/wpusers/getCourseStats/" + course,
-          contentType: "application/json",
-          dataType: 'json',
-          success: function(result){
-            console.log("Hi"+result.length);
-            notStarted = result.notStarted;
-            inProgress = result.inProgress;
-            completed = result.completed;
-            var total = notStarted + inProgress + completed;
-            document.getElementById("total").innerHTML = total;
-
-            // And for a doughnut chart
-            var ctx = document.getElementById("myChart").getContext('2d');
-
-            Chart.defaults.global.defaultFontFamily = "Rubik";
-            Chart.defaults.global.defaultFontSize = 14;
-
-            var myDoughnutChart = new Chart(ctx, {
-              type: 'doughnut',
-              data: {
-                labels: ["Completed", "In progress", "Not Started",],
-                datasets: [{
-                  backgroundColor: [
-                    "#45DAB6",
-                    "#28A3EF",
-                    "#FF5B79",
-                  ],
-                  data: [completed, inProgress, notStarted]
-                }]
-              }
-            });
-          },
-          error: function(result){
-            console.log("Error"+result.statusText);
+        var myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ["Completed", "In progress", "Not Started",],
+            datasets: [{
+              backgroundColor: [
+                "#45DAB6",
+                "#28A3EF",
+                "#FF5B79",
+              ],
+              data: [completed, inProgress, notStarted]
+            }]
           }
-        })
-    
-        changePage(1);
+        });
       },
       error: function(result){
         console.log("Error"+result.statusText);
