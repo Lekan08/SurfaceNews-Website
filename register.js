@@ -5,8 +5,9 @@ const phonenumberEl = document.querySelector('#phonenumber');
 const passwordEl = document.querySelector('#password');
 const confirmPasswordEl = document.querySelector('#confirm-password');
 
+/*
 const form = document.querySelector('#signup');
-
+*/
 
 
 const checkFirstname = () => {
