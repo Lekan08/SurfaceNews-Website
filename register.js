@@ -5,9 +5,8 @@ const phonenumberEl = document.querySelector('#phonenumber');
 const passwordEl = document.querySelector('#password');
 const confirmPasswordEl = document.querySelector('#confirm-password');
 
-/*
+
 const form = document.querySelector('#signup');
-*/
 
 
 const checkFirstname = () => {
@@ -70,10 +69,11 @@ const checkEmail = () => {
 const checkPhonenumber = () => {
     let valid = false;
     const phonenumber = phonenumberEl.value.trim();
+    console.log(phonenumber);
     if (!isRequired(phonenumber)) {
-        showError(phonenumberEl, 'Phonenumber cannot be blank.');
-    } else if (!isPhonenumberlValid(email)) {
-        showError(phonenumberEl, 'Phonenumber is not valid.')
+        showError(phonenumberEl, ' Phone number cannot be blank.');
+    } else if (!isPhonenumberValid(phonenumber)) {
+        showError(phonenumberEl, 'Phonenumber must not contain letters.')
     } else {
         showSuccess(phonenumberEl);
         valid = true;
@@ -125,7 +125,7 @@ const isEmailValid = (email) => {
 };
 
 const isPhonenumberValid = (phonenumber) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
     return re.test(phonenumber);
 };
 
