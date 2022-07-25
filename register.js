@@ -1,4 +1,4 @@
-const firstnameEl = document.querySelector('#firstname');
+const firstnameE1 = document.querySelector('#firstname');
 const lastnameEl = document.querySelector('#lastname');
 const emailEl = document.querySelector('#email');
 const phonenumberEl = document.querySelector('#phonenumber');
@@ -16,14 +16,14 @@ const checkFirstname = () => {
     const min = 3,
         max = 25;
 
-    const firstname = firstnameEl.value.trim();
+    const firstname = firstnameE1.value.trim();
 
     if (!isRequired(firstname)) {
-        showError(firstnameEl, 'firstname cannot be blank.');
+        showError(firstnameE1, 'firstname cannot be blank.');
     } else if (!isBetween(firstname.length, min, max)) {
-        showError(firstnameEl, `firstname must be between ${min} and ${max} characters.`)
+        showError(firstnameE1, `firstname must be between ${min} and ${max} characters.`)
     } else {
-        showSuccess(firstnameEl);
+        showSuccess(firstnameE1);
         valid = true;
     }
     return valid;
@@ -125,7 +125,7 @@ const isEmailValid = (email) => {
 };
 
 const isPhonenumberValid = (phonenumber) => {
-    const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{5})$/;
     return re.test(phonenumber);
 };
 
