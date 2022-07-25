@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Registeration</title>
+    <title> COMPLETE USER INVITATION</title>
     <link rel="stylesheet" href="register.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <form id="signup" class="form">
-            <h1><strong> CREATE YOUR ACCOUNT</strong></h1>
+            <h1><strong> COMPLETE USER INVITATION</strong></h1>
             <div class="form-field">
                 <label for="firstname">First name:</label>
                 <input type="text" name="firstname" id="firstname" autocomplete="off" placeholder="Enter your First name">
@@ -36,9 +36,9 @@
             <!-- <div class="form-field"> -->
                 <label for="maleBtn">Sex:</label><br>
                 <label for="maleBtn">Male</label>
-                <input type="radio" name="sex" id="sex" value="male"> &nbsp;  &nbsp;
+                <input type="radio" name="sex" id="sex"> &nbsp;  &nbsp;
                 <label for="femaleBtn">Female</label>
-                <input type="radio" name="sex" id="sex1" value="female">
+                <input type="radio" name="sex" id="sex">
                 <!-- <small></small> -->
             <!-- </div> -->
 
@@ -50,30 +50,30 @@
 
             <div class="form-field">
                 <label for="phonenumber">Phone number:</label>
-                <input type="tel" name="phonenumber" id="phonenumber" placeholder="Enter your Phone number">
+                <input type="phonenumber" name="phonenumber" id="phonenumber" autocomplete="off" placeholder="Enter your Phone number">
                 <small></small>
             </div>
 
             <div class="form-field">
                 <label for="Dob">Choose your Date of Birth:</label>
                 <!-- <input type="dob" name="dob" id="dob" autocomplete="off" > -->
-                <select id="month">
-                    <option value="">--Select Month--</option>
-                    <option value="01">January</option>
-                    <option value="02">Febuary</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
+                <select name="month">
+                    <option value="Month">Month</option>
+                    <option value="January">January</option>
+                    <option value="Febuary">Febuary</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
                 </select>
-                <select id="day">
-                    <option value="">--Select Day--</option>
+                <select name="Day">
+                    <option value="Day">Day</option>
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -107,8 +107,8 @@
                     <option value="31">31</option>
                 </select>
                 
-                <select id="year">
-                    <option value="">--Select Year--</option>
+                <select name="Year">
+                    <option value="year">Year</option>
                     <option value="1900">1900</option>
                     <option value="1901">1901</option>
                     <option value="1902">1902</option>
@@ -241,11 +241,11 @@
             <div class="form-field">
                 <label for="username">Confirm Password:</label>
                 <input type="password" name="confirm-password" id="confirm-password" autocomplete="off"
-                    placeholder="Re-enter your password">
+                    placeholder="Reenter your password">
                 <small></small>
             </div>
             <div class="form-field">
-                <button type="button" class="btn  pry-btn" onclick="validate(event);">Sign Up</button>
+                <button type="button" class="btn  pry-btn" onclick="validate(event);">Signup</button>
             </div>
         </form>
     </div>
@@ -258,58 +258,38 @@
 
     <script src="register.js"></script>
 
-<script>
-var url = "https://surfacenewservice.herokuapp.com";
 
-    function validate(event){
-        var e = document.getElementById("year");
-                    var pType = e.value;
-        var e1 = document.getElementById("month");
-                    var pType1 = e1.value;
-        var e2 = document.getElementById("day");
-                    var pType2 = e2.value;
-        var raw = JSON.stringify({
-                sex : document.getElementById("sex").value,
-                phoneNumber : document.getElementById("phonenumber").value,
-                email : document.getElementById("email").value,
-                password : document.getElementById("password").value,
-                dayOfBirth : pType2,
-                fname : document.getElementById("firstname").value,
-                lname : document.getElementById("lastname").value,
-                monthOfBirth : pType1,
-                yearOfBirth : pType,
-            });
-            console.log(raw);
+
+
+<script>
+     function validate(event){
         //Calling the API - 
         $.ajax({
     	    type: "POST",
        	    beforeSend: function(request) {
        	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	    },
-            url: url + "/Reporters/CreateReporter",
+            url: "http://surfacenewservice.herokuapp.com/Reporters/CreateReporter",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
+                username : document.getElementById("email").value,
                 sex : document.getElementById("sex").value,
-                phoneNumber : document.getElementById("phonenumber").value,
+                phoennumber : document.getElementById("phonenumber").value,
                 email : document.getElementById("email").value,
                 password : document.getElementById("password").value,
-                dayOfBirth : pType2,
-                fname : document.getElementById("firstname").value,
-                lname : document.getElementById("lastname").value,
-                monthOfBirth : pType1,
-                yearOfBirth : pType,
+                dayOfBirth : document.getElementById("dayOfBirth").value,
+                fname : document.getElementById("fname").value,
+                lname : document.getElementById(" lname").value,
+                monthOfBirth : document.getElementById(" monthOfBirth").value,
+                yearOfBirth : document.getElementById(" yearOfBirth").value,
             }),
             success: function(result){
-                console.log("Here "+result);
-                swal({
-                    title: result['status'],
-                    text: result['message'],
-                    icon: "success",
-                })
-                .then(() => {
-                    location.reload();
-                });
+                //console.log("Here "+result);
+                sessionStorage.setItem("user", JSON.stringify(result["user"]));
+                sessionStorage.setItem("lg", 1);
+                sessionStorage.setItem("url", url);
+                location.href = "user-management.html";
             },
             error: function(result){
                 var json = $.parseJSON(result.responseText);
