@@ -281,7 +281,7 @@
   var completed = 0;
 
   //ON-READY FUNCTION
-  (function() {
+  /*(function() {
     if(sessionStorage.getItem("lg") != 1){
       location.href = "login.html";
     }
@@ -290,7 +290,7 @@
       //console.log("Check "+user);
       //console.log("yes"+fname);
       document.getElementById("profilename").innerHTML = user.email;
-      //document.getElementById("oladeEmail").innerHTML = user.email;
+      //document.getElementById("oladeEmail").innerHTML = user.email;*/
 
       var courselist = JSON.parse(sessionStorage.getItem("courselist"));
       var dropDown = document.getElementById("exampleFormControlSelect1");

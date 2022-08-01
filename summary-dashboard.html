@@ -325,15 +325,15 @@
     var records_per_page = 20;
     var selectedLead = {};
 
-    //ON-READY FUNCTION
-    (function() {
-        if(sessionStorage.getItem("lg") != 1){
-          location.href = "login.html";
-        }
-        if(sessionStorage.getItem("user") != null){
+    /*ON-READY FUNCTION
+        (function() {
+         if(sessionStorage.getItem("lg") != 1){
+           location.href = "login.html";
+         }
+         if(sessionStorage.getItem("user") != null){
           var user = JSON.parse(sessionStorage.getItem("user"));
-          document.getElementById("profilename").innerHTML = user.email;
-        }
+           document.getElementById("profilename").innerHTML = user.email;
+         }*/
 
         //Calling the Course Chart API
         $.ajax({
@@ -542,7 +542,7 @@
         $(".hamburger").click(function(){
             $(".wrapper").toggleClass("active")
         })
-    })();
+    ();
 
     //function to set the css
     function setCSS(){
@@ -597,7 +597,7 @@
             },
 
         ]
-    };
+    +};
 
     var chartOptions = {
         responsive: true,
