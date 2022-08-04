@@ -346,7 +346,7 @@
   var discount = 0;
 
   //ON-READY FUNCTION
-  (function() {
+ /* (function() {
     if(sessionStorage.getItem("lg") != 1){
       location.href = "login.html";
     }
@@ -354,7 +354,7 @@
       var user = JSON.parse(sessionStorage.getItem("user"));
       //console.log("Check "+user);
       //console.log("yes"+fname);
-      document.getElementById("profilename").innerHTML = user.email;
+      document.getElementById("profilename").innerHTML = user.email;*/
       
       var courselist = JSON.parse(sessionStorage.getItem("courselist"));
       var dropDown = document.getElementById("exampleFormControlSelect2");

@@ -26,7 +26,11 @@
             </div>
 
             <div class="form-field">
+<<<<<<< HEAD
                 <label for="password"> Password:</label>
+=======
+                <label for="password">Password:</label>
+>>>>>>> fea49c20b4dd929d24179b8cf15d3beb901826f5
                 <input type="password" name="password" id="password" autocomplete="off"
                     placeholder="Enter a strong password">
                 <small></small>
@@ -34,6 +38,10 @@
             <div class="form-field">
                 <!-- <input type="submit" value="login" class="btn" onclick="validate(event);"> -->
                 <button type="button" class="btn  pry-btn" onclick="validate(event);">Login</button>
+<<<<<<< HEAD
+=======
+                <p>Don't have an account? <a href="register.html" class="pl-5 pt-2 forgot-password float-end" style="color: #007bff;" > sign up here </a></p>
+>>>>>>> fea49c20b4dd929d24179b8cf15d3beb901826f5
                 <a href="forgetpassword.html" class="pl-5 pt-2 forgot-password float-end" style="color: #007bff;">Forgot Password?</a>
             </div>
         </form>
@@ -44,7 +52,10 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fea49c20b4dd929d24179b8cf15d3beb901826f5
     <script>
     var url = "https://surfacenewservice.herokuapp.com";
     var wordpressUrl = "https://surfacenewservice.herokuapp.com";
@@ -53,6 +64,10 @@
             validate(event);
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> fea49c20b4dd929d24179b8cf15d3beb901826f5
     function validate(event){
         event.preventDefault();
         console.log("segun");
@@ -71,11 +86,19 @@
                 password : document.getElementById("password").value
             }),
             success: function(result){
+<<<<<<< HEAD
                 console.log("Here "+JSON.stringify(result));
                  sessionStorage.setItem("user", JSON.stringify(result["data"]));
                 // sessionStorage.setItem("lg", 1);
                 // sessionStorage.setItem("url", url);
                  location.href = "dashboard.html";
+=======
+                console.log("Here "+result);
+                sessionStorage.setItem("user", JSON.stringify(result["user"]));
+                sessionStorage.setItem("lg", 1);
+                sessionStorage.setItem("url", url);
+                location.href = "loginPAGE.html";
+>>>>>>> fea49c20b4dd929d24179b8cf15d3beb901826f5
             },
             error: function(result){
                 var json = $.parseJSON(result.responseText);
@@ -89,5 +112,11 @@
 
     }
 </script>
+<<<<<<< HEAD
 </body>
+=======
+    </script>
+</body>
+
+>>>>>>> fea49c20b4dd929d24179b8cf15d3beb901826f5
 </html>

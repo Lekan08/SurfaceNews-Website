@@ -382,9 +382,10 @@
 
     //ON-READY FUNCTION
     (function() {
-        if(sessionStorage.getItem("lg") != 1){
-            location.href = "login.html";
-        }
+        // if(sessionStorage.getItem("lg") != 1){
+        //     location.href = "login.html";
+        // }
+
         if(sessionStorage.getItem("user") != null){
             var user = JSON.parse(sessionStorage.getItem("user"));
             console.log("Check "+user);
