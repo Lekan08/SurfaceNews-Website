@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Edit Your Ad</title>
+<title>Create post  </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, shrink-to-fit=no">
 <meta name="theme-color" content="#293e80">
@@ -31,7 +31,7 @@
 <div id="logobar">
  <div class="titlebar">
   <a class="logo" href="//www.classifiedads.com/" title="Classified Ads" tabindex="1">
-   <img class=smash src="//static.classifiedads.com/_/logo-spaced-500x60.gif" alt="Edit Your Ad">
+   <img class=smash src="assets/images/Olade_logo_white.png" alt="Creat post" style="width:10%; height:30%;">
    <img class=unsmash style='display:none;' src="//static.classifiedads.com/_/logo-unsmash-350x50.png" alt="Edit Your Ad">
   </a>
   <div class="titleend nomob"><div>
@@ -44,10 +44,9 @@
 <div id="king" class="flowcon">
 <div class=nobukkit>
     <h1 style='margin:10px 0;'>
-          Editing ad 1018822665
+        SURFACE NEWS POST
                 <div class=nomob style="float:right;font-size:12px;margin-top:12px;">
-            Need help? Check out our quick <a class="tutorial" href="/info.php?tutorial#101">Tutorial Video</a>
-            on "How to Post an Ad"
+            <a href="#">Neep help?, contact us here </a>
         </div>
     </h1>
 
@@ -68,17 +67,11 @@
             </div>
             <div class="col-md-4 cads-cat0">
                 <label class="select">
-                    <select id="category" name="category" tabindex="2">
+                    <select id="category" class="form control" name="category" tabindex="2">
                         <option value="" selected disabled>Select category...</option>
-                        <option value="15">Jobs</option>
-                        <option value="336">Vehicles</option>
-                        <option value="4">Items for Sale</option>
-                        <option value="17">Pets</option>
-                        <option value="18">Real Estate</option>
-                        <option value="468">For Rent</option>
-                        <option value="462">Services</option>
-                        <option value="326">Personals</option>
-                        <option value="5">Community</option>
+                        <option value="#">Admin</option>
+                        <option value="#">Head Reporter</option>
+                        <option value="#">Reporter</option>
                     </select>
                     <i></i>
                 </label>
@@ -109,35 +102,10 @@
         </div>
     </div>
 
-    <div class=edit-cont id=cont-sect >
-        <form name=posting id=posting action='/post_go.php' method=post>
-            <input type=hidden name=email_default value="Brendadoucet4295@gmail.com"><input type=hidden name=aid value="1018822665">
-            <input type="hidden" class="cat0in" value="326">
-            <input type="hidden" class="cat1in" value="331">
-            <input type="hidden" name="cid" id="finalcid" value="331">
-            <input type="hidden" name="rid" id="finalrid" value="5341">
-            <input type="hidden" name="lname" id="finallname" value="Boston">
-            <div class=fhead>Ad title</div>
-            <div class=field><input class=beauteous type=text name=title size=40 value="Relationship" maxlength=255></div>
-            <div class=n-personals style="display:none;">
-                <div class="fhead n-jobs" >Asking price</div>
-                <div class="fhead y-jobs" style="display:none;">Compensation</div>
-                <div class=field><input class=beauteous type=text name=price size=20 value="" maxlength=20></div>
-            </div>
-            <div class=y-casual>
-                <div class="fhead">I am a</div>
-                <select name=seeking size=5 class=multisel>
-                    <option value=m4m >Man seeking a man</option>
-                    <option value=m4w >Man seeking a woman</option>
-                    <option value=w4m >Woman seeking a man</option>
-                    <option value=w4w >Woman seeking a woman</option>
-                    <option value=o4o selected>Other</option>
-                </select>
-            </div>
             <div class=fhead>Description
                 <img id="description-tip" src="//static.classifiedads.com/_/tool-tip.png">
             </div>
-            <div class=field><textarea id=post_desc name=description rows=15 style='width:90%;'>&lt;p&gt;Loneliness sucks&amp;nbsp;&lt;/p&gt;
+            <div class=field><textarea id=post_desc name=description rows=15 style='width:90%;'>&lt;p&gt;Write a Post &amp;nbsp;&lt;/p&gt;
 </textarea></div>
 
             <div class=y-autos style="display:none;">
@@ -161,67 +129,8 @@
                 <div class=fhead>Baths</div>
                 <div class=field><select class=beauteous name=baths style='width:200px;'><option selected>-Select-</option><option>0</option><option>1</option><option>1½</option><option>2</option><option>2½</option><option>3</option><option>3½</option><option>4+</option></select></div>
             </div>
-            <div class=fhead>Your name</div>
-            <div class=field><input class=beauteous type=text name=fname size=40 value="Kayla" maxlength=80></div>
-                        <div class=n-personals >
-                <div class=fhead>Phone</div>
-                <div class=field>
-                    <input class=beauteous type=text name=phone size=30 value="" maxlength=20>
-                    <span class=noti><label><input name=privatephone type=checkbox checked tabindex=-1>
-                    Keep phone private</label></span>
-                    <img id="phone-tip" src="//static.classifiedads.com/_/tool-tip.png">
-                </div>
-            </div>
-            <div class=fhead>City, town, or neighborhood</div>
-            <div class=field><input class=beauteous type=text name=city size=30 value="Dallas" maxlength=80></div>
-            <div class="fhead y-usa" >Zip code</div>
-            <div class="fhead n-usa" style="display:none;">Postal code</div>
-            <div class=field><input class=beauteous type=text name=zip size=20 value="75001 " maxlength=20></div>
-            <div class=fhead>Expire on</div>
-            <div class=field>
-                <input class=beauteous type=text id="time_expires" name=time_expires size=20 value="Dec 27, 2022" maxlength=20>
-            </div>
-                                                                        <!-- iphone 5.0 and lower doesn't support the file upload functionality-->
-
-            <div class=fhead id='imgsectiontitle'>
-                Images 
-                <img id="images-tip" src="//static.classifiedads.com/_/tool-tip.png">
-                <span class="nomob n-personals" style="padding-left:30px;">
-                    Watch our quick <a href="/info.php?tutorial#103" class="tutorial">Tutorial Video</a> on "How to Upload a photo"
-                </span>
-                <span class=y-personals style="padding-left:30px;color:#a00;">Nude or explicit photos will be removed.</span>
-            </div>
-            <div class=field>
-                <div id='hisubmit'>
-                    <input class=flat type=submit value='Post this ad'>
-                </div>
-                <div id='imglist' class=uploadpreview><div id=imgblank style='cursor:auto;display:none;'><img width=80 height=60 src='//static.classifiedads.com/_/no_image.gif' alt='no image'></div><div id="1018822665_qlQ4-A"><img width=80 height=60 src="https://images5.classifiedads.com/1018822665_qlQ4-A" alt='existing image'><br><img class=imgctrl src='//static.classifiedads.com/_/img_promote.gif' onclick='promoteimage(this.parentNode);' alt='make first' title='make first'><img class=imgctrl src='//static.classifiedads.com/_/img_delete.gif' onclick='removeimage(this.parentNode);' alt='remove' title='remove'></div></div>
-                <input type=hidden name=images id='images' value="1018822665_qlQ4-A">
-            </div>
-        </form>
-        <div id='imgcontrols'>
-            <div id='filechooser'></div>
-            <div id='imgerr'></div>
-        </div>
-        <div id='imgfull' style='display:none;'><span class=noti>Maximum of 5 images reached</span></div>
-
-        <div id=terms>
-            By posting an ad on ClassifiedAds.com, you agree to to be bound by our
-            <a href='/info.php?terms' target=_blank>Terms of Use</a> and our
-            <a href='/info.php?privacy' target=_blank>Privacy Policy</a>.
-            You agree we may moderate ClassifiedAds access/use in our sole discretion,
-            and that your ad may take up to 36 hours to go live. See our list of
-            <a href='/info.php?prohibited-items' target=_blank>Prohibited Items</a> before posting.
-        </div>
-
-        <div id=losubmit style='display:none;'>
-            <a class=flat href=#>Post this ad</a>
-        </div>
-
-        <div class=clearer></div>
-    </div><!-- edit-cont -->
-    <div class=clearer></div>
-</div><!-- nobukkit -->
+            
+    
 <style>
     .cke_bottom { padding-top: 0; }
     #cke_post_desc { margin: 3px 0; }
