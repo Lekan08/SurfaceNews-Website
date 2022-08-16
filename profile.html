@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
     <link rel="apple-touch-icon" sizes="76x76" href="assets/images/olade-logo-blue.png">
     <link rel="icon" type="image/png" href="assets/images/olade-logo-blue.png">
@@ -21,15 +22,14 @@
     <title>Login</title>
 </head>
 <body>
-    <ul class="nav-links">
-        <li>
-          <a href="dashboard.html" class="active">
-            <i class='bx bx-grid-alt' ></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+
+  </div>
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -41,15 +41,15 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" id="name" placeholder="enter first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" id="surname" placeholder="enter surname" vaue=""></div>
+                    <div class="col-md-6"><label class="labels">firstname</label><input type="text" class="form-control" id="firstname" placeholder="enter first name" value=""></div>
+                    <div class="col-md-6"><label class="labels">lastname</label><input type="text" class="form-control" id="lastname" placeholder="enter surname" vaue=""></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" id="phonenumber" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">date of birth</label><input type="date" class="form-control" id="" placeholder="enter date of birth " value=""></div>
+                    <div class="col-md-12"><label class="labels">date of birth</label><input type="date" class="form-control" id="DoB" placeholder="enter date of birth " value=""></div>
                     <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" id="email" placeholder="enter email " value=""></div>
                     <div label for="gender"> Select you gender</label>
-                        <select name="gender">
+                       <select id="sex" name="gender">
                             <option value="none" selected>Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -102,13 +102,63 @@
 
 var url = "https://surfacenewservice.herokuapp.com";
 
-
+    //ON-READY FUNCTION
+    (function() {
+        // if(sessionStorage.getItem("lg") != 1){
+        //     location.href = "login.html";
+        // }
+        
+       var userInfo = JSON.parse(sessionStorage.getItem("user"));
+       console.log(userInfo);
+      var personalID = userInfo.personalID;
         $.ajax({
-    	    type: "POST",
+            type: "GET",
+            beforeSend: function(request) {
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "Reporter/getByIds/" + userInfo,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log(result);
+                //Preparing the Select List
+            },
+            error: function(result){
+                console.log("Error"+result.statusText);
+            }
+        })
+
+        $(".hamburger").click(function(){
+            $(".wrapper").toggleClass("active")
+        })
+    })();
+
+function validate(event) {
+    var bbbbbb = document.getElementById("DoB").value;
+        const dayyss = new Date(bbbbbb);
+        console.log(dayyss);
+        let dayx = "";
+        let monthx = "";
+        let yearx = "";
+        if (bbbbbb != null) {
+          dayx = dayyss.getDate();
+          monthx = dayyss.getMonth() + 1;
+          yearx = dayyss.getFullYear();
+        }
+        console.log(dayx);
+        console.log(monthx);
+        console.log(yearx);
+
+       var userInfo = JSON.parse(sessionStorage.getItem("user"));
+       console.log(userInfo);
+      var personalID = userInfo.personalID;
+        $.ajax({
+    	    type: "PUT",
        	    beforeSend: function(request) {
        	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	    },
-            url: url + "/Reporters/updateReporter",
+            url: url + "/Reporters/updateReporter" + "/" + personalID,
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
@@ -117,12 +167,11 @@ var url = "https://surfacenewservice.herokuapp.com";
                 state : document.getElementById("state").value,
                 country : document.getElementById("country").value,
                 email : document.getElementById("email").value,
-                password : document.getElementById("password").value,
-                dayOfBirth : pType2,
+                dayOfBirth : dayx,
                 fname : document.getElementById("firstname").value,
                 lname : document.getElementById("lastname").value,
-                monthOfBirth : pType1,
-                yearOfBirth : pType,
+                monthOfBirth : monthx,
+                yearOfBirth : yearx,
             }),
             success: function(result){
                 console.log("Here "+result);
@@ -136,6 +185,7 @@ var url = "https://surfacenewservice.herokuapp.com";
                 });
             },
             error: function(result){
+                console.log("Here "+result.responseText);
                 var json = $.parseJSON(result.responseText);
                 swal({
                     title: json.status,
@@ -144,7 +194,7 @@ var url = "https://surfacenewservice.herokuapp.com";
                 });
             }
         })
-
+    }
 </script>
 
 

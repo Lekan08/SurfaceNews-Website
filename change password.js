@@ -1,67 +1,67 @@
-var code = document.getElementById("password");
+var password = document.getElementById("password")
+  , new_password = document.getElementById("newPassword");
 
-var strengthbar = document.getElementById("meter");
-var display = document.getElementsByClassName("textbox")[0];
+document.getElementById('signupLogo').src = "";
+enableSubmitButton();
 
-code.addEventListener("keyup",
-    checkpassword(code.value)
-);
-
-
-function checkpassword(password) {
-    var strength = 0;
-    if (password.match(/[a-z]+/)) {
-        strength += 1;
-    }
-    if (password.match(/[A-Z]+/)) {
-        strength += 1;
-    }
-    if (password.match(/[0-9]+/)) {
-        strength += 1;
-    }
-    if (password.match(/[$@#&!]+/)) {
-        strength += 1;
-
-    }
-
-    if (password.length < 6) {
-        display.innerHTML = "minimum number of characters is 6";
-    }
-
-    if (password.length > 12) {
-        display.innerHTML = "maximum number of characters is 12";
-    }
-
-    switch (strength) {
-        case 0:
-            strengthbar.value = 0;
-            break;
-
-        case 1:
-            strengthbar.value = 25;
-            break;
-
-        case 2:
-            strengthbar.value = 50;
-            break;
-
-        case 3:
-            strengthbar.value = 75;
-            break;
-
-        case 4:
-            strengthbar.value = 100;
-            break;
-    }
+function validatePassword() {
+  if(password.value != new_password.value) {
+    new_password.setCustomValidity("");
+    return false;
+  } else {
+    new_password.setCustomValidity('');
+    return true; 
+  }
 }
-let pattern = new RegExp("^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$"); //Regex: At least 8 characters with at least 2 numericals
-let inputToListen = document.getElementById('pass-one'); // Get Input where psw is write
-let valide = document.getElementsByClassName('indicator')[0]; //little indicator of validity of psw
 
-inputToListen.addEventListener('input', function () { // Add event listener on input
-    if (pattern.test(inputToListen.value)) {
-        valide.innerHTML = 'ok';
-    } else {
-        valide.innerHTML = 'not ok'
+password.onchange = validatePassword;
+new_password.onkeyup = validatePassword;
+
+function enableSubmitButton() {
+  document.getElementById('submitButton').disabled = false;
+  document.getElementById('loader').style.display = 'none';
+}
+
+function disableSubmitButton() {
+  document.getElementById('submitButton').disabled = true;
+  document.getElementById('loader').style.display = 'unset';
+}
+
+function validateSignupForm() {
+  var form = document.getElementById('signupForm');
+  
+  for(var i=0; i < form.elements.length; i++){
+      if(form.elements[i].value === '' && form.elements[i].hasAttribute('required')){
+        console.log('There are some required fields!');
+        return false;
+      }
     }
-});
+  
+  if (!validatePassword()) {
+    return false;
+  }
+  
+  onSignup();
+}
+
+function onSignup() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    
+    disableSubmitButton();
+    
+    if (this.readyState == 4 && this.status == 200) {
+      enableSubmitButton();
+    }
+    else {
+      console.log('AJAX call failed!');
+      setTimeout(function(){
+        enableSubmitButton();
+      }, 1000);
+    }
+    
+  };
+  
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}

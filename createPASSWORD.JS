@@ -10,7 +10,7 @@ function validatePassword() {
     return false;
   } else {
     confirm_password.setCustomValidity('');
-    return true;
+    return true; 
   }
 }
 
