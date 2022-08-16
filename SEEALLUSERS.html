@@ -35,7 +35,7 @@
                 User Management
             </div>
             <div class="right_info">
-
+<!-- 
 
                 <div class="dropdown  pic">
                     <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,9 +44,9 @@
                     </div>
 
                     <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item text-black-50" href="loginPAGE.html" style="font-size: 14px"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                        <a class="dropdown-item text-black-50" href="logout.php" style="font-size: 14px"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -57,17 +57,11 @@
             <div class="inner__sidebar_menu">
 
                 <ul >
-                  <li>
-                    <a href="SEEALLUSERS.html" class="active">
-                        <span class="icon"><i class="fas fa-address-book"></i></span>
-                        <span class="list">User Management</span>
-                    </a>
-                </li>
                     <li>
                         <a href="dashboard.html">
 		              <span class="icon">
-		              	<i class="fas fa-border-all"></i></span>
-                            <span class="list">Summary Dashboard</span>
+		              	<i class="fas 	fa fa-bookmark"></i></span>
+                            <span class="list">Dashboard</span>
                         </a>
                     </li>
                     <li>
@@ -85,8 +79,8 @@
         <nav>
             <div class="asidebr-button">
               <i class='btn_next sidebarBtn'></i>
-              <span class="icon"><i class="fas fa-address-book"></i></span>
-                        <span class="list">ALL REGISTERED USER</span>
+              <span class="icon"><i class="fas 	fa fa-user"></i></span>&nbsp; &nbsp; &nbsp; &nbsp;
+                        <span class="list">ALL REGISTERED REPORTER</span>
             </div>
           </nav>
   
@@ -163,7 +157,7 @@
   
         listing_table.innerHTML = "";
   
-        listing_table.innerHTML += '<tbody><tr><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Sex</b></td><td><b>Date Of Birth</b></td><td><b>Email</b></td><td><b>Phone Number</b></td><td><b>Actions</b></td></tr>';
+        listing_table.innerHTML += '<tbody><tr><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Sex</b></td><td><b>Date Of Birth</b></td><td><b>Email</b></td><td><b>Phone Number</b></td><td><b>Region</b></td><td><b>Actions</b></td></tr>';
         var total = page * records_per_page;
         if(jsonData.length < (page * records_per_page)){
             total = jsonData.length;
@@ -174,7 +168,7 @@
             
             //console.log("mexid "+exams[i].id);
             var oneRecord = "";
-                oneRecord = '<tr><td>' + jsonData[i].fname + '</td><td>' + jsonData[i].lname + '</td><td>' + jsonData[i].sex + '</td><td>' + jsonData[i].dayOfBirth + "/" + jsonData[i].monthOfBirth + "/" + jsonData[i].yearOfBirth + '</td><td>' + jsonData[i].email + '</td><td>' + jsonData[i].phoneNumber + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                oneRecord = '<tr><td>' + jsonData[i].fname + '</td><td>' + jsonData[i].lname + '</td><td>' + jsonData[i].sex + '</td><td>' + jsonData[i].dayOfBirth + "/" + jsonData[i].monthOfBirth + "/" + jsonData[i].yearOfBirth + '</td><td>' + jsonData[i].email + '</td><td>' + jsonData[i].phoneNumber + '</td><td>' + jsonData[i].country + "/" + jsonData[i].state + "/" + jsonData[i].city + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
                                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
                                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
                                 <a class="dropdown-item" href="#">Placeholder</a></div></div></td></tr>';

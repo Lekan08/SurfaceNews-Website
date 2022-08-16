@@ -1,67 +1,67 @@
-var password = document.getElementById("password")
-  , confirm_password = document.getElementById("confirmPassword");
+var code = document.getElementById("password");
 
-document.getElementById('signupLogo').src = "https://s3-us-west-2.amazonaws.com/shipsy-public-assets/shipsy/SHIPSY_LOGO_BIRD_BLUE.png";
-enableSubmitButton();
+var strengthbar = document.getElementById("meter");
+var display = document.getElementsByClassName("textbox")[0];
 
-function validatePassword() {
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords Don't Match");
-    return false;
-  } else {
-    confirm_password.setCustomValidity('');
-    return true;
-  }
-}
+code.addEventListener("keyup",
+    checkpassword(code.value)
+);
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
 
-function enableSubmitButton() {
-  document.getElementById('submitButton').disabled = false;
-  document.getElementById('loader').style.display = 'none';
-}
-
-function disableSubmitButton() {
-  document.getElementById('submitButton').disabled = true;
-  document.getElementById('loader').style.display = 'unset';
-}
-
-function validateSignupForm() {
-  var form = document.getElementById('signupForm');
-  
-  for(var i=0; i < form.elements.length; i++){
-      if(form.elements[i].value === '' && form.elements[i].hasAttribute('required')){
-        console.log('There are some required fields!');
-        return false;
-      }
+function checkpassword(password) {
+    var strength = 0;
+    if (password.match(/[a-z]+/)) {
+        strength += 1;
     }
-  
-  if (!validatePassword()) {
-    return false;
-  }
-  
-  onSignup();
-}
+    if (password.match(/[A-Z]+/)) {
+        strength += 1;
+    }
+    if (password.match(/[0-9]+/)) {
+        strength += 1;
+    }
+    if (password.match(/[$@#&!]+/)) {
+        strength += 1;
 
-function onSignup() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    
-    disableSubmitButton();
-    
-    if (this.readyState == 4 && this.status == 200) {
-      enableSubmitButton();
     }
-    else {
-      console.log('AJAX call failed!');
-      setTimeout(function(){
-        enableSubmitButton();
-      }, 1000);
+
+    if (password.length < 6) {
+        display.innerHTML = "minimum number of characters is 6";
     }
-    
-  };
-  
-  xhttp.open("GET", "ajax_info.txt", true);
-  xhttp.send();
+
+    if (password.length > 12) {
+        display.innerHTML = "maximum number of characters is 12";
+    }
+
+    switch (strength) {
+        case 0:
+            strengthbar.value = 0;
+            break;
+
+        case 1:
+            strengthbar.value = 25;
+            break;
+
+        case 2:
+            strengthbar.value = 50;
+            break;
+
+        case 3:
+            strengthbar.value = 75;
+            break;
+
+        case 4:
+            strengthbar.value = 100;
+            break;
+    }
 }
+let pattern = new RegExp("^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$"); //Regex: At least 8 characters with at least 2 numericals
+let inputToListen = document.getElementById('pass-one'); // Get Input where psw is write
+let valide = document.getElementsByClassName('indicator')[0]; //little indicator of validity of psw
+
+inputToListen.addEventListener('input', function () { // Add event listener on input
+    if (pattern.test(inputToListen.value)) {
+        valide.innerHTML = 'ok';
+    } else {
+        valide.innerHTML = 'not ok'
+    }
+});
