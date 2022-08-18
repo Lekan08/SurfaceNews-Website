@@ -102,7 +102,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script>
-     
+   
      let sidebar = document.querySelector(".sidebar");
           let sidebarBtn = document.querySelector(".sidebarBtn");
           sidebarBtn.onclick = function() {
@@ -126,6 +126,7 @@
          $.ajax({
             type: "GET",
             beforeSend: function(request) {
+
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
