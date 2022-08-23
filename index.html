@@ -71,6 +71,7 @@
                 password : document.getElementById("password").value
             }),
             success: function(result){
+                console.log(result);
                 console.log("Here "+JSON.stringify(result));
                  sessionStorage.setItem("user", JSON.stringify(result["data"]));
                 // sessionStorage.setItem("lg", 1);

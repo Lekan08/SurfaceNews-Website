@@ -23,7 +23,7 @@ body {
     font-size: 16px;
     background-image: url("./assets/css/backgroundphoto.jpg");
     background-repeat: no-repeat;
-    /* background-size: 100%; */
+    background-size: 100%;
     background-position: center;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,6 @@ body {
     background-position: left;
     background-attachment: fixed;
   /* background-size: cover; */
-  background-color: #3785da;
 }
 
 .container {
@@ -45,8 +44,8 @@ body {
     border-top-left-radius: 29px;
     border-top-right-radius: 0px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0, 0.3);
-    width: 500px;
-    margin-left: 40%;
+    /* width: 500px; */
+    margin-right: 50%;
 }
 
 .form {
