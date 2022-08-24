@@ -21,7 +21,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container scrollbar scrollbar-primary mt-2 mx-auto" style="height: 600px; max-height: 600px; ">
       <form id="signup" class="form">
         <h1><strong> CREATE YOUR ACCOUNT</strong></h1>
         <div class="form-field">
@@ -423,7 +423,7 @@
               text: result["message"],
               icon: "success",
             }).then(() => {
-              location.reload();
+              location.href = "index.html";
             });
           },
           error: function (result) {
