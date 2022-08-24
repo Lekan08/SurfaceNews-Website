@@ -23,10 +23,8 @@
 </head>
 <body>
     <ul>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a class="active" href="dashboard.html">dashboard</a></li>
+        
       </ul>
 
   </div>
@@ -57,16 +55,16 @@
                         </select>
                         
                     <div style='text-align:center;'>
-                        <script type= "text/javascript" src = "profile.js"></script>
-                        Select Country (with states):   <select id="country" name ="country"></select> </br></br>
-                        Select State: <select name ="state" id ="state"></select>  </br> </br> <hr/>
+                        <script type= "text/javascript" src = ""></script>
+                           
+                         
                         
                     </div>
                     
                     <script language="javascript">
-                        populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
-                        populateCountries("country2");
-                        populateCountries("country2");
+                        populateCountries("", ""); // first parameter is id of country drop-down and second parameter is id of state drop-down
+                        populateCountries("");
+                        populateCountries("");
                     </script>
                               
         
@@ -96,11 +94,38 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https:</script>//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <script>
 
 var url = "https://surfacenewservice.herokuapp.com";
+let idx = "";
+let countryx = "";
+let statex = "";
+let cityx = "";
+let deleteFlagx = "";
+function ChangeDate (date) {
+const datee = new Date(date);
+console.log(datee);
+let month = "0";
+if (datee.getMonth() + 1 < 10) {
+    const myMonth = datee.getMonth() + 1;
+    month += myMonth;
+} else {
+    const myMonth = datee.getMonth() + 1;
+    month = myMonth;
+}
+let day = "0";
+if (datee.getDate() < 10) {
+    day += datee.getDate();
+} else {
+    day = datee.getDate();
+}
+const newDate = `${datee.getFullYear()}-${month}-${day}`;
+console.log(newDate);
+return newDate
+}
 
     //ON-READY FUNCTION
     (function() {
@@ -110,18 +135,37 @@ var url = "https://surfacenewservice.herokuapp.com";
         
        var userInfo = JSON.parse(sessionStorage.getItem("user"));
        console.log(userInfo);
-      var personalID = userInfo.personalID;
+      var personalID = userInfo.id;
         $.ajax({
             type: "GET",
             beforeSend: function(request) {
                 request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
                 request.setRequestHeader("Access-Control-Allow-Origin", "*");
             },
-            url: url + "Reporter/getByIds/" + userInfo,
+            url: url + "/Reporters/getByIds/" + personalID,
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
                 console.log(result);
+                document.getElementById("email").value = result[0].email;
+                var comingDate = result[0].yearOfBirth + "/" + result[0].monthOfBirth + "/" + result[0].dayOfBirth;
+                console.log(comingDate);
+                document.getElementById("DoB").value = ChangeDate(comingDate);
+                document.getElementById("phonenumber").value = result[0].phoneNumber;
+                document.getElementById("sex").value = result[0].sex;
+                document.getElementById("firstname").value = result[0].fname;
+                document.getElementById("lastname").value = result[0].lname;
+                idx = result[0].id;
+                countryx = result[0].country;
+                cityx = result[0].city;
+                statex = result[0].state;
+                deleteFlagx = result[0].deleteFlag
+
+
+
+
+               
+
                 //Preparing the Select List
             },
             error: function(result){
@@ -136,6 +180,7 @@ var url = "https://surfacenewservice.herokuapp.com";
 
 function validate(event) {
     var bbbbbb = document.getElementById("DoB").value;
+    console.log(bbbbbb);
         const dayyss = new Date(bbbbbb);
         console.log(dayyss);
         let dayx = "";
@@ -158,14 +203,14 @@ function validate(event) {
        	    beforeSend: function(request) {
        	        request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
        	    },
-            url: url + "/Reporters/updateReporter" + "/" + personalID,
+            url: url + "/Reporters/updateReporter",
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify({
                 sex : document.getElementById("sex").value,
                 phoneNumber : document.getElementById("phonenumber").value,
-                state : document.getElementById("state").value,
-                country : document.getElementById("country").value,
+                
+                
                 email : document.getElementById("email").value,
                 dayOfBirth : dayx,
                 fname : document.getElementById("firstname").value,
@@ -185,7 +230,7 @@ function validate(event) {
                 });
             },
             error: function(result){
-                console.log("Here "+result.responseText);
+                console.log("Here" + result.responseText);
                 var json = $.parseJSON(result.responseText);
                 swal({
                     title: json.status,

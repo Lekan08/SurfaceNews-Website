@@ -73,6 +73,7 @@
             success: function(result){
                 console.log("Here "+JSON.stringify(result));
                  sessionStorage.setItem("user", JSON.stringify(result["data"]));
+                 console.log(JSON.parse(sessionStorage.getItem("user")));
                 // sessionStorage.setItem("lg", 1);
                 // sessionStorage.setItem("url", url);
                  location.href = "dashboard.html";
