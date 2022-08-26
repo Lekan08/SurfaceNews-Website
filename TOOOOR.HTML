@@ -245,11 +245,10 @@ srcAtt.value = URL.createObjectURL(filex[0])
         const textt = document.getElementById("post_desc").value;
          console.log(textt);
         var raw = JSON.stringify({
-            title: document.getElementById("title").value,
-            content: document.getElementById("post_desc").value,
-            reporterID: document.getElementById("").value,
-            status: document.getElementById("pending").value,
-            approvedBy: document.getElementById("").value,
+          sex: document.getElementById("sex").value,
+          phoneNumber: document.getElementById("phonenumber").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
         });
         console.log(raw);
        
