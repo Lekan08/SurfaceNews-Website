@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 Classic editor</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+</head>
+<body>
+    <h1>Classic editor</h1>
+    <div id="editor">
+        <p>This is some sample content.</p>
+    </div>
+    <button type="button" class="btn pry-btn" onclick="validate(event);">
+        Post
+      </button>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+            function validate(params) {
+       const valueee = document.querySelector( '#editor' ).value;
+         console.log(valueee);
+        const textt = document.querySelector( '#editor' ).text;
+         console.log(textt);
+        const innerHH = document.querySelector( '#editor' ).innerHTML;
+         console.log(innerHH);
+        const innerTT = document.querySelector( '#editor' ).innerText;
+         console.log(innerTT);   
+    }
+    </script>
+</body>
+</html>
