@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/olade-logo-blue.png">
-    <link rel="icon" type="image/png" href="assets/images/olade-logo-blue.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/SFnews.jpeg">
+    <link rel="icon" type="image/png" href="assets/images/SFnews.jpeg">
     <!--    font-awesome-->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,7 +28,7 @@
 
     <div class="top_navbar">
         <div class="logo">
-            <a href="#"><img src="assets/images/Olade_logo_white.png" width="75px"></a>
+            <a href="#"><img src="assets/images/SFnews.png" width="120px"></a>
         </div>
         <div class="top_menu">
             <div class="home_link page-header">
@@ -89,6 +89,7 @@
                         <div class="row cads-cat-sect">
                             <div class="col-xs-12">
                                 <h4>Category:</h4>
+                                
                             </div>
                             <div class="col-md-4 cads-cat0">
                                 <label class="select">
@@ -130,8 +131,8 @@
                     <div id="imageView">
                         <img style="max-width: 40%; max-height: 20%; border-radius: 10px;" id="imggg" alt="">
                     </div>
-                    <h3 style="color:rgb(4, 4, 23);" ><label for="title">Title:</label></h3>
-                    <textarea id="title" name="newsTitle" rows="4" cols="50" style="font-size: 30px; color:rgb(4, 4, 34);"></textarea>
+                    <h3 style="color: blue;" ><label for="title">Title:</label></h3>
+                    <textarea id="title" name="newsTitle" rows="2" cols="40" style="font-size: 30px; color:blue"></textarea>
                 </div>
             </div>
               
@@ -240,16 +241,23 @@ srcAtt.value = URL.createObjectURL(filex[0])
    </script> 
 <script>
     var url = "https://surfacenewservice.herokuapp.com";
-
     function validate(event) {
-        const textt = document.getElementById("post_desc").value;
+          var userInfo = JSON.parse(sessionStorage.getItem("user"));
+       console.log(userInfo);
+      var personalID = userInfo.id;
+        const valueee = document.getElementById("post_desc").value;
+         console.log(valueee);
+        const textt = document.getElementById("post_desc").text;
          console.log(textt);
+        const innerHH = document.getElementById("post_desc").innerHTML;
+         console.log(innerHH);
+        const innerTT = document.getElementById("post_desc").innerText;
+         console.log(innerTT);
         var raw = JSON.stringify({
             title: document.getElementById("title").value,
             content: document.getElementById("post_desc").value,
-            reporterID: document.getElementById("").value,
+            reporterID: userInfo.id,
             status: document.getElementById("0").value,
-            approvedBy: document.getElementById("").value,
         });
         console.log(raw);
        
@@ -268,9 +276,8 @@ srcAtt.value = URL.createObjectURL(filex[0])
           data: JSON.stringify({
             title: document.getElementById("title").value,
             content: document.getElementById("post_desc").value,
-            reporterID: document.getElementById("").value,
-            status: document.getElementById("").value,
-            approvedBy: document.getElementById("").value,
+            reporterID: userInfo.id,
+            status: document.getElementById("0").value,
             
           }),
           success: function (result) {
