@@ -142,7 +142,7 @@
             <div class=fhead>Description
                 <img id="description-tip" src="//static.classifiedads.com/_/tool-tip.png">
             </div>
-            <div class=field><textarea id=post_desc name=description rows=15 style='width:90%;'>
+            <div class="field"><textarea id="post_desc" name="description" rows="15" onkeyup="getContent(this)" style='width:90%;'>
 </textarea></div>
 <button type="button" class="btn pry-btn" onclick="validate(event);">
     Post
@@ -226,6 +226,11 @@
     twq('track','PageView');
     </script>
    <script>
+    function getContent(value){
+        console.log(value);
+    }
+
+
     function handleSetImage() {
 //     const imagex = document.createElement("img");
 //     const styleAtt = document.createAttribute("style");
@@ -259,7 +264,7 @@ srcAtt.value = URL.createObjectURL(filex[0])
             reporterID: userInfo.id,
             status: document.getElementById("0").value,
         });
-        console.log(raw);
+        console.log(document.getElementById("post_desc").value);
        
         //Calling the API -
         $.ajax({
