@@ -27,7 +27,7 @@
       <form id="signup" class="form">
         <h1><strong> CREATE YOUR ACCOUNT</strong></h1>
         <div class="form-field">
-          <label for="firstname">First name:</label>
+          <label for="firstname"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">First name:</label>
           <input
           style="color: blue;"
             type="text"
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-field">
-          <label for="lastname">Last name:</label>
+          <label for="lastname"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Last name:</label>
           <input
           style="color: blue;"
             type="text"
@@ -55,16 +55,16 @@
         </div>
 
         <!-- <div class="form-field"> -->
-        <label for="maleBtn">Sex:</label><br />
-        <label for="maleBtn">Male</label>
+        <label for="maleBtn"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Sex:</label><br />
+        <label for="maleBtn"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Male</label>
         <input type="radio" name="sex" id="sex" class="form control"  value="male" /> &nbsp; &nbsp;
-        <label for="femaleBtn">Female</label>
+        <label for="femaleBtn"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Female</label>
         <input type="radio" name="sex" id="sex1"  class="form control" value="female" />
         <!-- <small></small> -->
         <!-- </div> -->
 
         <div class="form-field">
-          <label for="Email">Email:</label>
+          <label for="Email"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Email:</label>
           <input
           style="color: blue;"
             type="text"
@@ -78,7 +78,7 @@
         </div>
 
         <div class="form-field">
-          <label for="phonenumber">Phone number:</label>
+          <label for="phonenumber"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Phone number:</label>
           <input
           style="color: blue;"
             type="tel"
@@ -91,10 +91,10 @@
         </div>
 
         <div class="form-field">
-          <label for="Dob">Choose your Date of Birth:</label>
+          <label for="Dob"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Choose your Date of Birth:</label>
           <!-- <input type="dob" name="dob" id="dob" autocomplete="off" > -->
           <select id="month"  class="form control">
-            <option value="">--Select Month--</option>
+            <option value=""  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">--Select Month--</option>
             <option value="01">January</option>
             <option value="02">Febuary</option>
             <option value="03">March</option>
@@ -266,21 +266,21 @@
         </div>
 
         <div class="form-field">
-          <label for="countries">Select Your Country:</label>
+          <label for="countries"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select Your Country:</label>
           <select name="countries" class="form-control" id="countries" onchange="fetchStates()">
             <option value="">select a country</option>
           </select>
 
-          <label for="states">Select Your State:</label>
+          <label for="states" style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select Your State:</label>
           <select name="states" id="states"class="form-control" >
             <option value="">select a state</option>
           </select>
-          <label for="city">City:</label>
+          <label for="city"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">City:</label>
           <input type="text" name="cities" id="cities"class="form-control" placeholder="Enter Your city">
         </div>
 
         <div class="form-field">
-          <label for="password">Password:</label>
+          <label for="password"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Password:</label>
           <input
           style="color: blue;"
             type="password"
@@ -293,8 +293,8 @@
           <small></small>
         </div>
 
-        <div class="form-field">
-          <label for="username">Confirm Password:</label>
+        <div class="form-field" >
+          <label for="username"  style="color: blue; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Confirm Password:</label>
           <input
           style="color: blue;"
             type="password"
@@ -435,7 +435,7 @@
               text: result["message"],
               icon: "success",
             }).then(() => {
-              location.href = "index.html";
+              location.href = "login.html";
             });
           },
           error: function (result) {
