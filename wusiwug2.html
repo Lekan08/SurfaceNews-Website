@@ -1,34 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+      <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>CKEditor 5 Classic editor</title>
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
-</head>
-<body>
-    <h1>Classic editor</h1>
-    <div id="editor">
-        <p>This is some sample content.</p>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/SFnews.jpeg">
+    <link rel="icon" type="image/png" href="assets/images/SFnews.jpeg">
+    <!--    font-awesome-->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
+    
+    <title>Write a Post</title>
+        <!-- Make sure the path to CKEditor is correct. -->
+        <script src="ckeditor/ckeditor.js"></script>
+    </head>
+    <body>
+        
+<div class="wrapper" >
+
+    <div class="top_navbar">
+        <div class="logo">
+            <a href="#"><img src="assets/images/SFnews.png" width="120px"></a>
+        </div>
+        <div class="top_menu">
+            <div class="home_link page-header">
+
+                POST
+            </div>
+            <div class="right_info">
+<!-- 
+
+                <div class="dropdown  pic">
+                    <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
+                        <span class="pl-2" style="font-size: 14px" id="profilename"></span>
+                    </div>
+
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item text-black-50" href="logout.php" style="font-size: 14px"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
     </div>
-    <button type="button" class="btn pry-btn" onclick="validate(event);">
-        Post
-      </button>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-            function validate(params) {
-       const valueee = document.querySelector( '#editor' ).value;
+
+    
+    <div class="main_body " >
+
+        <div class="sidebar_menu ">
+            <div class="inner__sidebar_menu">
+
+                <ul >
+                    <li>
+                        <a href="dashboard.html">
+		              <span class="icon">
+		              	<i class="fas 	fa fa-bookmark"></i></span>
+                            <span class="list">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="SEEALLUSERS.html">
+		              <span class="icon">
+		              	<i class=" fas fa fa-user-plus	"></i></span>
+                            <span class="list">User Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html">
+                            <span class="icon"><i class="fas fa-cog"></i></span>
+                            <span class="list">Settings</span>
+                        </a>
+                    </li>
+            </div>
+        </div>
+        
+        <div class="sub-container" >
+            <div class="card">
+                <div class="card-body">
+                   
+                    <div class="container-fluid box-sized cads-form">
+                        <div class="row cads-cat-sect">
+                            <div class="col-xs-12">
+                                <h4>Category:</h4>
+                                
+                            </div>
+                            <div class="col-md-4 cads-cat0">
+                                <label class="select">
+                                    <select id="category" class="form control" name="category" tabindex="2">
+                                        <option value="" selected disabled>Select category...</option>
+                                        <option value="#">Admin</option>
+                                        <option value="#">Head Reporter</option>
+                                        <option value="#">Reporter</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+                            </div>
+                            <div class="col-md-4 cads-cat1" style="display: none;">
+                                <label class="select">
+                                    <select id="subcategory" name="category" tabindex="3">
+                                        <option value="" selected disabled>Select subcategory...</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                
+                        <div class="row cads-loc-sect" style="display: none;">
+                            <div class="col-xs-12">
+                                <h4>Location:</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="input">
+                                    <span class="loc-lname" >Boston</span>
+                                    <span class="loc-change"  tabindex="4"></span>
+                                    <input id="location" type="text" style="display: none;" tabindex="4" autocomplete="off" placeholder="City or Zip">
+                                    <ul style="display: none;">
+                                    </ul>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="file" id="imgFile" onchange="handleSetImage()" accept="image/gif, image/jpeg, image/png, image/jpg" />
+                    <div id="imageView">
+                        <img style="max-width: 40%; max-height: 20%; border-radius: 10px;" id="imggg" alt="">
+                    </div>
+                    <h3 style="color: blue;" ><label for="title">Title:</label></h3>
+                    <textarea id="title" name="newsTitle" rows="2" cols="40" style="font-size: 30px; color:blue"></textarea>
+                </div>
+            </div>
+              
+            
+           
+                     
+            <form method="POST" enctype="multipart/form-data" onsubmit="return check(event)">
+                <textarea name="editor1" id="editor1" rows="10" cols="80" style="visibility: visible; display: block;">
+                    
+                </textarea>
+                <input type="submit" name="submit_data">
+                <button type="button" class="btn pry-btn" onclick="validate(event);">
+                    Post
+                  </button>
+                 </div>
+            </div>
+         </div>
+        
+       </div></div></div>
+      
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor 4
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+            <script>
+                const check = (e) => {
+    const form = new FormData(e.target);
+    const formula = form.get("editor1");
+    console.log(formula);
+    return false
+};
+                  function validate(params) {
+                    
+            let rates = document.getElementsByName('editor1');
+            console.log(rates);
+       const valueee = document.getElementById("editor1").value;
          console.log(valueee);
-        const textt = document.querySelector( '#editor' ).text;
+        const textt = document.getElementById("editor1");
          console.log(textt);
-        const innerHH = document.querySelector( '#editor' ).innerHTML;
+        const innerHH = document.getElementById("editor1").innerHTML;
          console.log(innerHH);
-        const innerTT = document.querySelector( '#editor' ).innerText;
+        const innerTT = document.getElementById("editor1").innerText;
          console.log(innerTT);   
     }
-    </script>
-</body>
+            </script>
+        </form>
+
+<script>
+      function handleSetImage() {
+//     const imagex = document.createElement("img");
+//     const styleAtt = document.createAttribute("style");
+
+// // Set the value of the style attribute:
+// styleAtt.value = "max-width: 25%; max-height: 80px; border-radius: 10px;";
+//     imagex.setAttributeNode(styleAtt);
+const srcAtt =  document.createAttribute("src");
+const filex =  document.getElementById("imgFile").files;
+srcAtt.value = URL.createObjectURL(filex[0])
+    document.getElementById("imggg").setAttributeNode(srcAtt)
+}
+</script>
+
+
+
+    </body>
 </html>
