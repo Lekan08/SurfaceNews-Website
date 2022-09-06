@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/SFnews.jpeg">
+    <link rel="icon" type="image/png" href="assets/images/SFnews.jpeg">
+    <!--    font-awesome-->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,600;1,800&display=swap" rel="stylesheet">
+    <title>See all registered user</title>
+</head>
+<body style="  background: #e8edf5;  width: 100%; height: 100%;">
+
+<div class="wrapper" >
+
+    <div class="top_navbar">
+        <div class="logo">
+            <a href="#"><img src="assets/images/SFnews.png" width="90px"></a>
+        </div>
+        <div class="top_menu">
+            <div class="home_link page-header">
+
+                User Management
+            </div>
+            <div class="right_info">
+<!-- 
+
+                <div class="dropdown  pic">
+                    <div class="profile-pic dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/images/user-profile.png" class="img-rounded" style="width: 35px; height: 35px;border-radius: 50px"/>
+                        <span class="pl-2" style="font-size: 14px" id="profilename"></span>
+                    </div>
+
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item text-black-50" href="logout.php" style="font-size: 14px"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="main_body " >
+
+        <div class="sidebar_menu ">
+            <div class="inner__sidebar_menu">
+
+                <ul >
+                    <li>
+                        <a href="dashboard.html">
+		              <span class="icon">
+		              	<i class="fas 	fa fa-bookmark"></i></span>
+                            <span class="list">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html">
+                            <span class="icon"><i class="fas fa-cog"></i></span>
+                            <span class="list">Settings</span>
+                        </a>
+                    </li>
+            </div>
+        </div>
+                       
+        <div class="sub-container" >
+          <div class="card mt-3">
+            <div class="card-body">
+        <nav>
+            <div class="asidebr-button">
+              <i class='btn_next sidebarBtn'></i>
+              <span class="icon"><i class="fas 	fa fa-suitcase"></i></span>&nbsp; &nbsp; &nbsp; &nbsp;
+                        <span class="list">ALL POST</span>
+            </div>
+          </nav>
+  
+            <div class="user">
+                <table class="table " id="fi">                      
+                </table>
+                <div class="pagination">
+                    <a id="btn_prev" href="javascript:prevPage()">&laquo;</a>
+                    <a class="active" href="#"><span id="page"></span></a>
+                    <a id="btn_next" href="javascript:nextPage()">&raquo;</a>
+                </div>
+            </div>
+       </div></div></div>
+      
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script>
+   
+     let sidebar = document.querySelector(".sidebar");
+          let sidebarBtn = document.querySelector(".sidebarBtn");
+          sidebarBtn.onclick = function() {
+          sidebar.classList.toggle("active");
+          if(sidebar.classList.contains("active")){
+            sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+          }else{
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+          }
+         }
+
+        var jsonData = [];
+        var current_page = 1;
+        var records_per_page = 20;
+        var url = "https://surfacenewservice.herokuapp.com";
+
+
+
+        //ON-READY FUNCTION
+         (function() {
+         $.ajax({
+            type: "GET",
+            beforeSend: function(request) {
+
+                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            url: url + "/Articles/getAllArticles",
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+              jsonData = result;
+                
+              console.log(result)
+               changePage(1);
+            },
+            error: function(result){
+                console.log("Err"+result.status);
+            }
+        })
+
+        
+        function changePage(page){
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("fi");
+        var page_span = document.getElementById("page");
+  
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+  
+        listing_table.innerHTML = "";
+  
+        listing_table.innerHTML += '<tbody><tr><td><b>Title</b></td><td><b>Reporter  Name</b></td><td><b>Created Time</b></td><td><b>Status</b></td><td><b>Actions</b></td></tr>';
+        var total = page * records_per_page;
+        if(jsonData.length < (page * records_per_page)){
+            total = jsonData.length;
+        }
+        if(total <= 0) return;
+        for (var i = (page-1) * records_per_page; i < total; i++) {
+           
+            
+            //console.log("mexid "+exams[i].id);
+            var oneRecord = "";
+                oneRecord = '<tr><td>' + jsonData[i].title + '</td><td>' + jsonData[i].content + '</td><td>' + jsonData[i].reporterID + '</td><td>' + jsonData[i].status +  '</td><td>' + jsonData[i].email + '</td><td>' + jsonData[i].phoneNumber + '</td><td>' + jsonData[i].country + "/" + jsonData[i].state + "/" + jsonData[i].city + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
+                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
+                                <a class="dropdown-item" href="#">Placeholder</a></div></div></td></tr>';
+            
+            listing_table.innerHTML += oneRecord;
+        }
+        listing_table.innerHTML += '</tbody>';
+        page_span.innerHTML = page; 
+  
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+  
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+  
+    function numPages(){
+        return Math.ceil(jsonData.length / records_per_page);
+    }
+        
+
+        $(".hamburger").click(function(){
+            $(".wrapper").toggleClass("active")
+        })
+    })();
+ </script>
+
+</body>
+</html>
