@@ -12,6 +12,51 @@
     box-sizing: border-box;
 }
 
+/* na me do am */
+/* #loading {
+    height: 200px;
+    left: 50%;
+    margin: -100px 0 0 -100px;
+    position: absolute;
+    top: 50%;
+    width: 200px;
+  }
+  
+  #preloader {
+    background: #fff none repeat scroll 0 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 9999;
+  }
+  .loader {
+    display: flex;
+    align-items: center;
+  }
+  .bar {
+    display: inline-block;
+    width: 30px;
+    height: 47px;
+    background-color: rgba(62, 14, 150, 0.5);
+    border-radius: 300px;
+    animation: sca
+    le-up 1s linear infinite;
+  }
+  .bar:nth-last-child(2) {
+    height: 35px;
+    margin: 0 5px;
+    animation-delay: 0.25s;
+  }
+  
+  @keyframes scale-up {
+    20% {
+      background-color: rgb(45, 28, 139);
+      transform: scaleY(2);
+    }
+  } */
+  /* na me do am  */
 
 body {
     background-image: url("./assets/css/backgroundphoto.jpg");
