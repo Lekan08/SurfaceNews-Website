@@ -316,7 +316,7 @@
 </div>
 
 <!--Edit Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -351,7 +351,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -381,149 +381,149 @@
     var records_per_page = 20;
 
     //ON-READY FUNCTION
-    (function() {
-        if(sessionStorage.getItem("lg") != 1){
-            location.href = "login.html";
-        }
-        if(sessionStorage.getItem("user") != null){
-            var user = JSON.parse(sessionStorage.getItem("user"));
-            console.log("Check "+user);
-            //console.log("yes"+fname);
-            document.getElementById("profilename").innerHTML = user.email;
-            //document.getElementById("oladeEmail").innerHTML = user.email;
+    // (function() {
+    //     if(sessionStorage.getItem("lg") != 1){
+    //         location.href = "login.html";
+    //     }
+    //     if(sessionStorage.getItem("user") != null){
+    //         var user = JSON.parse(sessionStorage.getItem("user"));
+    //         console.log("Check "+user);
+    //         //console.log("yes"+fname);
+    //         document.getElementById("profilename").innerHTML = user.email;
+    //         //document.getElementById("oladeEmail").innerHTML = user.email;
 
-            var courselist = JSON.parse(sessionStorage.getItem("courselist"));
-            var dropDown = document.getElementById("programSelect");
-            for(var i = 0; i < courselist.length; i++) {
-                var el = document.createElement("option");
-                el.innerHTML = courselist[i].name;
-                el.value = courselist[i].name;
-                dropDown.appendChild(el);
-            }
-            var dropDown1 = document.getElementById("exampleFormControlSelect2");
-            for(var i = 0; i < courselist.length; i++) {
-                var el = document.createElement("option");
-                el.innerHTML = courselist[i].name;
-                el.value = courselist[i].name;
-                dropDown1.appendChild(el);
-            }
-        }
-        document.getElementById("tAdmin").style.display = "none";
-        //Calling the Candidates List API
-        var e = document.getElementById("exampleFormControlSelect3");
-        var enrol = e.value;
-        if(enrol == "" && clickstatus != null) {
-            if(clickstatus == "enrolled") enrol = "Enrolled";
-            else if(clickstatus == "awaitingenrollment") enrol = "Awaiting Enrollment";
-            else if(clickstatus == "leads") enrol = "Lead";
-            else if(clickstatus == "abouttoexpire") enrol = "About To Expire";
-            else if(clickstatus == "expired") enrol = "Expired";
-            else enrol = "";
-        }
-        if(enrol == "" && progresscard != null){
-            if(progresscard == "total") enrol = "Enrolled";
-        }
-        console.log("yes "+enrol);
-        var ex = document.getElementById("exampleFormControlSelect2");
-        var program = ex.value;
-        $.ajax({
-            type: "POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-                request.setRequestHeader("Access-Control-Allow-Origin", "*");
-            },
-            url: url + "/users/getCandidate",
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify({
-                enrollmentStatus : enrol,
-                program : program
-            }),
-            success: function(result){
-                if(leadscard != null || progresscard == "active" || progresscard == "inactive"){
-                    if(leadscard != null){
-                        for(var i = 0; i < result.length; i++){
-                            if(leadscard == "total" && result[i].id != null) {
-                                jsonData.push(result[i]);
-                                candidates.push(result[i]);
-                            }else if(leadscard == "converted" && result[i].id != null && result[i].enrollmentStatus != "Lead") {
-                                jsonData.push(result[i]);
-                                candidates.push(result[i]);
-                            }else {
-                            }
-                        }
-                    }
+    //         var courselist = JSON.parse(sessionStorage.getItem("courselist"));
+    //         var dropDown = document.getElementById("programSelect");
+    //         for(var i = 0; i < courselist.length; i++) {
+    //             var el = document.createElement("option");
+    //             el.innerHTML = courselist[i].name;
+    //             el.value = courselist[i].name;
+    //             dropDown.appendChild(el);
+    //         }
+    //         var dropDown1 = document.getElementById("exampleFormControlSelect2");
+    //         for(var i = 0; i < courselist.length; i++) {
+    //             var el = document.createElement("option");
+    //             el.innerHTML = courselist[i].name;
+    //             el.value = courselist[i].name;
+    //             dropDown1.appendChild(el);
+    //         }
+    //     }
+    //     document.getElementById("tAdmin").style.display = "none";
+    //     //Calling the Candidates List API
+    //     var e = document.getElementById("exampleFormControlSelect3");
+    //     var enrol = e.value;
+    //     if(enrol == "" && clickstatus != null) {
+    //         if(clickstatus == "enrolled") enrol = "Enrolled";
+    //         else if(clickstatus == "awaitingenrollment") enrol = "Awaiting Enrollment";
+    //         else if(clickstatus == "leads") enrol = "Lead";
+    //         else if(clickstatus == "abouttoexpire") enrol = "About To Expire";
+    //         else if(clickstatus == "expired") enrol = "Expired";
+    //         else enrol = "";
+    //     }
+    //     if(enrol == "" && progresscard != null){
+    //         if(progresscard == "total") enrol = "Enrolled";
+    //     }
+    //     console.log("yes "+enrol);
+    //     var ex = document.getElementById("exampleFormControlSelect2");
+    //     var program = ex.value;
+    //     $.ajax({
+    //         type: "POST",
+    //         beforeSend: function(request) {
+    //             request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+    //             request.setRequestHeader("Access-Control-Allow-Origin", "*");
+    //         },
+    //         url: url + "/users/getCandidate",
+    //         contentType: "application/json",
+    //         dataType: 'json',
+    //         data: JSON.stringify({
+    //             enrollmentStatus : enrol,
+    //             program : program
+    //         }),
+    //         success: function(result){
+    //             if(leadscard != null || progresscard == "active" || progresscard == "inactive"){
+    //                 if(leadscard != null){
+    //                     for(var i = 0; i < result.length; i++){
+    //                         if(leadscard == "total" && result[i].id != null) {
+    //                             jsonData.push(result[i]);
+    //                             candidates.push(result[i]);
+    //                         }else if(leadscard == "converted" && result[i].id != null && result[i].enrollmentStatus != "Lead") {
+    //                             jsonData.push(result[i]);
+    //                             candidates.push(result[i]);
+    //                         }else {
+    //                         }
+    //                     }
+    //                 }
 
-                    if(progresscard != null && progresscard != "total"){
-                        var actives = JSON.parse(sessionStorage.getItem("actives"));
-                        var inactives = JSON.parse(sessionStorage.getItem("inactives"));
-                        for(var i = 0; i < result.length; i++){
-                            if(result[i].wordpressID != null){
-                                if(progresscard == "active"){
-                                    for(var j = 0; j < actives.length; j++){
-                                        if(result[i].wordpressID == actives[j]){
-                                            jsonData.push(result[i]);
-                                            candidates.push(result[i]);
-                                        }
-                                    }
-                                }
-                                if(progresscard == "inactive"){
-                                    for(var j = 0; j < inactives.length; j++){
-                                        if(result[i].wordpressID == inactives[j]){
-                                            jsonData.push(result[i]);
-                                            candidates.push(result[i]);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        sessionStorage.removeItem("actives");
-                        sessionStorage.removeItem("inactives");
-                    }
-                }else{
-                    candidates = result;
-                    jsonData = result;
-                }
+    //                 if(progresscard != null && progresscard != "total"){
+    //                     var actives = JSON.parse(sessionStorage.getItem("actives"));
+    //                     var inactives = JSON.parse(sessionStorage.getItem("inactives"));
+    //                     for(var i = 0; i < result.length; i++){
+    //                         if(result[i].wordpressID != null){
+    //                             if(progresscard == "active"){
+    //                                 for(var j = 0; j < actives.length; j++){
+    //                                     if(result[i].wordpressID == actives[j]){
+    //                                         jsonData.push(result[i]);
+    //                                         candidates.push(result[i]);
+    //                                     }
+    //                                 }
+    //                             }
+    //                             if(progresscard == "inactive"){
+    //                                 for(var j = 0; j < inactives.length; j++){
+    //                                     if(result[i].wordpressID == inactives[j]){
+    //                                         jsonData.push(result[i]);
+    //                                         candidates.push(result[i]);
+    //                                     }
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                     sessionStorage.removeItem("actives");
+    //                     sessionStorage.removeItem("inactives");
+    //                 }
+    //             }else{
+    //                 candidates = result;
+    //                 jsonData = result;
+    //             }
                 
-                changePage(1);
-            },
-            error: function(result){
-                console.log("Err"+result.status);
-            }
-        })
+    //             changePage(1);
+    //         },
+    //         error: function(result){
+    //             console.log("Err"+result.status);
+    //         }
+    //     })
 
-        //Calling the Wordpress Admin List API
-        var key = "wp_capabilities";
-        var value = "subscriber";
-        $.ajax({
-            type: "GET",
-            beforeSend: function(request) {
-                request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
-                request.setRequestHeader("Access-Control-Allow-Origin", "*");
-            },
-            url: wordpressUrl + "/wpusers/getNot/" + key + "/" + value,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function(result){
-                console.log("Hi"+result.length);
-                //Preparing the Select List
-                var dropDown = document.getElementById("wordpressID");
-                for(var i = 0; i < result.length; i++) {
-                    var el = document.createElement("option");
-                    el.innerHTML = result[i].userLogin;
-                    el.value = result[i].id;
-                    dropDown.appendChild(el);
-                }
-            },
-            error: function(result){
-                console.log("Error"+result.statusText);
-            }
-        })
+    //     //Calling the Wordpress Admin List API
+    //     var key = "wp_capabilities";
+    //     var value = "subscriber";
+    //     $.ajax({
+    //         type: "GET",
+    //         beforeSend: function(request) {
+    //             request.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type");
+    //             request.setRequestHeader("Access-Control-Allow-Origin", "*");
+    //         },
+    //         url: wordpressUrl + "/wpusers/getNot/" + key + "/" + value,
+    //         contentType: "application/json",
+    //         dataType: 'json',
+    //         success: function(result){
+    //             console.log("Hi"+result.length);
+    //             //Preparing the Select List
+    //             var dropDown = document.getElementById("wordpressID");
+    //             for(var i = 0; i < result.length; i++) {
+    //                 var el = document.createElement("option");
+    //                 el.innerHTML = result[i].userLogin;
+    //                 el.value = result[i].id;
+    //                 dropDown.appendChild(el);
+    //             }
+    //         },
+    //         error: function(result){
+    //             console.log("Error"+result.statusText);
+    //         }
+    //     })
 
-        $(".hamburger").click(function(){
-            $(".wrapper").toggleClass("active")
-        })
-    })();
+    //     $(".hamburger").click(function(){
+    //         $(".wrapper").toggleClass("active")
+    //     })
+    // })();
 
     //On-Change Invite Type
     function selectType(){
@@ -775,7 +775,7 @@
         }
         listing_table.innerHTML += '</tbody>';
         page_span.innerHTML = page;
-  
+  0
         if (page == 1) {
             btn_prev.style.visibility = "hidden";
         } else {
