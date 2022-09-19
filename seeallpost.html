@@ -114,6 +114,7 @@
          }
 
         var jsonData = [];
+        var currentID = "";
         var current_page = 1;
         var records_per_page = 20;
         var url = "https://surfacenewservice.herokuapp.com";
@@ -143,75 +144,63 @@
             }
         })
 
+        $(".hamburger").click(function(){
+            $(".wrapper").toggleClass("active")
+        })
+    })();
         
         function changePage(page){
         var btn_next = document.getElementById("btn_next");
         var btn_prev = document.getElementById("btn_prev");
         var listing_table = document.getElementById("fi");
         var page_span = document.getElementById("page");
-   // Method to change type
-   const changeType = (status) => {
-    if (status === 1) {
-      return "Apporved";
-      // eslint-disable-next-line no-else-return
-    } else if (status === 2) {
-      return "Declined";
-    } else {
-      return "Pending";
-    }
-  };
-
-  const changeDate = (timestamp) => {
-    const date = new Date(timestamp);
-    const retDate = date.toDateString();
-    return retDate;
-  };
+   
         // Validate page
         if (page < 1) page = 1;
         if (page > numPages()) page = numPages();
   
         listing_table.innerHTML = "";
   
-        listing_table.innerHTML += '<tbody><tr><td><b>Title</b></td><td><b>Contents</b></td><td><b>Status</b></td><td><b>Created Time</b></td><td><b>Actions</b></td></tr>';
+        listing_table.innerHTML += '<tbody><tr><td><b>Title</b></td><td><b>Status</b></td><td><b>Created Time</b></td><td><b>Actions</b></td></tr>';
         var total = page * records_per_page;
         if(jsonData.length < (page * records_per_page)){
             total = jsonData.length;
         }
         if(total <= 0) return;
         for (var i = (page-1) * records_per_page; i < total; i++) {
-            var Status = jsonData[i].status;
-    var oneRecord = "";
+            var status = jsonData[i].status;
+    var statusRecord = "";
     if(status == 1){
-        oneRecord = '<span class="badge badge-pill badge-success">Completed</span>';
+         statusRecord = '<span class="badge badge-pill badge-success">Completed</span>';
     }else if(status == 2){
-        oneRecord = '<span class="badge badge-pill badge-danger">Declined</span>';
+        statusRecord = '<span class="badge badge-pill badge-danger">Declined</span>';
     }else {
-        oneRecord = '<span class="badge badge-pill badge-secondary">Pending</span>';
+        statusRecord = '<span class="badge badge-pill badge-secondary">Pending</span>';
     }
             
             //console.log("mexid "+exams[i].id);
             
              var oneRecord = "";
-                oneRecord = '<tr><td>' + jsonData[i].title + '</td><td>' + jsonData[i].content + '</td><td>' + changeType(jsonData[i].status) + '</td><td>' + changeDate(jsonData[i].createdTime) +  '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                                <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
-                                <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
-                                <a class="dropdown-item" href="#">Placeholder</a></div></div></td></tr>';
-            
+                // oneRecord = '<tr><td>' + jsonData[i].title + '</td><td>' + jsonData[i].content + '</td><td>' + changeType(jsonData[i].status) + '</td><td>' + changeDate(jsonData[i].createdTime) +  '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
+                //                 <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
+                //                 <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
+                //                 <a class="dropdown-item" href="#">Placeholder</a></div></div></td></tr>';
+            console.log(status);
     if(status == 1){
-        oneRecord = '<tr><td>' + jsonData[i].displaytitle + '</td><td>' + jsonData[i].content + '</td><td>' +  changeType(jsonData[i].status) + '</td><td>' + changeDate(jsonData[i].createdTime) + '</td> \
-                        <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+i+'\');">...</span> \
+        oneRecord = '<tr><td>' + jsonData[i].title + '</td><td>' +  statusRecord + '</td><td>' + changeDate(jsonData[i].createdTime) + '</td><td> \
+                        <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+jsonData[i].id+'\');">...</span> \
                         <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
                         <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
     }else if(status == 2){
-        oneRecord = '<tr><td>' + jsonData[i].displaytitle + '</td><td>' +  changeType(jsonData[i].status) + '</td><td>' + changeDate(jsonData[i].createdTime) + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                        <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
-                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
-                        <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'3\');">Resend Invite</a></div></div></td></tr>';
+        oneRecord = '<tr><td>' + jsonData[i].title + '</td><td>' +  statusRecord + '</td><td>' + changeDate(jsonData[i].createdTime) + '</td><td> \
+                        <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+jsonData[i].id+'\');">...</span> \
+                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
+                        <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
     }else{
-        oneRecord = '<tr><td>' + jsonData[i].displaytitle + '</td><td>' + jsonData[i].content + '</td><td>' + changeType(jsonData[i].status) + '</td><td>' +  changeDate(jsonData[i].createdTime) + '</td><td class="options-ham-menu"> <div class="actions dropdown"> \
-                        <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span> \
-                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2"> \
-                        <a class="dropdown-item" href="#">Placeholder</a></div></div></td></tr>';
+        oneRecord = '<tr><td>' + jsonData[i].title + '</td><td>' +  statusRecord + '</td><td>' + changeDate(jsonData[i].createdTime) + '</td><td> \
+                        <span class="actions  dropdown-toggle" href="#"  id="action-dropDown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="kclick(\''+jsonData[i].id+'\');">...</span> \
+                        <div class="action dropdown-menu" aria-labelledby="action-dropDown2"><a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">Edit </a> \
+                        <a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'1\');">Send Program Information</a><a class="dropdown-item" onclick="sendMails(\''+jsonData[i].id+'\', \'2\');">Send Reminder</a></div></div></td></tr>';
     } 
     listing_table.innerHTML += oneRecord;
     
@@ -232,16 +221,23 @@
             btn_next.style.visibility = "visible";
         }
     }
+
+    function changeDate(timestamp) {
+    const date = new Date(timestamp);
+    const retDate = date.toDateString();
+    return retDate;
+  };
   
     function numPages(){
         return Math.ceil(jsonData.length / records_per_page);
     }
-        
 
-        $(".hamburger").click(function(){
-            $(".wrapper").toggleClass("active")
-        })
-    })();
+    //Function to handle the transition of selected lead
+    function kclick(x){
+        console.log("Here");
+        //console.log("My "+jsonData[x]);
+        currentID = x;
+    }
  </script>
 
 </body>

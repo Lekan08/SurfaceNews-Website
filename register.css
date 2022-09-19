@@ -21,7 +21,7 @@ h1{
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    background-image: url("./assets/css/backgroundphoto.jpg");
+    background-image: url("./assets/images/ahh.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
@@ -37,7 +37,8 @@ body {
 }
 
 .container {
-    background-color: #fff;
+  
+  background-color: rgba(0, 0, 0, 0);
     padding: 1em;
     border-bottom-left-radius: 29px;
     border-bottom-right-radius: 0px;
@@ -102,8 +103,8 @@ body {
 .btn {
     width: 100%;
     padding: 3%;
-    background: #0e4c8fd0;
-    border-bottom: 2px solid #007bff;
+    background: #0c0751d0;
+    border-bottom: 2px solid #0b0948;
     border-top-style: none;
     border-right-style: none;
     border-left-style: none;

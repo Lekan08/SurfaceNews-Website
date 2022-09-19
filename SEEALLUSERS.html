@@ -249,5 +249,22 @@
     });
   </script>
 
+<script>
+    
+    //ON-READY FUNCTION
+    (function() {
+        if(sessionStorage.getItem("lg") != 1){
+            location.href = "login.html";
+        }
+        if(sessionStorage.getItem("user") != null){
+            var user = JSON.parse(sessionStorage.getItem("user"));
+            console.log("Check "+user);
+            //console.log("yes"+fname);
+            document.getElementById("profilename").innerHTML = user.email;
+            //document.getElementById("oladeEmail").innerHTML = user.email;
+        }
+      
+    })();
+</script>
 </body>
 </html>
