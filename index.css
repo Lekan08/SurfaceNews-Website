@@ -59,7 +59,7 @@
   /* na me do am  */
 
 body {
-    background-image: url("./assets/css/backgroundphoto.jpg");
+    background-image: url("./assets/images/tech.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -78,11 +78,11 @@ font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .container {
-    background-color: #fff;
+    background-color: rgb(189, 171, 171);
     padding: 2em;
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 600px;
+    width: 400px;
     height: 400px;
 }
 
@@ -140,7 +140,7 @@ font-family:Georgia, 'Times New Roman', Times, serif;
 .btn {
     width: 100%;
     padding: 3%;
-    background: #0e4c8fd0;
+    background: rgb(30, 30, 95);
     border-bottom: 2px solid #0e4c8fd0;
     border-top-style: none;
     border-right-style: none;

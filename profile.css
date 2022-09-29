@@ -26,7 +26,7 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: #04AA6D;
+  background-color: #40a3ffda;
 }
 
 .form-control:focus {

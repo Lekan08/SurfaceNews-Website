@@ -2,13 +2,20 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <!--<title> Responsiive Admin Dashboard -->
+    <title>ADMIN DASHBOARD</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/images/SFnews.jpeg">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    </head>
 <body>
+  
+<div class="loader">
+  <div></div>
+</div>
+
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
@@ -27,10 +34,6 @@
             <span class="links_name">Edit profile</span>
           </a>
         </li>
-
-          
-        
-
         <li>
           <a href="SEEALLUSERS.html">
             <i class='bx bx-menu' ></i>
@@ -80,7 +83,7 @@
         <i class='bx bx-search' ></i>
       </div>
       <div class="profile-details">
-        <img src="fire.jpg" style="width:20%">
+        <img src="assets/images/SFnews.jpeg" style="width:20%">
         <span class="admin_name">Adams</span>
         <i class=></i>
       </div>
@@ -128,7 +131,7 @@
           <div class="sales-details">
             <ul class="details">
               <li class="topic">user ID:   LAKE</li>
-              <li><a href="#">NAME:         lekon something</a></li>
+              <li><a href="#">NAME:         lekon ssmoke</a></li>
               <li><a href="#">Email:        idontknow@email.com</a></li>
               <li><a href="#">phone number:         08041918786</a></li>
               <li><a href="#">address:                  unknown</a></li>
@@ -157,7 +160,12 @@ sidebarBtn.onclick = function() {
   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 }
  </script>
-
+ <script>
+  $(window).on('load',function(){
+     $(".loader").fadeOut(1000);
+     $(".home-section").fadeIn(1000);
+  });
+</script>
 </body>
 </html>
 
